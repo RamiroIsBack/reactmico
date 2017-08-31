@@ -1,0 +1,108 @@
+import React, { Component } from 'react'
+import {ModalCreaciones} from '../presentational'
+
+import {connect} from 'react-redux'
+import actions from '../../actions'
+
+
+class ModalCreacionesContainer extends Component {
+
+  componentDidMount() {
+
+    if (this.props.storeContenidos.ContenidosLoaded == false){
+      //en la accion ya lo pone a true
+      this.props.getContenidos()
+    }
+    //cargo lalista para que el dropdown menu sea dinamico
+    if (this.props.storeCreaciones.CreacionesLoaded == false){
+      //en la accion ya lo pone a true
+      this.props.getCreaciones()
+    }
+  }
+
+  moveToCreacionesSection(tipoName){
+    this.props.moveToCreacionesSection(tipoName)
+    this.props.toggleModal('closeCreaciones')
+  }
+
+  //onMouseOut() Rocks!!
+  handleHoverOff(event){
+    this.props.toggleModal('closeDropdowns')
+  }
+
+  render(){
+    var creacionesShowing = false
+    var creacionesContenidos = {}
+
+    if (this.props.storeModal){
+      creacionesShowing = this.props.storeModal.creacionesShowing
+    }
+    // Render nothing if the "show" prop is false
+    if (!creacionesShowing){
+      return null
+    }
+    for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
+
+      if (this.props.storeContenidos.listaContenidos[i].id == 'creaciones'){
+        creacionesContenidos = this.props.storeContenidos.listaContenidos[i]
+        break
+      }
+    }
+
+    let creacionDB =this.props.storeCreaciones.listaCreaciones
+
+    var creacionList =[]
+    //TODO:
+    //si lista.length > 3 hacer 2 filas con el conditional rendering
+    //valorar hacer 2 componentes presentational
+
+    for (var tipo in creacionDB) {
+      if (creacionDB.hasOwnProperty(tipo)) {
+
+        creacionList.push (
+          {
+            nombre: tipo,
+            urlIcon: creacionesContenidos.tipo[tipo].urlIcon,
+          }
+        )
+      }
+    }
+    console.log('caca'+JSON.stringify(creacionList))
+    return (
+
+      <div onMouseLeave={this.handleHoverOff.bind(this)} >
+        <ModalCreaciones show={creacionesShowing} onSelect={this.moveToCreacionesSection.bind(this)} contenido = {creacionesContenidos} creacionList ={creacionList}>
+        </ModalCreaciones>
+
+
+      </div>
+
+
+
+    )
+  }
+}
+const dispatchToProps = (dispatch) =>{
+
+  return{
+    getCreaciones:()=>dispatch(actions.getCreaciones()),
+    getContenidos: () => dispatch(actions.getContenidos()),
+    toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
+    moveToCreacionesSection:(creacionTipo)=>dispatch(actions.moveToCreacionesSection(creacionTipo)),
+  }
+}
+
+
+const stateToProps = (state) => {
+  return{
+    // state is d store in this case for convenction
+    // cojo el producto d state(store) y lo paso a props xa cogerlo
+    //en state.blabla dices de que reducer quieres info
+    //y tu le asignas una key q quieras
+    storeContenidos: state.contenidos,
+    storeModal:state.modal,
+    storeCreaciones:state.creacion,
+  }
+}
+//                                   ****
+export default connect (stateToProps,dispatchToProps)(ModalCreacionesContainer)
