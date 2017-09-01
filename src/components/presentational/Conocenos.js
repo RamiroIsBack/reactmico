@@ -6,6 +6,7 @@ class Conocenos extends Component {
     this.props.whenClicked()
   }
   render() {
+    //el conocenos primero deberia ser algo mas corto en xs
     return (
       <div>
         <div className = 'container text-center'>
