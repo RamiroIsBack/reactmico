@@ -105,10 +105,10 @@ class ModalRegistrarse extends React.Component {
                     </div>
                   </div>
                   <div className='form-group row' style={{marginBottom: 2}}>
-                    <div className='col-xs-12 col-sm-2 col-md-2 col-lg-2'>
+                    <div className='col-xs-3 col-sm-2 col-md-2 col-lg-2'>
                       <a className ={newsletter} id ='si' onClick={this.handleChange.bind(this)} style= {style.modal.btnNewsletter}></a>
                     </div>
-                    <div className='col-xs-12 col-sm-10 col-md-10 col-lg-10'>
+                    <div className='col-xs-9 col-sm-10 col-md-10 col-lg-10'>
                       <p>{sino} quiero recibir información por e-mail</p>
                     </div>
                   </div>
