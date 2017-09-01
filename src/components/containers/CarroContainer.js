@@ -26,6 +26,8 @@ class CarroContainer extends Component {
 
   goToProduct(foto){
     this.props.selectFoto(foto)
+    //make it start at the top of the page
+    window.scrollTo(0, 0)
   }
   deleteProduct(indice){
     this.props.eraseProduct(indice)

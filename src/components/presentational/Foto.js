@@ -8,6 +8,7 @@ export default class Foto extends Component {
     super()
     this.state ={
       url2: false,
+      timeToReact: false,
     }
   }
   onComponentDidMount(){
@@ -28,8 +29,17 @@ export default class Foto extends Component {
 
   }
   handleSwipe(){
-    this.setState ({url2 : !this.state.url2})
+    //necesitamos un timeout xq si no se cuelan 20 cambios x segundo y es un descontrol
+    //asi va bien pero molaria q solo cambiase cuando se mueve horizontalmente
+    if (!this.state.timeToReact){
+      this.setState ({url2 : !this.state.url2, timeToReact : true})
+      setTimeout(() => {
+        this.setState ({timeToReact : false})
+        console.log ('swiped')
+      }, 600)
+    }
   }
+
   //TODO read about image preloading
   render() {
     let url = this.props.propiedades.pic

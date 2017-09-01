@@ -50,9 +50,9 @@ class ModalRegistrarse extends React.Component {
       //To make sure that it is really on top of all other elements, we set z-index to a high value (by default all elements have a z-index value of 0).
       zIndex: 6668,
       top: '60px',
-      left: '40px',
-      right: '40px',
-      bottom: '40px',
+      left: '20px',
+      right: '20px',
+      bottom: '20px',
       //border                     : '1px solid #ccc',
       overflow: 'auto',
       WebkitOverflowScrolling: 'touch',
@@ -81,41 +81,40 @@ class ModalRegistrarse extends React.Component {
               <div >
                 <div >
                   <div className='form-group row'>
-                    <div className='col-sm-3'>
+                    <div className='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
                       <p>nombre*</p>
                     </div>
-                    <div className='col-sm-9'>
+                    <div className='col-xs-12 col-sm-9 col-md-9 col-lg-9'>
                       <textarea type='text' rows='1' className='form-control' id='nombre' placeholder='¿Cómo te llamas?' ></textarea>
                     </div>
                   </div>
                   <div className='form-group row'>
-                    <div className='col-sm-3'>
+                    <div className='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
                       <p>e-mail*</p>
                     </div>
-                    <div className='col-sm-9'>
+                    <div className='col-xs-12 col-sm-9 col-md-9 col-lg-9'>
                       <textarea type='e-mail' rows='1' className='form-control' id='contactMail' placeholder='nuevo.amigo.de.mico@micomail.com' ></textarea>
                     </div>
                   </div>
                   <div className ='form-group row' >
-                    <div className='col-sm-3'>
+                    <div className='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
                       <p>contraseña*</p>
                     </div>
-                    <div className='col-sm-9' >
+                    <div className='col-xs-12 col-sm-9 col-md-9 col-lg-9' >
                       <textarea type='password' rows='1' className='form-control' id ='password' placeholder='introduce al menos 6 caracteres'></textarea>
                     </div>
                   </div>
-                  <div className='form-group row'>
-                    <div className='col-sm-2'>
+                  <div className='form-group row' style={{marginBottom: 2}}>
+                    <div className='col-xs-12 col-sm-2 col-md-2 col-lg-2'>
                       <a className ={newsletter} id ='si' onClick={this.handleChange.bind(this)} style= {style.modal.btnNewsletter}></a>
                     </div>
-                    <div className='col-sm-10'>
+                    <div className='col-xs-12 col-sm-10 col-md-10 col-lg-10'>
                       <p>{sino} quiero recibir información por e-mail</p>
                     </div>
-
                   </div>
-                  <p className= 'text-muted'>(nunca mandamos spam ni publicidad)</p>
+                  <p className= 'text-muted' style= {{padding: 0}}>(nunca mandamos spam ni publicidad)</p>
                   <div className='form-group row'>
-                    <button onClick={this.handleImputData.bind(this)} className='btn btn-success text-center form-control ' style = {style.modal.btnRegistrarse} >Registrarse</button>
+                    <button onClick={this.handleImputData.bind(this)} className='btn text-center form-control ' style = {style.modal.btnRegistrarse} >Registrarse</button>
                   </div>
                 </div>
               </div>

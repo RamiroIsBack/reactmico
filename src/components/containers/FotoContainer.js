@@ -69,7 +69,7 @@ class FotoContainer extends React.Component {
     //console.log ('caca '+ JSON.stringify(foto))
     //this fires an action down below in this
     this.props.selectFoto(foto)
-
+    window.scrollTo(0, 0)
     //routing programatically, now i can prevent if there is an error
     history.push('/Productos')
 

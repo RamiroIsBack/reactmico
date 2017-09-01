@@ -21,7 +21,7 @@ export default class CarroBuy extends Component {
                 <h5 className = 'text-muted'>gratis</h5>
                 <h5 style = {style.carroProduct.texto}>{this.props.carroPropiedades.precioSubTotal} €</h5>
               </div>
-              <a className= 'btn btn-success col-xs-10 col-sm-12 col-md-12 col-lg-12' style= {style.carroProduct.btnPedido} onClick = {this.props.comprar}> REALIZAR PEDIDO <h4  className = 'glyphicon glyphicon-ok-circle'></h4>
+              <a className= 'btn col-xs-10 col-sm-12 col-md-12 col-lg-12' style= {style.carroProduct.btnPedido} onClick = {this.props.comprar}> REALIZAR PEDIDO <h4  className = 'glyphicon glyphicon-ok-circle'></h4>
               </a>
             </div>
           </div>

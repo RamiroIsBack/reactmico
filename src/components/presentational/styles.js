@@ -17,6 +17,7 @@ export default {
       //width : '100%',
       marginRight: '5px',
       whiteSpace: 'initial',
+      color : 'white'
     },
 
   },
@@ -189,6 +190,7 @@ export default {
     btnRegistrarse: {
       fontSize: '19px',
       backgroundColor: 'black',
+      color:'white',
     },
     btnNewsletter: {
       cursor: 'pointer',

@@ -20,10 +20,10 @@ export default class Feria extends React.Component {
   condiInfo () {
     if (this.props.propiedades.urlFeria != 'desconocida') {
       return(
-        <a onClick={this.handleClick.bind(this)} type='button' id='info' className='btn btn-success list-inline' style= {style.feria.btnlink} >
-          <li className='glyphicon glyphicon-info-sign' id='info'>
+        <a onClick={this.handleClick.bind(this)} type='button' id='info' className='btn list-inline' style= {style.feria.btnlink} >
+          <li className='glyphicon glyphicon-info-sign' id='info' style={{color: 'white'}}>
           </li>
-          <li ><h5 id='info'>Descubre mas sobre la feria</h5></li>
+          <li ><h5 id='info' style={{color: 'white'}}>Descubre mas sobre la feria</h5></li>
         </a>
       )
     }else {
