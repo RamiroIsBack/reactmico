@@ -36,8 +36,9 @@ export default (state = initialState, action) => {
       let feriaDate = new Date(parts[2], parts[1] - 1, parts[0])
 
       //calculo el final de la feria segun sus dias d duracion
-      let finalFeriaDate = feriaDate
-      finalFeriaDate = new Date(feriaDate.getFullYear(),feriaDate.getMonth(),feriaDate.getDate()+list[i].duracion)
+      let finalFeriaDate =  new Date(parts[2], parts[1] - 1, parts[0])
+      let duracion = list[i].duracion
+      finalFeriaDate.setTime( finalFeriaDate.getTime() + duracion * 86400000 )
       list[i].fechaFinal = finalFeriaDate
       let diaHoy = new Date()
 

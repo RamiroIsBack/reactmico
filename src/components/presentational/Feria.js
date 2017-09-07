@@ -45,9 +45,16 @@ export default class Feria extends React.Component {
           </div>
           <div className = 'container col-xs-12 col-sm-8 col-md-8 col-lg-8' style = {{padding : 0}}>
             <div className = 'container col-xs-6 col-sm-6 col-md-6 col-lg-6' style = {{padding : 0}}>
-              <h4 className = 'text-muted' style = {{whiteSpace: 'initial'}}>
-                {this.props.propiedades.fecha} ({this.props.propiedades.duracion} días)
-              </h4>
+              <div className = 'container col-xs-12 col-sm-6 col-md-6 col-lg-6 ' style = {{padding : 0}}>
+                <h4 className = 'text-muted' style = {{whiteSpace: 'initial', paddingLeft: 2}}>
+                  {this.props.propiedades.fecha}
+                </h4>
+              </div>
+              <div className = 'container col-xs-12 col-sm-6 col-md-6 col-lg-6' style = {{padding : 0}}>
+                <h4 className = 'text-muted' style = {{whiteSpace: 'initial'}}>
+                  ({this.props.propiedades.duracion} días)
+                </h4>
+              </div>
             </div>
             <div className = 'container col-xs-6 col-sm-6 col-md-6 col-lg-6' style = {{padding : 0}}>
               <h4 className = 'text-muted' style = {{whiteSpace: 'initial'}}>
