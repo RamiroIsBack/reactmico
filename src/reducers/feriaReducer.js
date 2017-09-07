@@ -35,6 +35,9 @@ export default (state = initialState, action) => {
       //                       year        month         day
       let feriaDate = new Date(parts[2], parts[1] - 1, parts[0])
 
+      //no lo uso aqui ahora pero as'i seria copiar un objeto
+      //let copyList = Object.assign([],this.state.list)
+
       //calculo el final de la feria segun sus dias d duracion
       let finalFeriaDate =  new Date(parts[2], parts[1] - 1, parts[0])
       let duracion = list[i].duracion
