@@ -52,6 +52,7 @@ export default class Foto extends Component {
     let nombre = this.props.propiedades.nombre
     let precio =this.props.propiedades.precio
     //console.log ('caca '+ url)
+    //pongo l'imites a las fotos x si se meten de diferente tama;no
     return (
 
       <div className = 'container col-xs-6 col-sm-6 col-md-4 col-lg-4' style= {{width: 300, height: 275, paddingRight: 0,paddingLeft: 10 }}>

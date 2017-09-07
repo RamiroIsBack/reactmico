@@ -28,7 +28,6 @@ export default (state = initialState, action) => {
     }
 
     //las ferias mas nuevas abajo (si cambio el 1 y el -1 seria al reves)
-
     //lo paso a formato yyyy/mm/dd para poder operar con Date Object y miro a ver si est'a en curso o est'a caducada
     for (let i = 0; i < list.length; i++) {
       let date = list[i].fecha
