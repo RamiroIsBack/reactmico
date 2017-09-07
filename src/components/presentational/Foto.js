@@ -56,7 +56,7 @@ export default class Foto extends Component {
 
       <div className = 'container col-xs-6 col-sm-6 col-md-4 col-lg-4' style= {{width: 300, height: 275, paddingRight: 0,paddingLeft: 10 }}>
         <div  className='btn btn-block' onClick = {this.handleClick.bind(this)} onTouchMove={this.handleSwipe.bind(this)} onMouseEnter={this.handlepic2.bind(this)} onMouseLeave={this.handlepic1.bind(this)} style= {style.foto.container}>
-          <img src= {url} className="img-responsive img-rounded" style= {{maxWidth:'100%', maxHeight : '275px'}}  alt={nombre} draggable = 'false'>
+          <img src= {url} className="img-responsive img-rounded" style= {{maxWidth:'100%', maxHeight : '200px'}}  alt={nombre} draggable = 'false'>
           </img>
           <div className = 'col-xs-offset-10 col-xs-2 col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2 col-lg-offset-10 col-lg-2 carousel-caption ' style = {{width : 25, padding: '0px', top: 0, left: 10, right: 10}}>
             <h6  style = {{backgroundColor: 'rgba(0,0,0,0.50)' ,borderRadius:'25px', padding: '0px',marginTop : 5, overflow: 'hidden'}}>{numPic}</h6>
