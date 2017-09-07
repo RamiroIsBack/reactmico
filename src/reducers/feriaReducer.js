@@ -29,6 +29,7 @@ export default (state = initialState, action) => {
 
     //las ferias mas nuevas abajo (si cambio el 1 y el -1 seria al reves)
     //estoy k.o. con heroku o resucitar'e?? me est'a dando bien de problemas el deploy con heroku
+    //I hate heroku so mucho right now
     //lo paso a formato yyyy/mm/dd para poder operar con Date Object y miro a ver si est'a en curso o est'a caducada
     for (let i = 0; i < list.length; i++) {
       let date = list[i].fecha
