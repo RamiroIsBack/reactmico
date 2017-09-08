@@ -43,7 +43,7 @@ export default {
       display : 'inline-block',
       padding: '0px',
       border: '1px solid #2C6549',
-      borderRadius:'10px'
+      borderRadius:'10px',
     },
     /*cover: {
       //backgroundPosition: 'center',

@@ -24,24 +24,24 @@ export default class CarroProduct extends Component {
   }
 
   render() {
-    let name = this.props.propiedades.name
+    let name = this.props.propiedades.nombre
     let url = this.props.propiedades.pic
     var precio = this.props.propiedades.precio * this.props.propiedades.unidades
     return (
 
-      <div className = 'container-fluid' style= {style.foto.panel}>
+      <div className = 'container-fluid' style= {{display : 'inline-block', padding: '0px', border: '1px solid #2C6549', borderRadius:'10px', width : '98%'}}>
         <div className = 'container-fluid col-xs-12 col-sm-6 col-md-5 col-lg-5' style= {style.foto.container}>
           <NavLink to='/Productos' onClick={this.handleClick.bind(this)}>
-            <img role='presentation' src={url} className ='img-rounded' style= {{maxWidth:'100%'}}>
+            <img role='presentation' src={url} className ='img-rounded' style= {{maxWidth:'100%', maxHeight: '200px'}}>
             </img>
           </NavLink>
 
         </div>
         <div className = 'container-fluid col-xs-12 col-sm-6 col-md-7 col-lg-7' style= {style.foto.container}>
-          <table className="table-condensed table-responsive">
+          <table className="table-condensed table-responsive" style = {{width : '100%'}}>
             <tbody>
               <tr>
-                <th>{this.props.propiedades.name}
+                <th>{name}
                 </th>
                 <th>
                   <btn className = 'btn glyphicon glyphicon-remove pull-right' style= {style.foto.container} onClick = {this.handleErase.bind(this)}>
