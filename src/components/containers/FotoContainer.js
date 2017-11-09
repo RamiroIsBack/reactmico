@@ -20,10 +20,7 @@ class FotoContainer extends React.Component {
   }
   //componentWillMount is executed once before the initial rendering occurs.
   componentWillMount(){
-    if (this.props.storeContenidos.ContenidosLoaded == false){
-      //en la accion ya lo pone a true
-      this.props.getContenidos()
-    }
+
   }
   //componentDidMount is executed once after the initial rendering.
   componentDidMount() {
@@ -132,7 +129,7 @@ class FotoContainer extends React.Component {
               </div>
             </div>
             <div className = 'container-fluid row visible-xs-block hidden-sm hidden-md hidden-lg' id = 'backTipo' >
-              <div className = 'col-xs-12 col-sm-3 col-md-3 col-lg-3' style = {{marginTop: 20,marginBottom: 10, paddingRight: 30, paddingTop: 25,paddingBottom: 2, backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2FbacklineTipo3.png?alt=media&token=80ea7f38-f900-4e24-9b8f-c94173b2d2bd)', backgroundPosition: 'right bottom', backgroundSize: 'cover', backgroundRepeat: 'no-repeat',opacity: 0.9, overflow: 'auto', borderRadius: '5px', maxWidth: 1500,}}>
+              <div className = 'col-xs-12 col-sm-3 col-md-3 col-lg-3' style = {{marginTop: 20,marginBottom: 10, paddingRight: 30, paddingTop: 25,paddingBottom: 2, backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2FbacklineTipo3.png?alt=media&token=31919da5-ef49-45ea-8fe2-da61c21efc6d)', backgroundPosition: 'right bottom', backgroundSize: 'cover', backgroundRepeat: 'no-repeat',opacity: 0.9, overflow: 'auto', borderRadius: '5px', maxWidth: 1500,}}>
                 <div className = 'col-xs-3' style={{padding: 1}}>
 
                   <img role='presentation' src={tipoObj.urlIcon} className ='img-rounded' style = {{width:'50px', height:'50px'}}>

@@ -7,10 +7,7 @@ import history from '../../utils/history'
 
 class ProductContainer extends Component {
   componentWillMount() {
-    if (this.props.storeContenidos.ContenidosLoaded == false){
-      //en la accion ya lo pone a true
-      this.props.getContenidos()
-    }
+
   }
   compoenentDidMount(){
     //make it start at the top of the page every time
@@ -22,9 +19,9 @@ class ProductContainer extends Component {
   }
 
   selectProduct(selectedProduct){
-    //console.log ('caca '+ JSON.stringify(selectedProduct))
-    //this fires an action down below in this class
-    this.props.selectFoto(selectedProduct)
+
+    this.props.productToCart(selectedProduct)
+
   }
 
   cierraDialogosNavbar(event){
@@ -68,7 +65,7 @@ const dispatchToProps = (dispatch) =>{
 
   return{
     getContenidos:()=>dispatch(actions.getContenidos()),
-    selectFoto: (selectedProduct) =>dispatch(actions.productToCart(selectedProduct)),
+    productToCart: (selectedProduct) =>dispatch(actions.productToCart(selectedProduct)),
     toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
   }
 }
@@ -81,6 +78,7 @@ const stateToProps = (state) => {
     //y tu le asignas una key q quieras
     productToshow:state.product,
     storeContenidos: state.contenidos,
+    users: state.user,
   }
 }
 

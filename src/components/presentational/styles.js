@@ -191,8 +191,11 @@ export default {
       fontSize: '19px',
       backgroundColor: 'black',
       color:'white',
+      width: '95%',
+      marginLeft: 10,
     },
     btnNewsletter: {
+      textDecoration:'none',
       cursor: 'pointer',
       padding: '2px',
       border: 'none',

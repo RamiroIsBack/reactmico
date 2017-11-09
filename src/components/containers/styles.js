@@ -14,13 +14,7 @@ export default {
       marginRight: '15px',
       display:'block',
     },
-    comprarButtonStyle :{
-      backgroundColor: 'black',
-      borderRadius:'15px',
-      border : 'none',
-      margin: 0,
-      marginTop: 4
-    },
+
     logoStyle :{
       marginTop:-6,
       float:'left',
@@ -79,15 +73,16 @@ export default {
     btnSeguirComprando:{
       textAlign: 'center',
       fontSize: '17px',
-      border: 'none',
-      color:'black'
+      color:'black',
+      border: '1px solid black',
+      borderRadius:'5px',
+      width : '50%',
+      padding: 0,
       //textDecoration:'none'
       //fontWeight: 'bold',
       //backgroundColor: 'black',
-      //width : '50%',
       //marginRight: '5px',
       //borderColor:'black',
-      //borderRadius:'10px',
 
 
     },

@@ -2,6 +2,12 @@ import React, { Component } from 'react'
 import { NavLink} from 'react-router-dom'
 import style from './styles'
 export default class CarroProduct extends Component {
+  constructor(){
+    super()
+    this.state ={
+      showDescripcion:false,
+    }
+  }
 
   handleClick(){
     //aqui hay una inconsistencia xq va a la pagina desde el
@@ -22,7 +28,10 @@ export default class CarroProduct extends Component {
     }*/
     this.props.changeQtty(this.props.indice ,qtty)
   }
-
+  toogleDescripcion(e){
+    this.setState({showDescripcion: !this.state.showDescripcion})
+  }
+  //<small>(x{this.props.propiedades.unidades})</small>
   render() {
     let name = this.props.propiedades.nombre
     let url = this.props.propiedades.pic
@@ -32,13 +41,13 @@ export default class CarroProduct extends Component {
       <div className = 'container-fluid' style= {{display : 'inline-block', padding: '0px', border: '1px solid #2C6549', borderRadius:'10px', width : '98%'}}>
         <div className = 'container-fluid col-xs-12 col-sm-6 col-md-5 col-lg-5' style= {style.foto.container}>
           <NavLink to='/Productos' onClick={this.handleClick.bind(this)}>
-            <img role='presentation' src={url} className ='img-rounded' style= {{maxWidth:'100%', maxHeight: '200px'}}>
+            <img role='presentation' src={url} className ='img-rounded' style= {{maxWidth:'100%', maxHeight: '125px'}}>
             </img>
           </NavLink>
 
         </div>
         <div className = 'container-fluid col-xs-12 col-sm-6 col-md-7 col-lg-7' style= {style.foto.container}>
-          <table className="table-condensed table-responsive" style = {{width : '100%'}}>
+          <table className="table-condensed table-responsive" style = {{width : '100%', border: 'none' ,marginBottom:0}}>
             <tbody>
               <tr>
                 <th>{name}
@@ -48,28 +57,31 @@ export default class CarroProduct extends Component {
                   </btn>
                 </th>
               </tr>
-              <tr>
-                <td>precio/unidad: </td>
-                <td>{this.props.propiedades.precio}</td>
-              </tr>
-              <tr>
-                <td>Existencias: </td>
-                <td>{this.props.propiedades.disponibilidad} disponible</td>
-              </tr>
-              <tr>
-                <td>Cantidad: </td>
-                <td>
-                  <tag style = {style.carroProduct.texto}>
-                    {this.props.propiedades.unidades} </tag>
-                  <div className="btn-group" role="group" aria-label="...">
-                    <btn id = '+' className = 'btn glyphicon glyphicon-plus' style= {style.foto.container} onClick = {this.handleqtty.bind(this,1)}/>
-                    <btn id = '-' className = 'btn glyphicon glyphicon-minus' style= {style.foto.container} onClick = {this.handleqtty.bind(this,0)}/>
-                  </div>
 
-                </td>
-              </tr>
+            </tbody>
+          </table>
+          <table className="table-condensed table-responsive" style = {{width : '100%', border: 'none' ,marginBottom:0}}>
+            <tbody>
+              {!this.state.showDescripcion &&
+                <tr>
+                  <td role='button' onClick = {this.toogleDescripcion.bind(this)}>mostrar descripcion:</td>
+                  <td>
+                    <small className = 'glyphicon glyphicon-chevron-down' role='button' onClick = {this.toogleDescripcion.bind(this)}>
+                    </small>
+
+                  </td>
+                </tr>
+              }
+              {this.state.showDescripcion &&
+                <tr>
+                  <td role='button' onClick = {this.toogleDescripcion.bind(this)} >
+                    {this.props.propiedades.descripcion}
+                  </td>
+                  <td className = 'glyphicon glyphicon-chevron-up' role='button' onClick = {this.toogleDescripcion.bind(this)}></td>
+                </tr>
+              }
               <tr>
-                <td>precio <small>(x{this.props.propiedades.unidades})</small>:</td>
+                <td>precio:</td>
                 <td className = 'pull-right' style = {style.carroProduct.texto}>{precio} €</td>
 
               </tr>

@@ -6,7 +6,10 @@ import feriaReducer from './feriaReducer'
 import contenidosReducer from './contenidosReducer'
 import modalReducer from './modalReducer'
 import enlacesReducer from './enlacesReducer'
+import navReducer from './navReducer'
+import pedidosReducer from './pedidosReducer'
 export {
+  pedidosReducer,
   enlacesReducer,
   contenidosReducer,
   modalReducer,
@@ -14,6 +17,7 @@ export {
   productReducer,
   carroReducer,
   feriaReducer,
-  userReducer
+  userReducer,
+  navReducer,
 
 }

@@ -11,19 +11,6 @@ class ModalMenuXsContainer extends Component {
     //no hago nada d esto xq ya los cargo en los otros modales y da la casualidad
     //de que en el feriasReducer entra a la vez 2 veces y me carga el doble de ferias
 
-    /*if (this.props.storeContenidos.ContenidosLoaded == false){
-      //en la accion ya lo pone a true
-      this.props.getContenidos()
-    }
-    //cargo lalista para que el dropdown menu sea dinamico
-    if (this.props.storeCreaciones.CreacionesLoaded == false){
-      //en la accion ya lo pone a true
-      this.props.getCreaciones()
-    }
-    if (this.props.storeFerias.FeriasLoaded == false){
-      //en el reducer ya lo pone a true
-      this.props.getFerias()
-    }*/
   }
 
   moveToCreacionesSection(Name){

@@ -8,10 +8,7 @@ import actions from '../../actions'
 class HomeContainer extends Component {
 
   componentWillMount() {
-    if (this.props.storeContenidos.ContenidosLoaded == false){
-      //en la accion ya lo pone a true
-      this.props.getContenidos()
-    }
+
   }
 
   dameEstilo( url){

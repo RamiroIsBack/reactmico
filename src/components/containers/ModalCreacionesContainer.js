@@ -9,10 +9,6 @@ class ModalCreacionesContainer extends Component {
 
   componentDidMount() {
 
-    if (this.props.storeContenidos.ContenidosLoaded == false){
-      //en la accion ya lo pone a true
-      this.props.getContenidos()
-    }
     //cargo lalista para que el dropdown menu sea dinamico
     if (this.props.storeCreaciones.CreacionesLoaded == false){
       //en la accion ya lo pone a true
@@ -23,6 +19,7 @@ class ModalCreacionesContainer extends Component {
   moveToCreacionesSection(tipoName){
     this.props.moveToCreacionesSection(tipoName)
     this.props.toggleModal('closeCreaciones')
+    this.props.navActive('creaciones', 'navbarMicoFront')
   }
 
   //onMouseOut() Rocks!!
@@ -89,6 +86,7 @@ const dispatchToProps = (dispatch) =>{
     getContenidos: () => dispatch(actions.getContenidos()),
     toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
     moveToCreacionesSection:(creacionTipo)=>dispatch(actions.moveToCreacionesSection(creacionTipo)),
+    navActive:(navTab,params)=>dispatch(actions.navActive(navTab,params)),
   }
 }
 

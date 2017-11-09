@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 import style from './styles'
 export default class CarroBuy extends Component {
   render() {
-    console.log ('subtotal: '+this.props.subTotal)
+    let total = this.props.carroPropiedades.precioSubTotal + this.props.carroPropiedades.envio
+
     return (
       <div className ='row container-fluid' style={{padding :4, marginRight:10,top: 0, bottom:142, position:'fixed',overflowY:'auto', overflowX:'hidden' }}>
         <div className ='row container-fluid' style={{marginTop:'60px'}}>
@@ -18,8 +19,8 @@ export default class CarroBuy extends Component {
               <div className='container-fluid col-xs-5 col-sm-6 col-md-6 col-lg-4' style= {style.foto.container}>
 
                 <h5>{this.props.carroPropiedades.numProducts}</h5>
-                <h5 className = 'text-muted'>gratis</h5>
-                <h5 style = {style.carroProduct.texto}>{this.props.carroPropiedades.precioSubTotal} €</h5>
+                <h5 className = 'text-muted'>{this.props.carroPropiedades.envio} €</h5>
+                <h5 style = {style.carroProduct.texto}>{total} €</h5>
               </div>
               <a className= 'btn col-xs-10 col-sm-11 col-md-11 col-lg-11' style= {style.carroProduct.btnPedido} onClick = {this.props.comprar}> REALIZAR PEDIDO <h4  className = 'glyphicon glyphicon-ok-circle'></h4>
               </a>

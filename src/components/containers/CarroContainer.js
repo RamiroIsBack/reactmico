@@ -10,19 +10,32 @@ class CarroContainer extends Component {
   constructor(){
     super()
     this.state = {
-      cartList:[]
+      oldCartListLength: 0
     }
   }
   componentWillMount(){
-    if (this.props.storeContenidos.ContenidosLoaded == false){
-      //en la accion ya lo pone a true
-      this.props.getContenidos()
+    if (this.props.productToCart){
+      if(this.props.users.currentUser){ //si hay un usuario logeado
+        if(this.state.oldCartListLength != this.props.productToCart.cartList.length){//si hay cambio en el carro
+          this.props.loadCarro(this.props.productToCart.cartList,false )
+          let newcount = this.props.productToCart.cartList.length
+          this.setState({oldCartListLength: newcount})
+        }
+      }
     }
   }
-  componentDidMount() {
-    //we'll have to fill d list from API here?
-    // I read is better to do it in the action
+  componentWillUpdate(){
+    if (this.props.productToCart){
+      if(this.props.users.currentUser){
+        if(this.state.oldCartListLength != this.props.productToCart.cartList.length){
+          this.props.loadCarro(this.props.productToCart.cartList,false )
+          let newcount = this.props.productToCart.cartList.length
+          this.setState({oldCartListLength: newcount})
+        }
+      }
+    }
   }
+
 
   goToProduct(foto){
     this.props.selectFoto(foto)
@@ -32,6 +45,7 @@ class CarroContainer extends Component {
   deleteProduct(indice){
     this.props.eraseProduct(indice)
   }
+  //no vamos a usar esto x ahora xq no se puede gestionar que pidan muchas unidades
   QttyToggle(indice,qtty){
     this.props.changeQtty(indice,qtty)
   }
@@ -53,7 +67,31 @@ class CarroContainer extends Component {
 
   }
   comprar(){
-    this.props.showNotificationWithTimeout('Trabajando')
+    if(this.props.productToCart){//hay conexion con el carroReducer
+      if(this.props.productToCart.cartList.length != 0){//hay algo en el carro
+        if(this.props.users.currentUser){//hay user
+          let currentUserBuying = this.props.users.currentUser
+          if(currentUserBuying.datosEnvio.cp){//hay cp con lo q ha rellenado los datos
+            if(currentUserBuying.datosPersonales.emailVerified || currentUserBuying.datosPersonales.providerId !='firebase'){
+              //va todo, todo bien abrimos el dialogo de compra
+              this.props.toggleModal('openRealizarCompra')
+
+            }else{ //hay q sacar un mensaje
+              //this.props.showNotificationWithTimeout('Trabajando')//cambiar trabajando por
+              alert('el email no esta verificado, necesitas que te mandemos otro mail? (boton de reeenviar mail) necesitas cambiar la direccion de mail?(boton de link a cambiar mail)')
+            }
+          }else{//no hay datos de envio
+            alert('rellena porfavor los datos de envio en tu perfil (boton a amigo/datos)')
+
+          }
+        }else{//no hay user
+          //this.props.showNotificationWithTimeout('Trabajando')//cambiar trabajando por (no hay usuario)
+          alert('no hay usuario, logeate antes de realizar la compra(boton abrir logearse)')
+        }
+      }else{
+        alert('no hay nada en el carro (boton a seguir comprando)')
+      }
+    }
   }
 
   render() {
@@ -94,13 +132,13 @@ class CarroContainer extends Component {
             <div className='container-fluid col-xs-7 col-sm-8 col-md-7 col-lg-6' style={{padding: 0}}>
               <div className='visible-xs-block hidden-sm hidden-md hidden-lg' style={{padding :0 , borderRightStyle:'ridge',minHeight: 980}}>
                 {this.props.productToCart.cartList.length == 0 &&
-                  <h2>
+                  <h3>
                     No tienes nungun producto en el carro para comprar.
-                  </h2>
+                  </h3>
                 }
                 {productList}
 
-                <NavLink onClick ={this.goToCreaciones.bind(this)} to='/Diseños' className= 'btn center-block' style= {style.carroContainer.btnSeguirComprando}> seguir comprando  <h4  className = 'glyphicon glyphicon-hand-left'></h4>
+                <NavLink onClick ={this.goToCreaciones.bind(this)} to='/Diseños' className= 'btn center-block' style= {{textAlign: 'center',fontSize: '17px',border: 'none',color:'black'}}> seguir comprando  <h4  className = 'glyphicon glyphicon-hand-left'></h4>
                 </NavLink>
 
               </div>
@@ -139,6 +177,8 @@ const dispatchToProps = (dispatch) =>{
     toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
     getContenidos:()=>dispatch(actions.getContenidos()),
     showNotificationWithTimeout:(modalName)=>dispatch(actions.showNotificationWithTimeout(modalName)),
+    loadCarro:(carro,justLogedIn)=>dispatch(actions.loadCarro(carro,justLogedIn)),
+
   }
 }
 
@@ -150,7 +190,8 @@ const stateToProps = (state) => {
     //en state.blabla dices de que reducer quieres info
     //y tu le asignas una key q quieras
     storeContenidos: state.contenidos,
-    productToCart:state.carro
+    productToCart:state.carro,
+    users: state.user,
   }
 }
 

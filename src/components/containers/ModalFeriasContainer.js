@@ -9,10 +9,6 @@ class ModalFeriasContainer extends Component {
 
   componentDidMount() {
 
-    if (this.props.storeContenidos.ContenidosLoaded == false){
-      //en la accion ya lo pone a true
-      this.props.getContenidos()
-    }
     //cargo la lista para que el dropdown menu sea dinamico
 
     if (this.props.storeFerias.FeriasLoaded == false){
@@ -24,6 +20,7 @@ class ModalFeriasContainer extends Component {
   moveToFeriasSection(feriaName){
     this.props.toggleModal('closeFerias')
     this.props.moveToFeriasSection(feriaName)
+    this.props.navActive('ferias', 'navbarMicoFront')
   }
 
   //onMouseOut() Rocks!!
@@ -73,6 +70,7 @@ const dispatchToProps = (dispatch) =>{
     getContenidos: () => dispatch(actions.getContenidos()),
     toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
     moveToFeriasSection: (feriaName)=>dispatch(actions.moveToFeriasSection(feriaName)),
+    navActive:(navTab,params)=>dispatch(actions.navActive(navTab,params)),
   }
 }
 

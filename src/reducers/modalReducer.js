@@ -6,6 +6,9 @@ var initialState = {
   feriasShowing : false,
   menuXsShowing : false,
   trabajandoShowing : false,
+  menuLoginShowing: false,
+  menuEntrarShowing:false,
+  realizarCompraShowing: false,
 }
 
 export default (state = initialState, action) => {
@@ -34,11 +37,26 @@ export default (state = initialState, action) => {
     else if (action.data == 'openCreaciones'){
       newState['creacionesShowing'] = true
     }
+    //login
+    else if (action.data === 'closeLogin'){
+      newState['menuLoginShowing'] = false
+    }
+    else if (action.data == 'openLogin'){
+      newState['menuLoginShowing'] = true
+    }
+    //entrar cuando ya tengo un usuario
+    if (action.data == 'closeEntrar'){
+      newState['menuEntrarShowing'] = false
+    }
+    else if (action.data == 'openEntrar'){
+      newState['menuEntrarShowing'] = true
+    }
     //si toca fuera de los dialogos de dropdown es que quiere pasar de ellos as'i q los cierro
     //tb con el hoover off en version desktop
     else if (action.data == 'closeDropdowns'){
       newState['creacionesShowing'] = false
       newState['feriasShowing'] = false
+      newState['menuLoginShowing'] = false
     }
     // el menuXs blokea todo como el registrarse
     else if(action.data == 'openMenuXs'){
@@ -51,6 +69,12 @@ export default (state = initialState, action) => {
       newState['trabajandoShowing'] = true
     }else if(action.data == 'closeTrabajando'){
       newState['trabajandoShowing'] = false
+    }
+    //abrir cerrar el proceso de compra
+    else if(action.data == 'openRealizarCompra'){
+      newState['realizarCompraShowing'] = true
+    }else if(action.data == 'closeRealizarCompra'){
+      newState['realizarCompraShowing'] = false
     }
 
 

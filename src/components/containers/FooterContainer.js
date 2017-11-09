@@ -11,10 +11,7 @@ class FooterContainer extends Component {
       //en la accion ya lo pone a true
       this.props.getEnlaces()
     }
-    if (this.props.storeContenidos.ContenidosLoaded == false){
-      //en la accion ya lo pone a true
-      this.props.getContenidos()
-    }
+
   }
   moveUp(event){
     //make it start at the top of the page every time
@@ -61,7 +58,7 @@ class FooterContainer extends Component {
       }
     }
     return (
-      <div onClick = {this.cierraDialogosNavbar.bind(this)} >
+      <div onClick = {this.cierraDialogosNavbar.bind(this)} style= {{position: 'relative', marginTop :-180, height:180,paddingTop:10}}>
         <button type='button' className='btn btn-primary glyphicon glyphicon-chevron-up' onClick = {this.moveUp.bind(this)}
           style={{backgroundColor: 'transparent', color: 'black',fontSize: 13,border:'none',padding:'2px', marginBottom:0}}> volver arriba</button>
         <div className='container' style={{backgroundColor: 'rgba(0,0,0,0.90)',height:160, width:'100%'}}>

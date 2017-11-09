@@ -25,6 +25,15 @@ export default {
   //ALSO
   //Fortunately, Redux Thunk offers you a way to read the current state of the Redux store. In addition to dispatch, it also passes getState as the second argument to the function you return from your thunk action creator
 
+
+  navActive:(activeTab,params) =>{
+    return{
+      type: constants.NAV_ACTIVE,
+      params: params,
+      data: activeTab,
+    }
+  },
+
   toggleModal: (modalName) => {
     return {
       type: constants.TOGGLE_MODAL,
@@ -99,13 +108,64 @@ export default {
 
   },
   productToCart: (product) => {
-    // key 'type' is mandatory after that, u can send whatever
-    //console.log ('PRODCUT_TO_CART action' + JSON.stringify(product))
+
     return {
       type: constants.PRODCUT_TO_CART,
       data: product
     }
 
+
+  },
+  guardarDatosPedido:(carro,paymentData) =>{
+    return dispatch =>{
+      return dispatch(Firebase.guardarDatosPedido(carro,paymentData,constants.GUARDAR_DATOS_PEDIDO))
+    }
+
+  },
+  vaciarCarro:() =>{
+    return dispatch => {
+      return dispatch (Firebase.vaciarCarro(constants.LOAD_CARRO))
+    }
+  },
+  loadCarro:(carro,justLogedIn) =>{//combinar el carro que haya con el de la DB si t acabas de logear
+    return dispatch=> {            //si no, simplemente sustituir el de la DB x el nuevo
+      return dispatch(Firebase.loadCarro(carro,justLogedIn,constants.LOAD_CARRO))
+    }
+  },
+  currentUserToDB : (user) => {
+    return dispatch => {
+      return dispatch(Firebase.currentUserToDB( user, constants.CURRENT_USER_TO_DB))
+    }
+  },
+  addUserInfo: (user , params, posibleFoto) => {
+    return dispatch => {
+      return dispatch(Firebase.addUserInfo(user, params, posibleFoto, constants.ADD_USER_INFO))
+    }
+  },
+  cambiarCurrentUserModificables : (currentUserModificable, params) => {
+    return {
+      type: constants.CAMBIAR_CURRENT_USER_MODIFICABLE,
+      params: params,
+      data: currentUserModificable
+    }
+  },
+  userCreated: (params)=>{
+    return dispatch => {
+      return dispatch(Firebase.userCreated(params, constants.USER_CREATED))
+    }
+
+  },
+  getUsers: (params)=>{
+    return dispatch => {
+      return dispatch(Firebase.getUsers(params, constants.USERS_RECEIVED))
+    }
+
+  },
+  currentUserRecieved: (user) => {
+    return {
+      type: constants.CURRENT_USER_RECEIVED,
+      data: user
+    }
   },
 
   fetchUsers: (params) => {
@@ -114,22 +174,37 @@ export default {
     }
   },
 
-  addUser: (params) => {
+
+  loginWithEmailAndPassword: (params) => {
     return dispatch => {
-      return dispatch(TurboClient.postRequest('user', params, constants.USER_CREATED))
+      return dispatch(Firebase.loginWithEmailAndPassword(params, constants.CURRENT_USER_RECEIVED))
     }
   },
 
-  loginUser: (credentials) => {
+  loginGoogle :(params) =>{
     return dispatch => {
-      return dispatch(TurboClient.login(credentials, constants.CURRENT_USER_RECEIVED))
+      return dispatch (Firebase.loginGoogle(params,constants.CURRENT_USER_RECEIVED))
     }
   },
-
-  currentUser: () => {
+  loginFacebook :(params) =>{
     return dispatch => {
-      return dispatch(TurboClient.currentUser(constants.CURRENT_USER_RECEIVED))
+      return dispatch (Firebase.loginFacebook(params,constants.CURRENT_USER_RECEIVED))
     }
-  }
-
+  },
+  logout :(params) =>{
+    return dispatch => {
+      return dispatch (Firebase.logout(params,constants.CURRENT_USER_RECEIVED))
+    }
+  },
+  changePassword : (newPassword,params)=>{
+    //params: change or forgot
+    return dispatch =>{
+      return dispatch(Firebase.changePassword(newPassword,params, constants.PASSWORD_CHANGED))
+    }
+  },
+  resendEmail:(params)=>{
+    return dispatch =>{
+      return dispatch(Firebase.resendEmail(params, constants.RESEND_EMAIL))
+    }
+  },
 }

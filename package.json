@@ -6,6 +6,7 @@
     "bootstrap": "^3.3.7",
     "express": "^4.15.4",
     "firebase": "^4.3.0",
+    "paypal-checkout": "^4.0.160",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.2",
     "react-dom": "^15.6.1",

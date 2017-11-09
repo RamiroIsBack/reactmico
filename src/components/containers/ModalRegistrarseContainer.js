@@ -3,27 +3,83 @@ import {ModalRegistrarse} from '../presentational'
 
 import {connect} from 'react-redux'
 import actions from '../../actions'
+import history from '../../utils/history'
+
 
 
 class ModalRegistrarseContainer extends Component {
 
+
   componentDidMount() {
 
-    if (this.props.storeContenidos.ContenidosLoaded == false){
-      //en la accion ya lo pone a true
-      this.props.getContenidos()
-    }
+
   }
 
-  subirNuevoAmigo(amigo ){
+  subirNuevoAmigo(user ){
     //TODO: log this new amigo to d DB
-    console.log('soy tu nuevo amigo!!!!!!!'+JSON.stringify(amigo))
-    this.props.showNotificationWithTimeout('Trabajando')
+    if (user === null){
+      this.props.showNotificationWithTimeout('Trabajando')
+    }else{
+      console.log('soy tu nuevo amigo!!!!!!!'+JSON.stringify(user))
+      this.props.userCreated(user)
+      this.props.toggleModal('closeRegistrarse')
+      //make it start at the top of the page every time
+      window.scrollTo(0, 0)
+
+    }
+  }
+  entrarConGoogle(){
+    this.props.loginGoogle()
+      .then(response => {
+        this.props.toggleModal('closeEntrar')
+        //puede que haya algo en el carro d ates y habr'a q combinarlo x eso lo paso, digo q est'a recien logeado
+        // y tb paso el uid de user para buscar en la base de ddatos
+        this.props.loadCarro(this.props.carro.cartList,true )
+
+      })
+      .catch(err => {
+        alert(err.message+ 'cacafuti ModalEntrarContainer l-134')
+      })
+
+    this.props.toggleModal('closeRegistrarse')
+
+  }
+  entrarConFacebook(){
+    this.props.loginGoogle()
+      .then(response => {
+        this.props.toggleModal('closeEntrar')
+        //puede que haya algo en el carro d ates y habr'a q combinarlo x eso lo paso, digo q est'a recien logeado
+        // y tb paso el uid de user para buscar en la base de ddatos
+        this.props.loadCarro(this.props.carro.cartList,true )
+
+      })
+      .catch(err => {
+        alert(err.message+ 'cacafuti ModalEntrarContainer l-134')
+      })
+
+    this.props.toggleModal('closeRegistrarse')
+
   }
 
   toggleModal(){
     this.props.toggleModal('closeRegistrarse')
   }
+
+  comprobarNombre(nombre){
+    var listaUsers = []
+    var repe= false
+    if (this.props.users){
+      listaUsers = this.props.users.listaUsers
+    }
+    for (let i =0; i < listaUsers.length; i++){
+      if (listaUsers[i].datosPersonales.nombre === nombre){
+        repe = true
+        break
+      }
+    }
+    return repe
+  }
+
   render(){
     var registrarseShowing = false
     var registrarseContenidos = {}
@@ -48,7 +104,7 @@ class ModalRegistrarseContainer extends Component {
     return (
 
       <div>
-        <ModalRegistrarse show={registrarseShowing} subirNuevoAmigo={this.subirNuevoAmigo.bind(this)} onClose={this.toggleModal.bind(this)} contenido = {registrarseContenidos}>
+        <ModalRegistrarse entrarConGoogle = {this.entrarConGoogle.bind(this)} entrarConFacebook = {this.entrarConFacebook.bind(this)} show={registrarseShowing} subirNuevoAmigo={this.subirNuevoAmigo.bind(this)} onClose={this.toggleModal.bind(this)} contenido = {registrarseContenidos} comprobarNombre = {this.comprobarNombre.bind(this)}>
         </ModalRegistrarse>
 
 
@@ -62,9 +118,16 @@ class ModalRegistrarseContainer extends Component {
 const dispatchToProps = (dispatch) =>{
 
   return{
+
+
     getContenidos: () => dispatch(actions.getContenidos()),
     toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
     showNotificationWithTimeout: (modalName) =>dispatch(actions.showNotificationWithTimeout(modalName)),
+    userCreated:(user) => dispatch(actions.userCreated(user)),
+    loginGoogle:() =>dispatch(actions.loginGoogle()),
+    loginFacebook:() =>dispatch(actions.loginFacebook()),
+    loadCarro:(carro,justLogedIn)=>dispatch(actions.loadCarro(carro,justLogedIn)),
+
   }
 }
 
@@ -77,6 +140,9 @@ const stateToProps = (state) => {
     //y tu le asignas una key q quieras
     storeContenidos: state.contenidos,
     storeModal:state.modal,
+    users: state.user,
+    carro:state.carro
+
 
   }
 }

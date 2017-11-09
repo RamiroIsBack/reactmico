@@ -4,7 +4,7 @@ var initialState = {
   cartList:[],
   numProducts: 0,
   precioSubTotal : 0,
-  envio : 0,
+  envio : 15,
 }
 
 export default (state = initialState, action) => {
@@ -71,6 +71,27 @@ export default (state = initialState, action) => {
     newState['precioSubTotal'] = precioSubTotal
 
     console.log (' from reducer PRODCUT_TO_CART: ' +JSON.stringify(newState['cartList'][action.data.indice]))
+    return newState
+
+  case constants.LOAD_CARRO:
+    //se ha combinado con el de la base de datos el carro provisional de antes de logearse si lo habia
+    //se ha cargado el carro de user
+    if(action.params === 'okCarroReady'){//solo lo he subido a la DB
+
+    }else if (action.params === 'okCarro'){//he cogido de la DB as'i q hay q meterlo en cartList
+      newState.cartList = action.data
+      newState.numProducts = action.data.length
+
+      newState['cartList'].forEach((value,index)=>{
+        //en realidad no estoy dejando q suban unidades pero lo dejo preparado xa el futuro x si acaso
+        unidadesTotales += value.unidades
+        precioSubTotal += value.precio * value.unidades
+      })
+      newState['precioSubTotal'] = precioSubTotal
+    }else if(action.params === 'okCarroVacio'){//se ha realizado una compra hay q vaciar el carro
+      newState['cartList'] = []
+      newState['numProducts'] = 0
+    }
     return newState
 
   default:

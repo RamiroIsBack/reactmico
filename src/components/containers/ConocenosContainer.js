@@ -6,10 +6,7 @@ import {Conocenos} from '../presentational'
 
 class ConocenosContainer extends Component {
   componentWillMount() {
-    if (this.props.storeContenidos.ContenidosLoaded == false){
-      //en la accion ya lo pone a true
-      this.props.getContenidos()
-    }
+
     //make it start at the top of the page every time
     window.scrollTo(0, 0)
   }

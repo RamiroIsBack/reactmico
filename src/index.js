@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom'
 import history from './utils/history'
 import store from './stores'
 import { Provider } from 'react-redux'
-import {Home,Contacto,Carro,Diseños,Ferias,Conocenos,Registrarse,Productos} from './components/layout'
-import {ModalTrabajandoContainer,ModalMenuXsContainer,ModalCreacionesContainer,ModalFeriasContainer,ModalRegistrarseContainer , NavbarMicoFront,FooterContainer} from './components/containers'
+import {Home,Contacto,Carro,Diseños,Ferias,Conocenos,Registrarse,Productos, Amigo} from './components/layout'
+import {AmigoPedidosContainer, AmigoDatosContainer, ModalLoginContainer,ModalTrabajandoContainer,ModalMenuXsContainer,ModalCreacionesContainer,ModalFeriasContainer,ModalRegistrarseContainer, ModalEntrarContainer , NavbarMicoFront,FooterContainer, ModalRealizarCompraContainer} from './components/containers'
 import 'bootstrap/dist/css/bootstrap.css'
 import {
   Router as Router,
@@ -26,22 +26,28 @@ class ReactMico extends Component {
 
       <Provider store={store.configure(null)}>
         <Router history={history}>
-          <div>
+          <div style={{height:'100%'}}>
+            <ModalRealizarCompraContainer/>
             <ModalRegistrarseContainer/>
             <ModalMenuXsContainer/>
             <ModalCreacionesContainer/>
             <ModalFeriasContainer/>
             <ModalTrabajandoContainer/>
+            <ModalLoginContainer/>
+            <ModalEntrarContainer/>
             <NavbarMicoFront/>
-            <div style={{minHeight :500}}>
-              <Route exact path="/" component={Home}/>
-              <Route path="/Diseños" component={Diseños}/>
-              <Route path="/Registrarse" component={Registrarse}/>
-              <Route path="/Carro" component={Carro}/>
-              <Route path="/Contacto" component={Contacto}/>
-              <Route path="/Ferias" component={Ferias}/>
-              <Route path="/Conocenos" component={Conocenos}/>
-              <Route path="/Productos" component={Productos}/>
+            <div  style={{width:'100%', minHeight :'100vh',paddingBottom : 180,display:'inline-block'}}>
+              <Route exact path='/' component={Home}/>
+              <Route path='/Diseños' component={Diseños}/>
+              <Route path='/Registrarse' component={Registrarse}/>
+              <Route path='/Carro' component={Carro}/>
+              <Route path='/Contacto' component={Contacto}/>
+              <Route path='/Ferias' component={Ferias}/>
+              <Route path='/Conocenos' component={Conocenos}/>
+              <Route path='/Productos' component={Productos}/>
+              <Route path='/Amigo' component = {Amigo}/>
+              <Route path='/Amigo/Datos' component = {AmigoDatosContainer}/>
+              <Route path='/Amigo/Pedidos' component = {AmigoPedidosContainer}/>
             </div>
             <FooterContainer/>
           </div>
