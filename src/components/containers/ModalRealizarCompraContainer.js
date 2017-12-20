@@ -35,18 +35,48 @@ class ModalRealizarCompraContainer extends Component {
     this.setState({formaDePago:false,compraRealizada:true})
   }
   guardarDatosPedido (data ){
-    this.props.guardarDatosPedido(this.props.carro,data)
-    //this.props.blockElementos(this.props.carro.cartList)   pone en opacity:60% y cartel de vendido durante 15 dias
-    //                                                       las creaciones vendidas ade+ guardar una lista de ellos para que todo //                                                       el q tenga esos elementos en el carro,
-    //                                                       al cargarlo de la DB, se le borren
-    // tb hay q mandar mail de confirmacion y otro a alba
-    // con backend: https://stackoverflow.com/questions/40298207/sending-email-to-user-upon-registration-in-react
-    // sin backend: https://github.com/dwyl/html-form-send-email-via-google-script-without-server
+    // le pongo la fecha para q alba sepa cuando se hizo el pedido
+    var today = new Date()
+    var dd = today.getDate()
+    var mm = today.getMonth()+1 //January is 0!
+    var yyyy = today.getFullYear()
+
+    if(dd<10) {
+      dd = '0'+dd
+    }
+
+    if(mm<10) {
+      mm = '0'+mm
+    }
+
+    today = dd + '/' + mm + '/' + yyyy
+    data.fechaPedido = today
+    data.payerEmail = this.props.users.currentUser.datosPersonales.email
+    data.uid = this.props.users.currentUser.datosPersonales.uid
+    this.props.guardarDatosPedido(this.props.users.currentUser.datosEnvio ,this.props.carro,data)
+
+    //TO DO:
+    //  hay q mandar mail a alba con el pedido y tunear los mails x favor
     // LO MEJOR X AHORA CLOUD FUNCTIONS https://firebase.google.com/products/functions/?authuser=0
 
     this.setState({pagoPedido: data, carroPedido:this.props.carro})
-    this.props.vaciarCarro() //de la DB tb claro
-    this.irAcompraRealizada()
+    for(let i=0 ; i<this.props.carro.cartList.length ; i++){
+      let id = this.props.carro.cartList[i].id
+      this.props.elementoVendido(id)
+    }
+    this.props.getCreaciones()
+      .then(response=>{
+        this.props.vaciarCarro()
+          .then(response =>{
+            this.irAcompraRealizada()
+          })
+          .catch(err=>{
+            alert(err.message+ 'fallo al vaciar el carro')
+          })
+      })
+      .catch(err=>{
+        alert(err.message+ 'fallo al cargar las creaciones')
+      })
   }
 
   toggleModal(whereTo){
@@ -84,7 +114,7 @@ class ModalRealizarCompraContainer extends Component {
     if (!realizarCompraShowing){
       return null
     }
-    for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
+    for (let i = 0 ;  i < this.props.storeContenidos.listaContenidos.length ;  i++) {
 
       if (this.props.storeContenidos.listaContenidos[i].id == 'registrarse'){
         registrarseContenidos = this.props.storeContenidos.listaContenidos[i]
@@ -150,8 +180,10 @@ const dispatchToProps = (dispatch) =>{
     userCreated:(user) => dispatch(actions.userCreated(user)),
     loginGoogle:() =>dispatch(actions.loginGoogle()),
     navActive:(activeTab,params) => dispatch(actions.navActive(activeTab,params)),
-    guardarDatosPedido:(carro,paymentData) =>dispatch(actions.guardarDatosPedido(carro,paymentData)),
+    guardarDatosPedido:(datosEnvio,carro,paymentData) =>dispatch(actions.guardarDatosPedido(datosEnvio,carro,paymentData)),
     vaciarCarro:() => dispatch(actions.vaciarCarro()),
+    elementoVendido:(id) => dispatch(actions.elementoVendido(id)),
+    getCreaciones:()=> dispatch (actions.getCreaciones()),
 
   }
 }

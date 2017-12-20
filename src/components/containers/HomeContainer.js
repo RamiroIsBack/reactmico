@@ -7,9 +7,6 @@ import actions from '../../actions'
 
 class HomeContainer extends Component {
 
-  componentWillMount() {
-
-  }
 
   dameEstilo( url){
     var estiloYBackgroundCreaciones = {
@@ -47,6 +44,7 @@ class HomeContainer extends Component {
     let headlineMico = ''
     let desarrolloMico = ''
 
+
     if (this.props.storeContenidos.listaContenidos.length !=0){
       for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
@@ -82,25 +80,6 @@ class HomeContainer extends Component {
 
     return (
       <div className ='container-fluid' onClick = {this.cierraDialogosNavbar.bind(this)}>
-        <div className = 'container-fluid row visible-xs-block hidden-sm hidden-md hidden-lg' style={{marginTop:'60px'}} >
-          <NavLink className ='btn btn-block' to='/Diseños' style={style.home.navlinkBtn}>
-            <img role='presentation' src={urlPicCreaciones}  className ='img-rounded' style= {{maxWidth: '100%'}}>
-            </img>
-            <div className = 'col-xs-offset-2 col-xs-8 col-sm-offset-2 col-sm-7 col-md-offset-2 col-md-7 col-lg-offset-2 col-lg-7 carousel-caption' style = {{padding: '0px', top: 60 , }}>
-              <h3  style = {{backgroundColor: 'black' ,borderRadius:'4px', padding: '0px',marginTop : 5,whiteSpace: 'initial'}}>{headerCreaciones}</h3>
-            </div>
-          </NavLink>
-        </div>
-        <div className = 'container-fluid row hidden-xs'  >
-          <NavLink className ='btn btn-block' to='/Diseños' style={style.home.navlinkBtn}>
-            <img role='presentation' src={urlPicCreaciones}  className ='img-rounded' style= {{maxWidth: '100%'}}>
-            </img>
-            <div className = 'col-xs-offset-2 col-xs-8 col-sm-offset-2 col-sm-7 col-md-offset-2 col-md-7 col-lg-offset-2 col-lg-7 carousel-caption' style = {{padding: '0px', top: 60 , }}>
-              <h3  style = {{backgroundColor: 'black' ,borderRadius:'4px', padding: '0px',marginTop : 5,overflow: 'hidden'}}>{headerCreaciones}</h3>
-            </div>
-          </NavLink>
-        </div>
-        <hr/>
         <div className ='container-fluid row'>
           <div className = 'container-fluid col-xs-12 col-sm-4 col-md-4' >
             <h1>Mico diseño textil</h1>
@@ -111,8 +90,34 @@ class HomeContainer extends Component {
           </div>
         </div>
         <hr/>
+        <div className = 'container-fluid visible-xs-block hidden-sm hidden-md hidden-lg btn-group btn btn-block'
+          style={style.home.navlinkBtn}>
+          <NavLink className ='btn-group btn btn-block' to='/Diseños' style={style.home.navlinkBtn}>
+            <div style= {{position: 'relative', top: 0, left: 0}}>
+              <img role='presentation' src={urlPicCreaciones}  className ='img-rounded' style= {{maxWidth: '100%',maxHeight : '300px', position: 'relative', top: 0, left: 0}}>
+              </img>
+
+              <div className = 'carousel-caption' style = {{padding: '0px', top: 0, left: 10, right: 10}}>
+                <h3  style = {{backgroundColor: 'black' ,borderRadius:'4px', padding: '0px',marginTop : 5,whiteSpace: 'initial'}}>{headerCreaciones}</h3>
+              </div>
+            </div>
+          </NavLink>
+        </div>
+        <div className = 'container-fluid hidden-xs btn-group btn btn-block '  style={style.home.navlinkBtn} >
+          <NavLink className ='btn-group btn btn-block' to='/Diseños' style={style.home.navlinkBtn}>
+            <div style= {{position: 'relative', top: 0, left: 0}}>
+              <img role='presentation' src={urlPicCreaciones}  className ='img-rounded' style= {{maxWidth: '60%',maxHeight : '300px', position: 'relative', top: 0, left: 0}}>
+              </img>
+
+              <div className = 'carousel-caption' style = {{padding: '0px', top: 0, left:'25%', right: '25%'}}>
+                <h3  style = {{backgroundColor: 'black' ,borderRadius:'4px', padding: '0px',marginTop : 5,whiteSpace: 'initial'}}>{headerCreaciones}</h3>
+              </div>
+            </div>
+          </NavLink>
+        </div>
+        <hr/>
         <div className ='container-fluid btn-group  btn-block ' style={style.home.navlinkBtn}>
-          <div className = 'container-fluid col-xs-12 col-sm-12 col-md-6 col-lg-6' style={style.home.navlinkBtn}>
+          <div className = 'container-fluid col-xs-12 col-sm-6 col-md-6 col-lg-6' style={style.home.navlinkBtn}>
             <NavLink className ='container-fluid btn btn-block ' to='/Ferias' style={style.home.navlinkBtn}>
               <img role='presentation' src={urlPicFerias}  className ='img-rounded' style= {{maxWidth: '100%'}}>
               </img>
@@ -120,8 +125,9 @@ class HomeContainer extends Component {
                 <h3  style = {{backgroundColor: 'black' ,borderRadius:'4px', padding: '0px',marginTop : 5, overflow: 'hidden'}}>{headerFerias}</h3>
               </div>
             </NavLink>
+            <br/>
           </div>
-          <div className = 'container-fluid col-xs-12 col-sm-12 col-md-6 col-lg-6'  >
+          <div className = 'container-fluid col-xs-12 col-sm-6 col-md-6 col-lg-6'  >
             <NavLink className ='container-fluid btn btn-block' to='/Conocenos' style={style.home.navlinkBtn}>
               <img role='presentation' src={urlPicConocenos}  className ='img-rounded' style= {{maxWidth: '100%'}}>
               </img>
@@ -142,6 +148,7 @@ const dispatchToProps = (dispatch) =>{
   return{
     getContenidos:()=>dispatch(actions.getContenidos()),
     toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
+    spinCarousel:(numPicCarousel) => dispatch(actions.spinCarousel(numPicCarousel)),
   }
 }
 
@@ -151,8 +158,9 @@ const stateToProps = (state) => {
     // cojo el producto d state(store) y lo paso a props xa cogerlo
     //en state.blabla dices de que reducer quieres info
     //y tu le asignas una key q quieras
-
+    creacion:state.creacion,
     storeContenidos:state.contenidos,
+    carousel:state.carousel,
     // TODO::  aqui meter tb el storeModal
 
   }

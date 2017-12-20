@@ -59,7 +59,7 @@ class ModalCreacionesContainer extends Component {
         creacionList.push (
           {
             nombre: tipo,
-            urlIcon: creacionesContenidos.tipo[tipo].urlIcon,
+            //urlIcon: creacionesContenidos.tipo[tipo].urlIcon,
           }
         )
       }

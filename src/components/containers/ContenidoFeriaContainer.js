@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import actions from '../../actions'
-
+import {FeriasMapContainer} from './'
 class ContenidoFeriaContainer extends Component {
 
   componentWillMount(){
@@ -10,6 +10,7 @@ class ContenidoFeriaContainer extends Component {
       this.props.getContenidos()
     }
   }
+
 
   render() {
     let feriasContenido = {}
@@ -22,17 +23,51 @@ class ContenidoFeriaContainer extends Component {
         }
       }
     }
-    return (
-      <div className='container'>
-        {feriasContenido.descripcion &&
-          <div className = 'container-fluid row col-xs-12 col-sm-10 col-md-10 col-lg-10' style = {{textAlign :'center'}} >
-            {feriasContenido.descripcion.descripcionFerias.split('\n').map((item, key) => {
-              return <span key={key} >{item}<br/></span>})}
 
+    return (
+      <div style ={{padding:0, margin:0}}>
+        {/*esto es visible-XS*/}
+        <div className = 'container-fluid row visible-xs-block hidden-sm hidden-md hidden-lg '
+          style ={{
+            paddingTop: 50, paddingBottom: 50,
+            backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2Fferia1.png?alt=media&token=996633e2-ad62-42b0-b395-c197b78becbe)',
+            backgroundPosition: 'right bottom', backgroundSize: 'cover', backgroundRepeat: 'no-repeat',
+            overflow: 'auto', maxWidth:'100%',
+            margin:0,
+          }}>
+
+        </div>
+
+        {/*esto es visible-SM MD LG*/}
+        <div className = 'container-fluid row hidden-xs '
+          style ={{
+            paddingTop: 80,paddingBottom: 80,
+            backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2Fferia1.png?alt=media&token=996633e2-ad62-42b0-b395-c197b78becbe)',
+            backgroundPosition: 'right bottom', backgroundSize: 'cover',backgroundRepeat: 'no-repeat',
+            overflow: 'auto',
+            maxWidth:'100%',
+            margin:0,
+          }}>
+
+        </div>
+
+        {feriasContenido.descripcion &&
+          <div>
+            <div className = 'container-fluid row col-xs-11 visible-xs-block hidden-sm hidden-md hidden-lg ' style = {{marginLeft:5, padding:3}} >
+              {feriasContenido.descripcion.descripcionFerias.split('\n').map((item, key) => {
+                return <span key={key} >{item}<br/></span>})}
+
+            </div>
+            <div className = 'container-fluid row hidden-xs col-sm-10 col-md-10 col-lg-10' style = {{marginLeft:35, padding:3}} >
+              {feriasContenido.descripcion.descripcionFerias.split('\n').map((item, key) => {
+                return <span key={key} >{item}<br/></span>})}
+
+            </div>
           </div>
         }
-        <br/>
         <div className='container row clearfix'><br/><br/></div>
+        <hr/>
+
       </div>
     )
   }

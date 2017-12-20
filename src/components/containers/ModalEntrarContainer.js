@@ -45,6 +45,22 @@ class ModalEntrarContainer extends Component {
     this.props.toggleModal('openRegistrarse')
   }
 
+  toggleModal(){
+    this.props.toggleModal('closeEntrar')
+  }
+
+
+  gestionaLogin(event){
+    if(event.target.id ==='entrar'){
+      this.props.toggleModal('closeLogin')
+      this.props.toggleModal('openEntrar')
+    }
+    else if(event.target.id ==='registrarse'){
+      this.props.toggleModal('closeLogin')
+      this.props.toggleModal('openRegistrarse')
+    }
+  }
+
   entrar(amigo){
     var listaUsers = []
     var nombreOEmailValido= false
@@ -94,14 +110,10 @@ class ModalEntrarContainer extends Component {
       history.push('/Amigo/Datos')
       this.props.loginWithEmailAndPassword(user)
         .then(response => {
-          this.props.toggleModal('closeEntrar')
-          //puede que haya algo en el carro d ates y habr'a q combinarlo x eso lo paso, digo q est'a recien logeado
-          // y tb paso el uid de user para buscar en la base de ddatos
-          this.props.loadCarro(this.props.carro.cartList,true )
-
+          this.toggleModalYrecargaCreacionesYgestionaCarroUser()
         })
         .catch(err => {
-          alert(err.message+ 'cacafuti ModalEntrarContainer l-134')
+          alert(err.message+ 'fallo al logearte con email y password')
         })
 
     }else if (!nombreOEmailValido){
@@ -110,33 +122,14 @@ class ModalEntrarContainer extends Component {
     }
   }
 
-  toggleModal(){
-    this.props.toggleModal('closeEntrar')
-  }
-
-
-  gestionaLogin(event){
-    if(event.target.id ==='entrar'){
-      this.props.toggleModal('closeLogin')
-      this.props.toggleModal('openEntrar')
-    }
-    else if(event.target.id ==='registrarse'){
-      this.props.toggleModal('closeLogin')
-      this.props.toggleModal('openRegistrarse')
-    }
-  }
 
   handleLoginGoogle(){
     this.props.loginGoogle()
       .then(response => {
-        this.props.toggleModal('closeEntrar')
-        //puede que haya algo en el carro d ates y habr'a q combinarlo x eso lo paso, digo q est'a recien logeado
-        // y tb paso el uid de user para buscar en la base de ddatos
-        this.props.loadCarro(this.props.carro.cartList,true )
-
+        this.toggleModalYrecargaCreacionesYgestionaCarroUser()
       })
       .catch(err => {
-        alert(err.message+ 'cacafuti ModalEntrarContainer l-134')
+        alert(err.message+ 'fallo al logearte con googlee')
       })
     this.props.toggleModal('closeEntrar')
 
@@ -144,16 +137,60 @@ class ModalEntrarContainer extends Component {
   handleLoginFacebook(){
     this.props.loginFacebook()
       .then(response => {
-        this.props.toggleModal('closeEntrar')
-        //puede que haya algo en el carro d ates y habr'a q combinarlo x eso lo paso, digo q est'a recien logeado
-        // y tb paso el uid de user para buscar en la base de ddatos
-        this.props.loadCarro(this.props.carro.cartList,true )
-
+        this.toggleModalYrecargaCreacionesYgestionaCarroUser()
       })
       .catch(err => {
-        alert(err.message+ 'cacafuti ModalEntrarContainer l-134')
+        alert(err.message+ 'fallo al logearte con facebook')
       })
 
+  }
+  toggleModalYrecargaCreacionesYgestionaCarroUser(){
+    this.props.toggleModal('closeEntrar')
+    //puede que haya algo en el carro d ates y habr'a q combinarlo x eso lo paso, digo q est'a recien logeado
+    // y tb paso el uid de user para buscar en la base de ddatos
+    this.props.getCreaciones()
+      .then(creaciones=>{
+        let justLogedIn =true
+        this.props.loadCarro(this.props.carro.cartList,justLogedIn )
+          .then(carro =>{
+            //TODO ::: corregir el carro del user si hay algun elemento q haya sido vendido
+            let listaSinVendidos = []
+            let listaDescartados= []
+            let tienesVendidos = false
+
+            for(let i=0 ; i<carro.length ; i++){
+              let elementoEnCarro = carro[i]
+              for (var key in creaciones) {
+                if (creaciones.hasOwnProperty(key)) {
+                  let elementoEnCreaciones = creaciones[key]
+                  elementoEnCreaciones.id = key
+                  if(elementoEnCarro.id === elementoEnCreaciones.id){
+                    if(elementoEnCreaciones.vendido){
+                      listaDescartados.push(elementoEnCreaciones.nombre)
+                      tienesVendidos= true
+                    }else{
+                      listaSinVendidos.push(elementoEnCreaciones)
+                    }
+                    break
+                  }
+                }
+              }
+            }
+            if(tienesVendidos){
+              alert(listaDescartados[0]+' ha sido descartado de tu carro porque ya no esta disponible--> 2 opciones, vale o realmente lo keria, contactar para hacer un pedido personalizado')
+              this.props.uploadCarro(listaSinVendidos)
+            }
+            //loadcarro con false es solo guardarlo en la BD pero vamos a cambiar eso
+            //vamos a crear otra accion q sea uploadCarro carro
+
+          })
+          .catch(err=>{
+            alert(err.message+ 'fallo al cargar el carro')
+          })
+      })
+      .catch(err=>{
+        alert(err.message+ 'fallo al cargar las creaciones')
+      })
   }
 
   render(){
@@ -209,8 +246,9 @@ const dispatchToProps = (dispatch) =>{
     loginGoogle:() =>dispatch(actions.loginGoogle()),
     loginFacebook: () =>dispatch (actions.loginFacebook()),
     changePassword:(newPassword,params) =>dispatch(actions.changePassword(newPassword,params)),
-
+    getCreaciones:() =>dispatch(actions.getCreaciones()),
     loadCarro:(carro,justLogedIn)=>dispatch(actions.loadCarro(carro,justLogedIn)),
+    uploadCarro:(carro)=>dispatch(actions.uploadCarro(carro)),
   }
 }
 
@@ -224,10 +262,15 @@ const stateToProps = (state) => {
     users: state.user,
     storeModal:state.modal,
     storeContenidos: state.contenidos,
-    carro:state.carro
+    carro:state.carro,
+    creacion:state.creacion
 
   }
 }
 //                                   ****
 export default connect (stateToProps,dispatchToProps)(ModalEntrarContainer)
+
+
+
+
 

@@ -5,12 +5,14 @@ import actions from './'
 
 export default {
 
+
+
   // A VER Q PUEEDO HACER ESTO LLAMANDO AL TOGGLEMODAL, NO NECESITO LOS HIDE AND SHOW NOTIFICATION
-  showNotificationWithTimeout: (notificationMaysuculaLaPrimera) => {
+  showNotificationWithTimeout: (notificationMaysuculaLaPrimera,submodalName) => {
     return dispatch => {
       let modalName = 'open'
       modalName = modalName +notificationMaysuculaLaPrimera
-      dispatch(actions.toggleModal(modalName))
+      dispatch(actions.toggleModal(modalName,submodalName))
       setTimeout(() => {
         dispatch(actions.toggleModal('close'+notificationMaysuculaLaPrimera))
       }, 8000)
@@ -24,7 +26,19 @@ export default {
 
   //ALSO
   //Fortunately, Redux Thunk offers you a way to read the current state of the Redux store. In addition to dispatch, it also passes getState as the second argument to the function you return from your thunk action creator
-
+  toggleYear: (year) => {
+    return {
+      type: constants.TOGGLE_YEAR,
+      data: year,
+    }
+  },
+  markerClicked:(markerId,params) =>{
+    return{
+      type: constants.MARKER_CLICKED,
+      params: params,
+      data: markerId,
+    }
+  },
 
   navActive:(activeTab,params) =>{
     return{
@@ -34,9 +48,10 @@ export default {
     }
   },
 
-  toggleModal: (modalName) => {
+  toggleModal: (modalName,submodalName) => {
     return {
       type: constants.TOGGLE_MODAL,
+      params: submodalName,
       data: modalName,
     }
   },
@@ -47,10 +62,10 @@ export default {
       data: creacionTipo
     }
   },
-  moveToFeriasSection: (feriaName)=>{
+  moveToFeriasSection: (id)=>{
     return{
       type: constants.MOVETO_FERIA_SECTION,
-      data: feriaName
+      data: id
     }
 
   },
@@ -116,11 +131,16 @@ export default {
 
 
   },
-  guardarDatosPedido:(carro,paymentData) =>{
+  guardarDatosPedido:(datosEnvio,carro,paymentData) =>{
     return dispatch =>{
-      return dispatch(Firebase.guardarDatosPedido(carro,paymentData,constants.GUARDAR_DATOS_PEDIDO))
+      return dispatch(Firebase.guardarDatosPedido(datosEnvio,carro,paymentData,constants.GUARDAR_DATOS_PEDIDO))
     }
 
+  },
+  elementoVendido:(id) =>{
+    return dispatch => {
+      return dispatch (Firebase.elementoVendido(id,constants.ELEMENTO_VENDIDO))
+    }
   },
   vaciarCarro:() =>{
     return dispatch => {
@@ -130,6 +150,11 @@ export default {
   loadCarro:(carro,justLogedIn) =>{//combinar el carro que haya con el de la DB si t acabas de logear
     return dispatch=> {            //si no, simplemente sustituir el de la DB x el nuevo
       return dispatch(Firebase.loadCarro(carro,justLogedIn,constants.LOAD_CARRO))
+    }
+  },
+  uploadCarro:(carro) =>{
+    return dispatch=> {            //simplemente sustituir el de la DB x el nuevo
+      return dispatch(Firebase.uploadCarro(carro,constants.LOAD_CARRO))
     }
   },
   currentUserToDB : (user) => {

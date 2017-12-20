@@ -1,14 +1,16 @@
 import constants from '../constants'
 
 var initialState = {
-
-  listaCreaciones: [],
+  listaCreacionesSinOrdenar: [],
+  listaCreaciones: {},
   CreacionesLoaded :false ,
   tipoSectionSelected :'allCreaciones',
+
 }
 
 export default (state = initialState, action) => {
   let newState = Object.assign({}, state)
+
   switch (action.type) {
 
   case constants.CREACIONES_RECEIVED:
@@ -21,12 +23,12 @@ export default (state = initialState, action) => {
     var sorted = {}
     let list = action.data
     for( var i = 0, max = list.length; i < max ; i++ ){
-      if( sorted[list[i].tipo] == undefined ){
+      if( sorted[list[i].tipo] === undefined ){
         sorted[list[i].tipo] = []
       }
       sorted[list[i].tipo].push(list[i])
     }
-    console.log('from creacines reducer')
+    newState['listaCreacionesSinOrdenar'] = list
     newState['listaCreaciones'] = sorted
     return newState
 
@@ -37,6 +39,7 @@ export default (state = initialState, action) => {
     console.log (' from reducer tipoSectionSelected:' +action.data)
 
     return newState
+
 
   default:
     return state

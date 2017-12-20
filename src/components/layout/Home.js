@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {HomeContainer} from '../containers'
-
+import style from './styles'
 class Home extends Component {
 
 
@@ -8,8 +8,8 @@ class Home extends Component {
 
 
     return (
-      <div>
-        <HomeContainer/>
+      <div style ={style.universal.containerDiv}>
+        <HomeContainer />
       </div>
     )
   }

@@ -23,5 +23,8 @@ export default {
   NAV_ACTIVE:                         'NAV_ACTIVE',
   LOAD_CARRO:                         'LOAD_CARRO',
   RESEND_EMAIL:                       'RESEND_EMAIL',
-  GUARDAR_DATOS_PEDIDO:               'GUARDAR_DATOS_PEDIDO'
+  GUARDAR_DATOS_PEDIDO:               'GUARDAR_DATOS_PEDIDO',
+  MARKER_CLICKED:                     'MARKER_CLICKED',
+  TOGGLE_YEAR:                        'TOGGLE_YEAR',
+  ELEMENTO_VENDIDO:                   'ELEMENTO_VENDIDO',
 }

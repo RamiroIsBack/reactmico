@@ -8,7 +8,9 @@ import modalReducer from './modalReducer'
 import enlacesReducer from './enlacesReducer'
 import navReducer from './navReducer'
 import pedidosReducer from './pedidosReducer'
+
 export {
+
   pedidosReducer,
   enlacesReducer,
   contenidosReducer,

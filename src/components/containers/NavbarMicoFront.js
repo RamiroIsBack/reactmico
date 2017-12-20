@@ -53,11 +53,12 @@ class NavbarMicoFront extends Component {
     // otherwise it would be d [else] of the las [if] ;)
     //
     else if (event.target.id == 'ferias'){
-      this.props.toggleModal('openFerias')
+      //this.props.toggleModal('openFerias') //not using this now, client want it diferently
       this.props.toggleModal('closeCreaciones')
       this.props.toggleModal('closeLogin')
       this.props.moveToFeriasSection(event.target.name)
       this.props.navActive(event.target.id, 'navbarMicoFront')
+      window.scrollTo(0, 0)
     }
     //viene de otro lado as'i q cierra los 2
     else if(event.target.id== 'carro'){
@@ -90,7 +91,7 @@ class NavbarMicoFront extends Component {
   handleHoverOn(event){
     //console.log('im on ' + event.target.id)
     if(event.target.id == 'ferias'){
-      this.props.toggleModal('openFerias')
+      //this.props.toggleModal('openFerias') //not using this now, client want it diferently
       this.props.toggleModal('closeCreaciones')
       this.props.toggleModal('closeLogin')
     }else if (event.target.id == 'creaciones'){
@@ -117,9 +118,6 @@ class NavbarMicoFront extends Component {
   render() {
     let registrarseShowing = this.props.storeModal.registrarseShowing
     let menuXsShowing = this.props.storeModal.menuXsShowing
-    let menuLoginShowing =this.props.storeModal.menuLoginShowing
-    let creacionesShowing =this.props.storeModal.creacionesShowing
-    let feriasShowing =this.props.storeModal.feriasShowing
 
     let logoMico = ''
     if (this.props.storeContenidos.listaContenidos.length !=0){
@@ -246,8 +244,7 @@ class NavbarMicoFront extends Component {
 
               </li>
               <li  id='ferias' onMouseOver={this.handleHoverOn.bind(this)} >
-                <NavLink  className='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false' style = {feriasEstilo}
-                  onClick = {this.gestionaColapso.bind(this)} id='ferias' name='allFerias' to='/Ferias'>Ferias <span className='caret'></span></NavLink>
+                <NavLink style = {feriasEstilo} onClick = {this.gestionaColapso.bind(this)} id='ferias' name='allFerias' to='/Ferias'>Ferias </NavLink>
 
               </li>
 

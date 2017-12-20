@@ -26,6 +26,7 @@ class ModalFormaDePago extends React.Component {
   }
   onCancel(data){
     console.log('accion de pago cancelada')
+    this.props.onClose('carro')
   }
   onError(data){
     console.log('aalgun error en la accion de pago'+data)

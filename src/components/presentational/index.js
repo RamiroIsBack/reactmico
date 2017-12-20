@@ -16,7 +16,19 @@ import ModalDatosEnvio from './ModalDatosEnvio'
 import ModalFormaDePago from './ModalFormaDePago'
 import ModalCompraRealizada from './ModalCompraRealizada'
 import PayPalButton from './PayPalButton'
+import Mapa from './Mapa'
+import WarningCarroVacio from './WarningCarroVacio'
+import WarningNoUser from './WarningNoUser'
+import WarningNoDatos from './WarningNoDatos'
+import WarningNoVerifyedEmail from './WarningNoVerifyedEmail'
+import WarningTienesVendidos from './WarningTienesVendidos'
 export{
+  WarningTienesVendidos,
+  WarningNoVerifyedEmail,
+  WarningNoDatos,
+  WarningNoUser,
+  WarningCarroVacio,
+  Mapa,
   PayPalButton,
   ModalFormaDePago,
   ModalCompraRealizada,

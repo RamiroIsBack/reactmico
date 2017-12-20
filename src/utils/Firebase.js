@@ -24,11 +24,12 @@ var listCreaciones = []
 var listFerias =[]
 var listContenidos = []
 var listEnlaces = []
-var CurrentUserUid='' //identificador del currentUser. Lo guardo al logear y lo uso si tengo q hacer cambios en sus datos
-
+var currentUserUid='' //identificador del currentUser. Lo guardo al logear y lo uso si tengo q hacer cambios en sus datos
+var currentUserEmail=''
 const getCreaciones = (params, actionType) => {
   return dispatch => DBcreaciones.once('value')
     .then(snapshot => {
+      listCreaciones=[]
       snapshot.forEach(function(childSnapshot){
         const valor = childSnapshot.val()
         valor.id = childSnapshot.key
@@ -140,27 +141,41 @@ const getUsers = (params, actionType) => {
       throw err
     })
 }
-const guardarDatosPedido=(carro,paymentData,actionType)=>{
-  return dispatch => database.ref('users/'+CurrentUserUid+'/pedidos/'+paymentData.paymentID+'/carro')
+const guardarDatosPedido=(datosEnvio,carro,paymentData,actionType)=>{
+  return dispatch => database.ref('users/'+currentUserUid+'/pedidos/'+paymentData.paymentID+'/carro')
     .set(carro).then(snapshot => {
-      database.ref('users/'+CurrentUserUid+'/pedidos/'+paymentData.paymentID+'/datosCompra')
-        .set(paymentData).then(snapshot => {
-          database.ref('users/'+CurrentUserUid+'/pedidos')
-            .once('value').then(snapshot => {
-              console.log('cargando los pedidos que hay en la DB para este user')
-              if (actionType != null){
-                dispatch({
-                  type: actionType,
-                  params: 'okPedido', // can be null
-                  data: snapshot, // usuario subido correctamente
+      database.ref('users/'+currentUserUid+'/pedidos/'+paymentData.paymentID+'/datosEnvio')
+        .set(datosEnvio).then(snapshot => {
+          database.ref('users/'+currentUserUid+'/pedidos/'+paymentData.paymentID+'/datosCompra')
+            .set(paymentData).then(snapshot => {
+              database.ref('users/'+currentUserUid+'/pedidos')
+                .once('value').then(snapshot => {
+                  console.log('cargando los pedidos que hay en la DB para este user')
+                  if (actionType != null){
+                    dispatch({
+                      type: actionType,
+                      params: 'okPedido', // can be null
+                      data: snapshot, // usuario subido correctamente
+                    })
+                  }
+                }).catch(err => {
+                  console.log(` no se ha podido cargar los pedidos: ${err.message}`)
+                  if (actionType != null){
+                    dispatch({
+                      type: actionType,
+                      params: 'errorCargaPedidos', // can be null
+                      data: err, // err , no ha subido usuario
+                    })
+                  }
+                  throw err
+
                 })
-              }
             }).catch(err => {
-              console.log(` no se ha podido cargar los pedidos: ${err.message}`)
+              console.log(` no se ha podido guardar los datos d compra del pedido: ${err.message}`)
               if (actionType != null){
                 dispatch({
                   type: actionType,
-                  params: 'errorCargaPedidos', // can be null
+                  params: 'errorPedidoDatosCompra', // can be null
                   data: err, // err , no ha subido usuario
                 })
               }
@@ -192,8 +207,52 @@ const guardarDatosPedido=(carro,paymentData,actionType)=>{
 
     })
 }
+const elementoVendido = (id,actionType) =>{
+  var today = new Date()
+  var dd = today.getDate()
+  var mm = today.getMonth()+1 //January is 0!
+  var yyyy = today.getFullYear()
+
+  if(dd<10) {
+    dd = '0'+dd
+  }
+
+  if(mm<10) {
+    mm = '0'+mm
+  }
+
+  today = dd + '/' + mm + '/' + yyyy
+
+  return dispatch => database.ref('creaciones/'+id).update({
+    vendido:true,
+    vendidoTime: today,
+
+  }).then (snapshot => {
+    console.log ('se ha puesto como vendido el elemento')
+    if (actionType != null){
+      dispatch({
+        type: actionType,
+        params: 'okElementoVendido', // can be null
+        data: snapshot, // usuario subido correctamente
+      })
+    }
+
+  }).catch(function(error){
+    console.log ('no se pudo poner como vendido '+ error)
+    if (actionType != null){
+      dispatch({
+        type: actionType,
+        params: 'errorElementoVendido', // can be null
+        data: error, // err , no ha subido usuario
+      })
+    }
+    throw error
+
+  })
+
+}
 const vaciarCarro = (actionType) =>{
-  return dispatch => database.ref('users/'+CurrentUserUid+'/carro')
+  return dispatch => database.ref('users/'+currentUserUid+'/carro')
     .remove().then(snapshot => {
 
       console.log('subido el carro vacio')
@@ -219,7 +278,7 @@ const vaciarCarro = (actionType) =>{
 }
 const loadCarro = (carro,justLogedIn,actionType)=> {
   if (justLogedIn){//hay q combinar lo q haya
-    return dispatch => database.ref('users/'+CurrentUserUid+'/carro')
+    return dispatch => database.ref('users/'+currentUserUid+'/carro')
       .once('value').then(snapshot => {
         let listaCarroDB =[]
         snapshot.forEach(function(childSnapshot){
@@ -236,7 +295,7 @@ const loadCarro = (carro,justLogedIn,actionType)=> {
           }
         })
         let listaCarroConcat = listaCarroDB.concat(carro)
-        database.ref('users/'+CurrentUserUid+'/carro')
+        database.ref('users/'+currentUserUid+'/carro')
           .set(listaCarroConcat).then(snapshot => {
 
             console.log('subido el carro')
@@ -267,7 +326,7 @@ const loadCarro = (carro,justLogedIn,actionType)=> {
       })
   }else{//solo hay q escribir encima
 
-    return dispatch => database.ref('users/'+CurrentUserUid+'/carro')
+    return dispatch => database.ref('users/'+currentUserUid+'/carro')
       .set(carro).then(snapshot => {
 
         console.log('subido el carro')
@@ -292,6 +351,31 @@ const loadCarro = (carro,justLogedIn,actionType)=> {
       })
   }
 }
+const uploadCarro=(carro,actionType) =>{
+  return dispatch => database.ref('users/'+currentUserUid+'/carro')
+    .set(carro).then(snapshot => {
+
+      console.log('subido el carro')
+      if (actionType != null){
+        dispatch({
+          type: actionType,
+          params: 'okCarro', // can be null
+          data: carro, // usuario subido correctamente
+        })
+      }
+    }).catch(err => {
+      console.log(` no se ha creado: ${err.message}`)
+      if (actionType != null){
+        dispatch({
+          type: actionType,
+          params: 'errorCarro', // can be null
+          data: err, // err , no ha subido usuario
+        })
+      }
+      throw err
+
+    })
+}
 const loginFacebook = (params,actionType) => {
   var provider = new firebase.auth.FacebookAuthProvider()
   firebase.auth().useDeviceLanguage()
@@ -309,8 +393,8 @@ const loginFacebook = (params,actionType) => {
         providerId: result.user.providerData[0].providerId,
         uid: result.user.uid, //user's unique ID lo usaremos para linkarlo con la DBUsers
       }
-      CurrentUserUid = result.user.uid
-
+      currentUserUid = result.user.uid
+      currentUserEmail = result.user.email
       database.ref('users/'+result.user.uid+'/datosPersonales')
         .set(datosPers).then(snapshot => {
 
@@ -369,7 +453,8 @@ const loginGoogle = (params,actionType) => {
         providerId: result.user.providerData[0].providerId,
         uid: result.user.uid, //user's unique ID lo usaremos para linkarlo con la DBUsers
       }
-      CurrentUserUid = result.user.uid
+      currentUserUid = result.user.uid
+      currentUserEmail = result.user.email
 
       database.ref('users/'+result.user.uid+'/datosPersonales')
         .set(datosPers).then(snapshot => {
@@ -411,6 +496,7 @@ const loginWithEmailAndPassword = (user,actionType) => {
   return dispatch => firebase.auth().signInWithEmailAndPassword(user.email, user.password)
     .then (result => {
       console.log(`${result.email} ha iniciado sesion`)
+
       let datosPers={
         nombre: result.displayName,
         email: result.email,
@@ -419,7 +505,8 @@ const loginWithEmailAndPassword = (user,actionType) => {
         providerId: result.providerId,
         uid: result.uid, //user's unique ID lo usaremos para linkarlo con la DBUsers
       }
-      CurrentUserUid = result.uid
+      currentUserUid = result.uid
+      currentUserEmail = result.email
 
       database.ref('users/'+result.uid+'/datosPersonales')
         .set(datosPers).then(snapshot => {
@@ -462,7 +549,9 @@ const logout = (params,actionType) => {
   return dispatch => firebase.auth().signOut()
     .then (result => {
       //console.log(`${result.user.email} ha salido de la sesion`)
-      CurrentUserUid = ''
+      currentUserUid = ''
+      currentUserEmail = ''
+
       console.log('bye bye')
       if (actionType != null){
         dispatch({
@@ -989,7 +1078,9 @@ export default {
   changePassword:  changePassword,
   loginFacebook: loginFacebook,
   loadCarro: loadCarro,
+  uploadCarro: uploadCarro,
   resendEmail: resendEmail,
   guardarDatosPedido: guardarDatosPedido,
   vaciarCarro:vaciarCarro,
+  elementoVendido:elementoVendido,
 }

@@ -143,7 +143,7 @@ export default (state = initialState, action) => {
   case constants.USERS_RECEIVED:
     newState['usersLoaded'] = true
     newState['listaUsers'] = action.data
-    console.log('usersloaded '+JSON.stringify(action.data))
+    //console.log('usersloaded '+JSON.stringify(action.data))
     if(currentUser){
       //se ha logeado o creado user as'i q al entrar en /Amigo/Datos se vuelve a cargar la listaUsers
       //aprovechamos este momento para meter de la base d datos lo que tengamos sobre ese currentuser y ya trabajamos con el

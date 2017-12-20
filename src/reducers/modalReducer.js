@@ -5,10 +5,12 @@ var initialState = {
   creacionesShowing : false,
   feriasShowing : false,
   menuXsShowing : false,
-  trabajandoShowing : false,
+  warningShowing : false,
   menuLoginShowing: false,
   menuEntrarShowing:false,
   realizarCompraShowing: false,
+
+  submodalWarning: '',
 }
 
 export default (state = initialState, action) => {
@@ -65,10 +67,13 @@ export default (state = initialState, action) => {
       newState['menuXsShowing'] = false
     }
     //aqui viene el abrir y cerrar el de trabajando en ello, es con time-out pero al reducer le da igual
-    else if(action.data == 'openTrabajando'){
-      newState['trabajandoShowing'] = true
-    }else if(action.data == 'closeTrabajando'){
-      newState['trabajandoShowing'] = false
+    else if(action.data == 'openWarning'){
+      newState['warningShowing'] = true
+      newState.submodalWarning = action.params
+
+    }else if(action.data == 'closeWarning'){
+      newState['warningShowing'] = false
+      newState.submodalWarning=''
     }
     //abrir cerrar el proceso de compra
     else if(action.data == 'openRealizarCompra'){
@@ -76,11 +81,6 @@ export default (state = initialState, action) => {
     }else if(action.data == 'closeRealizarCompra'){
       newState['realizarCompraShowing'] = false
     }
-
-
-
-    //desde
-    console.log (' from reducer TOGGLE_MODAL: ' +JSON.stringify(action.data) + 'menuXsShowing: '+ newState.menuXsShowing)
 
     return newState
 

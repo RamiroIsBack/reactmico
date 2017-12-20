@@ -61,7 +61,6 @@ class ModalMenuXsContainer extends Component {
         creacionList.push (
           {
             nombre: tipo,
-            urlIcon: creacionesContenidos.tipo[tipo].urlIcon,
           }
         )
       }

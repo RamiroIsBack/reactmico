@@ -17,18 +17,22 @@ import FooterContainer from './FooterContainer'
 import ModalFeriasContainer from './ModalFeriasContainer'
 import ModalCreacionesContainer from './ModalCreacionesContainer'
 import ModalMenuXsContainer from './ModalMenuXsContainer'
-import ModalTrabajandoContainer from './ModalTrabajandoContainer'
+import ModalWarningContainer from './ModalWarningContainer'
 import ModalLoginContainer from './ModalLoginContainer'
 import ModalEntrarContainer from './ModalEntrarContainer'
 import ModalRealizarCompraContainer from './ModalRealizarCompraContainer'
-export {
+import MapaContainer from './MapaContainer'
+import ListaFeriasContainer from './ListaFeriasContainer'
+export{
+  ListaFeriasContainer,
+  MapaContainer,
   ModalRealizarCompraContainer,
   AmigoNavContainer,
   AmigoDatosContainer,
   AmigoPedidosContainer,
   ModalEntrarContainer,
   ModalLoginContainer,
-  ModalTrabajandoContainer,
+  ModalWarningContainer,
   ModalMenuXsContainer,
   ModalCreacionesContainer,
   ModalFeriasContainer,

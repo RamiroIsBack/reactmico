@@ -100,50 +100,30 @@ class FotoContainer extends React.Component {
         listItem = sorted[tipo].map((foto,i)=>{
           return(
             <div key ={foto.id}>
-              <Foto propiedades ={foto} whenClicked={this.selectFoto.bind(this)}/>
+              <Foto creacion ={foto} whenClicked={this.selectFoto.bind(this)}/>
             </div>
           )
         })
       }
-      if (tipo == 'undefined'){ tipo = 'varios'}
+      if (tipo === 'undefined'){ tipo = 'varios'}
       let ele = sorted[tipo][0].id
       //console.log ('la ref '+ele)
       //saco el contenido de cada tipo de lo que hay en la DB
       let tipoObj= creacionesContenido.tipo[tipo.toString()]
       totalList.push (
         <div className = 'container-fluid' key = {g} ref={(el) => this[ele] = el} >
-          <div className = 'container-fluid row' id ={tipo} >
-            <div className = 'container-fluid row hidden-xs' id = 'backTipo' style = {styles.headerRow.container}>
-              <div className = ' text-center col-xs-12 col-sm-4 col-md-3 col-lg-3'>
-                <ul className='list-inline'>
-                  <li >
-                    <img role='presentation' src={tipoObj.urlIcon} className ='img-rounded' style = {{width:'50px', height:'50px'}}>
-                    </img>
-                  </li>
-                  <li><h2 style ={styles.headerRow.headerText}> {tipo}</h2></li>
-                </ul>
-              </div>
-              <div className = 'container col-xs-12 col-sm-6 col-md-7 col-lg-7 text-center'>
-                {tipoObj.descripcionTipo.split('\n').map((item, key) => {
-                  return <span key={key}>{item}<br/></span>})}
-              </div>
-            </div>
-            <div className = 'container-fluid row visible-xs-block hidden-sm hidden-md hidden-lg' id = 'backTipo' >
-              <div className = 'col-xs-12 col-sm-3 col-md-3 col-lg-3' style = {{marginTop: 20,marginBottom: 10, paddingRight: 30, paddingTop: 25,paddingBottom: 2, backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2FbacklineTipo3.png?alt=media&token=31919da5-ef49-45ea-8fe2-da61c21efc6d)', backgroundPosition: 'right bottom', backgroundSize: 'cover', backgroundRepeat: 'no-repeat',opacity: 0.9, overflow: 'auto', borderRadius: '5px', maxWidth: 1500,}}>
-                <div className = 'col-xs-3' style={{padding: 1}}>
+          {g!=0 && <hr/>}
+          <div className = 'container-fluid row' id ={tipo} style={{marginTop:40}}>
 
-                  <img role='presentation' src={tipoObj.urlIcon} className ='img-rounded' style = {{width:'50px', height:'50px'}}>
-                  </img>
-                </div>
-                <div className = 'col-xs-7' style={{padding: 1}}>
-                  <h2 style ={styles.headerRow.headerText}> {tipo}</h2>
-                </div>
-              </div>
-              <div className = 'container col-xs-12 col-sm-4 col-md-7 col-lg-7 text-center' style = {{paddingTop: 20}}>
-                {tipoObj.descripcionTipo.split('\n').map((item, key) => {
-                  return <span key={key}>{item}<br/></span>})}
-              </div>
+            <div className = ' text-center col-xs-12 col-sm-4 col-md-3 col-lg-3'>
+              <h2 style ={styles.headerRow.headerText}> {tipo}</h2>
             </div>
+            { tipoObj &&
+            <div className = 'container col-xs-12 col-sm-6 col-md-7 col-lg-7 text-center'>
+              {tipoObj.descripcionTipo.split('\n').map((item, key) => {
+                return <span key={key}>{item}<br/></span>})}
+            </div>
+            }
           </div>
           <br/>
         </div>

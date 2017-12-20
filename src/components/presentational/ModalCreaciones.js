@@ -19,13 +19,8 @@ export default class ModalCreaciones extends Component {
       return(
         <div key = {i} style ={{padding:0}}>
 
-          <div className= 'col-xs-3 col-sm-3 col-md-3 col-lg-3'  style ={{padding:1,textAlign:'center'}} >
-            <NavLink id='creaciones' name= {tipo.nombre} onClick = {this.gestionaIrACreacion.bind(this)} to = '/Diseños' style ={estilo}>
-              <img role='presentation' src={tipo.urlIcon} className ='img-rounded' style={{height:25}} name= {tipo.nombre}>
-              </img>
-            </NavLink>
-          </div>
-          <div className= 'col-xs-9 col-sm-9 col-md-9 col-lg-9 ' style ={{padding:1}} >
+
+          <div className= 'col-xs-12 col-sm-12 col-md-12 col-lg-12 ' style ={{padding:1, paddingLeft:10}} >
             <NavLink id='creaciones' name= {tipo.nombre} onClick = {this.gestionaIrACreacion.bind(this)} to = '/Diseños' style ={estilo}>
               {tipo.nombre}
             </NavLink>

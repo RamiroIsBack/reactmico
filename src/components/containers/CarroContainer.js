@@ -14,22 +14,22 @@ class CarroContainer extends Component {
     }
   }
   componentWillMount(){
-    if (this.props.productToCart){
+    if (this.props.carro){
       if(this.props.users.currentUser){ //si hay un usuario logeado
-        if(this.state.oldCartListLength != this.props.productToCart.cartList.length){//si hay cambio en el carro
-          this.props.loadCarro(this.props.productToCart.cartList,false )
-          let newcount = this.props.productToCart.cartList.length
+        if(this.state.oldCartListLength != this.props.carro.cartList.length){//si hay cambio en el carro
+          this.props.loadCarro(this.props.carro.cartList,false )
+          let newcount = this.props.carro.cartList.length
           this.setState({oldCartListLength: newcount})
         }
       }
     }
   }
   componentWillUpdate(){
-    if (this.props.productToCart){
+    if (this.props.carro){
       if(this.props.users.currentUser){
-        if(this.state.oldCartListLength != this.props.productToCart.cartList.length){
-          this.props.loadCarro(this.props.productToCart.cartList,false )
-          let newcount = this.props.productToCart.cartList.length
+        if(this.state.oldCartListLength != this.props.carro.cartList.length){
+          this.props.loadCarro(this.props.carro.cartList,false )
+          let newcount = this.props.carro.cartList.length
           this.setState({oldCartListLength: newcount})
         }
       }
@@ -53,45 +53,93 @@ class CarroContainer extends Component {
   goToCreaciones(event){
     let tipo = ''
     // in case there is nothing in the cart
-    if(this.props.productToCart.cartList.length!=0){
-      tipo = this.props.productToCart.cartList[this.props.productToCart.cartList.length-1].tipo
+    if(this.props.carro.cartList.length!=0){
+      tipo = this.props.carro.cartList[this.props.carro.cartList.length-1].tipo
     }
     if(tipo!=''){
       this.props.moveToCreacionesSection(tipo)
     }else{
       this.props.moveToCreacionesSection('allCreaciones')
     }
+    this.props.navActive('creaciones', 'navbarMicoFront')
   }
   cierraDialogosNavbar(event){
     this.props.toggleModal('closeDropdowns')
 
   }
   comprar(){
-    if(this.props.productToCart){//hay conexion con el carroReducer
-      if(this.props.productToCart.cartList.length != 0){//hay algo en el carro
+    if(this.props.carro){//hay conexion con el carroReducer
+      if(this.props.carro.cartList.length != 0){//hay algo en el carro
         if(this.props.users.currentUser){//hay user
           let currentUserBuying = this.props.users.currentUser
           if(currentUserBuying.datosEnvio.cp){//hay cp con lo q ha rellenado los datos
             if(currentUserBuying.datosPersonales.emailVerified || currentUserBuying.datosPersonales.providerId !='firebase'){
-              //va todo, todo bien abrimos el dialogo de compra
-              this.props.toggleModal('openRealizarCompra')
 
-            }else{ //hay q sacar un mensaje
-              //this.props.showNotificationWithTimeout('Trabajando')//cambiar trabajando por
-              alert('el email no esta verificado, necesitas que te mandemos otro mail? (boton de reeenviar mail) necesitas cambiar la direccion de mail?(boton de link a cambiar mail)')
+              this.gestionarSiTengoVendidosEnCarro()
+
+            }else{
+              this.props.showNotificationWithTimeout('Warning','noVerifyedEmail')
             }
-          }else{//no hay datos de envio
-            alert('rellena porfavor los datos de envio en tu perfil (boton a amigo/datos)')
-
+          }else{
+            this.props.showNotificationWithTimeout('Warning','noDatos')
           }
-        }else{//no hay user
-          //this.props.showNotificationWithTimeout('Trabajando')//cambiar trabajando por (no hay usuario)
-          alert('no hay usuario, logeate antes de realizar la compra(boton abrir logearse)')
+        }else{
+          this.props.showNotificationWithTimeout('Warning','noUser')
         }
       }else{
-        alert('no hay nada en el carro (boton a seguir comprando)')
+        this.props.showNotificationWithTimeout('Warning','carroVacio')
       }
     }
+  }
+  gestionarSiTengoVendidosEnCarro(){
+
+    this.props.getCreaciones()
+      .then(creaciones=>{
+        let justLogedIn =true
+        this.props.loadCarro(this.props.carro.cartList,justLogedIn )
+          .then(carro =>{
+            //TODO ::: corregir el carro del user si hay algun elemento q haya sido vendido
+            let listaSinVendidos = []
+            let listaDescartados= []
+            let tienesVendidos = false
+
+            for(let i=0 ; i<carro.length ; i++){
+              let elementoEnCarro = carro[i]
+              for (var key in creaciones) {
+                if (creaciones.hasOwnProperty(key)) {
+                  let elementoEnCreaciones = creaciones[key]
+                  elementoEnCreaciones.id = key
+                  if(elementoEnCarro.id === elementoEnCreaciones.id){
+                    if(elementoEnCreaciones.vendido){
+                      listaDescartados.push(elementoEnCreaciones.nombre)
+                      tienesVendidos= true
+                    }else{
+                      listaSinVendidos.push(elementoEnCreaciones)
+                    }
+                    break
+                  }
+                }
+              }
+            }
+            if(tienesVendidos){
+              this.props.uploadCarro(listaSinVendidos)
+              let objetosVendidos={
+                listaDescartados :listaDescartados,
+                nombre: 'tienesVendidos',
+              }
+              this.props.showNotificationWithTimeout('Warning',objetosVendidos)
+            }else{
+              this.props.toggleModal('openRealizarCompra')
+            }
+
+          })
+          .catch(err=>{
+            console.log(err.message+ 'fallo al cargar el carro')
+          })
+      })
+      .catch(err=>{
+        console.log(err.message+ 'fallo al cargar las creaciones')
+      })
   }
 
   render() {
@@ -116,7 +164,7 @@ class CarroContainer extends Component {
     }
 
     const productList =
-    this.props.productToCart.cartList.map((productInCart,i)=>{
+    this.props.carro.cartList.map((productInCart,i)=>{
       return(
         <div className ='container-fluid' style={{padding: 0}} key ={i}>
           <CarroProduct indice ={i} propiedades = {productInCart} whenClicked={this.goToProduct.bind(this)} whenErase={this.deleteProduct.bind(this)} changeQtty={this.QttyToggle.bind(this)} />
@@ -131,7 +179,7 @@ class CarroContainer extends Component {
           <div style={{padding: 1}}>
             <div className='container-fluid col-xs-7 col-sm-8 col-md-7 col-lg-6' style={{padding: 0}}>
               <div className='visible-xs-block hidden-sm hidden-md hidden-lg' style={{padding :0 , borderRightStyle:'ridge',minHeight: 980}}>
-                {this.props.productToCart.cartList.length == 0 &&
+                {this.props.carro.cartList.length == 0 &&
                   <h3>
                     No tienes nungun producto en el carro para comprar.
                   </h3>
@@ -143,7 +191,7 @@ class CarroContainer extends Component {
 
               </div>
               <div className='hidden-xs' style={{padding :0 , borderRightStyle:'ridge',minHeight: 440}}>
-                {this.props.productToCart.cartList.length == 0 &&
+                {this.props.carro.cartList.length == 0 &&
                   <h2>
                     No tienes nungun producto en el carro para comprar.
                   </h2>
@@ -156,7 +204,7 @@ class CarroContainer extends Component {
               </div>
             </div>
             <div className=' col-xs-5 col-sm-4 col-md-5 col-lg-6'>
-              <CarroBuy carroPropiedades = {this.props.productToCart} comprar= {this.comprar.bind(this)} postVentaContenido={postVentaContenido} pedidoContenido ={pedidoContenido}/>
+              <CarroBuy carroPropiedades = {this.props.carro} comprar= {this.comprar.bind(this)} postVentaContenido={postVentaContenido} pedidoContenido ={pedidoContenido}/>
             </div>
           </div>
         }
@@ -168,30 +216,28 @@ class CarroContainer extends Component {
 const dispatchToProps = (dispatch) =>{
 
   return{
-    //TODO el pay, order, recoger en feria
-    //pay: (cartList) =>dispatch(actions.pay(cartList))
     selectFoto: (foto) =>dispatch(actions.selectedFoto(foto)),
     eraseProduct: (indice) =>dispatch(actions.eraseProduct(indice)),
     changeQtty: (indice, qtty) =>dispatch(actions.changeQtty(indice,qtty)),
     moveToCreacionesSection:(creacionTipo)=>dispatch(actions.moveToCreacionesSection(creacionTipo)),
     toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
     getContenidos:()=>dispatch(actions.getContenidos()),
-    showNotificationWithTimeout:(modalName)=>dispatch(actions.showNotificationWithTimeout(modalName)),
+    showNotificationWithTimeout:(modalName,submodalName)=>dispatch(actions.showNotificationWithTimeout(modalName,submodalName)),
     loadCarro:(carro,justLogedIn)=>dispatch(actions.loadCarro(carro,justLogedIn)),
-
+    uploadCarro:(carro)=>dispatch(actions.uploadCarro(carro)),
+    getCreaciones:() =>dispatch(actions.getCreaciones()),
+    navActive:(activeTab,params) => dispatch(actions.navActive(activeTab,params)),
   }
 }
 
 
 const stateToProps = (state) => {
   return{
-    // state is d store in this case for convenction
-    // cojo el producto d state(store) y lo paso a props xa cogerlo
-    //en state.blabla dices de que reducer quieres info
-    //y tu le asignas una key q quieras
+
     storeContenidos: state.contenidos,
-    productToCart:state.carro,
+    carro:state.carro,
     users: state.user,
+    creacion:state.creacion
   }
 }
 

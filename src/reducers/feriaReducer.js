@@ -5,11 +5,32 @@ var initialState = {
   listaFerias: [],
   FeriasLoaded :false ,
   feriaSectionSelected : 'allFerias',
+  idFeriaShowing : '',
+  openYear: '',
 }
 
 export default (state = initialState, action) => {
   let newState = Object.assign({}, state)
   switch (action.type) {
+
+  case constants.TOGGLE_YEAR://action.data= id de feria selected
+
+    newState['openYear'] = action.data
+    return newState
+
+  case constants.MARKER_CLICKED://action.data= id de feria selected
+    for (let i =0 ;i<newState.listaFerias.length;i++){
+      if(action.data === newState.listaFerias[i].id){
+        newState.listaFerias[i].showInfo = true
+        newState['idFeriaShowing'] = action.data
+        let parts = newState.listaFerias[i].fecha.split('/')
+        newState['openYear'] = parts[2]
+      }else{
+        newState.listaFerias[i].showInfo = false
+      }
+    }
+
+    return newState
 
   case constants.FERIAS_RECEIVED:
 
@@ -27,36 +48,38 @@ export default (state = initialState, action) => {
       })
     }
 
-    //las ferias mas nuevas abajo (si cambio el 1 y el -1 seria al reves)
-    //estoy k.o. con heroku o resucitar'e?? me est'a dando bien de problemas el deploy con heroku
-    //I hate heroku so mucho right now
-    //My hatred is increasing more and more
     //lo paso a formato yyyy/mm/dd para poder operar con Date Object y miro a ver si est'a en curso o est'a caducada
+    let firstNoCaducada = true //flag to set the idFeriaShowing
+
     for (let i = 0; i < list.length; i++) {
       let date = list[i].fecha
       let parts = date.split('/')
       //                       year        month         day
       let feriaDate = new Date(parts[2], parts[1] - 1, parts[0])
 
-      //no lo uso aqui ahora pero as'i seria copiar un objeto
-      //let copyList = Object.assign([],this.state.list)
+      //ahora con la fecha final
+      let parts2 = list[i].fechaFinal.split('/')
+      //                             year        month         day
+      let finalFeriaDate = new Date(parts2[2], parts2[1] - 1, parts2[0])
 
-      //calculo el final de la feria segun sus dias d duracion
-      let finalFeriaDate =  new Date(parts[2], parts[1] - 1, parts[0])
-      let duracion = list[i].duracion
-      finalFeriaDate.setTime( finalFeriaDate.getTime() + duracion * 86400000 )
-      list[i].fechaFinal = finalFeriaDate
       let diaHoy = new Date()
 
-      if (feriaDate < diaHoy && diaHoy < list[i].fechaFinal){
-        list[i].enCurso = true
-      }else{
-        list[i].enCurso = false
-      }
+
       if (finalFeriaDate < diaHoy){
         list[i].caducada = true
       }else{
         list[i].caducada = false
+        if(firstNoCaducada){//muestro la feria mas proxima y hago visible su agno
+          firstNoCaducada = false
+          newState['idFeriaShowing'] = list[i].id
+          newState['openYear'] = parts[2]
+          list[i].showInfo = true
+        }
+      }
+      if (feriaDate < diaHoy && diaHoy < list[i].fechaFinal){
+        list[i].enCurso = true
+      }else{
+        list[i].enCurso = false
       }
     }
 
