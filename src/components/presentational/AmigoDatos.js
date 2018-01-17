@@ -83,7 +83,6 @@ class AmigoDatos extends React.Component {
         this.setState({nombreExpectation2 : true})
       }
 
-      //////////// llamada a la base de datos xa ver si ya existe ese nombre de usuario
       //          TEST THIS
       //llamada a la base de datos xa ver si ya existe ese nombre de usuario
       if (this.props.comprobarNombre(value)) {
@@ -138,7 +137,7 @@ class AmigoDatos extends React.Component {
         this.props.cambiarCurrentUserModificables('currentUserDatosEnvio', true)
         this.props.actualizarInfoUsuario(newCurrentUser,'envio')
       }else{
-        alert('porfavor rellena todos los campos')
+        this.props.showWarning('faltanDatos')
       }
     }else if(event.target.id === 'nombre'){
 
@@ -151,7 +150,7 @@ class AmigoDatos extends React.Component {
         this.props.actualizarInfoUsuario(newCurrentUser,'nombre')
 
       }else{
-        alert('porfavor rectifica los errores en el nombre')
+        this.props.showWarning('noUserName')
       }
 
     }else if(event.target.id === 'password'){
@@ -164,7 +163,7 @@ class AmigoDatos extends React.Component {
         this.props.changePassword(this.state.password,'change')
 
       }else{
-        alert('porfavor rectifica los errores en la contraseña')
+        this.props.showWarning('noPassword')
       }
 
     }else if(event.target.id === 'email'){
@@ -178,7 +177,7 @@ class AmigoDatos extends React.Component {
         this.props.actualizarInfoUsuario(newCurrentUser,'email')
 
       }else{
-        alert('porfavor rectifica los errores en el email')
+        this.props.showWarning('wrongEmail')
       }
 
     } else if(event.target.id === 'foto'){

@@ -11,7 +11,6 @@ import CarroContainer from './CarroContainer'
 import FeriaContainer from './FeriaContainer'
 import ContactoContainer from './ContactoContainer'
 import ConocenosContainer from './ConocenosContainer'
-import RegistrarseContainer from './RegistrarseContainer'
 import ContenidoFeriaContainer from './ContenidoFeriaContainer'
 import FooterContainer from './FooterContainer'
 import ModalFeriasContainer from './ModalFeriasContainer'
@@ -40,7 +39,6 @@ export{
   ContenidoFeriaContainer,
   HomeContainer,
   ModalRegistrarseContainer,
-  RegistrarseContainer,
   ConocenosContainer,
   ContactoContainer,
   NavbarMicoFront,

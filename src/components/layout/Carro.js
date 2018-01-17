@@ -3,10 +3,7 @@ import style from './styles'
 import { CarroContainer } from '../containers'
 
 export default class Carro extends Component {
-  constructor(){
-    super()
 
-  }
   render() {
     return (
 

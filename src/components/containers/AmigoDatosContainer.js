@@ -8,7 +8,7 @@ import history from '../../utils/history'
 class AmigoDatosContainer extends Component {
 
   actualizarInfoUsuario(user, flag, posibleFoto) {
-    //flag -> envio, nombre, foto
+    //flag -> envio, nombre, foto, Warning
     this.props.addUserInfo(user,flag, posibleFoto)
 
   }
@@ -21,7 +21,10 @@ class AmigoDatosContainer extends Component {
   resendEmail(){
     this.props.resendEmail()
   }
-
+  showWarning(message){
+    //message = noUserName, noPassword, faltanDatos, wrongEmail
+    this.props.showNotificationWithTimeout('Warning',message)
+  }
 
   comprobarNombre(nombre){
     var listaUsers = []
@@ -64,6 +67,7 @@ class AmigoDatosContainer extends Component {
           cambiarCurrentUserModificables ={this.cambiarCurrentUserModificables.bind(this)}
           changePassword ={this.changePassword.bind(this)}
           resendEmail= {this.resendEmail.bind(this)}
+          showWarning= {this.showWarning.bind(this)}
         >
         </AmigoDatos>
 
@@ -79,7 +83,7 @@ const dispatchToProps = (dispatch) =>{
 
   return{
 
-    showNotificationWithTimeout: (modalName) =>dispatch(actions.showNotificationWithTimeout(modalName)),
+    showNotificationWithTimeout: (modalName,subModalName) =>dispatch(actions.showNotificationWithTimeout(modalName,subModalName)),
     addUserInfo: (datos,flag,posibleFoto) => dispatch (actions.addUserInfo(datos,flag,posibleFoto)),
     cambiarCurrentUserModificables : (datos,flag) => dispatch (actions.cambiarCurrentUserModificables(datos,flag)),
     changePassword:(newPasword,params) =>dispatch(actions.changePassword(newPasword,params)),

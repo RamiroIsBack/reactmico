@@ -105,21 +105,18 @@ class CarroContainer extends Component {
 
             for(let i=0 ; i<carro.length ; i++){
               let elementoEnCarro = carro[i]
-              for (var key in creaciones) {
-                if (creaciones.hasOwnProperty(key)) {
-                  let elementoEnCreaciones = creaciones[key]
-                  elementoEnCreaciones.id = key
-                  if(elementoEnCarro.id === elementoEnCreaciones.id){
-                    if(elementoEnCreaciones.vendido){
-                      listaDescartados.push(elementoEnCreaciones.nombre)
-                      tienesVendidos= true
-                    }else{
-                      listaSinVendidos.push(elementoEnCreaciones)
-                    }
-                    break
-                  }
+              if (creaciones[elementoEnCarro.id]){
+                if(creaciones[elementoEnCarro.id].vendido){
+                  listaDescartados.push(elementoEnCarro.nombre)
+                  tienesVendidos= true
+                }else{
+                  listaSinVendidos.push(elementoEnCarro)
                 }
+              }else{//no existe esa creacion anymore
+                listaDescartados.push(elementoEnCarro.nombre)
+                tienesVendidos= true
               }
+
             }
             if(tienesVendidos){
               this.props.uploadCarro(listaSinVendidos)

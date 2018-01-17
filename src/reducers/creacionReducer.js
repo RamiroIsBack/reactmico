@@ -3,8 +3,13 @@ import constants from '../constants'
 var initialState = {
   listaCreacionesSinOrdenar: [],
   listaCreaciones: {},
-  CreacionesLoaded :false ,
+  creacionesLoaded :false ,
   tipoSectionSelected :'allCreaciones',
+  carousellItem:{
+    tipo:'',
+    vendido:'',
+    pic:'',
+  },
 
 }
 
@@ -17,7 +22,7 @@ export default (state = initialState, action) => {
   //desde
     //console.log (' from reducer CREACIONES_RECEIVED: ' +JSON.stringify(action.data))
 
-    newState['CreacionesLoaded'] = true
+    newState['creacionesLoaded'] = true
 
     //hago un objeto que contiene las listas segun su tipo
     var sorted = {}
@@ -40,6 +45,16 @@ export default (state = initialState, action) => {
 
     return newState
 
+  case constants.MOVE_CAROUSELL:
+    newState['carousellItem'] =
+      {
+        tipo:newState.listaCreacionesSinOrdenar[action.data].tipo,
+        vendido:newState.listaCreacionesSinOrdenar[action.data].vendido,
+        pic:newState.listaCreacionesSinOrdenar[action.data].pic
+
+      }
+
+    return newState
 
   default:
     return state

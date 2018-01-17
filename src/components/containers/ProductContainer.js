@@ -19,7 +19,7 @@ class ProductContainer extends Component {
   }
 
   selectProduct(selectedProduct){
-
+    this.props.navActive('carro', 'navbarMicoFront')
     this.props.productToCart(selectedProduct)
 
   }
@@ -67,6 +67,7 @@ const dispatchToProps = (dispatch) =>{
     getContenidos:()=>dispatch(actions.getContenidos()),
     productToCart: (selectedProduct) =>dispatch(actions.productToCart(selectedProduct)),
     toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
+    navActive:(activeTab,params) => dispatch(actions.navActive(activeTab,params)),
   }
 }
 

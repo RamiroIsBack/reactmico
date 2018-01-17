@@ -45,7 +45,11 @@ class FeriaContainer extends Component {
   render() {
     let feria =this.eligeFeria()
     if(feria===null){
-      return (<div>Selecciona una feria</div>)
+      return (
+        <div style= {{marginLeft:10}}>
+          <h4>Selecciona una feria de entre las que aparecen a la derecha</h4>
+        </div>
+      )
     }
     return (
       <div  onClick = {this.cierraDialogosNavbar.bind(this)}>

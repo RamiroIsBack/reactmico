@@ -3,10 +3,6 @@ import style from './styles'
 import {FeriaContainer,ContenidoFeriaContainer, MapaContainer,ListaFeriasContainer} from '../containers'
 export default class Ferias extends Component {
 
-  constructor(){
-    super()
-
-  }
   render() {
     return (
       <div className='container-fluid' id ='backgroundDiv' style ={style.universal.containerDiv} >

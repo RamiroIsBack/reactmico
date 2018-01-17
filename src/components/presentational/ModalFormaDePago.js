@@ -94,25 +94,13 @@ class ModalFormaDePago extends React.Component {
               {/*esto es visible-XS*/}
               <div className = 'container-fluid row visible-xs-block hidden-sm hidden-md hidden-lg carousel-caption ' style = {{ color: 'black' ,padding: '0px', top: 5, bottom: 'auto', textShadow: 'none'}}>
                 <h6 className='text-center' style={{fontWeight:'bold' ,padding:0 ,margin:0 ,paddingBottom:2}}>Forma de pago</h6>
-                <button id= 'datosEnvio' onClick = {this.irAcompraRealizada.bind(this)}
-                  style = {{cursor: 'pointer',border: 'none',borderRadius: 4, backgroundColor: 'black',color:'white',width: '100%',paddingLeft: 5,marginTop: 2}}>
-                  <span style= {{color : 'white' }} id='carro'>siguiente </span>
-                  <span style= {{color : 'white' }} id='carro' className='glyphicon glyphicon-arrow-right'>
-                  </span>
 
-                </button>
               </div>
 
               {/*esto es hidden-XS*/}
               <div className = 'container-fluid row hidden-xs carousel-caption' style = {{color: 'black' ,padding: '0px', top: 5 , bottom: 'auto', textShadow: 'none'}}>
                 <h3 className='text-center'>Forma de pago</h3>
-                <button id= 'datosEnvio' onClick = {this.irAcompraRealizada.bind(this)}
-                  style = {{cursor: 'pointer',border: 'none',borderRadius: 4, backgroundColor: 'black',color:'white',width: '100%',paddingLeft: 5,marginTop: 5}}>
-                  <span style= {{color : 'white' }} id='carro'>siguiente </span>
-                  <span style= {{color : 'white' }} id='carro' className='glyphicon glyphicon-arrow-right'>
-                  </span>
 
-                </button>
               </div>
               <div className = 'container-fluid row visible-xs-block hidden-sm hidden-md hidden-lg' style = {{padding: '0px', top: 5 , }}>
                 <hr style={{padding:0,marginTop :0,marginBottom:2}}/>

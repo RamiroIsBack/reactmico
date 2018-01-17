@@ -54,10 +54,12 @@ class ModalRealizarCompraContainer extends Component {
     data.payerEmail = this.props.users.currentUser.datosPersonales.email
     data.uid = this.props.users.currentUser.datosPersonales.uid
     this.props.guardarDatosPedido(this.props.users.currentUser.datosEnvio ,this.props.carro,data)
-
-    //TO DO:
-    //  hay q mandar mail a alba con el pedido y tunear los mails x favor
-    // LO MEJOR X AHORA CLOUD FUNCTIONS https://firebase.google.com/products/functions/?authuser=0
+      .then(response =>{
+        this.props.getUsers()//para incluir el nuevo pedido
+      })
+      .catch(err=>{
+        console.log(err.message+ 'fallo al guardarDatosPedido')
+      })
 
     this.setState({pagoPedido: data, carroPedido:this.props.carro})
     for(let i=0 ; i<this.props.carro.cartList.length ; i++){
@@ -71,11 +73,11 @@ class ModalRealizarCompraContainer extends Component {
             this.irAcompraRealizada()
           })
           .catch(err=>{
-            alert(err.message+ 'fallo al vaciar el carro')
+            console.log(err.message+ 'fallo al vaciar el carro')
           })
       })
       .catch(err=>{
-        alert(err.message+ 'fallo al cargar las creaciones')
+        console.log(err.message+ 'fallo al cargar las creaciones')
       })
   }
 
@@ -145,7 +147,6 @@ class ModalRealizarCompraContainer extends Component {
             currentUser = {this.props.users.currentUser}
             show={realizarCompraShowing}
             onClose={this.toggleModal.bind(this)}
-            irAcompraRealizada = {this.irAcompraRealizada.bind(this)}
             guardarDatosPedido = {this.guardarDatosPedido.bind(this)}
           >
           </ModalFormaDePago>
@@ -173,7 +174,7 @@ const dispatchToProps = (dispatch) =>{
 
   return{
 
-
+    getUsers: () => dispatch(actions.getUsers()),
     getContenidos: () => dispatch(actions.getContenidos()),
     toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
     showNotificationWithTimeout: (modalName) =>dispatch(actions.showNotificationWithTimeout(modalName)),

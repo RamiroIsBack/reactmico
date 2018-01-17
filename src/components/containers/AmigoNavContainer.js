@@ -62,24 +62,13 @@ class AmigoNavContainer extends Component {
 const dispatchToProps = (dispatch) =>{
 
   return{
-    moveToCreacionesSection:(creacionTipo)=>dispatch(actions.moveToCreacionesSection(creacionTipo)),
-    getContenidos:()=>dispatch(actions.getContenidos()),
-    toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
     navActive:(activeTab,params) => dispatch(actions.navActive(activeTab,params)),
   }
 }
 const stateToProps = (state) => {
   return{
-    // state is d store in this case for convenction
-    // cojo el producto d state(store) y lo paso a props xa cogerlo
-    //en state.blabla dices de que reducer quieres info
-    //y tu le asignas una key q quieras
-    carro:state.carro,
-    storeContenidos: state.contenidos,
-    users: state.user,
-    storeModal:state.modal,
     navigation: state.navigation,
   }
 }
-//                                   ****
+
 export default connect (stateToProps,dispatchToProps)(AmigoNavContainer)

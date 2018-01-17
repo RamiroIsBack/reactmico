@@ -7,12 +7,12 @@ class WarningTienesVendidos extends Component {
   render() {
 
     let listaDescartados = this.props.listaDescartados.map((nombre,i)=>{
-          return(
-            <div key ={i}>
-              <h4 style = {{fontWeight: 'bold'}}>{nombre} </h4>
-            </div>
-          )
-        })
+      return(
+        <div key ={i}>
+          <h4 style = {{fontWeight: 'bold'}}>{nombre} </h4>
+        </div>
+      )
+    })
     return (
       <div>
 

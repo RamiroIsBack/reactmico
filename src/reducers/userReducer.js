@@ -66,8 +66,8 @@ export default (state = initialState, action) => {
       }
       for (let i =0; i < newState.listaUsers.length; i++){
         if (newState.listaUsers[i].id === newState.currentUser.datosPersonales.uid){
-          //ya lo tenemos en la base de datos le metemos los datos d envio
-          newState.currentUser.datosEnvio= newState.listaUsers[i].datosEnvio
+          //ya lo tenemos en la base de datos le metemos todos los datos
+          newState.currentUser= newState.listaUsers[i]
           loTenemos = true
           if(newState.currentUser.datosEnvio.cp){//vale est'a en la DB pero igual est'a todo a false
             //hay datos mostrables en la db, si no lo ubiera , seria false y el user tendr'ia q rellenarlos
@@ -90,7 +90,7 @@ export default (state = initialState, action) => {
       newState['usersLoaded'] = false
       return newState
     }else if (action.params ==='okPassword'){
-      // se ha logeado con google, colocar los datos
+      // se ha logeado con password, colocar los datos
       console.log(`${action.data.displayName} t has logeado con email y password`)
       newState.currentUser= {
         datosPersonales:{
@@ -111,10 +111,10 @@ export default (state = initialState, action) => {
       let loTenemos=false
       for (let i =0; i < newState.listaUsers.length; i++){
         if (newState.listaUsers[i].id === newState.currentUser.datosPersonales.uid){
+          // le metemos los datos q ya tenemos en la base de datos
+          newState.currentUser= newState.listaUsers[i]
+          loTenemos = true
           if(newState.listaUsers[i].datosEnvio.cp){
-            // le metemos los datos d envio q ya tenemos en la base de datos
-            newState.currentUser.datosEnvio= newState.listaUsers[i].datosEnvio
-            loTenemos = true
             newState.currentUserDatos.currentUserDatosEnvio = true
             break
           }
@@ -150,8 +150,8 @@ export default (state = initialState, action) => {
 
       for (let i =0; i < action.data.length; i++){
         if (newState.listaUsers[i].id === newState.currentUser.datosPersonales.uid){
-          //ya lo tenemos en la base de datos le metemos los datos d envio
-          newState.currentUser.datosEnvio= newState.listaUsers[i].datosEnvio
+          //ya lo tenemos en la base de datos, lo actualizamos con los nuevos datos
+          newState['currentUser'] = newState.listaUsers[i]
           //TODO: la foto la tenemos q tener si hay xq en cuanto lo meta , tb se lo asignamos al user de firebase
           // y si es de google o facebook no podemos hacer nada xq es otra plataforma q no controlamos
           break
@@ -180,7 +180,7 @@ export default (state = initialState, action) => {
       },
       foto:{
         photoURL: action.data.photoURL,
-      }
+      },
     }
     if(!newState.currentUser){
       newState['currentUser'] = currentUser

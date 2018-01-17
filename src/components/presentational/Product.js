@@ -7,7 +7,14 @@ export default class Product extends Component {
     super()
     this.state ={
       url2: false,
-      timeToReact: false,
+      movementObj:{
+        minX :30,
+        maxY :50,
+        startX :0,
+        startY :0,
+        endX:0,
+        endY:0,
+      },
     }
   }
   handlepic2(){
@@ -18,15 +25,28 @@ export default class Product extends Component {
     this.setState ({url2 :false})
 
   }
-  handleSwipe(){
-    //necesitamos un timeout xq si no se cuelan 20 cambios x segundo y es un descontrol
-    //asi va bien pero molaria q solo cambiase cuando se mueve horizontalmente
-    if (!this.state.timeToReact){
-      this.setState ({url2 : !this.state.url2, timeToReact : true})
-      setTimeout(() => {
-        this.setState ({timeToReact : false})
-        console.log ('swiped')
-      }, 600)
+  handleTouchStart(e){
+    let newMovementObj = Object.assign({}, this.state.movementObj)
+    let touch = e.touches[0]
+    newMovementObj.startY = touch.screenY
+    newMovementObj.startX = touch.screenX
+    this.setState({movementObj : newMovementObj })
+  }
+  handleTouchMove(e){
+    let newMovementObj = Object.assign({}, this.state.movementObj)
+    let touch = e.touches[0]
+    newMovementObj.endY = touch.screenY
+    newMovementObj.endX = touch.screenX
+    this.setState({movementObj : newMovementObj })
+  }
+  handleTouchEnd(){
+    let xMove = this.state.movementObj.startX - this.state.movementObj.endX
+    let yMove = this.state.movementObj.startY - this.state.movementObj.endY
+    if(Math.abs(xMove) > this.state.movementObj.minX){
+      if(Math.abs(yMove) < this.state.movementObj.maxY){
+        this.setState ({url2 : !this.state.url2})
+      }
+
     }
   }
   handleClick(){
@@ -48,7 +68,13 @@ export default class Product extends Component {
 
     return (
       <div className='card '>
-        <NavLink to='/Carro' onClick={this.handleClick.bind(this)} onClick = {this.handleClick.bind(this)} onTouchMove={this.handleSwipe.bind(this)} onMouseEnter={this.handlepic2.bind(this)} onMouseLeave={this.handlepic1.bind(this)}>
+        <NavLink to='/Carro'
+          onTouchStart={this.handleTouchStart.bind(this)}
+          onTouchMove={this.handleTouchMove.bind(this)}
+          onTouchEnd={this.handleTouchEnd.bind(this)}
+          onClick={this.handleClick.bind(this)}
+          onMouseEnter={this.handlepic2.bind(this)}
+          onMouseLeave={this.handlepic1.bind(this)}>
           <img className='card-img-top img-rounded' src={url} alt='Card image cap' style={style.product} style= {{maxWidth:'100%'}} draggable = 'false' />
           <div className = 'col-xs-offset-10 col-xs-2 col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2 col-lg-offset-10 col-lg-2 carousel-caption ' style = {{width : 25, padding: '0px', top: 0, left: 10, right: 10}}>
             <h6  style = {{backgroundColor: 'rgba(0,0,0,0.50)' ,borderRadius:'25px', padding: '0px',marginTop : 5, overflow: 'hidden'}}>{numPic}</h6>

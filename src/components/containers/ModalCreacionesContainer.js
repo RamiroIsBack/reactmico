@@ -10,7 +10,7 @@ class ModalCreacionesContainer extends Component {
   componentDidMount() {
 
     //cargo lalista para que el dropdown menu sea dinamico
-    if (this.props.storeCreaciones.CreacionesLoaded == false){
+    if (this.props.storeCreaciones.creacionesLoaded === false){
       //en la accion ya lo pone a true
       this.props.getCreaciones()
     }

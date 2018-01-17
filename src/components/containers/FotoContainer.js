@@ -9,22 +9,10 @@ import styles from './styles'
 
 
 class FotoContainer extends React.Component {
-  /*static get propTypes() {
-    return {
-      history: PropTypes.object.isRequired
-    }
-  }*/
-  constructor(args) {
-    super()
 
-  }
-  //componentWillMount is executed once before the initial rendering occurs.
-  componentWillMount(){
-
-  }
   //componentDidMount is executed once after the initial rendering.
   componentDidMount() {
-    if (this.props.firebaseCreaciones.creacionesLoaded == false){
+    if (this.props.firebaseCreaciones.creacionesLoaded === false){
       //en la accion ya lo pone a true
       this.props.getCreaciones()
     }
@@ -45,8 +33,6 @@ class FotoContainer extends React.Component {
       setTimeout(() => {
         this.focusDiv(this.props.firebaseCreaciones.tipoSectionSelected)
       }, 200)
-    }else{
-      window.scrollTo(0, 0)
     }
   }
 
@@ -140,6 +126,7 @@ class FotoContainer extends React.Component {
     return (
       <div className= 'container-fluid' onClick = {this.cierraDialogosNavbar.bind(this)} style={{padding: 0}}>
         <div className='clearfix visible-sm-block visible-md-block' style={{padding: 0}}></div>
+
         {totalList}
       </div>
     )

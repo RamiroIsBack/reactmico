@@ -11,7 +11,7 @@ import ModalCreaciones from './ModalCreaciones'
 import ModalMenuXs from './ModalMenuXs'
 import ModalEntrar from './ModalEntrar'
 import AmigoDatos from './AmigoDatos'
-import AmigoPedidos from './AmigoPedidos'
+import Pedido from './Pedido'
 import ModalDatosEnvio from './ModalDatosEnvio'
 import ModalFormaDePago from './ModalFormaDePago'
 import ModalCompraRealizada from './ModalCompraRealizada'
@@ -22,7 +22,9 @@ import WarningNoUser from './WarningNoUser'
 import WarningNoDatos from './WarningNoDatos'
 import WarningNoVerifyedEmail from './WarningNoVerifyedEmail'
 import WarningTienesVendidos from './WarningTienesVendidos'
+import WarningBasicConfigurable from './WarningBasicConfigurable'
 export{
+  WarningBasicConfigurable,
   WarningTienesVendidos,
   WarningNoVerifyedEmail,
   WarningNoDatos,
@@ -34,7 +36,7 @@ export{
   ModalCompraRealizada,
   ModalDatosEnvio,
   AmigoDatos,
-  AmigoPedidos,
+  Pedido,
   ModalEntrar,
   ModalMenuXs,
   Conocenos,

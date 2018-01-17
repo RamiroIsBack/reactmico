@@ -2,23 +2,42 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import actions from '../../actions'
 import history from '../../utils/history'
-import {AmigoPedidos} from '../presentational'
+import {Pedido} from '../presentational'
 class AmigoPedidosContainer extends Component {
-  detallesPedido(){
 
-  }
-  trackOrder(){
-
+  trackOrder(urlToGo){
+    window.open(urlToGo,'_blank')
   }
   render() {
+    let pedidos= {}
+    let listaPedidos =[]
+    if(this.props.users.currentUser){
+
+      if(this.props.users.currentUser.pedidos){
+        pedidos = this.props.users.currentUser.pedidos
+        for (var id in pedidos) {
+          if (pedidos.hasOwnProperty(id)) {
+
+            listaPedidos.push(
+
+              <Pedido
+                key = {id}
+                id ={id}
+                pedido={pedidos[id]}
+                trackOrder = {this.trackOrder.bind(this)}
+
+              >
+              </Pedido>
+
+            )
+          }
+        }
+      }
+    }
+
     return (
       <div>
-        <AmigoPedidos
-          detallesPedido={this.detallesPedido.bind(this)}
-          trackOrder = {this.trackOrder.bind(this)}
-          currentUser = {this.props.users.currentUser}
-        >
-        </AmigoPedidos>
+        {listaPedidos}
       </div>
     )
   }
@@ -28,7 +47,6 @@ const dispatchToProps = (dispatch) =>{
 
   return{
 
-    showNotificationWithTimeout: (modalName) =>dispatch(actions.showNotificationWithTimeout(modalName)),
     addUserInfo: (datos,flag,posibleFoto) => dispatch (actions.addUserInfo(datos,flag,posibleFoto)),
   }
 }
@@ -47,5 +65,5 @@ const stateToProps = (state) => {
 
   }
 }
-//                                   ****
+
 export default connect (stateToProps,dispatchToProps)(AmigoPedidosContainer)

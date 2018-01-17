@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import actions from '../../actions'
 import history from '../../utils/history'
 
-import{WarningCarroVacio,WarningNoUser,WarningNoVerifyedEmail,WarningNoDatos,WarningTienesVendidos} from '../presentational'
+import{WarningCarroVacio,WarningNoUser,WarningNoVerifyedEmail,WarningNoDatos,WarningTienesVendidos, WarningBasicConfigurable} from '../presentational'
 
 class ModalWarningContainer extends Component {
 
@@ -47,6 +47,14 @@ class ModalWarningContainer extends Component {
 
     if (!warningShowing){
       return null
+    }
+    let warningBasic =''
+    if(this.props.storeModal.submodalWarning === 'noPassword' ||
+      this.props.storeModal.submodalWarning === 'noUserName' ||
+      this.props.storeModal.submodalWarning === 'faltanDatos' ||
+      this.props.storeModal.submodalWarning === 'wrongEmail' )
+    {
+      warningBasic = true
     }
     var stiloModalGrande ={
       position: 'fixed',
@@ -129,6 +137,13 @@ class ModalWarningContainer extends Component {
             />
           }
 
+          {warningBasic &&
+            <WarningBasicConfigurable
+
+              nombre = {nombre}
+              submodalWarning = {this.props.storeModal.submodalWarning}
+            />
+          }
         </div>
 
 
@@ -173,6 +188,13 @@ class ModalWarningContainer extends Component {
               redirecciona = {this.llevameA.bind(this)}
               nombre = {nombre}
               listaDescartados = {this.props.storeModal.submodalWarning.listaDescartados}
+            />
+          }
+          {warningBasic &&
+            <WarningBasicConfigurable
+
+              nombre = {nombre}
+              submodalWarning = {this.props.storeModal.submodalWarning}
             />
           }
 

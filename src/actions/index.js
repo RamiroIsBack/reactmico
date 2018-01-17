@@ -6,8 +6,6 @@ import actions from './'
 export default {
 
 
-
-  // A VER Q PUEEDO HACER ESTO LLAMANDO AL TOGGLEMODAL, NO NECESITO LOS HIDE AND SHOW NOTIFICATION
   showNotificationWithTimeout: (notificationMaysuculaLaPrimera,submodalName) => {
     return dispatch => {
       let modalName = 'open'
@@ -19,13 +17,62 @@ export default {
     }
   },
 
-  //info interesante -> https://github.com/reactjs/redux/issues/291
+  incriseOpacityWithTimeOut:(num) =>{
+    return dispatch => {
 
-  //intentando hacer una acion asincrona
-  //Redux Thunk middleware will give it  dispatch as an argument. It will also “swallow” such actions (firebase.getCreaciones does d async action)
+      let opacity =num
+      if(opacity === 0){
+        setTimeout(()=>{
+          setTimeout(() => {
+            dispatch(actions.incriseOpacity(opacity))
+            opacity +=0.1
 
-  //ALSO
-  //Fortunately, Redux Thunk offers you a way to read the current state of the Redux store. In addition to dispatch, it also passes getState as the second argument to the function you return from your thunk action creator
+            if(opacity<1){
+              dispatch(actions.incriseOpacityWithTimeOut(opacity))
+            }
+          }, 70)
+        },1000)
+      }else{//ya no es la primera vez asi q no esperamos a q carge la pagina para incrementar
+
+        setTimeout(() => {
+          dispatch(actions.incriseOpacity(opacity))
+          opacity +=0.1
+
+          if(opacity<1){
+            dispatch(actions.incriseOpacityWithTimeOut(opacity))
+          }
+        }, 70)
+
+      }
+
+    }
+  },
+  incriseOpacity:(num) =>{
+    return{
+      type: constants.INCRISE_OPACITY,
+      data:num,
+    }
+  },
+  startCarousellWithTimeOut:(pic,length)=>{
+    return dispatch =>{
+      setTimeout(() => {
+        dispatch(actions.moveCarousell(pic))
+        pic ++
+
+        if(pic != length){
+          dispatch(actions.startCarousellWithTimeOut(pic,length))
+        }else{
+          dispatch(actions.startCarousellWithTimeOut(0,length))
+        }
+      }, 8000)
+    }
+  },
+  moveCarousell:(pic)=>{
+    return{
+      type: constants.MOVE_CAROUSELL,
+      data: pic,
+    }
+  },
   toggleYear: (year) => {
     return {
       type: constants.TOGGLE_YEAR,

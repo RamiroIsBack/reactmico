@@ -78,8 +78,6 @@ class ModalEntrarContainer extends Component {
         for (i =0; i < listaUsers.length; i++){
           if (listaUsers[i].datosPersonales.email === amigo.nombre){
             nombreOEmailValido = true
-            alert('yes here you are' + listaUsers[i].datosPersonales.nombre)
-            //we don't validate your password for privacy reassons
             user.email= amigo.nombre
             user.password= amigo.password
             break
@@ -92,7 +90,6 @@ class ModalEntrarContainer extends Component {
         for (i =0; i < listaUsers.length; i++){
           if (listaUsers[i].datosPersonales.nombre === amigo.nombre){
             nombreOEmailValido = true
-            alert('yes here you are ' + listaUsers[i].nombre)
             user.email = listaUsers[i].datosPersonales.email
             user.password= amigo.password
             break
@@ -113,7 +110,7 @@ class ModalEntrarContainer extends Component {
           this.toggleModalYrecargaCreacionesYgestionaCarroUser()
         })
         .catch(err => {
-          alert(err.message+ 'fallo al logearte con email y password')
+          console.log(err.message+ 'fallo al logearte con email y password')
         })
 
     }else if (!nombreOEmailValido){
@@ -129,7 +126,7 @@ class ModalEntrarContainer extends Component {
         this.toggleModalYrecargaCreacionesYgestionaCarroUser()
       })
       .catch(err => {
-        alert(err.message+ 'fallo al logearte con googlee')
+        alert(err.message+ 'fallo al logearte con google, prueba otra vez en un par de minutos')
       })
     this.props.toggleModal('closeEntrar')
 
@@ -140,7 +137,7 @@ class ModalEntrarContainer extends Component {
         this.toggleModalYrecargaCreacionesYgestionaCarroUser()
       })
       .catch(err => {
-        alert(err.message+ 'fallo al logearte con facebook')
+        alert(err.message+ 'fallo al logearte con facebook, prueba en un par de minutos')
       })
 
   }
@@ -153,7 +150,6 @@ class ModalEntrarContainer extends Component {
         let justLogedIn =true
         this.props.loadCarro(this.props.carro.cartList,justLogedIn )
           .then(carro =>{
-            //TODO ::: corregir el carro del user si hay algun elemento q haya sido vendido
             let listaSinVendidos = []
             let listaDescartados= []
             let tienesVendidos = false
@@ -177,19 +173,21 @@ class ModalEntrarContainer extends Component {
               }
             }
             if(tienesVendidos){
-              alert(listaDescartados[0]+' ha sido descartado de tu carro porque ya no esta disponible--> 2 opciones, vale o realmente lo keria, contactar para hacer un pedido personalizado')
               this.props.uploadCarro(listaSinVendidos)
+              let objetosVendidos={
+                listaDescartados :listaDescartados,
+                nombre: 'tienesVendidos',
+              }
+              this.props.showNotificationWithTimeout('Warning',objetosVendidos)
             }
-            //loadcarro con false es solo guardarlo en la BD pero vamos a cambiar eso
-            //vamos a crear otra accion q sea uploadCarro carro
 
           })
           .catch(err=>{
-            alert(err.message+ 'fallo al cargar el carro')
+            console.log(err.message+ 'fallo al cargar el carro')
           })
       })
       .catch(err=>{
-        alert(err.message+ 'fallo al cargar las creaciones')
+        console.log(err.message+ 'fallo al cargar las creaciones')
       })
   }
 
@@ -241,7 +239,7 @@ const dispatchToProps = (dispatch) =>{
     getContenidos: () => dispatch(actions.getContenidos()),
     getUsers: () => dispatch(actions.getUsers()),
     toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
-    showNotificationWithTimeout: (modalName) =>dispatch(actions.showNotificationWithTimeout(modalName)),
+    showNotificationWithTimeout:(modalName,submodalName)=>dispatch(actions.showNotificationWithTimeout(modalName,submodalName)),
     loginWithEmailAndPassword: (user) => dispatch(actions.loginWithEmailAndPassword(user)),
     loginGoogle:() =>dispatch(actions.loginGoogle()),
     loginFacebook: () =>dispatch (actions.loginFacebook()),
@@ -267,7 +265,6 @@ const stateToProps = (state) => {
 
   }
 }
-//                                   ****
 export default connect (stateToProps,dispatchToProps)(ModalEntrarContainer)
 
 
