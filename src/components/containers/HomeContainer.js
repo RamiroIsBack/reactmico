@@ -166,6 +166,12 @@ class HomeContainer extends Component {
                 <img role='presentation' src={urlPicCreaciones} id= 'creaciones' className ='img-rounded' style= {{maxWidth: '100%',minHeight : '200px',maxHeight : '300px', position: 'relative', top: 0, left: 0}}>
                 </img>
 
+                { this.props.creacion.carousellItem.pic != '' &&
+                  <img src= {carousellItem.pic} className="img-responsive " alt='creacion' draggable = 'false'
+                    style= {{maxWidth:'100%', maxHeight : '75px', position: 'absolute', bottom: 2, left: '35%', borderRadius:'50px'}}
+                  />
+                }
+
                 <div className = 'carousel-caption' id= 'creaciones' style = {{padding: '0px', top: 0, left: 10, right: 10}}>
                   <h3  style = {{backgroundColor: 'black' ,borderRadius:'4px', padding: '0px',marginTop : 5,whiteSpace: 'initial'}}>{headerCreaciones}</h3>
                 </div>

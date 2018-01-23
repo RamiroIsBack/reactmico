@@ -2,6 +2,7 @@ import Conocenos from './Conocenos'
 import ModalRegistrarse from './ModalRegistrarse'
 import Foto from './Foto'
 import Product from './Product'
+import MagnifyingProduct from './MagnifyingProduct'
 import ProductSpecification from './ProductSpecification'
 import CarroBuy from './CarroBuy'
 import CarroProduct from './CarroProduct'
@@ -49,4 +50,5 @@ export{
   CarroBuy,
   CarroProduct,
   Feria,
+  MagnifyingProduct,
 }

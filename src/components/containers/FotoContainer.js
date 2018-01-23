@@ -6,7 +6,7 @@ import actions from '../../actions'
 import { connect } from 'react-redux'
 import history from '../../utils/history'
 import styles from './styles'
-
+import {FotoGrid} from '../../utils'
 
 class FotoContainer extends React.Component {
 
@@ -22,7 +22,7 @@ class FotoContainer extends React.Component {
       setTimeout(() => {
         this.focusDiv(this.props.firebaseCreaciones.tipoSectionSelected)
       }, 200)
-    }else{
+    }else if(this.props.firebaseCreaciones.tipoSectionSelected === 'allCreaciones'){
       //make it start at the top of the page
       window.scrollTo(0, 0)
     }
@@ -46,6 +46,7 @@ class FotoContainer extends React.Component {
     if(theDiv){
       theDiv.scrollIntoView({block: 'start', behavior: 'smooth'})
     }
+    this.props.moveToCreacionesSection('allCreaciones')//lo pongo a allCreaciones xq si no me va a la seccion cada vez q hay un update
   }
 
   selectFoto(foto){
@@ -74,9 +75,9 @@ class FotoContainer extends React.Component {
     //TODO
     //uso esta let g tb para numerar los ref q me sirven para encontrar las secciones q elijo desde el dropdown del navbar
     let g = 0
+    let h = 1000
     var listItem ={}
 
-    //var sorted = this.sortDlist()
     var sorted =this.props.firebaseCreaciones.listaCreaciones
     var totalList = []
 
@@ -85,7 +86,7 @@ class FotoContainer extends React.Component {
 
         listItem = sorted[tipo].map((foto,i)=>{
           return(
-            <div key ={foto.id}>
+            <div className= 'container' style= {{maxWidth: 300}} key ={foto.id}>
               <Foto creacion ={foto} whenClicked={this.selectFoto.bind(this)}/>
             </div>
           )
@@ -114,8 +115,13 @@ class FotoContainer extends React.Component {
           <br/>
         </div>
       )
-      totalList.push(listItem)
+      totalList.push(
+        <div className= 'foto__container' key = {h}>
+          {listItem}
+        </div>
+      )
       g++
+      h++
       totalList.push (
         <div className = 'container ' key = {g} style= {{padding: 0 }}><br/></div>
       )
@@ -124,7 +130,7 @@ class FotoContainer extends React.Component {
     }
 
     return (
-      <div className= 'container-fluid' onClick = {this.cierraDialogosNavbar.bind(this)} style={{padding: 0}}>
+      <div className= 'container' onClick = {this.cierraDialogosNavbar.bind(this)} style={{padding: 0}}>
         <div className='clearfix visible-sm-block visible-md-block' style={{padding: 0}}></div>
 
         {totalList}
@@ -141,7 +147,7 @@ const dispatchToProps = (dispatch) =>{
     getCreaciones:()=>dispatch(actions.getCreaciones()),
     getContenidos: () => dispatch(actions.getContenidos()),
     toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
-
+    moveToCreacionesSection:(creacionTipo)=>dispatch(actions.moveToCreacionesSection(creacionTipo)),
   }
 }
 const stateToProps = (state) => {

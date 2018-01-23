@@ -1,0 +1,56 @@
+
+.fluid {
+  display: grid;
+  grid-gap: 3px;
+  grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 40px auto 40px;
+    grid-template-areas:
+        "p p p p p p "
+        "p p p p p p "
+        "p p p p p p "
+        "q b b b b b "
+        "w b b b b b ";
+
+}
+
+
+.fluid__image-container{
+  z-index: 10;
+  grid-area:p;
+}
+
+.boton__comprar__container {
+  grid-area:b;
+  margin: auto;
+}
+.pic1__container {
+  grid-area:q;
+}
+.pic2__container {
+  grid-area:w;
+}
+
+.boton__comprar {
+  text-align : center;
+  font-size: 13px;
+  font-weight: bold;
+  color:white;
+  background-color: black;
+  white-space: initial;
+  margin: auto;
+  .btn:hover {
+    text-decoration: none;
+
+  }
+}
+
+.pic__1 {
+  border-width: 2px;
+  border-style: solid;
+  max-width:80px;
+}
+.pic__2 {
+  border-width: 2px;
+  border-style: solid;
+  max-width:80px;
+}

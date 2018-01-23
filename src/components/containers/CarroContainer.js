@@ -41,6 +41,7 @@ class CarroContainer extends Component {
     this.props.selectFoto(foto)
     //make it start at the top of the page
     window.scrollTo(0, 0)
+    this.props.navActive('creaciones', 'navbarMicoFront')
   }
   deleteProduct(indice){
     this.props.eraseProduct(indice)

@@ -36,7 +36,7 @@ class AmigoPedidosContainer extends Component {
     }
 
     return (
-      <div>
+      <div className = 'container'>
         {listaPedidos}
       </div>
     )

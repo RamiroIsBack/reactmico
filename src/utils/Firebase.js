@@ -26,6 +26,7 @@ var listContenidos = []
 var listEnlaces = []
 var currentUserUid='' //identificador del currentUser. Lo guardo al logear y lo uso si tengo q hacer cambios en sus datos
 var currentUserEmail=''
+
 const getCreaciones = (params, actionType) => {
   return dispatch => DBcreaciones.once('value')
     .then(snapshot => {
@@ -118,7 +119,7 @@ const getEnlaces = (params, actionType) => {
     })
 }
 
-const getUsers = (params, actionType) => {
+const getUsers = (params, actionType) => {//actionType=USERS_RECEIVED
   return dispatch => DBusers.once('value')
     .then(snapshot => {
       let listaUsuarios =[]

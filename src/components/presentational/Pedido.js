@@ -42,16 +42,22 @@ class Pedido extends Component {
 
       )
     })
+    let fechaPedido = this.props.pedido.datosCompra.fechaPedido
+    let enviadoTime = this.props.pedido.datosCompra.enviadoTime
+    let entregadoTime = this.props.pedido.datosCompra.entregadoTime
 
     let estado = 'preparando el envio'
     let progressI = 'https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/ferias%2Fproceso%20de%20envio%201.png?alt=media&token=8ca492a7-d0c3-47b2-8a99-de76a34859d7'
+    let fecha= fechaPedido
 
     if (this.props.pedido.datosCompra.localizador){
       estado = 'en camino'
       progressI = 'https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/ferias%2Fproceso%20de%20envio%202.png?alt=media&token=915fa9ef-ae9b-4dc3-a4fe-cf6c397908b2'
+      fecha = enviadoTime
     }if(this.props.pedido.datosCompra.entregado){
       estado = 'entregado'
       progressI = 'https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/ferias%2Fproceso%20de%20envio%203.png?alt=media&token=db6b630a-2b94-420e-a80c-54636c0ec80a'
+      fecha = entregadoTime
     }
 
     let precioTotal = this.props.pedido.carro.precioSubTotal + this.props.pedido.carro.envio
@@ -60,6 +66,9 @@ class Pedido extends Component {
       <div className = 'container'>
         <div className ='col-xs-12  col-sm-12 col-md-12 col-lg-12'>
           <h4>pedido con ID: <b> {id} </b></h4>
+        </div>
+        <div className ='col-xs-12  col-sm-12 col-md-12 col-lg-12' style={{marginTop:0}}>
+          <h5>con fecha: {fechaPedido}</h5>
         </div>
         <div className ='col-xs-12 col-sm-12 col-md-4 col-lg-4'>
           {carroLista}
@@ -109,14 +118,14 @@ class Pedido extends Component {
 
           }
         </div>
-        <div className ='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
+        <div className ='col-xs-12 col-sm-12 col-md-6 col-lg-6' style ={{paddingBottom:10 }}>
           <div style ={{minHeight: 122 ,textAlign: 'center' ,}}>
             <img id='foto' src={progressI}  style={{borderRadius : 10 ,paddingTop: 3,  width: '70%'}} />
           </div>
           {/*esto es visible-XS*/}
           <div className = 'container-fluid row visible-xs-block hidden-sm hidden-md hidden-lg carousel-caption ' style = {{ color: 'black' ,padding: '0px', top: 5, bottom: 'auto', textShadow: 'none', display:'block', width:'90%' }}>
 
-            <h6 style = {{marginBottom :0 , paddingBottom:0, marginTop :0 , paddingTop:0}}>estado: <b> {estado} </b></h6>
+            <h6 style = {{marginBottom :0 , paddingBottom:0, marginTop :0 , paddingTop:0}}>estado: <b> {estado} </b> a {fecha}</h6>
             {estado === 'en camino' &&
               <div>
                 <div className ='col-xs-6' style = {{paddingLeft :0, paddingRight: 0}}>
@@ -135,7 +144,7 @@ class Pedido extends Component {
           </div>
           {/*esto es hidden-XS*/}
           <div className = 'container-fluid row hidden-xs carousel-caption' style = {{color: 'black' ,padding: '0px', top: 5 , bottom: 'auto', textShadow: 'none'}}>
-            <h4>estado: <b> {estado} </b></h4>
+            <h4>estado: <b> {estado} </b> a {fecha}</h4>
             {estado === 'en camino' &&
               <div>
                 <div className ='col-xs-8' style = {{paddingLeft :0, paddingRight: 0}}>
@@ -154,7 +163,7 @@ class Pedido extends Component {
           </div>
         </div>
         <hr
-          style = {{display:'block', width: '96%'}}
+          style = {{display:'block', width: '96%',paddingBottom:50}}
         ></hr>
 
       </div>

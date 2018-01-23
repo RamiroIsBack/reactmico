@@ -282,7 +282,7 @@ class AmigoDatos extends React.Component {
       else{ //no hay datos en la BD o quiero modificarlos
 
         return(
-          <div>
+          <div className='container'>
             <div className='form-group row'>
               <div className='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
                 <p>nombre completo* :</p>
@@ -335,7 +335,9 @@ class AmigoDatos extends React.Component {
               <div className='col-xs-9 col-sm-10 col-md-10 col-lg-10' style= {{paddingLeft:2}}>
                 <p>{sino} quiero recibir información por e-mail</p>
               </div>
-              <p className= 'text-muted' style= {{padding: 0, paddingLeft:10}}>(nunca mandamos spam ni publicidad ajena a Mico)</p>
+              <div className='col-xs-12 col-sm-12 col-md-12 col-lg-12' style= {{paddingLeft:5}}>
+                <p className= 'text-muted' style= {{padding: 0, }}>(nunca mandamos spam ni publicidad ajena a Mico)</p>
+              </div>
             </div>
 
             <div className='form-group row'>
@@ -343,9 +345,9 @@ class AmigoDatos extends React.Component {
                 <button id= 'datosEnvio' onClick={this.handleGuardarCambios.bind(this)} className='btn text-center form-control ' style = {{border: 'none',borderRadius: 4, backgroundColor: 'black',color:'white',width: '95%',paddingLeft: 5,}} >Guardar cambios</button>
               </div>
               {this.props.currentUser.datosEnvio && this.props.currentUser.datosEnvio.cp &&
-                <div className='col-xs-3 col-sm-2 col-md-2 col-lg-2' style = {{paddingLeft: 0 }}>
+                <div className='col-xs-3 col-sm-2 col-md-2 col-lg-2' style = {{paddingLeft: 0 ,paddingRight:0 }}>
                   <button className='btn text-center form-control ' id= 'datosEnvio' onClick = {this.handleCurrentUserModificables.bind(this)}
-                    style = {{border: '1px solid',borderRadius: 4, backgroundColor: 'white',width: '95%',paddingLeft: 5,}}>cancelar
+                    style = {{paddingLeft: 5 ,paddingRight:0, border: '1px solid',borderRadius: 4, backgroundColor: 'white',width: '95%',}}>cancelar
                   </button>
                 </div>
               }

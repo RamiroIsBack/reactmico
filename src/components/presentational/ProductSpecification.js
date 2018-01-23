@@ -2,20 +2,26 @@ import React, { Component } from 'react'
 
 export default class ProductSpecification extends Component {
   render() {
-    let caca = this.props.propiedades
+
     return (
       <div className ='container-fluid' style={{padding: 0}}>
         <table className="table-condensed table-responsive">
           <tbody>
             <tr>
-              <th>{this.props.propiedades.name}</th>
-              <th></th>
+              <th>
+                <h4 >{this.props.propiedades.nombre}</h4>
+              </th>
             </tr>
-
             <tr>
-              <td>Existencias: </td>
-              <td>{this.props.propiedades.disponibilidad} disponible</td>
+              <td>
+
+                <p >{this.props.propiedades.descripcion}</p>
+              </td>
             </tr>
+          </tbody>
+        </table>
+        <table className="table-condensed table-responsive">
+          <tbody>
             <tr>
               <td>precio:</td>
               <td>{this.props.propiedades.precio} €</td>

@@ -33,7 +33,7 @@ exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos
   const mailOptions = {
     from: '"Mico diseno textil" <pedidos@micotextil.com>',
     to: pedidoMail,
-    bcc:'ramiro.santamaria.alvarez@gmail.com',//cambiar esto para el personal de alba
+    bcc:'mico.textil@gmail.com',//cambiar esto para el personal de alba
     replyTo: 'pedidos@micotextil.com',
   }
   console.log(val.datosCompra.localizador)

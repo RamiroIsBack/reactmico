@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import actions from '../../actions'
 import {connect} from 'react-redux'
-import {Product, ProductSpecification} from '../presentational'
+import {MagnifyingProduct, Product, ProductSpecification} from '../presentational'
 import history from '../../utils/history'
 
 
@@ -46,17 +46,28 @@ class ProductContainer extends Component {
         }
       }
     }
+    //<div onClick = {this.cierraDialogosNavbar.bind(this)}>
+    //  <div className='container-fluid col-xs-12 col-sm-8 col-md-8 col-lg-6'>
+    //    <Product propiedades = {product} whenClicked={this.selectProduct.bind(this)}/>
+    //  </div>
+    //  {artesania.headerFoto &&
+    //    <div className='container-fluid col-xs-12 col-sm-4 col-md-4 col-lg-6'>
+    //      <ProductSpecification propiedades = {product} contenido = {artesania}/>
+    //    </div>
+    //  }
+    //</div>
     return (
       <div onClick = {this.cierraDialogosNavbar.bind(this)}>
-        <div className='container-fluid col-xs-12 col-sm-8 col-md-8 col-lg-6'>
-          <Product propiedades = {product} whenClicked={this.selectProduct.bind(this)}/>
+        <div className='container-fluid col-xs-12 col-sm-6 col-md-6 col-lg-6'>
+          <MagnifyingProduct propiedades = {product} whenClicked={this.selectProduct.bind(this)}/>
         </div>
         {artesania.headerFoto &&
-          <div className='container-fluid col-xs-12 col-sm-4 col-md-4 col-lg-6'>
+          <div className='container-fluid col-xs-12 col-sm-6 col-md-6 col-lg-6'>
             <ProductSpecification propiedades = {product} contenido = {artesania}/>
           </div>
         }
       </div>
+
     )
   }
 }

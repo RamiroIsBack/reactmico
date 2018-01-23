@@ -70,10 +70,12 @@ export default class Foto extends Component {
     //pongo l'imites a las fotos x si se meten de diferente tama;no
     return (
 
-      <div className = 'container col-xs-6 col-sm-6 col-md-4 col-lg-4' style= {{width: 300, height: 275, paddingRight: 0,paddingLeft: 10 }}>
+      <div  style= {{maxWidth: 300, minHeight: 175, padding: 5 ,}}>
 
         {!this.props.creacion.vendido &&
           <div  className='btn btn-block'  style= {style.foto.container}>
+
+
             <img src= {url} className="img-responsive img-rounded" alt={nombre} draggable = 'false'
               style= {{maxWidth:'100%', maxHeight : '200px',cursor: 'pointer'}}
               onClick = {this.handleClick.bind(this)}
@@ -83,9 +85,7 @@ export default class Foto extends Component {
               onMouseEnter={this.handlepic2.bind(this)}
               onMouseLeave={this.handlepic1.bind(this)}>
             </img>
-            <div className = 'col-xs-offset-10 col-xs-2 col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2 col-lg-offset-10 col-lg-2 carousel-caption ' style = {{width : 25, padding: '0px', top: 0, left: 10, right: 10}}>
-              <h6  style = {{backgroundColor: 'rgba(0,0,0,0.50)' ,borderRadius:'25px', padding: '0px',marginTop : 5, overflow: 'hidden'}}>{numPic}</h6>
-            </div>
+            <h6  style = {{width : 25,opacity:0.5,border:'1px solid black' ,borderRadius:'25px', padding: '0px', overflow: 'hidden', margin:0}}>{numPic}</h6>
           </div>
         }
         {this.props.creacion.vendido &&
@@ -101,11 +101,11 @@ export default class Foto extends Component {
         }
 
         <div className = 'row' style= {style.foto.container}>
-          <div className = 'container-fluid col-xs-9 col-sm-9 col-md-9 col-lg-9'>
-            <h5 className='text-muted' style= {style.foto.footName}>{nombre}</h5>
+          <div className = 'container-fluid col-xs-9 col-sm-9 col-md-9 col-lg-9' style = {{paddingRight: 0,}}>
+            <h5 className='text-muted'  >{nombre}</h5>
           </div>
-          <div className = 'container-fluid col-xs-3 col-sm-3 col-md-3 col-lg-3'>
-            <h6 className = 'text-muted pull-right' style= {style.foto.footPrice}>{precio}€</h6>
+          <div className = 'container col-xs-3 col-sm-3 col-md-3 col-lg-3' style = {{paddingLeft :5, paddingRight: 5,textAlign:'center'}}>
+            <h6 className = 'text-muted '>{precio}€</h6>
           </div>
         </div>
       </div>

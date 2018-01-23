@@ -46,14 +46,15 @@ export default (state = initialState, action) => {
     return newState
 
   case constants.MOVE_CAROUSELL:
-    newState['carousellItem'] =
-      {
-        tipo:newState.listaCreacionesSinOrdenar[action.data].tipo,
-        vendido:newState.listaCreacionesSinOrdenar[action.data].vendido,
-        pic:newState.listaCreacionesSinOrdenar[action.data].pic
+    if (newState.listaCreacionesSinOrdenar.length!=0){
+      newState['carousellItem'] =
+        {
+          tipo:newState.listaCreacionesSinOrdenar[action.data].tipo,
+          vendido:newState.listaCreacionesSinOrdenar[action.data].vendido,
+          pic:newState.listaCreacionesSinOrdenar[action.data].pic
 
-      }
-
+        }
+    }
     return newState
 
   default:

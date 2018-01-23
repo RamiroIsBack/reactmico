@@ -57,7 +57,7 @@ class AmigoDatosContainer extends Component {
 
     return (
 
-      <div>
+      <div className = 'container'>
         <AmigoDatos
           actualizarInfoUsuario={this.actualizarInfoUsuario.bind(this)}
           contenido = {registrarseContenidos}

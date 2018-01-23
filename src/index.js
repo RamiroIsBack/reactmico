@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import history from './utils/history'
 import store from './stores'
 import { Provider } from 'react-redux'
-import {Home,Contacto,Carro,Diseños,Ferias,Conocenos,Registrarse,Productos, Amigo} from './components/layout'
+import {Home,Carro,Diseños,Ferias,Conocenos,Registrarse,Productos, Amigo} from './components/layout'
 import {AmigoPedidosContainer, AmigoDatosContainer, ModalLoginContainer,ModalWarningContainer,ModalMenuXsContainer,ModalCreacionesContainer,ModalFeriasContainer,ModalRegistrarseContainer, ModalEntrarContainer , NavbarMicoFront,FooterContainer,
   ModalRealizarCompraContainer} from './components/containers'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -61,7 +61,6 @@ class ReactMico extends Component {
               <Route path='/Diseños' component={Diseños}/>
               <Route path='/Registrarse' component={Registrarse}/>
               <Route path='/Carro' component={Carro}/>
-              <Route path='/Contacto' component={Contacto}/>
               <Route path='/Ferias' component={Ferias}/>
               <Route path='/Conocenos' component={Conocenos}/>
               <Route path='/Productos' component={Productos}/>

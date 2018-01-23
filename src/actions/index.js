@@ -1,5 +1,4 @@
 import constants from '../constants'
-import { TurboClient } from '../utils'
 import { Firebase } from '../utils'
 import actions from './'
 
@@ -237,12 +236,6 @@ export default {
     return {
       type: constants.CURRENT_USER_RECEIVED,
       data: user
-    }
-  },
-
-  fetchUsers: (params) => {
-    return dispatch => {
-      return dispatch(TurboClient.getRequest('user', params, constants.USERS_RECEIVED))
     }
   },
 

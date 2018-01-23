@@ -64,7 +64,10 @@ class ModalCreacionesContainer extends Component {
         )
       }
     }
-    console.log('caca'+JSON.stringify(creacionList))
+    //console.log('caca'+JSON.stringify(creacionList))
+    if(creacionList.length ===0){
+      return null
+    }
     return (
 
       <div onMouseLeave={this.handleHoverOff.bind(this)} >

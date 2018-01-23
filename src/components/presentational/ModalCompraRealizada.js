@@ -16,12 +16,7 @@ class ModalCompraRealizada extends React.Component {
   irAPedidos(){
     this.props.onClose('pedidos')
   }
-  corregirDatos(){
-    this.props.onClose('datos')
-  }
-  cambiarCarro(){
-    this.props.onClose('carro')
-  }
+
   render() {
     // Render nothing if the 'show' prop is false
     if(!this.props.show) {

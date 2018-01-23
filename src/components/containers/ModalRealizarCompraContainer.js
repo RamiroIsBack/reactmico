@@ -55,7 +55,8 @@ class ModalRealizarCompraContainer extends Component {
     data.uid = this.props.users.currentUser.datosPersonales.uid
     this.props.guardarDatosPedido(this.props.users.currentUser.datosEnvio ,this.props.carro,data)
       .then(response =>{
-        this.props.getUsers()//para incluir el nuevo pedido
+
+        this.props.getUsers()//para q est'e incluido el nuevo pedido
       })
       .catch(err=>{
         console.log(err.message+ 'fallo al guardarDatosPedido')
@@ -89,9 +90,11 @@ class ModalRealizarCompraContainer extends Component {
         this.props.navActive('currentUser', 'navbarMicoFront')
         history.push('/Amigo/Datos')
       }else if(whereTo === 'pedidos'){
+
         this.props.navActive(whereTo, 'amigoNav')
         this.props.navActive('currentUser', 'navbarMicoFront')
         history.push('/Amigo/Pedidos')
+
       }else if(whereTo === 'carro'){
         this.props.navActive(whereTo, 'navbarMicoFront')
         history.push('/Carro')

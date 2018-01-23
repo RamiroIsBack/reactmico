@@ -144,16 +144,13 @@ export default (state = initialState, action) => {
     newState['usersLoaded'] = true
     newState['listaUsers'] = action.data
     //console.log('usersloaded '+JSON.stringify(action.data))
-    if(currentUser){
-      //se ha logeado o creado user as'i q al entrar en /Amigo/Datos se vuelve a cargar la listaUsers
-      //aprovechamos este momento para meter de la base d datos lo que tengamos sobre ese currentuser y ya trabajamos con el
+    if(newState.currentUser){
 
       for (let i =0; i < action.data.length; i++){
         if (newState.listaUsers[i].id === newState.currentUser.datosPersonales.uid){
           //ya lo tenemos en la base de datos, lo actualizamos con los nuevos datos
           newState['currentUser'] = newState.listaUsers[i]
-          //TODO: la foto la tenemos q tener si hay xq en cuanto lo meta , tb se lo asignamos al user de firebase
-          // y si es de google o facebook no podemos hacer nada xq es otra plataforma q no controlamos
+          console.log('usersloaded '+JSON.stringify(newState.listaUsers[i]))
           break
         }
       }
