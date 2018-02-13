@@ -103,7 +103,7 @@ class FotoContainer extends React.Component {
           <div className = 'container-fluid row' id ={tipo} style={{marginTop:40}}>
 
             <div className = ' text-center col-xs-12 col-sm-4 col-md-3 col-lg-3'>
-              <h2 style ={styles.headerRow.headerText}> {tipo}</h2>
+              <h2 style ={{fontWeight: 'bolder'}}> {tipo}</h2>
             </div>
             { tipoObj &&
             <div className = 'container col-xs-12 col-sm-6 col-md-7 col-lg-7 text-center'>
