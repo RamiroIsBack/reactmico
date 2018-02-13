@@ -93,7 +93,7 @@ class ModalDatosEnvio extends React.Component {
       stiloModal.backgroundColor = 'white'
     }
 
-    let progressI = 'https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2Fproceso%20de%20compra1.png?alt=media&token=e7dc66fe-4a78-4400-be56-0b9a84500f05'
+    let progressI = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/proceso%20de%20compra1.png?alt=media&token=75d910d4-75eb-4ce4-8d00-934acce712b3'
 
     return (
       <div style={style.modal.backdropStyle}>

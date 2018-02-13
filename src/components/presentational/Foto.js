@@ -94,7 +94,7 @@ export default class Foto extends Component {
               style= {{maxWidth:'100%', maxHeight : '200px',opacity: 0.7, position: 'relative', top: 0, left: 0}}
             >
             </img>
-            <img src= {'https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/creaciones%2Fvendido.png?alt=media&token=c2d338f3-eeb2-45e7-a2ee-a478ee461efd'} className="img-responsive img-rounded" alt={nombre} draggable = 'false'
+            <img src= {'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/vendido.png?alt=media&token=b31eafca-663d-4d89-95f5-ad93afe4aa8f'} className="img-responsive img-rounded" alt={nombre} draggable = 'false'
               style= {{maxWidth:'100%', maxHeight : '200px', position: 'absolute', top: 0, left: 0}}
             />
           </div>

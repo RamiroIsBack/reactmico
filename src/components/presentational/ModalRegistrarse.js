@@ -118,7 +118,16 @@ class ModalRegistrarse extends React.Component {
     if(!this.props.show) {
       return null
     }
-    let contenido = this.props.contenido
+    let contenido ={}
+    let registrarseInfo =''
+    let registrarseTitulo = ''
+    if(this.props.contenido){
+      contenido = this.props.contenido
+      if (contenido.descripcion){
+        registrarseInfo = contenido.descripcion.registrarseInfo
+        registrarseTitulo = contenido.descripcion.registrarseTitulo
+      }
+    }
     var stiloModal ={
       position: 'absolute',
       //backgroundImage: 'url(' + contenido.pic.urlPicRegistrarse + ')',
@@ -214,8 +223,9 @@ class ModalRegistrarse extends React.Component {
       newsletter = 'glyphicon glyphicon-remove text-center pull-right'
       sino = 'No'
     }
-    var loginGIcon='https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2Flogin%20gplus.png?alt=media&token=2f31b4f0-43b9-4f46-b443-cfb93b448278'
-    var loginFIcon='https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2Ffb_icon_325x325.png?alt=media&token=e7644d22-ab42-4ada-ae81-7754c0918553'
+    var loginGIcon='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/login%20gplus.png?alt=media&token=3bb269b6-fae5-4c0f-99b0-666f4388e494'
+    var loginFIcon='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/fb_icon_325x325.png?alt=media&token=f82e3369-9844-4929-a8f8-af1faa665624'
+
     return (
       <div style={style.modal.backdropStyle}>
 
@@ -227,11 +237,11 @@ class ModalRegistrarse extends React.Component {
             <div className = 'col-xs-10 col-sm-8 col-md-8 col-lg-8' style = {style.modal.formContainer}>
 
               <div className = 'container-fluid row visible-xs-block hidden-sm hidden-md hidden-lg'>
-                <h6 className='text-center' style={{fontWeight:'bold'}}>{contenido.descripcion.registrarseTitulo}</h6>
+                <h6 className='text-center' style={{fontWeight:'bold'}}>{registrarseTitulo}</h6>
                 <hr style={{padding:0,marginTop :0,marginBottom:2}}/>
               </div>
               <div className = 'container-fluid row hidden-xs'>
-                <h3 className='text-center'>{contenido.descripcion.registrarseTitulo}</h3>
+                <h3 className='text-center'>{registrarseTitulo}</h3>
                 <hr/>
               </div>
 
@@ -373,7 +383,7 @@ class ModalRegistrarse extends React.Component {
                 </div>
               </div>
               <div className='hidden-xs col-sm-10 text-center'>
-                {contenido.descripcion.registrarseInfo.split('\n').map((item, key) => {
+                {registrarseInfo.split('\n').map((item, key) => {
                   return <span key={key}>{item}<br/></span>})}
               </div>
 

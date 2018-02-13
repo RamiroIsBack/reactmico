@@ -23,8 +23,8 @@ class ReactMico extends Component {
 
   render(){
     let ready = true
-    let picConstruccionPortrait = 'https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2FmicEnConstruccion-portrait.png?alt=media&token=29ad4eff-08f8-489c-a452-e36c755c9130'
-    let picConstruccionDesktop = 'https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2FmicEnConstruccion-desktop.png?alt=media&token=f5665630-d8bc-4c8f-8b58-9a29cdf4e256'
+    let picConstruccionPortrait = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/micEnConstruccion-portrait.png?alt=media&token=6656adf4-73d9-49cf-830d-79871df530e4'
+    let picConstruccionDesktop = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/micEnConstruccion-desktop.png?alt=media&token=5c91b69e-1be4-4314-bbf1-6539572cb884'
     if(!ready){
       return(
         <Provider store={store.configure(null)}>

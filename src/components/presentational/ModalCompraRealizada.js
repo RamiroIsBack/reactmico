@@ -81,7 +81,7 @@ class ModalCompraRealizada extends React.Component {
       stiloModal.backgroundColor = 'white'
     }
 
-    let progressI = 'https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2Fproceso%20de%20compra3.png?alt=media&token=00034c89-d23d-4937-99cc-3ab1d080fb40'
+    let progressI = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/proceso%20de%20compra3.png?alt=media&token=5f94f2f9-6a09-4439-8fa6-1110a973b1ad'
 
     return (
       <div style={style.modal.backdropStyle}>

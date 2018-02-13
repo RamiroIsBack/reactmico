@@ -85,10 +85,9 @@ class ModalRegistrarse extends React.Component {
       stiloModal.backgroundColor = 'white'
     }
 
-    var loginFIcon='https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2Ffb_icon_325x325.png?alt=media&token=e7644d22-ab42-4ada-ae81-7754c0918553'
-
-    var loginGIcon='https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2Flogin%20gplus.png?alt=media&token=2f31b4f0-43b9-4f46-b443-cfb93b448278'
-    var loginMIcon='https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2Flogin%20with%20password.png?alt=media&token=0d2fb7a7-40a1-48b9-87ca-7395701b6568'
+    var loginGIcon='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/login%20gplus.png?alt=media&token=3bb269b6-fae5-4c0f-99b0-666f4388e494'
+    var loginFIcon='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/fb_icon_325x325.png?alt=media&token=f82e3369-9844-4929-a8f8-af1faa665624'
+    var loginMIcon='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/login%20with%20password.png?alt=media&token=8b2ec7a9-c286-4c65-b720-93ed6aec4ab7'
     return (
       <div style={style.modal.backdropStyle}>
 
@@ -265,4 +264,3 @@ class ModalRegistrarse extends React.Component {
 }*/
 
 export default ModalRegistrarse
-

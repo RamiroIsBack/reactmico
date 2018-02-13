@@ -417,7 +417,7 @@ class AmigoDatos extends React.Component {
       forPassword ={border: '1.5px solid green',}
     }
 
-    var loginIcon = 'https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2FloginIcon.png?alt=media&token=c20aa5cb-4a39-4c17-b29c-f2b5c417d03d'
+    var loginIcon = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/loginIcon.png?alt=media&token=9df1a1ea-8b37-482b-919e-b0fb3be6b273'
     if (this.props.currentUser != null){
       if (this.props.currentUser.foto.photoURL){
         loginIcon = this.props.currentUser.foto.photoURL

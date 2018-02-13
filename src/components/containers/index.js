@@ -11,7 +11,7 @@ import CarroContainer from './CarroContainer'
 import FeriaContainer from './FeriaContainer'
 import ContactoContainer from './ContactoContainer'
 import ConocenosContainer from './ConocenosContainer'
-import ContenidoFeriaContainer from './ContenidoFeriaContainer'
+
 import FooterContainer from './FooterContainer'
 import ModalFeriasContainer from './ModalFeriasContainer'
 import ModalCreacionesContainer from './ModalCreacionesContainer'
@@ -36,7 +36,7 @@ export{
   ModalCreacionesContainer,
   ModalFeriasContainer,
   FooterContainer,
-  ContenidoFeriaContainer,
+  
   HomeContainer,
   ModalRegistrarseContainer,
   ConocenosContainer,

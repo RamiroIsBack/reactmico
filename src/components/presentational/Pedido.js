@@ -47,16 +47,16 @@ class Pedido extends Component {
     let entregadoTime = this.props.pedido.datosCompra.entregadoTime
 
     let estado = 'preparando el envio'
-    let progressI = 'https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/ferias%2Fproceso%20de%20envio%201.png?alt=media&token=8ca492a7-d0c3-47b2-8a99-de76a34859d7'
+    let progressI = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/proceso%20de%20envio%201.png?alt=media&token=949e5324-fab2-4d2a-ab0c-a27f9bc8f12a'
     let fecha= fechaPedido
 
     if (this.props.pedido.datosCompra.localizador){
       estado = 'en camino'
-      progressI = 'https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/ferias%2Fproceso%20de%20envio%202.png?alt=media&token=915fa9ef-ae9b-4dc3-a4fe-cf6c397908b2'
+      progressI = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/proceso%20de%20envio%202.png?alt=media&token=2c1cd883-feac-43ee-a79b-32f321707cd2'
       fecha = enviadoTime
     }if(this.props.pedido.datosCompra.entregado){
       estado = 'entregado'
-      progressI = 'https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/ferias%2Fproceso%20de%20envio%203.png?alt=media&token=db6b630a-2b94-420e-a80c-54636c0ec80a'
+      progressI = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/proceso%20de%20envio%203.png?alt=media&token=6a3727e0-4ce0-4259-a16f-e54f5964e05c'
       fecha = entregadoTime
     }
 

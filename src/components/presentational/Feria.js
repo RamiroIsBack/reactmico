@@ -16,7 +16,7 @@ export default class Feria extends React.Component {
 
   render(){
 
-    let mapsImg ='https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/ferias%2F1c9e15bc48db729a509c1c4d9382d180.jpeg?alt=media&token=1d8d39af-4e91-433b-a9db-3978624beb78'
+    let mapsImg ='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/mapsPointer.jpeg?alt=media&token=4d2aee6c-56fb-466c-9285-0a49b5abc5fc'
     return(
       <div >
         <div className='container-fluid row' style = {{marginLeft:5}}>
@@ -68,6 +68,3 @@ export default class Feria extends React.Component {
   }
 
 }
-
-
-

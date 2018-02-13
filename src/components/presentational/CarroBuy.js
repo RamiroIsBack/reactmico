@@ -4,7 +4,12 @@ import style from './styles'
 export default class CarroBuy extends Component {
   render() {
     let total = this.props.carroPropiedades.precioSubTotal + this.props.carroPropiedades.envio
-
+    let pedidoTitulo = '';
+    let pedidoInfo = '';
+    if(this.props.pedidoContenido.descripcion){
+      pedidoTitulo = this.props.pedidoContenido.descripcion.pedidoTitulo;
+      pedidoInfo = this.props.pedidoContenido.descripcion.pedidoInfo;
+    }
     return (
       <div className ='row container-fluid' style={{padding :4, marginRight:10,top: 0, bottom:142, position:'fixed',overflowY:'auto', overflowX:'hidden' }}>
         <div className ='row container-fluid' style={{marginTop:'60px'}}>
@@ -29,12 +34,12 @@ export default class CarroBuy extends Component {
           <br/>
           <div className=' clear-fix container-fluid col-xs-12 col-sm-12 col-md-12 col-lg-6' style={{paddingLeft: 0}} >
 
-            <h4 style = {{whiteSpace: 'initial',paddingLeft: 0}}>{this.props.pedidoContenido.descripcion.pedidoTitulo}</h4>
+            <h4 style = {{whiteSpace: 'initial',paddingLeft: 0}}>{pedidoTitulo}</h4>
 
             <br/>
 
 
-            {this.props.pedidoContenido.descripcion.pedidoInfo.split('\n').map((item, key) => {
+            {pedidoInfo.split('\n').map((item, key) => {
               return <span style = {{whiteSpace: 'initial',paddingLeft: 0}} key={key}>{item}<br/></span>})}
 
           </div>
@@ -43,5 +48,3 @@ export default class CarroBuy extends Component {
     )
   }
 }
-
-

@@ -10,11 +10,6 @@ import history from '../../utils/history'
 class ModalRegistrarseContainer extends Component {
 
 
-  componentDidMount() {
-
-
-  }
-
   subirNuevoAmigo(user ){
     //TODO: log this new amigo to d DB
     if (user === null){

@@ -88,23 +88,7 @@ export default {
       //marginTop:6,
       //borderBottom: '1px solid'
     },
-    headlineContainer:{
-      //marginTop: 50,
-      //marginBottom: 20,
-      //paddingRight: 30,
-      paddingTop: 60,
-      paddingBottom: 30,
-      marginRight:10,
-      backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2FbacklineFeria4.png?alt=media&token=30b4db56-d8d6-4aa0-8f18-439664171d36)',
-      backgroundPosition: 'right bottom',
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-      opacity: 0.8,
-      overflow: 'auto',
-      borderRadius: '5px',
-      maxWidth: 1600,
-
-    },
+    
     mapsLink:{
 
       paddingRight: 5,

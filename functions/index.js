@@ -1,18 +1,21 @@
 'use strict'
-const functions = require('firebase-functions')
-const nodemailer = require('nodemailer')
+
+const nodemailer = require('nodemailer');
+const functions = require('firebase-functions');
+
+
 // Configure the email transport using the default SMTP transport and a GMail account.
 // For other types of transports such as Sendgrid see https://nodemailer.com/transports/
 // TODO: Configure the `gmail.email` and `gmail.password` Google Cloud environment variables.
-const gmailEmail = functions.config().gmail.email
-const gmailPassword = functions.config().gmail.password
+const gmailEmail = functions.config().gmail.email;
+const gmailPassword = functions.config().gmail.password;
 const mailTransport = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: gmailEmail,
     pass: gmailPassword
   }
-})
+});
 
 // Sends an email confirmation when a user buys a product or when mico sends that product
 exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos/{pushId}').onWrite(event => {
@@ -24,6 +27,9 @@ exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos
   console.log('pushId: ',pushId)
   const snapshot = event.data
   const val = snapshot.val()
+  console.log('val: ',val)
+  console.log('val.datosCompra: ',val.datosCompra)
+  console.log('val.datosCompra.payerEmail: ',val.datosCompra.payerEmail)
   const pedidoMail = val.datosCompra.payerEmail
 
   if (!snapshot.changed('subscribedToMailingList')) {
@@ -45,7 +51,7 @@ exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos
     mailOptions.html =
       '<div style ="margin:5px; max-width: 600px ">'
        +'<div style = "max-width: 550px; margin:8px">'
-       +' <a href="http://www.micotextil.com/" style = "float:right"> <img src="cid:nyan@example.com"  height="82" width="82"/> </a>'
+       +' <a href="http://www.micotextil.com/" style = "float:right"> <img src="cid:logo@micotextil.com"  height="82" width="82"/> </a>'
        +'<p>Hola '+val.datosEnvio.nombreCompletoEnvio+' !</p> <hr></hr>'
 
        +'<p>Dentro de poco recibiras tu paquete en <b style="font-size:17px">'+val.datosEnvio.calle+'</b> </p>'
@@ -59,7 +65,7 @@ exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos
        +'<div style = "max-width: 550px; margin:8px">'
        +'<p>Disfruta de tu compra! </p>'
 
-       +' <a href="http://www.micotextil.com/"><img src="cid:nyan@example.com" height="150" width="150"/> </a>'
+       +' <a href="http://www.micotextil.com/"><img src="cid:logo@micotextil.com" height="150" width="150"/> </a>'
        +'<div style="opacity: 0.7">'
        +'<p>Cualquier problema que surja con el pedido, no dudes en contestar a este email a la dirección de correo pedidos@micotextil.com </p>'
        +'</div>'
@@ -73,7 +79,7 @@ exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos
       {
         filename: 'mico.jpg',
         path: __dirname + '/assets/mico_disegno_textil.jpg',
-        cid: 'nyan@example.com' // should be as unique as possible
+        cid: 'logo@micotextil.com' // should be as unique as possible
       },
 
     ]
@@ -90,7 +96,7 @@ exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos
     mailOptions.html =
        '<div style ="margin:5px; max-width: 600px ">'
        +'<div style = "max-width: 550px; margin:8px">'
-       +' <a href="http://www.micotextil.com/" style = "float:right"> <img src="cid:nyan@example.com"  height="82" width="82"/> </a>'
+       +' <a href="http://www.micotextil.com/" style = "float:right"> <img src="cid:logo@micotextil.com"  height="82" width="82"/> </a>'
        +'<p>Hola '+val.datosEnvio.nombreCompletoEnvio+' !</p> <hr></hr>'
 
        +'<p>tu paquete ha sido entregado en la calle <b style="font-size:17px">'+val.datosEnvio.calle+'</b> </p>'
@@ -103,7 +109,7 @@ exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos
        +'<div style = "max-width: 550px; margin:8px">'
        +'<p>Gracias otra vez por tu compra! </p>'
 
-       +' <a href="http://www.micotextil.com/"><img src="cid:nyan@example.com" height="150" width="150"/> </a>'
+       +' <a href="http://www.micotextil.com/"><img src="cid:logo@micotextil.com" height="150" width="150"/> </a>'
        +'<div style="opacity: 0.7">'
        +'<p>Cualquier problema que surja con el pedido, no dudes en contestar a este email a la dirección de correo pedidos@micotextil.com </p>'
        +'</div>'
@@ -117,7 +123,7 @@ exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos
       {
         filename: 'mico.jpg',
         path: __dirname + '/assets/mico_disegno_textil.jpg',
-        cid: 'nyan@example.com' // should be as unique as possible
+        cid: 'logo@micotextil.com' // should be as unique as possible
       },
 
     ]
@@ -136,7 +142,7 @@ exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos
     mailOptions.html =
        '<div style ="margin:5px; max-width: 600px ">'
        +'<div style = "max-width: 550px; margin:8px">'
-       +' <a href="http://www.micotextil.com/" style = "float:right"> <img src="cid:nyan@example.com"  height="82" width="82"/> </a>'
+       +' <a href="http://www.micotextil.com/" style = "float:right"> <img src="cid:logo@micotextil.com"  height="82" width="82"/> </a>'
        +'<p>Hola '+val.datosEnvio.nombreCompletoEnvio+' !</p> <hr></hr>'
 
        +'<p>en breve nos pondremos manos a la obra para que puedas tener tu compra lo mas pronto posible en <b style="font-size:17px">'+val.datosEnvio.calle+'</b> </p>'
@@ -149,7 +155,7 @@ exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos
        +'<div style = "max-width: 550px; margin:8px">'
        +'<p>Gracias por tu compra! </p>'
 
-       +' <a href="http://www.micotextil.com/"><img src="cid:nyan@example.com" height="150" width="150"/> </a>'
+       +' <a href="http://www.micotextil.com/"><img src="cid:logo@micotextil.com" height="150" width="150"/> </a>'
        +'<div style="opacity: 0.7">'
        +'<p>Cualquier problema que surja con el pedido, no dudes en contestar a este email a la dirección de correo pedidos@micotextil.com </p>'
        +'</div>'
@@ -163,7 +169,7 @@ exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos
       {
         filename: 'mico.jpg',
         path: __dirname + '/assets/mico_disegno_textil.jpg',
-        cid: 'nyan@example.com' // should be as unique as possible
+        cid: 'logo@micotextil.com' // should be as unique as possible
       },
 
     ]

@@ -72,7 +72,7 @@ class ModalFormaDePago extends React.Component {
       stiloModal.backgroundColor = 'white'
     }
 
-    let progressI = 'https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2Fproceso%20de%20compra2.png?alt=media&token=365b6908-89c1-4789-ace7-596448223b61'
+    let progressI = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/proceso%20de%20compra2.png?alt=media&token=1497e1c1-d14f-4751-b802-52f10b0e0385'
     let productionID = 'AR2tH06OvYcokjrKYyGTaDyoR8n56QvhNH8bFQfqIaIls-tRWVGN0P1u9jWg_wUgNj8mTVmBTELvHgUu'
     let sandboxID='AUt-Juq7KaOA6IiUtQxPGjSAPvLapovYbVAaryh9BzuxLzCEdxV2YKPRq9uQuwPdeUnu2O63PbJZGnjQ'
 
@@ -149,4 +149,3 @@ class ModalFormaDePago extends React.Component {
 
 
 export default ModalFormaDePago
-

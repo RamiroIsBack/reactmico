@@ -111,26 +111,35 @@ class HomeContainer extends Component {
 
         if (this.props.storeContenidos.listaContenidos[i].id == 'creaciones'){
           creacionesContenido = this.props.storeContenidos.listaContenidos[i]
-          urlPicCreaciones = creacionesContenido.headerFoto.urlPicCreaciones
-          headerCreaciones=creacionesContenido.headerFoto.headerCreaciones
+          if(creacionesContenido.headerFoto){
+            urlPicCreaciones = creacionesContenido.headerFoto.urlPicCreaciones
+            headerCreaciones=creacionesContenido.headerFoto.headerCreaciones
+
+          }
 
         }
         if (this.props.storeContenidos.listaContenidos[i].id == 'ferias'){
           feriasContenido = this.props.storeContenidos.listaContenidos[i]
-          urlPicFerias = feriasContenido.headerFoto.urlPicFerias
-          headerFerias=feriasContenido.headerFoto.headerFerias
+          if(feriasContenido.headerFoto){
+            urlPicFerias = feriasContenido.headerFoto.urlPicFerias
+            headerFerias=feriasContenido.headerFoto.headerFerias
+          }
 
         }
         if (this.props.storeContenidos.listaContenidos[i].id == 'mico'){
           micoContenido = this.props.storeContenidos.listaContenidos[i]
-          headlineMico = micoContenido.descripcion.headlineMico
-          desarrolloMico=micoContenido.descripcion.desarrolloMico
+          if(micoContenido.descripcion){
+            headlineMico = micoContenido.descripcion.headlineMico
+            desarrolloMico=micoContenido.descripcion.desarrolloMico
+          }
 
         }
         if (this.props.storeContenidos.listaContenidos[i].id == 'conocenos'){
           conocenosContenido = this.props.storeContenidos.listaContenidos[i]
-          urlPicConocenos = conocenosContenido.headerFoto.urlPicConocenos
-          headerConocenos=conocenosContenido.headerFoto.headerConocenos
+          if(conocenosContenido.headerFoto){
+            urlPicConocenos = conocenosContenido.headerFoto.urlPicConocenos
+            headerConocenos=conocenosContenido.headerFoto.headerConocenos
+          }
 
         }
 
@@ -173,7 +182,7 @@ class HomeContainer extends Component {
                 }
 
                 <div className = 'carousel-caption' id= 'creaciones' style = {{padding: '0px', top: 0, left: 10, right: 10}}>
-                  <h3  style = {{backgroundColor: 'black' ,borderRadius:'4px', padding: '0px',marginTop : 5,whiteSpace: 'initial'}}>{headerCreaciones}</h3>
+                  <h3  style = {{backgroundColor: 'rgba(0, 0, 0, 0.6)' ,borderRadius:'4px', padding: '0px',marginTop : 5,whiteSpace: 'initial', display: 'inline-block'}} >{headerCreaciones}</h3>
                 </div>
               </div>
             </NavLink>
@@ -191,7 +200,7 @@ class HomeContainer extends Component {
                 }
 
                 <div className = 'carousel-caption' id= 'creaciones' style = {{padding: '0px', top: 0, left:'25%', right: '25%'}}>
-                  <h3  style = {{backgroundColor: 'black' ,borderRadius:'4px', padding: '0px',marginTop : 5,whiteSpace: 'initial'}}>{headerCreaciones}</h3>
+                  <h3  style = {{backgroundColor: 'rgba(0, 0, 0, 0.6)' ,borderRadius:'4px', padding: '0px',marginTop : 5,whiteSpace: 'initial', display: 'inline-block' }} >{headerCreaciones} </h3>
                 </div>
               </div>
             </NavLink>
@@ -203,7 +212,7 @@ class HomeContainer extends Component {
                 <img role='presentation' src={urlPicFerias}  className ='img-rounded' id= 'ferias' style= {{maxHeight : '300px', maxWidth: '100%'}}>
                 </img>
                 <div className = 'carousel-caption ' id= 'ferias' style = {{padding: '0px', top: 0, left: 10, right: 10}}>
-                  <h3  style = {{backgroundColor: 'black' ,borderRadius:'4px', padding: '0px',marginTop : 5, overflow: 'hidden'}}>{headerFerias}</h3>
+                  <h3  style = {{backgroundColor: 'rgba(0, 0, 0, 0.6)' ,borderRadius:'4px', padding: '0px',marginTop : 5, overflow: 'hidden', display: 'inline-block'}}>{headerFerias}</h3>
                 </div>
               </NavLink>
               <br/>
@@ -213,7 +222,7 @@ class HomeContainer extends Component {
                 <img role='presentation' src={urlPicConocenos} id= 'conocenos'  className ='img-rounded' style= {{maxHeight : '300px', maxWidth: '100%'}}>
                 </img>
                 <div className = 'carousel-caption ' id= 'conocenos' style = {{padding: '0px', top: 0, left: 10, right: 10}}>
-                  <h3  style = {{backgroundColor: 'black' ,borderRadius:'4px', padding: '0px',marginTop : 5, overflow: 'hidden'}}>{headerConocenos}</h3>
+                  <h3  style = {{backgroundColor: 'rgba(0, 0, 0, 0.6)' ,borderRadius:'4px', padding: '0px',marginTop : 5, overflow: 'hidden', display: 'inline-block'}}>{headerConocenos}</h3>
                 </div>
               </NavLink>
             </div>
@@ -252,4 +261,3 @@ const stateToProps = (state) => {
 }
 //                                   ****dispatchToProps
 export default connect (stateToProps,dispatchToProps)(HomeContainer)
-

@@ -173,39 +173,39 @@ class CarroContainer extends Component {
     })
     return (
       <div onClick = {this.cierraDialogosNavbar.bind(this)} style={{padding: 1}}>
-        {pedidoContenido.descripcion&&
-          <div style={{padding: 1}}>
-            <div className='container-fluid col-xs-7 col-sm-8 col-md-7 col-lg-6' style={{padding: 0}}>
-              <div className='visible-xs-block hidden-sm hidden-md hidden-lg' style={{padding :0 , borderRightStyle:'ridge',minHeight: 980}}>
-                {this.props.carro.cartList.length == 0 &&
-                  <h3>
-                    No tienes nungun producto en el carro para comprar.
-                  </h3>
-                }
-                {productList}
 
-                <NavLink onClick ={this.goToCreaciones.bind(this)} to='/Diseños' className= 'btn center-block' style= {{textAlign: 'center',fontSize: '17px',border: 'none',color:'black'}}> seguir comprando  <h4  className = 'glyphicon glyphicon-hand-left'></h4>
-                </NavLink>
+        <div style={{padding: 1}}>
+          <div className='container-fluid col-xs-7 col-sm-8 col-md-7 col-lg-6' style={{padding: 0}}>
+            <div className='visible-xs-block hidden-sm hidden-md hidden-lg' style={{padding :0 , borderRightStyle:'ridge',minHeight: 980}}>
+              {this.props.carro.cartList.length == 0 &&
+                <h3>
+                  No tienes nungun producto en el carro para comprar.
+                </h3>
+              }
+              {productList}
 
-              </div>
-              <div className='hidden-xs' style={{padding :0 , borderRightStyle:'ridge',minHeight: 440}}>
-                {this.props.carro.cartList.length == 0 &&
-                  <h2>
-                    No tienes nungun producto en el carro para comprar.
-                  </h2>
-                }
-                {productList}
+              <NavLink onClick ={this.goToCreaciones.bind(this)} to='/Diseños' className= 'btn center-block' style= {{textAlign: 'center',fontSize: '17px',border: 'none',color:'black'}}> seguir comprando  <h4  className = 'glyphicon glyphicon-hand-left'></h4>
+              </NavLink>
 
-                <NavLink onClick ={this.goToCreaciones.bind(this)} to='/Diseños' className= 'btn center-block' style= {style.carroContainer.btnSeguirComprando}> seguir comprando  <h4  className = 'glyphicon glyphicon-hand-left'></h4>
-                </NavLink>
-
-              </div>
             </div>
-            <div className=' col-xs-5 col-sm-4 col-md-5 col-lg-6'>
-              <CarroBuy carroPropiedades = {this.props.carro} comprar= {this.comprar.bind(this)} postVentaContenido={postVentaContenido} pedidoContenido ={pedidoContenido}/>
+            <div className='hidden-xs' style={{padding :0 , borderRightStyle:'ridge',minHeight: 440}}>
+              {this.props.carro.cartList.length == 0 &&
+                <h2>
+                  No tienes nungun producto en el carro para comprar.
+                </h2>
+              }
+              {productList}
+
+              <NavLink onClick ={this.goToCreaciones.bind(this)} to='/Diseños' className= 'btn center-block' style= {style.carroContainer.btnSeguirComprando}> seguir comprando  <h4  className = 'glyphicon glyphicon-hand-left'></h4>
+              </NavLink>
+
             </div>
           </div>
-        }
+          <div className=' col-xs-5 col-sm-4 col-md-5 col-lg-6'>
+            <CarroBuy carroPropiedades = {this.props.carro} comprar= {this.comprar.bind(this)} postVentaContenido={postVentaContenido} pedidoContenido ={pedidoContenido}/>
+          </div>
+        </div>
+      
       </div>
     )
   }
@@ -240,5 +240,3 @@ const stateToProps = (state) => {
 }
 
 export default connect (stateToProps,dispatchToProps)(CarroContainer)
-
-

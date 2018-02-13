@@ -85,7 +85,7 @@ class FooterContainer extends Component {
               { urlFacebook != 'no' &&
                 <div style={{marginLeft:5, marginBottom: 5, textAlign:'center'}}>
                   <a style={{color: 'white', cursor: 'pointer',padding: '2px',border: 'none',borderRadius:'5px',}} id= {urlFacebook} onClick = {this.resdesSociales.bind(this)}>
-                    <img role='presentation' src='https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2Ffacebook.png?alt=media&token=508bbbec-b423-4d5d-85cf-f78df1015ae8' className ='img-rounded' style={{height:25}} id= {urlFacebook}>
+                    <img role='presentation' src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/facebook.png?alt=media&token=076f6504-5890-4f3b-9295-d7cf522cfa8f' className ='img-rounded' style={{height:25}} id= {urlFacebook}>
                     </img> Facebook
                   </a>
                 </div>
@@ -93,7 +93,7 @@ class FooterContainer extends Component {
               { urlTwiter != 'no' &&
                 <div style={{marginLeft:5, marginBottom: 5, textAlign:'center'}}>
                   <a style={{color: 'white', cursor: 'pointer',padding: '2px',border: 'none',borderRadius:'5px',}} id={urlTwiter} onClick = {this.resdesSociales.bind(this)}>
-                    <img role='presentation' src='https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2Ftwitter.png?alt=media&token=b566b49b-3a32-4f50-a284-b7b2e1e5eed8' className ='img-rounded' style={{height:25}} id='twiter'>
+                    <img role='presentation' src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/twitter.png?alt=media&token=720aa952-6a8e-4c0e-b655-046761141a07' className ='img-rounded' style={{height:25}} id='twiter'>
                     </img> Twiter
                   </a>
                 </div>
@@ -105,7 +105,7 @@ class FooterContainer extends Component {
               { urlInstagram != 'no' &&
                 <div style={{marginLeft:5, marginBottom: 5, textAlign:'center'}}>
                   <a style={{color: 'white', cursor: 'pointer',padding: '2px',border: 'none',borderRadius:'5px',}} id={urlInstagram} onClick = {this.resdesSociales.bind(this)}>
-                    <img role='presentation' src='https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2Finstagram.png?alt=media&token=17519e4b-9580-4d64-a4e2-8a8790ed3147' className ='img-rounded' style={{height:25}} id='instagram'>
+                    <img role='presentation' src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/instagram.png?alt=media&token=ab825d56-382c-4dae-97da-ea5806837de1' className ='img-rounded' style={{height:25}} id='instagram'>
                     </img> Instagram
                   </a>
                 </div>
@@ -114,7 +114,7 @@ class FooterContainer extends Component {
 
                 <div style={{marginLeft:5, marginBottom: 5, textAlign:'center'}}>
                   <a style={{color: 'white', cursor: 'pointer',padding: '2px',border: 'none',borderRadius:'5px',}} id={urlYoutube} onClick = {this.resdesSociales.bind(this)}>
-                    <img role='presentation' src='https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2Fyoutube.png?alt=media&token=25fcd87b-de30-4111-b503-b6eb387cd996' className ='img-rounded' style={{height:25}} id='youtube'>
+                    <img role='presentation' src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/youtube.png?alt=media&token=16854bdb-78a8-4ed4-b13e-cde1be1ef582' className ='img-rounded' style={{height:25}} id='youtube'>
                     </img> Youtube
                   </a>
                 </div>

@@ -135,9 +135,9 @@ class NavbarMicoFront extends Component {
     }
 
     //           menuIcon en firebase
-    var xsMenuIcon = 'https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2FMenuIcon.png?alt=media&token=5f3feccd-02af-4045-ac0b-aeb9775a293d'
+    var xsMenuIcon = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/MenuIcon.png?alt=media&token=d9e28cfa-0514-44d3-b0ac-6fad9a2422e8'
 
-    var loginIcon = 'https://firebasestorage.googleapis.com/v0/b/mico-62a9a.appspot.com/o/contenidos%2FloginIcon.png?alt=media&token=c20aa5cb-4a39-4c17-b29c-f2b5c417d03d'
+    var loginIcon = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/loginIcon.png?alt=media&token=9df1a1ea-8b37-482b-919e-b0fb3be6b273'
     if (this.props.users.currentUser != null){
       if (this.props.users.currentUser.foto){
         if (this.props.users.currentUser.foto.photoURL){
