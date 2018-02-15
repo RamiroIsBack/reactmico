@@ -91,7 +91,7 @@ class FooterContainer extends Component {
                 </div>
               }
               { urlTwiter != 'no' &&
-                <div style={{marginLeft:5, marginBottom: 5, textAlign:'center'}}>
+                <div style={{marginLeft:5, marginBottom: 5, textAlign:'center',opacity:0,}}>
                   <a style={{color: 'white', cursor: 'pointer',padding: '2px',border: 'none',borderRadius:'5px',}} id={urlTwiter} onClick = {this.resdesSociales.bind(this)}>
                     <img role='presentation' src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/twitter.png?alt=media&token=720aa952-6a8e-4c0e-b655-046761141a07' className ='img-rounded' style={{height:25}} id='twiter'>
                     </img> Twiter
@@ -103,7 +103,7 @@ class FooterContainer extends Component {
 
             <div className='container-fluid col-xs-6 col-sm-6 col-md-6 col-lg-6' style={{padding: 0}}>
               { urlInstagram != 'no' &&
-                <div style={{marginLeft:5, marginBottom: 5, textAlign:'center'}}>
+                <div style={{marginLeft:5, marginBottom: 5, textAlign:'center',}}>
                   <a style={{color: 'white', cursor: 'pointer',padding: '2px',border: 'none',borderRadius:'5px',}} id={urlInstagram} onClick = {this.resdesSociales.bind(this)}>
                     <img role='presentation' src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/instagram.png?alt=media&token=ab825d56-382c-4dae-97da-ea5806837de1' className ='img-rounded' style={{height:25}} id='instagram'>
                     </img> Instagram
@@ -112,7 +112,7 @@ class FooterContainer extends Component {
               }
               { urlYoutube != 'no' &&
 
-                <div style={{marginLeft:5, marginBottom: 5, textAlign:'center'}}>
+                <div style={{marginLeft:5, marginBottom: 5, textAlign:'center',opacity:0,}}>
                   <a style={{color: 'white', cursor: 'pointer',padding: '2px',border: 'none',borderRadius:'5px',}} id={urlYoutube} onClick = {this.resdesSociales.bind(this)}>
                     <img role='presentation' src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/youtube.png?alt=media&token=16854bdb-78a8-4ed4-b13e-cde1be1ef582' className ='img-rounded' style={{height:25}} id='youtube'>
                     </img> Youtube

@@ -208,7 +208,7 @@ class NavbarMicoFront extends Component {
             {this.props.users.currentUser === null &&
               <li id='registrarse' onMouseOver={this.handleHoverOn.bind(this)}>
                 <a style = {{cursor: 'pointer', color:'white',backgroundColor:'transparent',textDecoration: 'none',padding: 0}}>
-                  <img id='registrarse' src={loginIcon}  style={{borderRadius : 40, paddingTop: 3, height:45}} onClick = {this.gestionaColapso.bind(this)}/>
+                  <img id='registrarse' alt='Registrarse' src={loginIcon}  style={{borderRadius : 40, paddingTop: 3, height:45}} onClick = {this.gestionaColapso.bind(this)}/>
                 </a>
               </li>
             }
@@ -237,7 +237,7 @@ class NavbarMicoFront extends Component {
             <ul className='nav nav-pills navbar-left fixed-top hide-while-loading' style={{float:'left',display: 'block', marginLeft: '10px',}}>
               <li id='home' onMouseOver={this.handleHoverOn.bind(this)}>
                 <NavLink to='/' style = {{cursor: 'pointer', color:'white',backgroundColor:'transparent',textDecoration: 'none',padding: 0}}>
-                  <img id='home' src={logoMico}  style={{borderRadius: 15, paddingTop: 3, height:45}} onClick = {this.gestionaColapso.bind(this)}/>
+                  <img id='home' src={logoMico} style={{borderRadius: 15, paddingTop: 3, height:45}} onClick = {this.gestionaColapso.bind(this)}/>
                 </NavLink>
               </li>
               <li id='creaciones' onMouseOver={this.handleHoverOn.bind(this)}>

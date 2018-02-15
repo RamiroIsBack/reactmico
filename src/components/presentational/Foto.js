@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import style from './styles'
 import { NavLink} from 'react-router-dom'
+import {FotoGrid} from '../../utils'
 
 export default class Foto extends Component {
   constructor(args){
@@ -16,6 +17,7 @@ export default class Foto extends Component {
         endX:0,
         endY:0,
       },
+      fotoLoaded:false,
     }
   }
 
@@ -54,6 +56,10 @@ export default class Foto extends Component {
 
     }
   }
+  handleFotoLoaded(){
+    this.setState({fotoLoaded:true})
+    console.log ('foto loaded trueeeeee')
+  }
 
   //TODO read about image preloading
   render() {
@@ -66,32 +72,40 @@ export default class Foto extends Component {
 
     let nombre = this.props.creacion.nombre
     let precio =this.props.creacion.precio
-    //console.log ('caca '+ url)
-    //pongo l'imites a las fotos x si se meten de diferente tama;no
+    let imgLoaded = this.state.fotoLoaded
     return (
 
       <div  style= {{maxWidth: 300, minHeight: 175, padding: 5 ,}}>
 
         {!this.props.creacion.vendido &&
           <div  className='btn btn-block'  style= {style.foto.container}>
-
+            {!imgLoaded &&
+              <div className='loader'>Cargando...</div>
+            }
 
             <img src= {url} className="img-responsive img-rounded" alt={nombre} draggable = 'false'
-              style= {{maxWidth:'100%', maxHeight : '200px',cursor: 'pointer'}}
+              style= {{opacity:1 ,maxWidth:'100%', maxHeight : '200px',cursor: 'pointer'}}
+              onLoad= {this.handleFotoLoaded.bind(this)}
               onClick = {this.handleClick.bind(this)}
               onTouchStart={this.handleTouchStart.bind(this)}
               onTouchMove={this.handleTouchMove.bind(this)}
               onTouchEnd={this.handleTouchEnd.bind(this)}
               onMouseEnter={this.handlepic2.bind(this)}
-              onMouseLeave={this.handlepic1.bind(this)}>
+              onMouseLeave={this.handlepic1.bind(this)}
+            >
             </img>
+
             <h6  style = {{width : 25,opacity:0.5,border:'1px solid black' ,borderRadius:'25px', padding: '0px', overflow: 'hidden', margin:0}}>{numPic}</h6>
           </div>
         }
         {this.props.creacion.vendido &&
           <div style= {{position: 'relative', top: 0, left: 0}}>
+            {!imgLoaded &&
+              <div className='loader'>Cargando...</div>
+            }
             <img src= {url} className="img-responsive img-rounded" alt={nombre} draggable = 'false'
-              style= {{maxWidth:'100%', maxHeight : '200px',opacity: 0.7, position: 'relative', top: 0, left: 0}}
+              style= {{maxWidth:'100%', maxHeight : '200px',opacity: 0.6, position: 'relative', top: 0, left: 0}}
+              onLoad= {this.handleFotoLoaded.bind(this)}
             >
             </img>
             <img src= {'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/vendido.png?alt=media&token=b31eafca-663d-4d89-95f5-ad93afe4aa8f'} className="img-responsive img-rounded" alt={nombre} draggable = 'false'
