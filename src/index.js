@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import history from './utils/history'
+import {General_css} from './utils'
 import store from './stores'
 import { Provider } from 'react-redux'
 import {Home,Carro,Diseños,Ferias,Conocenos,Registrarse,Productos, Amigo} from './components/layout'
@@ -29,24 +30,30 @@ class ReactMico extends Component {
       return(
         <Provider store={store.configure(null)}>
           <Router history={history}>
-            <div style={{height:'100%'}}>
-              <div className = 'visible-xs-block hidden-sm hidden-md hidden-lg' style= {{width:'100%', minHeight :'100vh',paddingBottom : 180,display:'inline-block'}}>
+            <div className = 'general__container' >
+              <div className = 'main__container visible-xs-block hidden-sm hidden-md hidden-lg' >
                 <img id='foto' src={picConstruccionPortrait}  style={{height:'100%',width:'100%'}} />
               </div>
-              <div className = 'hidden-xs' style= {{width:'100%', minHeight :'100vh',paddingBottom : 180,display:'inline-block'}}>
+              <div className = 'main__container hidden-xs' >
                 <img id='foto' src={picConstruccionDesktop}  style={{height:'100%',width:'100%'}} />
               </div>
-              <FooterContainer/>
+              <div className = 'footer__container'>
+                <FooterContainer/>
+              </div>
             </div>
           </Router>
         </Provider>
       )
     }
+    let settingMinHigthToScreen = {
+
+      minHeight: window.innerHeight+20,
+    }
     return (
 
       <Provider store={store.configure(null)}>
         <Router history={history}>
-          <div style={{height:'100%'}}>
+          <div className = 'general__container' style = {settingMinHigthToScreen} >
             <ModalRealizarCompraContainer/>
             <ModalRegistrarseContainer/>
             <ModalMenuXsContainer/>
@@ -55,8 +62,10 @@ class ReactMico extends Component {
             <ModalWarningContainer/>
             <ModalLoginContainer/>
             <ModalEntrarContainer/>
+
             <NavbarMicoFront/>
-            <div  style={{width:'100%', minHeight :'100vh',paddingBottom : 180,display:'inline-block'}}>
+
+            <div className = 'main__container'  >
               <Route exact path='/' component={Home}/>
               <Route path='/Diseños' component={Diseños}/>
               <Route path='/Registrarse' component={Registrarse}/>
@@ -69,7 +78,9 @@ class ReactMico extends Component {
               <Route path='/Amigo/Pedidos' component = {AmigoPedidosContainer}/>
 
             </div>
-            <FooterContainer/>
+            <div className = 'footer__container'>
+              <FooterContainer/>
+            </div>
           </div>
         </Router>
       </Provider>

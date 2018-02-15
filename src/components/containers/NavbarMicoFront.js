@@ -197,7 +197,7 @@ class NavbarMicoFront extends Component {
     }
 
     return (
-      <nav className='navbar navbar-inverse navbar-fixed-top sticky' role='navigation' style= {navbarStilo}>
+      <nav className='navbar navbar-inverse navbar-fixed-top' role='navigation' style= {navbarStilo}>
 
 
 

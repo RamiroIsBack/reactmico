@@ -2,11 +2,9 @@
 export default {
   navbar:{
     container:{
-      //#e3f2fd, #C4F4D0
-      //backgroundColor: '#e3f2fd',
       background: 'rgba(0,0,0,0.7)',
-      display: 'block',
-      maxWidth :'100%'
+      paddingTop:'5px',
+      top : '-3',
 
     },
     comprarButtonContainer :{
@@ -21,7 +19,7 @@ export default {
 
     }
   },
-  
+
   home:{
     navlinkBtn:{
       padding: '0px',

@@ -1,0 +1,26 @@
+.general__container{
+  display: grid;
+  grid-gap: 3px;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(4,auto);
+  grid-template-areas:
+      "m m m m m m m m m m m m"
+      "m m m m m m m m m m m m"
+      "m m m m m m m m m m m m"
+      "f f f f f f f f f f f f";
+}
+
+.main__container{
+  background-color: white;
+  grid-area: m;
+}
+
+.footer__container{
+  background-color: black;
+  display: inline-block;
+  grid-area: f;
+  margin-top: 50px;
+  max-height : 800px;
+  min-height: 150px;
+
+}

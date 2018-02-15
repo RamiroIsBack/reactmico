@@ -172,11 +172,11 @@ class CarroContainer extends Component {
       )
     })
     return (
-      <div onClick = {this.cierraDialogosNavbar.bind(this)} style={{padding: 1}}>
+      <div onClick = {this.cierraDialogosNavbar.bind(this)} >
 
-        <div style={{padding: 1}}>
+        <div >
           <div className='container-fluid col-xs-7 col-sm-8 col-md-7 col-lg-6' style={{padding: 0}}>
-            <div className='visible-xs-block hidden-sm hidden-md hidden-lg' style={{padding :0 , borderRightStyle:'ridge',minHeight: 980}}>
+            <div className='visible-xs-block hidden-sm hidden-md hidden-lg' style={{padding :0 , borderRightStyle:'ridge',minHeight: window.innerHeight}}>
               {this.props.carro.cartList.length == 0 &&
                 <h3>
                   No tienes nungun producto en el carro para comprar.
@@ -188,7 +188,7 @@ class CarroContainer extends Component {
               </NavLink>
 
             </div>
-            <div className='hidden-xs' style={{padding :0 , borderRightStyle:'ridge',minHeight: 440}}>
+            <div className='hidden-xs' style={{padding :0 , borderRightStyle:'ridge',minHeight: window.innerHeight}}>
               {this.props.carro.cartList.length == 0 &&
                 <h2>
                   No tienes nungun producto en el carro para comprar.
@@ -205,7 +205,7 @@ class CarroContainer extends Component {
             <CarroBuy carroPropiedades = {this.props.carro} comprar= {this.comprar.bind(this)} postVentaContenido={postVentaContenido} pedidoContenido ={pedidoContenido}/>
           </div>
         </div>
-      
+
       </div>
     )
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import actions from '../../actions'
 import {connect} from 'react-redux'
-
+import {Footer_css} from '../../utils'
 
 
 class FooterContainer extends Component {
@@ -58,10 +58,10 @@ class FooterContainer extends Component {
       }
     }
     return (
-      <div onClick = {this.cierraDialogosNavbar.bind(this)} style= {{position: 'relative', marginTop :-180, height:180,paddingTop:10}}>
+      <div onClick = {this.cierraDialogosNavbar.bind(this)} >
         <button type='button' className='btn btn-primary glyphicon glyphicon-chevron-up' onClick = {this.moveUp.bind(this)}
           style={{backgroundColor: 'transparent', color: 'black',fontSize: 13,border:'none',padding:'2px', marginBottom:0}}> volver arriba</button>
-        <div className='container' style={{backgroundColor: 'rgba(0,0,0,0.90)',height:160, width:'100%'}}>
+        <div className='container'>
           <div className='container-fluid col-xs-12 col-sm-4 col-md-4 col-lg-4' style={{padding: 0}}>
             <p style={{color: 'white', textAlign:'center'}}>Contacta con Mico:</p>
             <div style={{textAlign:'center'}}>
@@ -81,44 +81,28 @@ class FooterContainer extends Component {
           <div className='container-fluid col-xs-6 col-sm-4 col-md-4 col-lg-4' style={{padding: 0}}>
             <p style={{color: 'white', textAlign:'center'}}>Síguenos en:</p>
 
-            <div className='container-fluid col-xs-6 col-sm-6 col-md-6 col-lg-6' style={{padding: 0}}>
+            <div className='container-fluid col-xs-6 col-sm-6 col-md-6 col-lg-6' style={{padding: 0,display: 'inline-block'}}>
               { urlFacebook != 'no' &&
-                <div style={{marginLeft:5, marginBottom: 5, textAlign:'center'}}>
+                <div style={{marginLeft:5, marginBottom: 5, textAlign:'center',display: 'inline-block'}}>
                   <a style={{color: 'white', cursor: 'pointer',padding: '2px',border: 'none',borderRadius:'5px',}} id= {urlFacebook} onClick = {this.resdesSociales.bind(this)}>
-                    <img role='presentation' src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/facebook.png?alt=media&token=076f6504-5890-4f3b-9295-d7cf522cfa8f' className ='img-rounded' style={{height:25}} id= {urlFacebook}>
+                    <img role='presentation' src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/facebookTrans.png?alt=media&token=f0f02332-86fc-4ccf-b89a-ad54a29a8c79' className ='footer__photo__link'  id= {urlFacebook}>
                     </img> Facebook
                   </a>
                 </div>
               }
-              { urlTwiter != 'no' &&
-                <div style={{marginLeft:5, marginBottom: 5, textAlign:'center',opacity:0,}}>
-                  <a style={{color: 'white', cursor: 'pointer',padding: '2px',border: 'none',borderRadius:'5px',}} id={urlTwiter} onClick = {this.resdesSociales.bind(this)}>
-                    <img role='presentation' src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/twitter.png?alt=media&token=720aa952-6a8e-4c0e-b655-046761141a07' className ='img-rounded' style={{height:25}} id='twiter'>
-                    </img> Twiter
-                  </a>
-                </div>
 
-              }
             </div>
 
-            <div className='container-fluid col-xs-6 col-sm-6 col-md-6 col-lg-6' style={{padding: 0}}>
+            <div className='container-fluid col-xs-6 col-sm-6 col-md-6 col-lg-6' style={{padding: 0,display: 'inline-block'}}>
               { urlInstagram != 'no' &&
-                <div style={{marginLeft:5, marginBottom: 5, textAlign:'center',}}>
+                <div style={{marginLeft:5, marginBottom: 5, textAlign:'center'}}>
                   <a style={{color: 'white', cursor: 'pointer',padding: '2px',border: 'none',borderRadius:'5px',}} id={urlInstagram} onClick = {this.resdesSociales.bind(this)}>
-                    <img role='presentation' src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/instagram.png?alt=media&token=ab825d56-382c-4dae-97da-ea5806837de1' className ='img-rounded' style={{height:25}} id='instagram'>
+                    <img role='presentation' src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/instaTrans.png?alt=media&token=a3d2eb00-a265-4836-b748-b4e9b7b0ff5d' className ='footer__photo__link' id='instagram'>
                     </img> Instagram
                   </a>
                 </div>
               }
-              { urlYoutube != 'no' &&
 
-                <div style={{marginLeft:5, marginBottom: 5, textAlign:'center',opacity:0,}}>
-                  <a style={{color: 'white', cursor: 'pointer',padding: '2px',border: 'none',borderRadius:'5px',}} id={urlYoutube} onClick = {this.resdesSociales.bind(this)}>
-                    <img role='presentation' src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/youtube.png?alt=media&token=16854bdb-78a8-4ed4-b13e-cde1be1ef582' className ='img-rounded' style={{height:25}} id='youtube'>
-                    </img> Youtube
-                  </a>
-                </div>
-              }
             </div>
 
 
