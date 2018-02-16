@@ -23,7 +23,7 @@ class ReactMico extends Component {
 
 
   render(){
-    let ready = false
+    let ready = true
     let picConstruccion = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/micEnConstruccion-mobile2.png?alt=media&token=4cba7d9f-8a8f-4cad-a379-1dbabcbfea0a'
 
     let settingMinHigthToScreen = {
