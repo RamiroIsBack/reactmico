@@ -24,3 +24,50 @@
   min-height: 150px;
 
 }
+
+
+/* animation for the presentation */
+.bell__container {
+  position: absolute;
+  height:136px;
+  width: 122px;
+  left: 150px;
+  top: 90px;
+  transform: rotate(4deg);
+  animation-name: rotate-container;
+  animation-delay: 2.33s;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  transform-origin: 50% 0%;
+  animation-timing-function: ease-in-out;
+  z-index: 100;
+}
+.bellImg {
+  height: 100%;
+  width: 100%;
+  transform: rotate(-4deg);
+  animation-name: rotate;
+  animation-delay: 3s;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  transform-origin: 50% 0%;
+  animation-timing-function: ease-in-out;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(-4deg);
+  }
+  100% {
+    transform: rotate(4deg);
+  }
+}
+@keyframes rotate-container {
+  0% {
+    transform: rotate(4deg);
+  }
+  100% {
+    transform: rotate(-4deg);
+  }
+}

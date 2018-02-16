@@ -23,31 +23,56 @@ class ReactMico extends Component {
 
 
   render(){
-    let ready = true
-    let picConstruccionPortrait = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/micEnConstruccion-portrait.png?alt=media&token=6656adf4-73d9-49cf-830d-79871df530e4'
-    let picConstruccionDesktop = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/micEnConstruccion-desktop.png?alt=media&token=5c91b69e-1be4-4314-bbf1-6539572cb884'
+    let ready = false
+    let picConstruccion = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/micEnConstruccion-mobile2.png?alt=media&token=4cba7d9f-8a8f-4cad-a379-1dbabcbfea0a'
+
+    let settingMinHigthToScreen = {
+
+      minHeight: window.innerHeight+20,
+    }
     if(!ready){
       return(
         <Provider store={store.configure(null)}>
           <Router history={history}>
-            <div className = 'general__container' >
-              <div className = 'main__container visible-xs-block hidden-sm hidden-md hidden-lg' >
-                <img id='foto' src={picConstruccionPortrait}  style={{height:'100%',width:'100%'}} />
+            <div>
+              <div className='bell__container'>
+                <img className="bellImg" src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/mico%20poster%20bigger.png?alt=media&token=28883b94-a403-4a8d-87aa-07fe19a027eb'>
+                </img>
               </div>
-              <div className = 'main__container hidden-xs' >
-                <img id='foto' src={picConstruccionDesktop}  style={{height:'100%',width:'100%'}} />
-              </div>
-              <div className = 'footer__container'>
-                <FooterContainer/>
+              <div className = 'general__container' style = {settingMinHigthToScreen} >
+
+                <div className = 'main__container visible-xs-block hidden-sm hidden-md hidden-lg' >
+                  <div className = 'col-xs-12' >
+                    <img id='foto' src={picConstruccion}  style={{height:420,width:300}} />
+                  </div>
+                  <div className = 'col-xs-11'>
+                    <h4>Hola!,</h4>
+                    <h5>Estamos dando los últimos retoques a la pagina.</h5>
+                    <p>Dentro de muy poco tendrás una guía con todas las ferias para que puedas ir a verme y una tienda online donde podrás comprar mis productos desde casa si lo prefieres </p>
+                    <p>hasta entonces, sígueme en las redes sociales o contacta conmigo cuando quieras :) </p>
+                  </div>
+                </div>
+                <div className = 'main__container hidden-xs' >
+                  <div className = 'col-xs-12 col-sm-6 col-md-6 col-lg-4'>
+                    <img id='foto' src={picConstruccion}  style={{height:420,width:300}} />
+                  </div>
+                  <div className = 'col-xs-12 col-sm-6 col-md-6 col-lg-6'>
+                    <h1>Hola!,</h1>
+                    <h2>Estamos dando los últimos retoques a la pagina.</h2>
+                    <h3>Dentro de muy poco tendrás una guía con todas las ferias para que puedas ir a verme y una tienda online donde podrás comprar mis productos desde casa si lo prefieres </h3>
+                    <br/>
+                    <br/>
+                    <h4>hasta entonces, sígueme en las redes sociales o contacta conmigo cuando quieras :) </h4>
+                  </div>
+                </div>
+                <div className = 'footer__container'>
+                  <FooterContainer/>
+                </div>
               </div>
             </div>
           </Router>
         </Provider>
       )
-    }
-    let settingMinHigthToScreen = {
-
-      minHeight: window.innerHeight+20,
     }
     return (
 
