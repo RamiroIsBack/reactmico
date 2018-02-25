@@ -5,12 +5,15 @@ var initialState = {
 
   listaEnlaces: [],
   enlacesLoaded :false ,
-
+  instagramFeedList:[],
 }
 
 export default (state = initialState, action) => {
   let newState = Object.assign({}, state)
   switch (action.type) {
+  case constants.LOAD_FROM_INSTAGRAM:
+    newState.instagramFeedList = action.data
+    return newState
 
   case constants.ENLACES_RECEIVED:
     //console.log (' from reducer enlaces_RECEIVED: ' +JSON.stringify(action.data))
@@ -24,5 +27,3 @@ export default (state = initialState, action) => {
     return state
   }
 }
-
-

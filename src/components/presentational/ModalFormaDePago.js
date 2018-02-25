@@ -20,8 +20,7 @@ class ModalFormaDePago extends React.Component {
   cambiarCarro(){
     this.props.onClose('carro')
   }
-  pagoHecho(data,actions){
-    console.log('pagoHecho2'+data +', y ' + actions)
+  pagoHecho(data){
     this.props.guardarDatosPedido(data)
   }
   onCancel(data){
@@ -73,11 +72,14 @@ class ModalFormaDePago extends React.Component {
     }
 
     let progressI = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/proceso%20de%20compra2.png?alt=media&token=1497e1c1-d14f-4751-b802-52f10b0e0385'
-    let productionID = 'AR2tH06OvYcokjrKYyGTaDyoR8n56QvhNH8bFQfqIaIls-tRWVGN0P1u9jWg_wUgNj8mTVmBTELvHgUu'
-    let sandboxID='AUt-Juq7KaOA6IiUtQxPGjSAPvLapovYbVAaryh9BzuxLzCEdxV2YKPRq9uQuwPdeUnu2O63PbJZGnjQ'
-
+    let productionID = 'ARL6l7dPOCpGW_dIg-fCuq-OJtHzwJIy7ZmAwARL7cRz096fNjD4tXJKDrNR4IIfZYlFsAWNuTpIwsoN'
+    //ramiro liveId:AR2tH06OvYcokjrKYyGTaDyoR8n56QvhNH8bFQfqIaIls-tRWVGN0P1u9jWg_wUgNj8mTVmBTELvHgUu
+    //mico live id: ARL6l7dPOCpGW_dIg-fCuq-OJtHzwJIy7ZmAwARL7cRz096fNjD4tXJKDrNR4IIfZYlFsAWNuTpIwsoN
+    let sandboxID='AfQ-lrbSHR0DHe-EsYAbECAQTmX7WmIuMWP6JHoYU9op2pIEpuIeIlfosM8JV4ECuGcSg4vaCRvMn1d7'
+    // mico sandbox id: AfQ-lrbSHR0DHe-EsYAbECAQTmX7WmIuMWP6JHoYU9op2pIEpuIeIlfosM8JV4ECuGcSg4vaCRvMn1d7
+    //ramiro sandboxId: AUt-Juq7KaOA6IiUtQxPGjSAPvLapovYbVAaryh9BzuxLzCEdxV2YKPRq9uQuwPdeUnu2O63PbJZGnjQ
     let precioTotal = this.props.carro.precioSubTotal + this.props.carro.envio
-    let shipping= 1 //no shipping address
+
     return (
       <div style={style.modal.backdropStyle}>
 
@@ -127,13 +129,15 @@ class ModalFormaDePago extends React.Component {
               </div>
               <div>
                 {/* docs
-                https://www.npmjs.com/package/react-paypal-express-checkout*/}
+                https://www.npmjs.com/package/react-paypal-express-checkout
+                env = sandbox /production
+                */}
                 <PayPalButton
                   env='sandbox'
                   sandboxID={sandboxID}
+                  productionID = {productionID}
                   amount={precioTotal}
                   currency='EUR'
-                  shipping= {shipping}//1=no shipping address . I have it stored already, we dont wanna confuse nobody
                   commit={true}
                   pagoHecho = {this.pagoHecho.bind(this)}
                   onCancel = {this.onCancel.bind(this)}

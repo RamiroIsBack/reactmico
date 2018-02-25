@@ -9,6 +9,7 @@ class ConocenosContainer extends Component {
 
     //make it start at the top of the page every time
     window.scrollTo(0, 0)
+
   }
   compomentDidUpdate(){
     //make it start at the top of the page every time
@@ -78,4 +79,3 @@ const stateToProps = (state) => {
 }
 
 export default connect (stateToProps,dispatchToProps)(ConocenosContainer)
-

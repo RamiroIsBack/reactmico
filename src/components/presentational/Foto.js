@@ -108,9 +108,9 @@ export default class Foto extends Component {
               onLoad= {this.handleFotoLoaded.bind(this)}
             >
             </img>
-            <img src= {'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/vendido.png?alt=media&token=b31eafca-663d-4d89-95f5-ad93afe4aa8f'} className="img-responsive img-rounded" alt={nombre} draggable = 'false'
-              style= {{maxWidth:'100%', maxHeight : '200px', position: 'absolute', top: 0, left: 0}}
-            />
+            <div className = 'vendido__container'>
+              <h4 style={{padding:1,margin:0}}>vendido</h4>
+            </div>
           </div>
         }
 

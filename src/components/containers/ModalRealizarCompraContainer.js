@@ -51,6 +51,9 @@ class ModalRealizarCompraContainer extends Component {
 
     today = dd + '/' + mm + '/' + yyyy
     data.fechaPedido = today
+
+    //voy a quitar lo de pedir la direccion porque ya lo mete en PayPal
+    //pero si hay q comprobar q el mail sea igual y preguntarle cual quiere usar
     data.payerEmail = this.props.users.currentUser.datosPersonales.email
     data.uid = this.props.users.currentUser.datosPersonales.uid
     this.props.guardarDatosPedido(this.props.users.currentUser.datosEnvio ,this.props.carro,data)

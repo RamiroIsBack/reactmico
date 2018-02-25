@@ -4,7 +4,7 @@ var initialState = {
   cartList:[],
   numProducts: 0,
   precioSubTotal : 0,
-  envio : 15,
+  envio : 0,
 }
 
 export default (state = initialState, action) => {

@@ -72,6 +72,12 @@ export default {
       data: pic,
     }
   },
+  loadFromInstagram:(feedList) =>{
+    return{
+      type:constants.LOAD_FROM_INSTAGRAM,
+      data:feedList
+    }
+  },
   toggleYear: (year) => {
     return {
       type: constants.TOGGLE_YEAR,
