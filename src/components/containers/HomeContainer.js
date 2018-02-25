@@ -132,11 +132,11 @@ class HomeContainer extends Component {
 
         //owner    //id: "3704130568" es micotextil, poner primero los usuarios
         //caption  //text,
-        //<p style = {{width:'80%',paddingLeft:'8px'}}>{post.caption}</p>
         //imgUrl   //photo
         instagramFeedComponentsList.push(
           <div style = {{padding:'1px',backgroundColor:'rgb(229, 233, 230)'}} key = {i}>
             <img style = {{width:'100%'}} src= {post.imgUrl}></img>
+            <p style = {{fontSize:'12px'}}>{post.caption}</p>
           </div>
         )
       }
