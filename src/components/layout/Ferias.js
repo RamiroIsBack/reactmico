@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import style from './styles'
 import {FeriaContainer,ContenidoFeriaContainer, MapaContainer,ListaFeriasContainer} from '../containers'
 export default class Ferias extends Component {
 
   render() {
     return (
-      <div className='container-fluid' id ='backgroundDiv' style ={style.universal.containerDiv} >
+      <div className='container-fluid' id ='backgroundDiv' >
 
         <div className = 'container col-xs-12 col-sm-12 col-md-12 col-lg-12' style = {{}}>
 

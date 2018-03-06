@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactImageMagnify from 'react-image-magnify'
 import { NavLink} from 'react-router-dom'
 
-import {Magnifying} from '../../utils'
+import {Magnifying_css} from '../../utils/css'
 
 export default class extends Component {
   constructor(){
@@ -43,7 +43,6 @@ export default class extends Component {
               height: 800
             },
             smallImage: {
-              alt: 'Wristwatch by Ted Baker London',
               src: picToShow,
               sizes: '(min-width: 80px) 30vw, 80vw',
               isFluidWidth: true,

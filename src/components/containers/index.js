@@ -9,9 +9,7 @@ import FotoContainer from './FotoContainer'
 import ProductContainer from './ProductContainer'
 import CarroContainer from './CarroContainer'
 import FeriaContainer from './FeriaContainer'
-import ContactoContainer from './ContactoContainer'
 import ConocenosContainer from './ConocenosContainer'
-
 import FooterContainer from './FooterContainer'
 import ModalFeriasContainer from './ModalFeriasContainer'
 import ModalCreacionesContainer from './ModalCreacionesContainer'
@@ -22,7 +20,9 @@ import ModalEntrarContainer from './ModalEntrarContainer'
 import ModalRealizarCompraContainer from './ModalRealizarCompraContainer'
 import MapaContainer from './MapaContainer'
 import ListaFeriasContainer from './ListaFeriasContainer'
+import ModalVolverArribaContainer from './ModalVolverArribaContainer'
 export{
+  ModalVolverArribaContainer,
   ListaFeriasContainer,
   MapaContainer,
   ModalRealizarCompraContainer,
@@ -36,11 +36,9 @@ export{
   ModalCreacionesContainer,
   ModalFeriasContainer,
   FooterContainer,
-  
   HomeContainer,
   ModalRegistrarseContainer,
   ConocenosContainer,
-  ContactoContainer,
   NavbarMicoFront,
   FotoContainer,
   AmigoContainer,

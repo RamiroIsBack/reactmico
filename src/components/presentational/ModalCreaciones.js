@@ -25,36 +25,22 @@ export default class ModalCreaciones extends Component {
               {tipo.nombre}
             </NavLink>
           </div>
-          <div className= 'col-xs-12 col-sm-12 col-md-12 col-lg-12'  style ={{padding:1,textAlign:'center'}} >
-            <hr style= {{padding: 0,margin :0 }}></hr>
-          </div>
+
         </div>
       )
     }
     )
-    var estiloModal ={
-      position: 'fixed',
-      //backgroundImage: 'url(' + contenido.pic.urlPicRegistrarse + ')',
 
-      //backgroundPosition: 'center',
-      //backgroundSize: 'cover',
-      //backgroundRepeat: 'no-repeat',
-      backgroundColor:'#FAFAFA',
-      minWidth: 200,
-      maxWidth: 600,
-      minHeight: 100,
-      maxHeight: 700,
+    var estiloModal ={
+      position: 'absolute',
+      textAlign:'left',
+      backgroundColor:'white',
+      display: 'inline-block',
       margin: '0 auto',
-      //To make sure that it is really on top of all other elements, we set z-index to a high value (by default all elements have a z-index value of 0).
       zIndex: 3333,
-      top: '38px',
-      left: '100px',
-      //right: '40px',
-      //bottom: '40px',
-      border: '1px solid #ccc',
       overflow: 'auto',
       WebkitOverflowScrolling: 'touch',
-      borderRadius: '5px',
+      borderRadius: '2px',
       outline: 'none',
     }
     return (
@@ -89,6 +75,3 @@ var creacionList =[]
   {creacionList}
 
 </ul>*/
-
-
-

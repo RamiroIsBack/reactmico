@@ -61,7 +61,7 @@ export default (state = initialState, action) => {
         }
       }
       let loTenemos=false
-      if(newState.currentUser.foto.photoURL != null){
+      if(newState.currentUser.foto.photoURL !== null){
         newState.currentUserFoto =true
       }
       for (let i =0; i < newState.listaUsers.length; i++){
@@ -105,7 +105,7 @@ export default (state = initialState, action) => {
           photoURL: action.data.photoURL,
         }
       }
-      if(newState.currentUser.foto.photoURL != null){
+      if(newState.currentUser.foto.photoURL !== null){
         newState.currentUserDatos.currentUserFoto =true
       }
       let loTenemos=false

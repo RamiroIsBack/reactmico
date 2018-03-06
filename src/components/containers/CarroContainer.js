@@ -16,7 +16,7 @@ class CarroContainer extends Component {
   componentWillMount(){
     if (this.props.carro){
       if(this.props.users.currentUser){ //si hay un usuario logeado
-        if(this.state.oldCartListLength != this.props.carro.cartList.length){//si hay cambio en el carro
+        if(this.state.oldCartListLength !== this.props.carro.cartList.length){//si hay cambio en el carro
           this.props.loadCarro(this.props.carro.cartList,false )
           let newcount = this.props.carro.cartList.length
           this.setState({oldCartListLength: newcount})
@@ -27,7 +27,7 @@ class CarroContainer extends Component {
   componentWillUpdate(){
     if (this.props.carro){
       if(this.props.users.currentUser){
-        if(this.state.oldCartListLength != this.props.carro.cartList.length){
+        if(this.state.oldCartListLength !== this.props.carro.cartList.length){
           this.props.loadCarro(this.props.carro.cartList,false )
           let newcount = this.props.carro.cartList.length
           this.setState({oldCartListLength: newcount})
@@ -54,10 +54,10 @@ class CarroContainer extends Component {
   goToCreaciones(event){
     let tipo = ''
     // in case there is nothing in the cart
-    if(this.props.carro.cartList.length!=0){
+    if(this.props.carro.cartList.length!==0){
       tipo = this.props.carro.cartList[this.props.carro.cartList.length-1].tipo
     }
-    if(tipo!=''){
+    if(tipo!==''){
       this.props.moveToCreacionesSection(tipo)
     }else{
       this.props.moveToCreacionesSection('allCreaciones')
@@ -70,20 +70,18 @@ class CarroContainer extends Component {
   }
   comprar(){
     if(this.props.carro){//hay conexion con el carroReducer
-      if(this.props.carro.cartList.length != 0){//hay algo en el carro
+      if(this.props.carro.cartList.length !== 0){//hay algo en el carro
         if(this.props.users.currentUser){//hay user
           let currentUserBuying = this.props.users.currentUser
-          if(currentUserBuying.datosEnvio.cp){//hay cp con lo q ha rellenado los datos
-            if(currentUserBuying.datosPersonales.emailVerified || currentUserBuying.datosPersonales.providerId !='firebase'){
 
-              this.gestionarSiTengoVendidosEnCarro()
+          if(currentUserBuying.datosPersonales.emailVerified || currentUserBuying.datosPersonales.providerId !=='firebase'){
 
-            }else{
-              this.props.showNotificationWithTimeout('Warning','noVerifyedEmail')
-            }
+            this.gestionarSiTengoVendidosEnCarro()
+
           }else{
-            this.props.showNotificationWithTimeout('Warning','noDatos')
+            this.props.showNotificationWithTimeout('Warning','noVerifyedEmail')
           }
+
         }else{
           this.props.showNotificationWithTimeout('Warning','noUser')
         }
@@ -144,17 +142,17 @@ class CarroContainer extends Component {
     //console.log ('carreta '+ JSON.stringify(this.state.cartList))
     let pedidoContenido = {}
     let postVentaContenido = {}
-    if (this.props.storeContenidos.listaContenidos.length !=0){
+    if (this.props.storeContenidos.listaContenidos.length !==0){
       for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
-        if (this.props.storeContenidos.listaContenidos[i].id == 'pedido'){
+        if (this.props.storeContenidos.listaContenidos[i].id === 'pedido'){
           pedidoContenido = this.props.storeContenidos.listaContenidos[i]
           break
         }
       }
       for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
-        if (this.props.storeContenidos.listaContenidos[i].id == 'postVenta'){
+        if (this.props.storeContenidos.listaContenidos[i].id === 'postVenta'){
           postVentaContenido = this.props.storeContenidos.listaContenidos[i]
           break
         }
@@ -171,13 +169,25 @@ class CarroContainer extends Component {
 
       )
     })
+    let stiloCarroBuy = {}
+    let paddingTop = {}
+    if(this.props.navigation){
+      if(this.props.navigation.sticky){
+        paddingTop = this.props.navigation.paddingTop4navbar
+        stiloCarroBuy = {position:'fixed', padding:0 , paddingLeft:3 ,marginRight:5,top:60, bottom:200 ,overflowY:'hidden', overflowX:'hidden' }
+      }else{
+        stiloCarroBuy = {position:'relative',padding:0 , paddingLeft:3 ,marginRight:5,top:0 , bottom:200 ,overflowY:'hidden', overflowX:'hidden' }
+        paddingTop = {paddingTop:0}
+      }
+    }
+
     return (
       <div onClick = {this.cierraDialogosNavbar.bind(this)} >
 
         <div >
-          <div className='container-fluid col-xs-7 col-sm-8 col-md-7 col-lg-6' style={{padding: 0}}>
+          <div className='container-fluid col-xs-7 col-sm-8 col-md-7 col-lg-6' style={paddingTop}>
             <div className='visible-xs-block hidden-sm hidden-md hidden-lg' style={{padding :0 , borderRightStyle:'ridge',minHeight: window.innerHeight}}>
-              {this.props.carro.cartList.length == 0 &&
+              {this.props.carro.cartList.length === 0 &&
                 <h3>
                   No tienes nungun producto en el carro para comprar.
                 </h3>
@@ -189,7 +199,7 @@ class CarroContainer extends Component {
 
             </div>
             <div className='hidden-xs' style={{padding :0 , borderRightStyle:'ridge',minHeight: window.innerHeight}}>
-              {this.props.carro.cartList.length == 0 &&
+              {this.props.carro.cartList.length === 0 &&
                 <h2>
                   No tienes nungun producto en el carro para comprar.
                 </h2>
@@ -202,7 +212,8 @@ class CarroContainer extends Component {
             </div>
           </div>
           <div className=' col-xs-5 col-sm-4 col-md-5 col-lg-6'>
-            <CarroBuy carroPropiedades = {this.props.carro} comprar= {this.comprar.bind(this)} postVentaContenido={postVentaContenido} pedidoContenido ={pedidoContenido}/>
+            <CarroBuy carroPropiedades = {this.props.carro} comprar= {this.comprar.bind(this)} postVentaContenido={postVentaContenido} pedidoContenido ={pedidoContenido}
+              stiloCarroBuy= {stiloCarroBuy}/>
           </div>
         </div>
 
@@ -235,7 +246,8 @@ const stateToProps = (state) => {
     storeContenidos: state.contenidos,
     carro:state.carro,
     users: state.user,
-    creacion:state.creacion
+    creacion:state.creacion,
+    navigation:state.navigation,
   }
 }
 

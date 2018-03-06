@@ -1,18 +1,31 @@
-
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import history from './utils/history'
 import {General_css} from './utils'
 import store from './stores'
 import { Provider } from 'react-redux'
-import {Home,Carro,Diseños,Ferias,Conocenos,Registrarse,Productos, Amigo} from './components/layout'
-import {AmigoPedidosContainer, AmigoDatosContainer, ModalLoginContainer,ModalWarningContainer,ModalMenuXsContainer,ModalCreacionesContainer,ModalFeriasContainer,ModalRegistrarseContainer, ModalEntrarContainer , NavbarMicoFront,FooterContainer,
-  ModalRealizarCompraContainer} from './components/containers'
+import {Home,Carro,Diseños,Ferias,Conocenos,Productos, Amigo} from './components/layout'
+import {AmigoPedidosContainer,
+  AmigoDatosContainer,
+  ModalLoginContainer,
+  ModalWarningContainer,
+  ModalMenuXsContainer,
+  ModalCreacionesContainer,
+  ModalFeriasContainer,
+  ModalRegistrarseContainer,
+  ModalEntrarContainer ,
+  NavbarMicoFront,
+  FooterContainer,
+  ModalRealizarCompraContainer,
+  ModalVolverArribaContainer,
+} from './components/containers'
+
 import 'bootstrap/dist/css/bootstrap.css'
 import {
   Router as Router,
   Route,
   Link,
+  NavLink,
 } from 'react-router-dom'
 import registerServiceWorker from './registerServiceWorker'
 /* The Elements components is a summary of basic presentation componets
@@ -21,8 +34,8 @@ import registerServiceWorker from './registerServiceWorker'
 
 class ReactMico extends Component {
 
-
   render(){
+
     let ready = true
     let picConstruccion = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/micEnConstruccion-mobile2.png?alt=media&token=4cba7d9f-8a8f-4cad-a379-1dbabcbfea0a'
 
@@ -62,7 +75,7 @@ class ReactMico extends Component {
                     <h3>Dentro de muy poco tendrás una guía con todas las ferias para que puedas ir a verme y una tienda online donde podrás comprar mis productos desde casa si lo prefieres </h3>
                     <br/>
                     <br/>
-                    <h4>hasta entonces, sígueme en las redes sociales o contacta conmigo cuando quieras :) </h4>
+                    <h3>hasta entonces, sígueme en las redes sociales o contacta conmigo cuando quieras :) </h3>
                   </div>
                 </div>
                 <div className = 'footer__container'>
@@ -78,33 +91,42 @@ class ReactMico extends Component {
 
       <Provider store={store.configure(null)}>
         <Router history={history}>
-          <div className = 'general__container' style = {settingMinHigthToScreen} >
-            <ModalRealizarCompraContainer/>
-            <ModalRegistrarseContainer/>
-            <ModalMenuXsContainer/>
-            <ModalCreacionesContainer/>
-            <ModalFeriasContainer/>
-            <ModalWarningContainer/>
-            <ModalLoginContainer/>
-            <ModalEntrarContainer/>
+          <div>
+            <div className = 'general__container' style = {settingMinHigthToScreen}>
+              <div className ='logo__top__container' id='logoTopContainer' >
+                <NavLink to='/' >
+                  <img className ='logo__top__img' src= '/mico_disegno_textil.jpg'></img>
+                </NavLink>
+              </div>
 
-            <NavbarMicoFront/>
+              <NavbarMicoFront/>
 
-            <div className = 'main__container'  >
-              <Route exact path='/' component={Home}/>
-              <Route path='/Diseños' component={Diseños}/>
-              <Route path='/Registrarse' component={Registrarse}/>
-              <Route path='/Carro' component={Carro}/>
-              <Route path='/Ferias' component={Ferias}/>
-              <Route path='/Conocenos' component={Conocenos}/>
-              <Route path='/Productos' component={Productos}/>
-              <Route path='/Amigo' component = {Amigo}/>
-              <Route path='/Amigo/Datos' component = {AmigoDatosContainer}/>
-              <Route path='/Amigo/Pedidos' component = {AmigoPedidosContainer}/>
+              <ModalRealizarCompraContainer/>
+              <ModalRegistrarseContainer/>
+              <ModalMenuXsContainer/>
+              <ModalFeriasContainer/>
+              <ModalWarningContainer/>
+              <ModalLoginContainer/>
+              <ModalEntrarContainer/>
 
-            </div>
-            <div className = 'footer__container'>
-              <FooterContainer/>
+
+              <div className = 'main__container'  >
+                <Route exact path='/' component={Home}/>
+                <Route path='/Diseños' component={Diseños}/>
+                <Route path='/Carro' component={Carro}/>
+                <Route path='/Ferias' component={Ferias}/>
+                <Route path='/Conocenos' component={Conocenos}/>
+                <Route path='/Productos' component={Productos}/>
+                <Route path='/Amigo' component = {Amigo}/>
+                <Route path='/Amigo/Datos' component = {AmigoDatosContainer}/>
+                <Route path='/Amigo/Pedidos' component = {AmigoPedidosContainer}/>
+
+                <ModalVolverArribaContainer/>
+
+              </div>
+              <div className = 'footer__container'>
+                <FooterContainer/>
+              </div>
             </div>
           </div>
         </Router>

@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react'
-import {ModalDatosEnvio,ModalFormaDePago, ModalCompraRealizada} from '../presentational'
+import {ModalDatosEnvio,ModalFormaDePago,ModalConfirmacionDatosEnvio, ModalCompraRealizada} from '../presentational'
 
 import {connect} from 'react-redux'
 import actions from '../../actions'
@@ -16,6 +16,10 @@ class ModalRealizarCompraContainer extends Component {
       show: 'no',
       datosEnvio:true,
       formaDePago: false,
+      confirmacionDatosEnvio:false,
+      paypalEnvio:{},
+      dbEnvio:{},
+      data:{},//will have all data from pedido pagado
       compraRealizada: false,
       pagoPedido:{},
       carroPedido:{},
@@ -28,6 +32,8 @@ class ModalRealizarCompraContainer extends Component {
   }
   irAformaDePago(){
     this.setState({formaDePago:true, datosEnvio:false})
+  }
+  irAconfirmacionDatosEnvio(){
 
   }
 
@@ -52,11 +58,38 @@ class ModalRealizarCompraContainer extends Component {
     today = dd + '/' + mm + '/' + yyyy
     data.fechaPedido = today
 
-    //voy a quitar lo de pedir la direccion porque ya lo mete en PayPal
-    //pero si hay q comprobar q el mail sea igual y preguntarle cual quiere usar
+    let dbEnvio = this.props.users.currentUser.datosEnvio
+
+    let paypalEnvio = {
+      calle : data.paypalAddress.line1
+        +''+(data.paypalAddress.line2!==undefined ||data.paypalAddress.line2!==null ? data.paypalAddress.line2 :'' ),
+      cp: data.paypalAddress.postal_code,
+      localidad:data.paypalAddress.city,
+      newsletter:dbEnvio.newsletter,
+      nombreCompletoEnvio:data.paypalAddress.recipient_name,
+      provincia:data.paypalAddress.state,
+    }
     data.payerEmail = this.props.users.currentUser.datosPersonales.email
     data.uid = this.props.users.currentUser.datosPersonales.uid
-    this.props.guardarDatosPedido(this.props.users.currentUser.datosEnvio ,this.props.carro,data)
+    data.envioDefinitivo = paypalEnvio
+    if (dbEnvio.hayDatos){
+      this.setState({
+        confirmacionDatosEnvio: true,
+        formaDePago:false,
+        paypalEnvio:paypalEnvio,
+        dbEnvio:dbEnvio,
+        data:data,
+      })
+
+    }else{
+      this.wrapPedido(data)
+    }
+
+  }
+
+  wrapPedido(data){
+    
+    this.props.guardarDatosPedido(data.envioDefinitivo ,this.props.carro,data)
       .then(response =>{
 
         this.props.getUsers()//para q est'e incluido el nuevo pedido
@@ -65,7 +98,7 @@ class ModalRealizarCompraContainer extends Component {
         console.log(err.message+ 'fallo al guardarDatosPedido')
       })
 
-    this.setState({pagoPedido: data, carroPedido:this.props.carro})
+    this.setState({confirmacionDatosEnvio: false, pagoPedido: data, carroPedido:this.props.carro})
     for(let i=0 ; i<this.props.carro.cartList.length ; i++){
       let id = this.props.carro.cartList[i].id
       this.props.elementoVendido(id)
@@ -83,6 +116,7 @@ class ModalRealizarCompraContainer extends Component {
       .catch(err=>{
         console.log(err.message+ 'fallo al cargar las creaciones')
       })
+
   }
 
   toggleModal(whereTo){
@@ -124,7 +158,7 @@ class ModalRealizarCompraContainer extends Component {
     }
     for (let i = 0 ;  i < this.props.storeContenidos.listaContenidos.length ;  i++) {
 
-      if (this.props.storeContenidos.listaContenidos[i].id == 'registrarse'){
+      if (this.props.storeContenidos.listaContenidos[i].id === 'registrarse'){
         registrarseContenidos = this.props.storeContenidos.listaContenidos[i]
         break
       }
@@ -156,6 +190,16 @@ class ModalRealizarCompraContainer extends Component {
             guardarDatosPedido = {this.guardarDatosPedido.bind(this)}
           >
           </ModalFormaDePago>
+        }
+        {this.state.confirmacionDatosEnvio &&
+          <ModalConfirmacionDatosEnvio
+            contenido = {registrarseContenidos}
+            data ={this.state.data}
+            show={realizarCompraShowing}
+            paypalEnvio={this.state.paypalEnvio}
+            dbEnvio={this.state.dbEnvio}
+            wrapPedido = {this.wrapPedido.bind(this)}
+          />
         }
         { this.state.compraRealizada &&
           <ModalCompraRealizada

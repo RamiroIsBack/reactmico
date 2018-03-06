@@ -1,0 +1,74 @@
+.navbar__container{
+  padding-top: 10px;
+  background-color: white;
+  display: grid;
+  grid-template-areas:
+  ". . d d f f c c . r r p p . .";
+  grid-template-columns: repeat(15, 1fr);
+  grid-template-rows: repeat(1,60px);
+}
+.navbar__diseno__container{
+  grid-area: d;
+padding-top: 7px;
+  text-align: center;
+  cursor:pointer;
+
+}
+.navbar__feria__container{
+  grid-area: f;
+  text-align: center;
+  cursor:pointer;
+  padding-top: 7px;
+}
+
+.navbar__conocenos__container{
+  text-align: center;
+  cursor:pointer;
+  padding-top: 7px;
+  grid-area: c;
+}
+
+.navbar__registrarse__container{
+  grid-area: r;
+  text-align: center;
+  cursor:pointer;
+  padding-top: 3px;
+}
+.navbar__pagar__container{
+  grid-area: p;
+  text-align: center;
+padding-top: 7px;
+  cursor:pointer;
+}
+@media screen and (max-width: 705px) {
+  .navbar__container{
+    padding-top: 10px;
+    background-color: white;
+    display: grid;
+    grid-template-areas:
+    ". . x x r r p p . .";
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(1,60px);
+  }
+  .navbar__menuXS__container{
+    grid-area: x;
+    text-align: center;
+    cursor:pointer;
+    padding-top: 3px;
+  }
+  .navbar__registrarse__container{
+    grid-area: r;
+    text-align: center;
+    cursor:pointer;
+    padding-top: 3px;
+  }
+  .navbar__pagar__container{
+    grid-area: p;
+    text-align: center;
+  padding-top: 7px;
+    cursor:pointer;
+  }
+
+
+
+}

@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import style from './styles'
 import { NavLink} from 'react-router-dom'
-import {FotoGrid} from '../../utils'
+import {FotoGrid_css} from '../../utils/css'
 
 export default class Foto extends Component {
   constructor(args){

@@ -37,27 +37,26 @@ class ProductContainer extends Component {
       //history.push('/Productos')
       return null
     }
-    if (this.props.storeContenidos.listaContenidos.length !=0){
+    if (this.props.storeContenidos.listaContenidos.length !==0){
       for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
-        if (this.props.storeContenidos.listaContenidos[i].id == 'artesania'){
+        if (this.props.storeContenidos.listaContenidos[i].id === 'artesania'){
           artesania = this.props.storeContenidos.listaContenidos[i]
           break
         }
       }
     }
-    //<div onClick = {this.cierraDialogosNavbar.bind(this)}>
-    //  <div className='container-fluid col-xs-12 col-sm-8 col-md-8 col-lg-6'>
-    //    <Product propiedades = {product} whenClicked={this.selectProduct.bind(this)}/>
-    //  </div>
-    //  {artesania.headerFoto &&
-    //    <div className='container-fluid col-xs-12 col-sm-4 col-md-4 col-lg-6'>
-    //      <ProductSpecification propiedades = {product} contenido = {artesania}/>
-    //    </div>
-    //  }
-    //</div>
+    let paddingTop = {}
+    if(this.props.navigation){
+      if(this.props.navigation.sticky){
+        paddingTop = this.props.navigation.paddingTop4navbar
+      }else{
+        paddingTop = {paddingTop:0}
+      }
+    }
+
     return (
-      <div onClick = {this.cierraDialogosNavbar.bind(this)}>
+      <div onClick = {this.cierraDialogosNavbar.bind(this)} style= {paddingTop}>
         <div className='container-fluid col-xs-12 col-sm-6 col-md-6 col-lg-6'>
           <MagnifyingProduct propiedades = {product} whenClicked={this.selectProduct.bind(this)}/>
         </div>
@@ -91,6 +90,7 @@ const stateToProps = (state) => {
     productToshow:state.product,
     storeContenidos: state.contenidos,
     users: state.user,
+    navigation:state.navigation,
   }
 }
 

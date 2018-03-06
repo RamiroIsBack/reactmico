@@ -25,7 +25,7 @@ class ModalEntrarContainer extends Component {
 
     /*if(amigo.nombre.indexOf('@') > -1){
       //esta entrando con el mail
-      if (amigo.nombre.indexOf('.') >-1 && amigo.nombre.charAt(amigo.nombre.length-1)!= '.'){
+      if (amigo.nombre.indexOf('.') >-1 && amigo.nombre.charAt(amigo.nombre.length-1)!== '.'){
         //alert('parece un email valido, vamos a compararlo con los que tenemos')
         for (i =0; i < listaUsers.length; i++){
           if (listaUsers[i].datosPersonales.email === amigo.nombre){
@@ -73,7 +73,7 @@ class ModalEntrarContainer extends Component {
     //comprobar que existe este user
     if(amigo.nombre.indexOf('@') > -1){
       //esta entrando con el mail
-      if (amigo.nombre.indexOf('.') >-1 && amigo.nombre.charAt(amigo.nombre.length-1)!= '.'){
+      if (amigo.nombre.indexOf('.') >-1 && amigo.nombre.charAt(amigo.nombre.length-1)!== '.'){
         //alert('parece un email valido, vamos a compararlo con los que tenemos')
         for (i =0; i < listaUsers.length; i++){
           if (listaUsers[i].datosPersonales.email === amigo.nombre){
@@ -205,7 +205,7 @@ class ModalEntrarContainer extends Component {
 
     for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
-      if (this.props.storeContenidos.listaContenidos[i].id == 'registrarse'){
+      if (this.props.storeContenidos.listaContenidos[i].id === 'registrarse'){
         registrarseContenidos = this.props.storeContenidos.listaContenidos[i]
         break
       }
@@ -266,8 +266,3 @@ const stateToProps = (state) => {
   }
 }
 export default connect (stateToProps,dispatchToProps)(ModalEntrarContainer)
-
-
-
-
-

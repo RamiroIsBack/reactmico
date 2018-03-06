@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import actions from '../../actions'
-import history from '../../utils/history'
 import {Pedido} from '../presentational'
 class AmigoPedidosContainer extends Component {
 
@@ -36,9 +35,16 @@ class AmigoPedidosContainer extends Component {
     }
 
     return (
-      <div className = 'container'>
-        {listaPedidos}
-      </div>
+      <div>
+        {listaPedidos.length=== 0 &&
+          <h4 style= {{textAlign:'center',padding:'30px'}}>
+            no has realizado ningún pedido todavía
+          </h4>
+        }
+        <div className = 'container'>
+          {listaPedidos}
+        </div>
+    </div>
     )
   }
 }

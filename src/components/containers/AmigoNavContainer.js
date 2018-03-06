@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
 import actions from '../../actions'
-import style from './styles'
 
 class AmigoNavContainer extends Component {
   constructor(){
@@ -41,7 +40,7 @@ class AmigoNavContainer extends Component {
     return (
       <div>
         <button onClick={this.props.logout} className = 'btn glyphicon glyphicon glyphicon-log-out pull-right'
-          style = {{background: 'white', border: '1px solid'}}></button>
+          style = {{background: 'white', border: '1px solid',marginRight:'2px'}}></button>
         <h6 className = ' pull-right' style = {{marginRight : 2}}>Cerrar sesión </h6>
         <ul className='nav nav-tabs'>
           <li id= 'datos' className={datosActive} onClick= {this.cambiaTab.bind(this)}>

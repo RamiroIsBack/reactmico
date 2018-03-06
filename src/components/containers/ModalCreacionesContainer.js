@@ -40,7 +40,7 @@ class ModalCreacionesContainer extends Component {
     }
     for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
-      if (this.props.storeContenidos.listaContenidos[i].id == 'creaciones'){
+      if (this.props.storeContenidos.listaContenidos[i].id === 'creaciones'){
         creacionesContenidos = this.props.storeContenidos.listaContenidos[i]
         break
       }
@@ -64,7 +64,6 @@ class ModalCreacionesContainer extends Component {
         )
       }
     }
-    //console.log('caca'+JSON.stringify(creacionList))
     if(creacionList.length ===0){
       return null
     }

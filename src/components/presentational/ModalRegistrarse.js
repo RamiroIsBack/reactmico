@@ -70,7 +70,7 @@ class ModalRegistrarse extends React.Component {
       }
 
     }else if (event.target.id ==='contactMail'){
-      if(value.indexOf('@') > -1 && value.indexOf('.') >-1 && value.charAt(value.length-1)!= '.'){
+      if(value.indexOf('@') > -1 && value.indexOf('.') >-1 && value.charAt(value.length-1)!== '.'){
         this.setState({mailExpectation : true})
       }else{
         this.setState({mailExpectation : false})

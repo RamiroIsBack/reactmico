@@ -30,6 +30,8 @@ class AmigoDatos extends React.Component {
       emailEditar : false, //si es true sale un input, si no un texto y un boton q ponga cambiar
       recibir: true,
 
+      quieroDatos: false,//si es true le mostramos el form
+
       showInfoVerified :false,
 
       nombreCompletoEnvio : '',//setting value of the input
@@ -52,7 +54,7 @@ class AmigoDatos extends React.Component {
   }
   handleFocus(event){
     this.setState({show: event.target.id})
-    console.log('show: '+ event.target.id)
+
   }
   isLetterOrNumber(str) {
     /*
@@ -69,7 +71,7 @@ class AmigoDatos extends React.Component {
     this.setState({[event.target.id]: event.target.value})
 
     let value = event.target.value
-    console.log ( value)
+
     if (event.target.id ==='nombre'){
       if(value.length >2 ){
         this.setState({nombreExpectation1 : true})
@@ -92,7 +94,7 @@ class AmigoDatos extends React.Component {
       }
 
     }else if (event.target.id ==='email'){
-      if(value.indexOf('@') > -1 && value.indexOf('.') >-1 && value.charAt(value.length-1)!= '.'){
+      if(value.indexOf('@') > -1 && value.indexOf('.') >-1 && value.charAt(value.length-1)!== '.'){
         this.setState({mailExpectation : true})
       }else{
         this.setState({mailExpectation : false})
@@ -130,8 +132,9 @@ class AmigoDatos extends React.Component {
         provincia: document.getElementById('provincia').value,
         cp: document.getElementById('cp').value,
         newsletter: this.state.recibir,
+        hayDatos:true,
       }
-      if (newDatosEnvio.nombreCompletoEnvio.length != 0 && newDatosEnvio.calle.length != 0 && newDatosEnvio.localidad.length != 0 && newDatosEnvio.provincia.length != 0 && newDatosEnvio.cp.length != 0 && newDatosEnvio.newsletter.length != 0 ){
+      if (newDatosEnvio.nombreCompletoEnvio.length !== 0 && newDatosEnvio.calle.length !== 0 && newDatosEnvio.localidad.length !== 0 && newDatosEnvio.provincia.length !== 0 && newDatosEnvio.cp.length !== 0 && newDatosEnvio.newsletter.length !== 0 ){
 
         newCurrentUser.datosEnvio=newDatosEnvio
         this.props.cambiarCurrentUserModificables('currentUserDatosEnvio', true)
@@ -239,125 +242,6 @@ class AmigoDatos extends React.Component {
     this.props.resendEmail()
   }
 
-  renderDatosParaEnvio(){
-    //setting the news letter to yes or no
-    var sino = 'Sí'
-    var newsletter = 'glyphicon glyphicon-ok text-center pull-right'
-    if (!this.state.recibir){
-      newsletter = 'glyphicon glyphicon-remove text-center pull-right'
-      sino = 'No'
-    }
-
-    if(this.props.currentUser){
-      if(this.props.currentUserDatos.currentUserDatosEnvio){ //hay datos de envio ya en la DB
-        return(
-          <div>
-            <div className= 'hidden-xs col-sm-6 offset-sm-2 col-md-5 offset-md-3 col-lg-5 offset-lg-3' style = {{paddingRight: 10}}>
-              <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.nombreCompletoEnvio} </p>
-              <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.calle} </p>
-              <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.localidad} </p>
-              <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.cp+' , '+this.props.currentUser.datosEnvio.provincia} </p>
-
-              <p style= {{marginBottom: 0,paddingTop: 2}}> {sino+', quiero recibir información'} </p>
-            </div>
-
-            <div className= 'hidden-sm hidden-md hidden-lg visible-xs-block col-xs-9' style = {{paddingLeft: 0, paddingRight: 0}}>
-              <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.nombreCompletoEnvio} </p>
-              <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.calle} </p>
-              <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.localidad} </p>
-              <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.cp+' , '+this.props.currentUser.datosEnvio.provincia} </p>
-
-              <p style= {{marginBottom: 0,paddingTop: 2}}> {sino+', quiero recibir información'} </p>
-            </div>
-
-
-            <div className= 'col-xs-3 col-sm-4 col-md-4 col-lg-4' style = {{paddingRight: 0,paddingLeft:0}}>
-              <button id= 'datosEnvio' onClick = {this.handleCurrentUserModificables.bind(this)}
-                style = {{border: 'none',borderRadius: 4, backgroundColor: 'black',color:'white',width: '95%',paddingLeft: 5,}}>cambiar datos</button>
-            </div>
-
-          </div>
-        )
-      }
-      else{ //no hay datos en la BD o quiero modificarlos
-
-        return(
-          <div className='container'>
-            <div className='form-group row'>
-              <div className='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
-                <p>nombre completo* :</p>
-              </div>
-              <div className='col-xs-12 col-sm-9 col-md-9 col-lg-9' >
-                <input type='text' onFocus={this.handleFocus.bind(this)} onChange ={this.handleImputData.bind(this)} className='form-control' value = {this.state.nombreCompletoEnvio} id ='nombreCompletoEnvio' placeholder='nombre apellido-1 apellido-2'></input>
-              </div>
-            </div>
-
-            <div className='form-group row'>
-              <div className='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
-                <p>calle*</p>
-              </div>
-              <div className='col-xs-12 col-sm-9 col-md-9 col-lg-9'>
-                <input type='text' onFocus={this.handleFocus.bind(this)} onChange ={this.handleImputData.bind(this)} className='form-control' value = {this.state.calle} id='calle' placeholder='calle del ejemplo 4' ></input>
-              </div>
-            </div>
-
-            <div className='form-group row'>
-              <div className='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
-                <p>localidad*</p>
-              </div>
-              <div className='col-xs-12 col-sm-9 col-md-9 col-lg-9'>
-                <input type='text' onFocus={this.handleFocus.bind(this)} onChange ={this.handleImputData.bind(this)} rows='1' className='form-control' value = {this.state.localidad} id='localidad' placeholder='Vigo' ></input>
-              </div>
-            </div>
-
-            <div className ='form-group row' >
-              <div className='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
-                <p>provincia*</p>
-              </div>
-              <div className='col-xs-12 col-sm-9 col-md-9 col-lg-9' >
-                <input type='text' onFocus={this.handleFocus.bind(this)} onChange ={this.handleImputData.bind(this)} rows='1' className='form-control' id ='provincia' value={this.state.provincia} placeholder='Pontevedra'></input>
-              </div>
-            </div>
-
-            <div className='form-group row'>
-              <div className='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
-                <p>código postal* :</p>
-              </div>
-              <div className='col-xs-12 col-sm-9 col-md-9 col-lg-9' >
-                <input type='text' onFocus={this.handleFocus.bind(this)} onChange ={this.handleImputData.bind(this)} rows='1' className='form-control' id ='cp' value = {this.state.cp} placeholder='36000'></input>
-              </div>
-            </div>
-
-            <div className='form-group row' style={{marginBottom: 2}}>
-              <div className='col-xs-3 col-sm-2 col-md-2 col-lg-2'>
-                <a className ={newsletter} name ='sino' onClick={this.handleClick.bind(this)} style= {style.modal.btnNewsletter} id='newsletter'></a>
-              </div>
-              <div className='col-xs-9 col-sm-10 col-md-10 col-lg-10' style= {{paddingLeft:2}}>
-                <p>{sino} quiero recibir información por e-mail</p>
-              </div>
-              <div className='col-xs-12 col-sm-12 col-md-12 col-lg-12' style= {{paddingLeft:5}}>
-                <p className= 'text-muted' style= {{padding: 0, }}>(nunca mandamos spam ni publicidad ajena a Mico)</p>
-              </div>
-            </div>
-
-            <div className='form-group row'>
-              <div className='col-xs-9 col-sm-10 col-md-10 col-lg-10' style = {{paddingRight: 0 }}>
-                <button id= 'datosEnvio' onClick={this.handleGuardarCambios.bind(this)} className='btn text-center form-control ' style = {{border: 'none',borderRadius: 4, backgroundColor: 'black',color:'white',width: '95%',paddingLeft: 5,}} >Guardar cambios</button>
-              </div>
-              {this.props.currentUser.datosEnvio && this.props.currentUser.datosEnvio.cp &&
-                <div className='col-xs-3 col-sm-2 col-md-2 col-lg-2' style = {{paddingLeft: 0 ,paddingRight:0 }}>
-                  <button className='btn text-center form-control ' id= 'datosEnvio' onClick = {this.handleCurrentUserModificables.bind(this)}
-                    style = {{paddingLeft: 5 ,paddingRight:0, border: '1px solid',borderRadius: 4, backgroundColor: 'white',width: '95%',}}>cancelar
-                  </button>
-                </div>
-              }
-            </div>
-
-          </div>
-        )
-      }
-    }
-  }
 
   renderDatosPersonales(){
     var estiloNom1 = {color: 'red', marginTop:0,marginBottom:0}
@@ -418,7 +302,7 @@ class AmigoDatos extends React.Component {
     }
 
     var loginIcon = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/loginIcon.png?alt=media&token=9df1a1ea-8b37-482b-919e-b0fb3be6b273'
-    if (this.props.currentUser != null){
+    if (this.props.currentUser !== null){
       if (this.props.currentUser.foto.photoURL){
         loginIcon = this.props.currentUser.foto.photoURL
       }
@@ -447,11 +331,11 @@ class AmigoDatos extends React.Component {
                 <div className= 'hidden-xs col-sm-6 offset-sm-2 col-md-5 offset-md-3 col-lg-5 offset-lg-3'>
                   <p> {this.props.currentUser.datosPersonales.nombre} </p>
                 </div>
-                <div className= 'hidden-sm hidden-md hidden-lg visible-xs-block col-xs-9'>
+                <div className= 'hidden-sm hidden-md hidden-lg visible-xs-block col-xs-8'>
                   <p> {this.props.currentUser.datosPersonales.nombre} </p>
                 </div>
 
-                <div className= 'col-xs-3 col-sm-4 col-md-4 col-lg-4' style = {{paddingRight: 0,paddingLeft:0}}>
+                <div className= 'col-xs-4 col-sm-4 col-md-4 col-lg-4' style = {{paddingRight: 0,paddingLeft:0}}>
                   <button id= 'nombre' onClick = {this.handleCurrentUserModificables.bind(this)}
                     style = {{border: 'none',borderRadius: 4, backgroundColor: 'black',color:'white',width: '95%',paddingLeft: 5,}}>cambiar nombre</button>
                 </div>
@@ -541,7 +425,7 @@ class AmigoDatos extends React.Component {
                         </div>
                       }
                     </div>
-                    <div className= 'hidden-sm hidden-md hidden-lg visible-xs-block col-xs-9'>
+                    <div className= 'hidden-sm hidden-md hidden-lg visible-xs-block col-xs-8'>
                       <p> {this.props.currentUser.datosPersonales.email} </p>
                       {!this.props.currentUser.datosPersonales.emailVerified &&
                         <div>
@@ -559,7 +443,7 @@ class AmigoDatos extends React.Component {
                         </div>
                       }
                     </div>
-                    <div className= 'col-xs-3 col-sm-4 col-md-4 col-lg-4' style = {{paddingRight: 0,paddingLeft:0}}>
+                    <div className= 'col-xs-4 col-sm-4 col-md-4 col-lg-4' style = {{paddingRight: 0,paddingLeft:0}}>
                       <button id= 'email' onClick = {this.handleCurrentUserModificables.bind(this)}
                         style = {{border: 'none',borderRadius: 4, backgroundColor: 'black',color:'white',width: '95%',paddingLeft: 5,}}>cambiar email
                       </button>
@@ -630,10 +514,10 @@ class AmigoDatos extends React.Component {
                     <div className= 'hidden-xs col-sm-6 offset-sm-2 col-md-5 offset-md-3 col-lg-5 offset-lg-3'>
                       <p> ********************* </p>
                     </div>
-                    <div className= 'hidden-sm hidden-md hidden-lg visible-xs-block col-xs-9'>
+                    <div className= 'hidden-sm hidden-md hidden-lg visible-xs-block col-xs-8'>
                       <p> ******** </p>
                     </div>
-                    <div className= 'col-xs-3 col-sm-4 col-md-4 col-lg-4' style = {{paddingRight: 0,paddingLeft:0}}>
+                    <div className= 'col-xs-4 col-sm-4 col-md-4 col-lg-4' style = {{paddingRight: 0,paddingLeft:0}}>
                       <button id= 'password' onClick = {this.handleCurrentUserModificables.bind(this)}
                         style = {{border: 'none',borderRadius: 4, backgroundColor: 'black',color:'white',width: '95%',paddingLeft: 5,}}>cambiar contraseña
                       </button>
@@ -698,11 +582,169 @@ class AmigoDatos extends React.Component {
       )
     }
   }
+
+  renderDatosParaEnvio(){
+    //setting the news letter to yes or no
+    var sino = 'Sí'
+    var newsletter = 'glyphicon glyphicon-ok text-center pull-right'
+    if (!this.state.recibir){
+      newsletter = 'glyphicon glyphicon-remove text-center pull-right'
+      sino = 'No'
+    }
+
+    if(this.props.currentUser){
+      if(this.props.currentUserDatos.currentUserDatosEnvio){ //mostrar los datos que hay
+        return(
+          <div>
+            <div className= 'hidden-xs col-sm-6 offset-sm-2 col-md-5 offset-md-3 col-lg-5 offset-lg-3' style = {{paddingRight: 10}}>
+              <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.nombreCompletoEnvio} </p>
+              <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.calle} </p>
+              <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.localidad} </p>
+              <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.cp+' , '+this.props.currentUser.datosEnvio.provincia} </p>
+
+              <p style= {{marginBottom: 0,paddingTop: 2}}> {sino+', quiero recibir información'} </p>
+            </div>
+
+            <div className= 'hidden-sm hidden-md hidden-lg visible-xs-block col-xs-9' style = {{paddingLeft: 0, paddingRight: 0}}>
+              <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.nombreCompletoEnvio} </p>
+              <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.calle} </p>
+              <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.localidad} </p>
+              <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.cp+' , '+this.props.currentUser.datosEnvio.provincia} </p>
+
+              <p style= {{marginBottom: 0,paddingTop: 2}}> {sino+', quiero recibir información'} </p>
+            </div>
+
+
+            <div className= 'col-xs-3 col-sm-4 col-md-4 col-lg-4' style = {{paddingRight: 0,paddingLeft:0}}>
+              <button id= 'datosEnvio' onClick = {this.handleCurrentUserModificables.bind(this)}
+                style = {{border: 'none',borderRadius: 4, backgroundColor: 'black',color:'white',width: '95%',paddingLeft: 5,}}>cambiar datos</button>
+            </div>
+
+          </div>
+        )
+      }
+      else{ //no hay datos en la BD o quiero modificarlos
+        if(this.props.currentUser.datosEnvio.hayDatos || this.state.quieroDatos){//quiere modificarlos
+          return(
+            <div className='container'>
+              <div className='form-group row'>
+                <div className='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
+                  <p>nombre completo* :</p>
+                </div>
+                <div className='col-xs-12 col-sm-9 col-md-9 col-lg-9' >
+                  <input type='text' onFocus={this.handleFocus.bind(this)} onChange ={this.handleImputData.bind(this)} className='form-control' value = {this.state.nombreCompletoEnvio} id ='nombreCompletoEnvio' placeholder='nombre apellido-1 apellido-2'></input>
+                </div>
+              </div>
+
+              <div className='form-group row'>
+                <div className='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
+                  <p>calle*</p>
+                </div>
+                <div className='col-xs-12 col-sm-9 col-md-9 col-lg-9'>
+                  <input type='text' onFocus={this.handleFocus.bind(this)} onChange ={this.handleImputData.bind(this)} className='form-control' value = {this.state.calle} id='calle' placeholder='calle del ejemplo 4' ></input>
+                </div>
+              </div>
+
+              <div className='form-group row'>
+                <div className='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
+                  <p>localidad*</p>
+                </div>
+                <div className='col-xs-12 col-sm-9 col-md-9 col-lg-9'>
+                  <input type='text' onFocus={this.handleFocus.bind(this)} onChange ={this.handleImputData.bind(this)} rows='1' className='form-control' value = {this.state.localidad} id='localidad' placeholder='Vigo' ></input>
+                </div>
+              </div>
+
+              <div className ='form-group row' >
+                <div className='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
+                  <p>provincia*</p>
+                </div>
+                <div className='col-xs-12 col-sm-9 col-md-9 col-lg-9' >
+                  <input type='text' onFocus={this.handleFocus.bind(this)} onChange ={this.handleImputData.bind(this)} rows='1' className='form-control' id ='provincia' value={this.state.provincia} placeholder='Pontevedra'></input>
+                </div>
+              </div>
+
+              <div className='form-group row'>
+                <div className='col-xs-12 col-sm-3 col-md-3 col-lg-3'>
+                  <p>código postal* :</p>
+                </div>
+                <div className='col-xs-12 col-sm-9 col-md-9 col-lg-9' >
+                  <input type='text' onFocus={this.handleFocus.bind(this)} onChange ={this.handleImputData.bind(this)} rows='1' className='form-control' id ='cp' value = {this.state.cp} placeholder='36000'></input>
+                </div>
+              </div>
+
+              <div className='form-group row' style={{marginBottom: 2}}>
+                <div className='col-xs-3 col-sm-2 col-md-2 col-lg-2'>
+                  <a className ={newsletter} name ='sino' onClick={this.handleClick.bind(this)} style= {style.modal.btnNewsletter} id='newsletter'></a>
+                </div>
+                <div className='col-xs-9 col-sm-10 col-md-10 col-lg-10' style= {{paddingLeft:2}}>
+                  <p>{sino} quiero recibir información por e-mail</p>
+                </div>
+                <div className='col-xs-12 col-sm-12 col-md-12 col-lg-12' style= {{paddingLeft:5}}>
+                  <p className= 'text-muted' style= {{padding: 0, }}>(nunca mandamos spam ni publicidad ajena a Mico)</p>
+                </div>
+              </div>
+
+              <div className='form-group row'>
+                <div className='col-xs-9 col-sm-10 col-md-10 col-lg-10' style = {{paddingRight: 0 }}>
+                  <button id= 'datosEnvio' onClick={this.handleGuardarCambios.bind(this)} className='btn text-center form-control ' style = {{border: 'none',borderRadius: 4, backgroundColor: 'black',color:'white',width: '95%',paddingLeft: 5,}} >Guardar cambios</button>
+                </div>
+                {this.props.currentUser.datosEnvio && this.props.currentUser.datosEnvio.cp &&
+                  <div className='col-xs-3 col-sm-2 col-md-2 col-lg-2' style = {{paddingLeft: 0 ,paddingRight:0 }}>
+                    <button className='btn text-center form-control ' id= 'datosEnvio' onClick = {this.handleCurrentUserModificables.bind(this)}
+                      style = {{paddingLeft: 5 ,paddingRight:0, border: '1px solid',borderRadius: 4, backgroundColor: 'white',width: '95%',}}>cancelar
+                    </button>
+                  </div>
+                }
+              </div>
+
+            </div>
+          )
+        }else{//no hay datos en DB
+          return(
+            <div>
+              <div className= 'col-xs-7 col-sm-8 col-md-8 col-lg-8' style = {{paddingRight: 2,paddingLeft:0}}>
+                No necesitas rellenar datos de envio porque se te preguntará en el proceso de pago.
+              </div>
+              <div className= 'col-xs-5 col-sm-4 col-md-4 col-lg-4' style = {{paddingRight: 0,paddingLeft:0}}>
+                <button id= 'datosEnvio' onClick={()=> this.setState({quieroDatos:true})}
+                  style = {{border: 'none',borderRadius: 4, backgroundColor: 'black',color:'white',width: '95%',paddingLeft: 5,}}>quiero guardar datos
+                </button>
+              </div>
+              <div className= 'col-xs-12 col-sm-8 col-md-8 col-lg-8' style = {{paddingRight: 0,paddingLeft:0}}>
+                De todas formas, si quieres tener una dirección predeterminada para Mico, puedes guardarla aquí y, a la hora de pagar, te daremos a elegir entre la que tengas guardada con nosotros y la que elijas en el proceso de pago de paypal.
+              </div>
+            </div>
+          )
+        }
+
+      }
+    }
+  }
+
   render() {
 
 
     return (
       <div>
+        <div className = 'col-xs-12 col-sm-12 col-md-12 col-lg-12' style = {{paddingBottom:'40px'}}>
+          <div className = 'container-fluid row visible-xs-block hidden-sm hidden-md hidden-lg'>
+            <h6 className='text-center' style={{fontWeight:'bold'}}>Datos personales</h6>
+            <hr style={{padding:0,marginTop :0,marginBottom:2}}/>
+          </div>
+          <div className = 'container-fluid row hidden-xs'>
+            <h3 className='text-center'>Datos personales</h3>
+            <hr/>
+          </div>
+          <div className = 'col-xs-12 col-sm-10 col-md-10 col-lg-8'>
+            <div >
+
+
+              {this.renderDatosPersonales()}
+
+
+            </div>
+          </div>
+        </div>
         <div>
           <div className = 'col-xs-12 col-sm-12 col-md-12 col-lg-12' style = {{paddingRight: 0}}>
 
@@ -722,25 +764,6 @@ class AmigoDatos extends React.Component {
 
 
               </div>
-            </div>
-          </div>
-        </div>
-        <div className = 'col-xs-12 col-sm-12 col-md-12 col-lg-12'>
-          <div className = 'container-fluid row visible-xs-block hidden-sm hidden-md hidden-lg'>
-            <h6 className='text-center' style={{fontWeight:'bold'}}>Datos personales</h6>
-            <hr style={{padding:0,marginTop :0,marginBottom:2}}/>
-          </div>
-          <div className = 'container-fluid row hidden-xs'>
-            <h3 className='text-center'>Datos personales</h3>
-            <hr/>
-          </div>
-          <div className = 'col-xs-12 col-sm-10 col-md-10 col-lg-8'>
-            <div >
-
-
-              {this.renderDatosPersonales()}
-
-
             </div>
           </div>
         </div>

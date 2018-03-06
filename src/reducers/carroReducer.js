@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
   case constants.PRODCUT_TO_CART:
     newState['cartList'].forEach((value,index)=>{
       //  para evitar duplicados
-      if(value.id == action.data.id){
+      if(value.id === action.data.id){
         repe =true
       }
     })
@@ -53,7 +53,7 @@ export default (state = initialState, action) => {
 
   case constants.CHANGE_QTTY:
 
-    if(action.data.qtty == 1){
+    if(action.data.qtty === 1){
       newState['cartList'][action.data.indice].unidades += 1
 
     }else{

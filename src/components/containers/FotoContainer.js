@@ -6,7 +6,7 @@ import actions from '../../actions'
 import { connect } from 'react-redux'
 import history from '../../utils/history'
 import styles from './styles'
-import {FotoGrid} from '../../utils'
+import {FotoGrid_css} from '../../utils'
 
 class FotoContainer extends React.Component {
 
@@ -18,7 +18,7 @@ class FotoContainer extends React.Component {
     }
 
     //dont worry cuando le llegue 'all' se focalizar'a arriba
-    if (this.props.firebaseCreaciones.tipoSectionSelected && this.props.firebaseCreaciones.tipoSectionSelected != 'allCreaciones'){
+    if (this.props.firebaseCreaciones.tipoSectionSelected && this.props.firebaseCreaciones.tipoSectionSelected !== 'allCreaciones'){
       setTimeout(() => {
         this.focusDiv(this.props.firebaseCreaciones.tipoSectionSelected)
       }, 200)
@@ -29,7 +29,7 @@ class FotoContainer extends React.Component {
   }
 
   componentDidUpdate(){
-    if (this.props.firebaseCreaciones.tipoSectionSelected != 'allCreaciones'){
+    if (this.props.firebaseCreaciones.tipoSectionSelected !== 'allCreaciones'){
       setTimeout(() => {
         this.focusDiv(this.props.firebaseCreaciones.tipoSectionSelected)
       }, 200)
@@ -64,73 +64,84 @@ class FotoContainer extends React.Component {
 
   render() {
     let creacionesContenido = {}
+    if(this.props.storeContenidos.listaContenidos.length !== 0){
+      for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
-    for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
-
-      if (this.props.storeContenidos.listaContenidos[i].id == 'creaciones'){
-        creacionesContenido = this.props.storeContenidos.listaContenidos[i]
-        break
+        if (this.props.storeContenidos.listaContenidos[i].id === 'creaciones'){
+          creacionesContenido = this.props.storeContenidos.listaContenidos[i]
+          break
+        }
       }
     }
-    //TODO
-    //uso esta let g tb para numerar los ref q me sirven para encontrar las secciones q elijo desde el dropdown del navbar
     let g = 0
     let h = 1000
     var listItem ={}
-
-    var sorted =this.props.firebaseCreaciones.listaCreaciones
     var totalList = []
 
-    for (var tipo in sorted) {
-      if (sorted.hasOwnProperty(tipo)) {
+    if(this.props.firebaseCreaciones.listaCreaciones!=={} &&
+      this.props.storeContenidos.listaContenidos.length !== 0 ){
+      var sorted =this.props.firebaseCreaciones.listaCreaciones
+      for (var tipo in sorted) {
+        if (sorted.hasOwnProperty(tipo)) {
 
-        listItem = sorted[tipo].map((foto,i)=>{
-          return(
-            <div className= 'container' style= {{maxWidth: 300}} key ={foto.id}>
-              <Foto creacion ={foto} whenClicked={this.selectFoto.bind(this)}/>
-            </div>
-          )
-        })
-      }
-      if (tipo === 'undefined'){ tipo = 'varios'}
-      let ele = sorted[tipo][0].id
-      //console.log ('la ref '+ele)
-      //saco el contenido de cada tipo de lo que hay en la DB
-      let tipoObj= creacionesContenido.tipo[tipo.toString()]
-      totalList.push (
-        <div className = 'container-fluid' key = {g} ref={(el) => this[ele] = el} >
-          {g!=0 && <hr/>}
-          <div className = 'container-fluid row' id ={tipo} style={{marginTop:40}}>
+          listItem = sorted[tipo].map((foto,i)=>{
+            return(
+              <div className= 'container' style= {{maxWidth: 300}} key ={foto.id}>
+                <Foto creacion ={foto} whenClicked={this.selectFoto.bind(this)}/>
+              </div>
+            )
+          })
+        }
+        if (tipo === 'undefined'){ tipo = 'varios'}
+        let ele = sorted[tipo][0].id
+        //console.log ('la ref '+ele)
+        //saco el contenido de cada tipo de lo que hay en la DB
+        let tipoObj= creacionesContenido.tipo[tipo.toString()]
+        totalList.push (
+          <div className = 'container-fluid' key = {g} ref={(el) => this[ele] = el} >
+            {g!==0 && <hr/>}
+            <div className = 'container-fluid row' id ={tipo} style={{marginTop:40}}>
 
-            <div className = ' text-center col-xs-12 col-sm-4 col-md-3 col-lg-3'>
-              <h2 style ={{fontWeight: 'bolder'}}> {tipo}</h2>
+              <div className = ' text-center col-xs-12 col-sm-4 col-md-3 col-lg-3'>
+                <h2 style ={{fontWeight: 'bolder'}}> {tipo}</h2>
+              </div>
+              { tipoObj &&
+                <div className = 'container col-xs-12 col-sm-6 col-md-7 col-lg-7 text-center'>
+                  {tipoObj.descripcionTipo.split('\n').map((item, key) => {
+                    return <span key={key}>{item}<br/></span>})}
+                </div>
+              }
             </div>
-            { tipoObj &&
-            <div className = 'container col-xs-12 col-sm-6 col-md-7 col-lg-7 text-center'>
-              {tipoObj.descripcionTipo.split('\n').map((item, key) => {
-                return <span key={key}>{item}<br/></span>})}
-            </div>
-            }
+            <br/>
           </div>
-          <br/>
-        </div>
-      )
-      totalList.push(
-        <div className= 'foto__container' key = {h}>
-          {listItem}
-        </div>
-      )
-      g++
-      h++
-      totalList.push (
-        <div className = 'container ' key = {g} style= {{padding: 0 }}><br/></div>
-      )
-      //console.log ('caca '+ g +JSON.stringify(key))
-      g++
+        )
+        totalList.push(
+          <div className= 'foto__container' key = {h}>
+            {listItem}
+          </div>
+        )
+        g++
+        h++
+        totalList.push (
+          <div className = 'container ' key = {g} style= {{padding: 0 }}><br/></div>
+        )
+        //console.log ('caca '+ g +JSON.stringify(key))
+        g++
+      }
+    }
+
+
+    let paddingTop = {}
+    if(this.props.navigation){
+      if(this.props.navigation.sticky){
+        paddingTop = this.props.navigation.paddingTop4navbar
+      }else{
+        paddingTop = {paddingTop:0}
+      }
     }
 
     return (
-      <div className= 'container' onClick = {this.cierraDialogosNavbar.bind(this)} style={{padding: 0}}>
+      <div className= 'container' onClick = {this.cierraDialogosNavbar.bind(this)} style={paddingTop}>
         <div className='clearfix visible-sm-block visible-md-block' style={{padding: 0}}></div>
 
         {totalList}
@@ -156,6 +167,7 @@ const stateToProps = (state) => {
     //y tu le asignas una key q quieras
     firebaseCreaciones:state.creacion,
     storeContenidos: state.contenidos,
+    navigation: state.navigation,
   }
 }
 //it would be null at d first argument cos i was not registering

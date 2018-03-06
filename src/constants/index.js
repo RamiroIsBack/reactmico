@@ -30,4 +30,6 @@ export default {
   INCRISE_OPACITY:                    'INCRISE_OPACITY',
   MOVE_CAROUSELL:                     'MOVE_CAROUSELL',
   LOAD_FROM_INSTAGRAM:                'LOAD_FROM_INSTAGRAM',
+  CHANGE_SCREEN_WIDTH:                'CHANGE_SCREEN_WIDTH',
+  FIX_NAVBAR:                         'FIX_NAVBAR',
 }

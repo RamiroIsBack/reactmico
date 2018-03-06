@@ -11,7 +11,7 @@ export default class CarroBuy extends Component {
       pedidoInfo = this.props.pedidoContenido.descripcion.pedidoInfo;
     }
     return (
-      <div className ='row container-fluid' style={{padding:0 , paddingLeft:3 ,marginRight:5,top:60, bottom:200, position:'fixed',overflowY:'hidden', overflowX:'hidden' }}>
+      <div className ='row container-fluid' style={this.props.stiloCarroBuy}>
 
         <div className='container-fluid col-xs-12 col-sm-12 col-md-12 col-lg-6' >
           <div className ='row '>

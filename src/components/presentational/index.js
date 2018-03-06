@@ -15,6 +15,7 @@ import AmigoDatos from './AmigoDatos'
 import Pedido from './Pedido'
 import ModalDatosEnvio from './ModalDatosEnvio'
 import ModalFormaDePago from './ModalFormaDePago'
+import ModalConfirmacionDatosEnvio from './ModalConfirmacionDatosEnvio'
 import ModalCompraRealizada from './ModalCompraRealizada'
 import PayPalButton from './PayPalButton'
 import Mapa from './Mapa'
@@ -33,6 +34,7 @@ export{
   WarningCarroVacio,
   Mapa,
   PayPalButton,
+  ModalConfirmacionDatosEnvio,
   ModalFormaDePago,
   ModalCompraRealizada,
   ModalDatosEnvio,

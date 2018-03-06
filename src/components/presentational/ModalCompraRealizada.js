@@ -131,20 +131,20 @@ class ModalCompraRealizada extends React.Component {
                 <div className= 'hidden-xs col-sm-6 col-md-4  col-lg-4 ' style = {{paddingRight: 10}}>
                   <h4>el pedido se enviará a la siguiente direncción:</h4>
                   <hr style={{padding:0,marginTop :0,marginBottom:2}}/>
-                  <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.nombreCompletoEnvio} </p>
-                  <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.calle} </p>
-                  <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.localidad} </p>
-                  <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.cp+' , '+this.props.currentUser.datosEnvio.provincia} </p>
+                  <p style= {{marginBottom: 1}}> {this.props.pagoPedido.envioDefinitivo.nombreCompletoEnvio} </p>
+                  <p style= {{marginBottom: 1}}> {this.props.pagoPedido.envioDefinitivo.calle} </p>
+                  <p style= {{marginBottom: 1}}> {this.props.pagoPedido.envioDefinitivo.localidad} </p>
+                  <p style= {{marginBottom: 1}}> {this.props.pagoPedido.envioDefinitivo.cp+' , '+this.props.pagoPedido.envioDefinitivo.provincia} </p>
 
                 </div>
 
                 <div className= 'hidden-sm hidden-md hidden-lg visible-xs-block col-xs-12' style = {{paddingLeft: 0, paddingRight: 0, paddingBottom: 5}}>
                   <h4>el pedido se enviará a la siguiente direncción:</h4>
                   <hr style={{padding:0,marginTop :0,marginBottom:2}}/>
-                  <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.nombreCompletoEnvio} </p>
-                  <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.calle} </p>
-                  <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.localidad} </p>
-                  <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.cp+' , '+this.props.currentUser.datosEnvio.provincia} </p>
+                  <p style= {{marginBottom: 1}}> {this.props.pagoPedido.envioDefinitivo.nombreCompletoEnvio} </p>
+                  <p style= {{marginBottom: 1}}> {this.props.pagoPedido.envioDefinitivo.calle} </p>
+                  <p style= {{marginBottom: 1}}> {this.props.pagoPedido.envioDefinitivo.localidad} </p>
+                  <p style= {{marginBottom: 1}}> {this.props.pagoPedido.envioDefinitivo.cp+' , '+this.props.currentUser.datosEnvio.provincia} </p>
 
                 </div>
 

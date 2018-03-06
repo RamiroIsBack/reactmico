@@ -59,10 +59,17 @@ class AmigoContainer extends Component {
   }
 
   render(){
-
+    let paddingTop = {}
+    if(this.props.navigation){
+      if(this.props.navigation.sticky){
+        paddingTop = this.props.navigation.paddingTop4navbar
+      }else{
+        paddingTop = {paddingTop:0}
+      }
+    }
 
     return (
-      <div  onClick = {this.cierraDialogosNavbar.bind(this)} id= 'AmigoContainer' >
+      <div  onClick = {this.cierraDialogosNavbar.bind(this)} id= 'AmigoContainer' style={paddingTop} >
         <AmigoNavContainer logout={this.logout.bind(this)}/>
 
       </div>
@@ -72,7 +79,8 @@ class AmigoContainer extends Component {
 
 const stateToProps = (state) => {
   return {
-    users: state.user
+    users: state.user,
+    navigation:state.navigation,
   }
 }
 

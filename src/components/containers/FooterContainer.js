@@ -7,16 +7,13 @@ import {Footer_css} from '../../utils/css'
 class FooterContainer extends Component {
 
   componentWillMount() {
-    if (this.props.storeEnlaces.enlacesLoaded == false){
+    if (this.props.storeEnlaces.enlacesLoaded === false){
       //en la accion ya lo pone a true
       this.props.getEnlaces()
     }
 
   }
-  moveUp(event){
-    //make it start at the top of the page every time
-    window.scrollTo(0, 0)
-  }
+  
   resdesSociales(event){
     let urlToGo= event.target.id
     window.open(urlToGo,'_blank')
@@ -34,33 +31,32 @@ class FooterContainer extends Component {
     let urlFacebook = ''
     let urlTwiter = ''
 
-    if (this.props.storeEnlaces.listaEnlaces.length !=0){
+    if (this.props.storeEnlaces.listaEnlaces.length !==0){
       for (let i = 0 ; i < this.props.storeEnlaces.listaEnlaces.length ; i++) {
 
-        if (this.props.storeEnlaces.listaEnlaces[i].id == 'contact'){
+        if (this.props.storeEnlaces.listaEnlaces[i].id === 'contact'){
           contactMail = this.props.storeEnlaces.listaEnlaces[i].contactMail
           contactHours = this.props.storeEnlaces.listaEnlaces[i].contactHours
           contactPhone = this.props.storeEnlaces.listaEnlaces[i].contactPhone
           contactPost = this.props.storeEnlaces.listaEnlaces[i].contactPost
         }
-        if (this.props.storeEnlaces.listaEnlaces[i].id == 'youtube'){
+        if (this.props.storeEnlaces.listaEnlaces[i].id === 'youtube'){
           urlYoutube = this.props.storeEnlaces.listaEnlaces[i].urlYoutube
         }
-        if (this.props.storeEnlaces.listaEnlaces[i].id == 'instagram'){
+        if (this.props.storeEnlaces.listaEnlaces[i].id === 'instagram'){
           urlInstagram = this.props.storeEnlaces.listaEnlaces[i].urlInstagram
         }
-        if (this.props.storeEnlaces.listaEnlaces[i].id == 'facebook'){
+        if (this.props.storeEnlaces.listaEnlaces[i].id === 'facebook'){
           urlFacebook = this.props.storeEnlaces.listaEnlaces[i].urlFacebook
         }
-        if (this.props.storeEnlaces.listaEnlaces[i].id == 'twiter'){
+        if (this.props.storeEnlaces.listaEnlaces[i].id === 'twiter'){
           urlTwiter = this.props.storeEnlaces.listaEnlaces[i].urlTwiter
         }
       }
     }
     return (
       <div onClick = {this.cierraDialogosNavbar.bind(this)} >
-        <button type='button' className='btn btn-primary glyphicon glyphicon-chevron-up' onClick = {this.moveUp.bind(this)}
-          style={{backgroundColor: 'transparent', color: 'black',fontSize: 13,border:'none',padding:'2px', marginBottom:0}}> volver arriba</button>
+
         <div className='container'>
           <div className='container-fluid col-xs-12 col-sm-4 col-md-4 col-lg-4' style={{padding: 0}}>
             <p style={{color: 'white', textAlign:'center'}}>Contacta con Mico:</p>

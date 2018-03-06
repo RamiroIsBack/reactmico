@@ -12,7 +12,7 @@ class FeriaContainer extends Component {
   //componentWillMount is executed once before the initial rendering occurs.
 
   componentDidMount() {
-    if (this.props.ferias.feriasLoaded == false){
+    if (this.props.ferias.feriasLoaded === false){
       //en el reducer ya lo pone a true
       this.props.getFerias()
     }
@@ -51,8 +51,17 @@ class FeriaContainer extends Component {
         </div>
       )
     }
+    let paddingTop = {}
+    if(this.props.navigation){
+      if(this.props.navigation.sticky){
+        paddingTop = this.props.navigation.paddingTop4navbar
+      }else{
+        paddingTop = {paddingTop:0}
+      }
+    }
+
     return (
-      <div  onClick = {this.cierraDialogosNavbar.bind(this)}>
+      <div  onClick = {this.cierraDialogosNavbar.bind(this)} style= {paddingTop}>
 
         <Feria
           feria ={feria} whenClicked={this.selectFeria.bind(this)}
@@ -75,10 +84,10 @@ const stateToProps = (state) => {
     //en state.blabla dices de que reducer quieres info
     //y tu le asignas una key q quieras
     ferias:state.feria,
+    navigation: state.navigation,
   }
 }
 //it would be null at d first argument cos i was not registering
 //for listening d store, only dispatching actions but NOW I DO to get the
 //creaciones from firebase data base
 export default connect (stateToProps,dispatchToProps)(FeriaContainer)
-

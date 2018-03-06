@@ -11,14 +11,30 @@ class ModalFormaDePago extends React.Component {
 
     }
   }
-  irAcompraRealizada(){
-    this.props.irAcompraRealizada()
-  }
+
   corregirDatos(){
     this.props.onClose('datos')
   }
   cambiarCarro(){
     this.props.onClose('carro')
+  }
+  fakePagoHecho(){
+    let data ={
+      paymentToken: 'sdfadfdfsf',
+      paymentID: 'PAY'+Date.now(),
+      paypalAddress:{
+        country_code : 'es',
+        city:'zamunda',
+        line1:'calle inventada para paypal',
+        line2: 'linea 2',
+        postal_code:'28934',
+        state:'zamora',
+        recipient_name: 'Estela con Paypal'
+      },
+      paypalEmail:'inventado@papaypal.com',
+      returnUrl:'https:www.micotextil.com',
+    }
+    this.props.guardarDatosPedido(data)
   }
   pagoHecho(data){
     this.props.guardarDatosPedido(data)
@@ -28,7 +44,7 @@ class ModalFormaDePago extends React.Component {
     this.props.onClose('carro')
   }
   onError(data){
-    console.log('aalgun error en la accion de pago'+data)
+    console.log('algun error en la accion de pago'+data)
   }
   render() {
     // Render nothing if the 'show' prop is false
@@ -142,6 +158,13 @@ class ModalFormaDePago extends React.Component {
                   pagoHecho = {this.pagoHecho.bind(this)}
                   onCancel = {this.onCancel.bind(this)}
                 />
+              </div>
+              <div id= 'fakeButton'>
+                <button
+                  onClick = {this.fakePagoHecho.bind(this)}
+                > fake pagoHecho
+                </button>
+
               </div>
             </div>
           </div>

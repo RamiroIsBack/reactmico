@@ -28,25 +28,33 @@ class ConocenosContainer extends Component {
   render() {
     let conocenosContenido = {}
     let artesaniaContenido = {}
-    if (this.props.storeContenidos.listaContenidos.length !=0){
+    if (this.props.storeContenidos.listaContenidos.length !==0){
       for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
-        if (this.props.storeContenidos.listaContenidos[i].id == 'conocenos'){
+        if (this.props.storeContenidos.listaContenidos[i].id === 'conocenos'){
           conocenosContenido = this.props.storeContenidos.listaContenidos[i]
           break
         }
       }
       for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
-        if (this.props.storeContenidos.listaContenidos[i].id == 'artesania'){
+        if (this.props.storeContenidos.listaContenidos[i].id === 'artesania'){
           artesaniaContenido = this.props.storeContenidos.listaContenidos[i]
           break
         }
       }
     }
+    let paddingTop = {}
+    if(this.props.navigation){
+      if(this.props.navigation.sticky){
+        paddingTop = this.props.navigation.paddingTop4navbar
+      }else{
+        paddingTop = {paddingTop:0}
+      }
+    }
 
     return (
-      <div onClick = {this.cierraDialogosNavbar.bind(this)}>
+      <div onClick = {this.cierraDialogosNavbar.bind(this)} style= {paddingTop}>
         {conocenosContenido.headerFoto &&
           <Conocenos conocenosContenido = {conocenosContenido} artesaniaContenido = {artesaniaContenido}
             whenClicked={this.goArtesania.bind(this)}/>
@@ -73,7 +81,7 @@ const stateToProps = (state) => {
     //en state.blabla dices de que reducer quieres info
     //y tu le asignas una key q quieras
     storeContenidos: state.contenidos,
-    // TODO::  aqui meter tb el storeModal
+    navigation: state.navigation,
 
   }
 }

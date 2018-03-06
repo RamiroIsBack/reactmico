@@ -18,6 +18,12 @@ var initialState = {
     currentUser: false,
     carro: false,
   },
+  sticky: false,
+  paddingTop4navbar:{
+    paddingTop:60
+  },
+  screenSize: 'laptop', //or mobile
+
 }
 
 export default (state = initialState, action) => {
@@ -34,7 +40,7 @@ export default (state = initialState, action) => {
         currentUser: false,
         carro: false,
       }
-      if(action.data !=''){
+      if(action.data !==''){
         newState.navbarMicoFrontActive[action.data]= true
       }
     }
@@ -49,6 +55,16 @@ export default (state = initialState, action) => {
     }
     return newState
 
+  case constants.CHANGE_SCREEN_WIDTH:
+
+    newState.screenSize = action.data
+    console.log('chageScreenWidth: '+action.data)
+    return newState
+
+  case constants.FIX_NAVBAR:
+    newState.sticky = action.data
+    console.log('fixNavbar: '+action.data)
+    return newState
 
   default:
     return state

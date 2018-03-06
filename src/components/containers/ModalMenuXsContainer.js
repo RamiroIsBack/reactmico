@@ -39,11 +39,11 @@ class ModalMenuXsContainer extends Component {
     }
     for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
-      if (this.props.storeContenidos.listaContenidos[i].id == 'creaciones'){
+      if (this.props.storeContenidos.listaContenidos[i].id === 'creaciones'){
         creacionesContenidos = this.props.storeContenidos.listaContenidos[i]
 
       }
-      if (this.props.storeContenidos.listaContenidos[i].id == 'ferias'){
+      if (this.props.storeContenidos.listaContenidos[i].id === 'ferias'){
         feriasContenidos = this.props.storeContenidos.listaContenidos[i]
         break
       }

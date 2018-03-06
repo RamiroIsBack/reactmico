@@ -9,7 +9,7 @@ export default class Feria extends React.Component {
   // methods
   handleClick(event){
 
-    if (event.target.id == 'pic'){
+    if (event.target.id === 'pic'){
       this.props.whenClicked(this.props.feria.urlFeria)
     }
   }

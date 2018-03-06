@@ -173,10 +173,10 @@ class HomeContainer extends Component {
 
     let carousellItem = {}
 
-    if (this.props.storeContenidos.listaContenidos.length !=0){
+    if (this.props.storeContenidos.listaContenidos.length !==0){
       for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
-        if (this.props.storeContenidos.listaContenidos[i].id == 'creaciones'){
+        if (this.props.storeContenidos.listaContenidos[i].id === 'creaciones'){
           creacionesContenido = this.props.storeContenidos.listaContenidos[i]
           if(creacionesContenido.headerFoto){
             urlPicCreaciones = creacionesContenido.headerFoto.urlPicCreaciones
@@ -185,7 +185,7 @@ class HomeContainer extends Component {
           }
 
         }
-        if (this.props.storeContenidos.listaContenidos[i].id == 'ferias'){
+        if (this.props.storeContenidos.listaContenidos[i].id === 'ferias'){
           feriasContenido = this.props.storeContenidos.listaContenidos[i]
           if(feriasContenido.headerFoto){
             urlPicFerias = feriasContenido.headerFoto.urlPicFerias
@@ -193,7 +193,7 @@ class HomeContainer extends Component {
           }
 
         }
-        if (this.props.storeContenidos.listaContenidos[i].id == 'mico'){
+        if (this.props.storeContenidos.listaContenidos[i].id === 'mico'){
           micoContenido = this.props.storeContenidos.listaContenidos[i]
           if(micoContenido.descripcion){
             headlineMico = micoContenido.descripcion.headlineMico
@@ -201,7 +201,7 @@ class HomeContainer extends Component {
           }
 
         }
-        if (this.props.storeContenidos.listaContenidos[i].id == 'conocenos'){
+        if (this.props.storeContenidos.listaContenidos[i].id === 'conocenos'){
           conocenosContenido = this.props.storeContenidos.listaContenidos[i]
           if(conocenosContenido.headerFoto){
             urlPicConocenos = conocenosContenido.headerFoto.urlPicConocenos
@@ -221,19 +221,21 @@ class HomeContainer extends Component {
     carousellItem = this.props.creacion.carousellItem
     let instagramFeedComponentsList = this.getInstagramFeed()
 
+    let paddingTop = {}
+    if(this.props.navigation){
+      if(this.props.navigation.sticky){
+        paddingTop = this.props.navigation.paddingTop4navbar
+      }else{
+        paddingTop = {paddingTop:0}
+      }
+    }
 
     return (
-      <div className ='container-fluid' onClick = {this.cierraDialogosNavbar.bind(this)}>
-        <div className ='container-fluid row'>
-          <div className = 'container-fluid col-xs-12 col-sm-4 col-md-4' >
-            <h1>Mico diseño textil</h1>
-          </div>
-          <div className = 'container-fluid col-xs-12 col-sm-8 col-md-8'>
-            <h3>{headlineMico}</h3>
-            <p>{desarrolloMico}</p>
-          </div>
-        </div>
-        <hr/>
+      <div
+        style = {paddingTop}
+        onClick = {this.cierraDialogosNavbar.bind(this)}
+      >
+        
         {this.state.loading &&
           <div style= {{textAlign:'center',}}>
             <img id='faviconFliping' src='/favicon.ico' style= {{maxHeight :'250px',maxWidth :'250px'}}/>
@@ -249,7 +251,7 @@ class HomeContainer extends Component {
                     onLoad={this.handleImageLoaded.bind(this)}>
                   </img>
 
-                  { this.props.creacion.carousellItem.pic != '' &&
+                  { this.props.creacion.carousellItem.pic !== '' &&
                     <img src= {carousellItem.pic} className="img-responsive " alt='creacion' draggable = 'false'
                       style= {{maxWidth:'100%', maxHeight : '75px', position: 'absolute', bottom: 2, left: '35%', borderRadius:'50px'}}
                     />
@@ -267,7 +269,7 @@ class HomeContainer extends Component {
                   <img role='presentation' src={urlPicCreaciones}  className ='img-rounded'  id= 'creaciones' style= {{maxWidth: '100%',minHeight : '200px', maxHeight : '300px', position: 'relative', top: 0, left: 0}}>
                   </img>
 
-                  { this.props.creacion.carousellItem.pic != '' &&
+                  { this.props.creacion.carousellItem.pic !== '' &&
                     <img src= {carousellItem.pic} className="img-responsive " alt='creacion' draggable = 'false'
                       style= {{maxWidth:'100%', maxHeight : '100px', position: 'absolute', bottom: 4, left: '44%', borderRadius:'50px'}}
                     />
@@ -334,7 +336,7 @@ const stateToProps = (state) => {
     creacion:state.creacion,
     storeContenidos:state.contenidos,
     enlaces:state.enlaces,
-
+    navigation:state.navigation,
 
   }
 }

@@ -46,7 +46,7 @@ export default (state = initialState, action) => {
     return newState
 
   case constants.MOVE_CAROUSELL:
-    if (newState.listaCreacionesSinOrdenar.length!=0){
+    if (newState.listaCreacionesSinOrdenar.length!==0){
       newState['carousellItem'] =
         {
           tipo:newState.listaCreacionesSinOrdenar[action.data].tipo,
@@ -61,4 +61,3 @@ export default (state = initialState, action) => {
     return state
   }
 }
-

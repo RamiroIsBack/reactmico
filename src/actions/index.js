@@ -78,6 +78,18 @@ export default {
       data:feedList
     }
   },
+  chageScreenWidth: (screenSize) =>{
+    return{
+      type:constants.CHANGE_SCREEN_WIDTH,
+      data: screenSize,
+    }
+  },
+  fixNavbar:(flag) =>{
+    return{
+      type:constants.FIX_NAVBAR,
+      data: flag,
+    }
+  },
   toggleYear: (year) => {
     return {
       type: constants.TOGGLE_YEAR,

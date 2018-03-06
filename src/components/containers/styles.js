@@ -3,8 +3,8 @@ export default {
   navbar:{
     container:{
       background: 'rgba(0,0,0,0.7)',
-      paddingTop:'5px',
-      top : '-3',
+      paddingTop:'2px',
+
 
     },
     comprarButtonContainer :{

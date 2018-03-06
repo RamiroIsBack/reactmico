@@ -42,8 +42,8 @@ export default class PayPalButton extends React.Component {
       payment.paymentToken = data.paymentToken
       payment.returnUrl = data.returnUrl
       // getting buyer's shipping address and email
-      payment.address = payment_data.payer.payer_info.shipping_address
-      payment.email = payment_data.payer.payer_info.email
+      payment.paypalAddress = payment_data.payer.payer_info.shipping_address
+      payment.paypalEmail = payment_data.payer.payer_info.email
       this.props.pagoHecho(payment)
 
     })

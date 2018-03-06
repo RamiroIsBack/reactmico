@@ -3,9 +3,6 @@ import {ModalRegistrarse} from '../presentational'
 
 import {connect} from 'react-redux'
 import actions from '../../actions'
-import history from '../../utils/history'
-
-
 
 class ModalRegistrarseContainer extends Component {
 
@@ -88,7 +85,7 @@ class ModalRegistrarseContainer extends Component {
     }
     for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
-      if (this.props.storeContenidos.listaContenidos[i].id == 'registrarse'){
+      if (this.props.storeContenidos.listaContenidos[i].id === 'registrarse'){
         registrarseContenidos = this.props.storeContenidos.listaContenidos[i]
         break
       }

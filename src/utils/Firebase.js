@@ -1,11 +1,11 @@
 import firebase from 'firebase'
 var config = {
-  apiKey: "AIzaSyAikVZnJteFavPRHv7M_Qiv-RIPyE0lrCM",
-  authDomain: "micotextil-3f024.firebaseapp.com",
-  databaseURL: "https://micotextil-3f024.firebaseio.com",
-  projectId: "micotextil-3f024",
-  storageBucket: "micotextil-3f024.appspot.com",
-  messagingSenderId: "1069659429917"
+  apiKey: 'AIzaSyAikVZnJteFavPRHv7M_Qiv-RIPyE0lrCM',
+  authDomain: 'micotextil-3f024.firebaseapp.com',
+  databaseURL: 'https://micotextil-3f024.firebaseio.com',
+  projectId: 'micotextil-3f024',
+  storageBucket: 'micotextil-3f024.appspot.com',
+  messagingSenderId: '1069659429917'
 }
 firebase.initializeApp(config)
 const database =firebase.database()
@@ -36,7 +36,7 @@ const getCreaciones = (params, actionType) => {
         valor.id = childSnapshot.key
         listCreaciones.push(valor)
       })
-      if (actionType != null){
+      if (actionType !== null){
         dispatch({
           type: actionType,
           params: params, // can be null
@@ -58,7 +58,7 @@ const getFerias = (params, actionType) => {
         valor.id = childSnapshot.key
         listFerias.push(valor)
       })
-      if (actionType != null){
+      if (actionType !== null){
         dispatch({
           type: actionType,
           params: params, // can be null
@@ -81,7 +81,7 @@ const getContenidos = (params, actionType) => {
         valor.id = childSnapshot.key
         listContenidos.push(valor)
       })
-      if (actionType != null){
+      if (actionType !== null){
         dispatch({
           type: actionType,
           params: params, // can be null
@@ -104,7 +104,7 @@ const getEnlaces = (params, actionType) => {
         valor.id = childSnapshot.key
         listEnlaces.push(valor)
       })
-      if (actionType != null){
+      if (actionType !== null){
         dispatch({
           type: actionType,
           params: params, // can be null
@@ -128,7 +128,7 @@ const getUsers = (params, actionType) => {//actionType=USERS_RECEIVED
         valor.id = childSnapshot.key
         listaUsuarios.push(valor)
       })
-      if (actionType != null){
+      if (actionType !== null){
         dispatch({
           type: actionType,
           params: params, // can be null
@@ -152,7 +152,7 @@ const guardarDatosPedido=(datosEnvio,carro,paymentData,actionType)=>{
               database.ref('users/'+currentUserUid+'/pedidos')
                 .once('value').then(snapshot => {
                   console.log('cargando los pedidos que hay en la DB para este user')
-                  if (actionType != null){
+                  if (actionType !== null){
                     dispatch({
                       type: actionType,
                       params: 'okPedido', // can be null
@@ -161,7 +161,7 @@ const guardarDatosPedido=(datosEnvio,carro,paymentData,actionType)=>{
                   }
                 }).catch(err => {
                   console.log(` no se ha podido cargar los pedidos: ${err.message}`)
-                  if (actionType != null){
+                  if (actionType !== null){
                     dispatch({
                       type: actionType,
                       params: 'errorCargaPedidos', // can be null
@@ -173,7 +173,7 @@ const guardarDatosPedido=(datosEnvio,carro,paymentData,actionType)=>{
                 })
             }).catch(err => {
               console.log(` no se ha podido guardar los datos d compra del pedido: ${err.message}`)
-              if (actionType != null){
+              if (actionType !== null){
                 dispatch({
                   type: actionType,
                   params: 'errorPedidoDatosCompra', // can be null
@@ -185,7 +185,7 @@ const guardarDatosPedido=(datosEnvio,carro,paymentData,actionType)=>{
             })
         }).catch(err => {
           console.log(` no se ha podido guardar los datos d compra del pedido: ${err.message}`)
-          if (actionType != null){
+          if (actionType !== null){
             dispatch({
               type: actionType,
               params: 'errorPedidoDatosCompra', // can be null
@@ -197,7 +197,7 @@ const guardarDatosPedido=(datosEnvio,carro,paymentData,actionType)=>{
         })
     }).catch(err => {
       console.log(` no se ha podido guardar el carro del pedido: ${err.message}`)
-      if (actionType != null){
+      if (actionType !== null){
         dispatch({
           type: actionType,
           params: 'errorPedidoCarro', // can be null
@@ -230,7 +230,7 @@ const elementoVendido = (id,actionType) =>{
 
   }).then (snapshot => {
     console.log ('se ha puesto como vendido el elemento')
-    if (actionType != null){
+    if (actionType !== null){
       dispatch({
         type: actionType,
         params: 'okElementoVendido', // can be null
@@ -240,7 +240,7 @@ const elementoVendido = (id,actionType) =>{
 
   }).catch(function(error){
     console.log ('no se pudo poner como vendido '+ error)
-    if (actionType != null){
+    if (actionType !== null){
       dispatch({
         type: actionType,
         params: 'errorElementoVendido', // can be null
@@ -257,7 +257,7 @@ const vaciarCarro = (actionType) =>{
     .remove().then(snapshot => {
 
       console.log('subido el carro vacio')
-      if (actionType != null){
+      if (actionType !== null){
         dispatch({
           type: actionType,
           params: 'okCarroVacio', // can be null
@@ -266,7 +266,7 @@ const vaciarCarro = (actionType) =>{
       }
     }).catch(err => {
       console.log(` no se ha creado: ${err.message}`)
-      if (actionType != null){
+      if (actionType !== null){
         dispatch({
           type: actionType,
           params: 'errorDeleteCarro', // can be null
@@ -300,7 +300,7 @@ const loadCarro = (carro,justLogedIn,actionType)=> {
           .set(listaCarroConcat).then(snapshot => {
 
             console.log('subido el carro')
-            if (actionType != null){
+            if (actionType !== null){
               dispatch({
                 type: actionType,
                 params: 'okCarro', // can be null
@@ -309,7 +309,7 @@ const loadCarro = (carro,justLogedIn,actionType)=> {
             }
           }).catch(err => {
             console.log(` no se ha creado: ${err.message}`)
-            if (actionType != null){
+            if (actionType !== null){
               dispatch({
                 type: actionType,
                 params: 'errorCarro', // can be null
@@ -331,7 +331,7 @@ const loadCarro = (carro,justLogedIn,actionType)=> {
       .set(carro).then(snapshot => {
 
         console.log('subido el carro')
-        if (actionType != null){
+        if (actionType !== null){
           dispatch({
             type: actionType,
             params: 'okCarroReady', // can be null
@@ -340,7 +340,7 @@ const loadCarro = (carro,justLogedIn,actionType)=> {
         }
       }).catch(err => {
         console.log(` no se ha creado: ${err.message}`)
-        if (actionType != null){
+        if (actionType !== null){
           dispatch({
             type: actionType,
             params: 'errorCarro', // can be null
@@ -357,7 +357,7 @@ const uploadCarro=(carro,actionType) =>{
     .set(carro).then(snapshot => {
 
       console.log('subido el carro')
-      if (actionType != null){
+      if (actionType !== null){
         dispatch({
           type: actionType,
           params: 'okCarro', // can be null
@@ -366,7 +366,7 @@ const uploadCarro=(carro,actionType) =>{
       }
     }).catch(err => {
       console.log(` no se ha creado: ${err.message}`)
-      if (actionType != null){
+      if (actionType !== null){
         dispatch({
           type: actionType,
           params: 'errorCarro', // can be null
@@ -400,7 +400,7 @@ const loginFacebook = (params,actionType) => {
         .set(datosPers).then(snapshot => {
 
           console.log('creado los datos personales')
-          if (actionType != null){
+          if (actionType !== null){
             dispatch({
               type: actionType,
               params: 'okFacebook', // can be null
@@ -409,7 +409,7 @@ const loginFacebook = (params,actionType) => {
           }
         }).catch(err => {
           console.log(` no se ha creado: ${err.message}`)
-          if (actionType != null){
+          if (actionType !== null){
             dispatch({
               type: actionType,
               params: 'error', // can be null
@@ -430,7 +430,7 @@ const loginFacebook = (params,actionType) => {
       var credential = error.credential
       // ...
       console.log (`el error es ${errorCode}: ${errorMessage}`)
-      if (actionType != null){
+      if (actionType !== null){
         dispatch({
           type: actionType,
           params: 'error', // can be null
@@ -461,7 +461,7 @@ const loginGoogle = (params,actionType) => {
         .set(datosPers).then(snapshot => {
 
           console.log('creado los datos personales')
-          if (actionType != null){
+          if (actionType !== null){
             dispatch({
               type: actionType,
               params: 'okGoogle', // can be null
@@ -470,7 +470,7 @@ const loginGoogle = (params,actionType) => {
           }
         }).catch(err => {
           console.log(` no se ha creado: ${err.message}`)
-          if (actionType != null){
+          if (actionType !== null){
             dispatch({
               type: actionType,
               params: 'error', // can be null
@@ -484,7 +484,7 @@ const loginGoogle = (params,actionType) => {
     })
     .catch(error =>{
       console.log (`el error es ${error.code}: ${error.message}`)
-      if (actionType != null){
+      if (actionType !== null){
         dispatch({
           type: actionType,
           params: 'error', // can be null
@@ -513,7 +513,7 @@ const loginWithEmailAndPassword = (user,actionType) => {
         .set(datosPers).then(snapshot => {
 
           console.log('creado los datos personales')
-          if (actionType != null){
+          if (actionType !== null){
             dispatch({
               type: actionType,
               params: 'okPassword', // can be null
@@ -522,7 +522,7 @@ const loginWithEmailAndPassword = (user,actionType) => {
           }
         }).catch(err => {
           console.log(` no se ha creado: ${err.message}`)
-          if (actionType != null){
+          if (actionType !== null){
             dispatch({
               type: actionType,
               params: 'error', // can be null
@@ -536,7 +536,7 @@ const loginWithEmailAndPassword = (user,actionType) => {
     })
     .catch(error =>{
       console.log (`el error es ${error.code}: ${error.message}`)
-      if (actionType != null){
+      if (actionType !== null){
         dispatch({
           type: actionType,
           params: 'error', // can be null
@@ -554,7 +554,7 @@ const logout = (params,actionType) => {
       currentUserEmail = ''
 
       console.log('bye bye')
-      if (actionType != null){
+      if (actionType !== null){
         dispatch({
           type: actionType,
           params: 'byebye', // can be null
@@ -565,7 +565,7 @@ const logout = (params,actionType) => {
     })
     .catch(error =>{
       console.log (`el error es ${error.code}: ${error.message}`)
-      if (actionType != null){
+      if (actionType !== null){
         dispatch({
           type: actionType,
           params: 'error', // can be null
@@ -617,13 +617,14 @@ const userCreated = (user, actionType) => {
                       provincia: false,
                       cp: false,
                       newsletter: user.newsletter,
+                      hayDatos:false,
                     }
                     database.ref('users/'+result.uid+'/datosEnvio')
                       .set(datosEnv).then(snapshot => {
                         console.log('creado los datos envio')
 
                         result.newsletter=user.newsletter
-                        if (actionType != null){
+                        if (actionType !== null){
                           dispatch({
                             type: actionType,
                             params: 'ok', // can be null
@@ -633,7 +634,7 @@ const userCreated = (user, actionType) => {
 
                       }).catch(err => {
                         console.log(` no se ha creado: ${err.message}`)
-                        if (actionType != null){
+                        if (actionType !== null){
                           dispatch({
                             type: actionType,
                             params: 'error', // can be null
@@ -645,7 +646,7 @@ const userCreated = (user, actionType) => {
                       })
                   }).catch(err => {
                     console.log(` no se ha creado: ${err.message}`)
-                    if (actionType != null){
+                    if (actionType !== null){
                       dispatch({
                         type: actionType,
                         params: 'error', // can be null
@@ -658,7 +659,7 @@ const userCreated = (user, actionType) => {
 
               }).catch(err => {
                 console.log(` no se ha creado: ${err.message}`)
-                if (actionType != null){
+                if (actionType !== null){
                   dispatch({
                     type: actionType,
                     params: 'error', // can be null
@@ -685,7 +686,6 @@ const userCreated = (user, actionType) => {
       var errorCode = error.code
       var errorMessage = error.message
 
-      alert('error en autenticacion ' +errorCode +' ' +errorMessage)
       console.log('error en autenticacion ' +errorCode +' ' +errorMessage)
       // ...
 
@@ -706,7 +706,7 @@ const currentUserToDB =(user,actionType) => {
             .set(user.datosEnvio).then(snapshot => {
               console.log('creado los datos envio')
 
-              if (actionType != null){
+              if (actionType !== null){
                 dispatch({
                   type: actionType,
                   params: 'ok', // can be null
@@ -716,7 +716,7 @@ const currentUserToDB =(user,actionType) => {
 
             }).catch(err => {
               console.log(` no se ha creado: ${err.message}`)
-              if (actionType != null){
+              if (actionType !== null){
                 dispatch({
                   type: actionType,
                   params: 'error', // can be null
@@ -728,7 +728,7 @@ const currentUserToDB =(user,actionType) => {
             })
         }).catch(err => {
           console.log(` no se ha creado: ${err.message}`)
-          if (actionType != null){
+          if (actionType !== null){
             dispatch({
               type: actionType,
               params: 'error', // can be null
@@ -741,7 +741,7 @@ const currentUserToDB =(user,actionType) => {
 
     }).catch(err => {
       console.log(` no se ha creado: ${err.message}`)
-      if (actionType != null){
+      if (actionType !== null){
         dispatch({
           type: actionType,
           params: 'error', // can be null
@@ -759,7 +759,7 @@ const changePassword = (payload,params,actionType) =>{
     return dispatch => firebase.auth().currentUser.updatePassword(payload)
       .then(function() {
         console.log('se ha cambiado el password'+ payload)
-        if (actionType != null){
+        if (actionType !== null){
           dispatch({
             type: actionType,
             params: 'okPassword', // can be null
@@ -769,7 +769,7 @@ const changePassword = (payload,params,actionType) =>{
       }).catch(function(error) {
         // An error happened.
         console.log (`el error es ${error.code}: ${error.message}`)
-        if (actionType != null){
+        if (actionType !== null){
           dispatch({
             type: actionType,
             params: 'errorUpdateProfile', // can be null
@@ -784,7 +784,7 @@ const changePassword = (payload,params,actionType) =>{
       .sendPasswordResetEmail(payload).then(function() {
         alert('se ha mandado un email de cambiar de contraseña, mira en la bandeja de correo no deseado!!')
         console.log('change password email sent')
-        if (actionType != null){
+        if (actionType !== null){
           dispatch({
             type: actionType,
             params: 'okPasswordMail', // can be null
@@ -793,7 +793,7 @@ const changePassword = (payload,params,actionType) =>{
         }
       }).catch(err => {
         console.log(` no se ha creado: ${err.message}`)
-        if (actionType != null){
+        if (actionType !== null){
           dispatch({
             type: actionType,
             params: 'errorPasswordMail', // can be null
@@ -814,7 +814,7 @@ const resendEmail = (params,actionType)=>{
     .sendEmailVerification().then(function() {
       alert('se ha mandado un email, mira en la bandeja de correo no deseado!!')
       console.log('email sent')
-      if (actionType != null){
+      if (actionType !== null){
         dispatch({
           type: actionType,
           params: 'okEnvioMail', // can be null
@@ -823,7 +823,7 @@ const resendEmail = (params,actionType)=>{
       }
     }).catch(err => {
       console.log(` no se ha creado: ${err.message}`)
-      if (actionType != null){
+      if (actionType !== null){
         dispatch({
           type: actionType,
           params: 'errorEnvioMail', // can be null
@@ -841,7 +841,7 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
       .set(user.datosEnvio).then(snapshot => {
         console.log('creado los datos envio')
 
-        if (actionType != null){
+        if (actionType !== null){
           dispatch({
             type: actionType,
             params: 'okEnvio', // can be null
@@ -851,7 +851,7 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
 
       }).catch(err => {
         console.log(` no se ha creado: ${err.message}`)
-        if (actionType != null){
+        if (actionType !== null){
           dispatch({
             type: actionType,
             params: 'errorEnvio', // can be null
@@ -868,7 +868,7 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
           .set(user.datosPersonales).then(snapshot => {
             console.log('creado los datos personales')
 
-            if (actionType != null){
+            if (actionType !== null){
               dispatch({
                 type: actionType,
                 params: 'okNombre', // can be null
@@ -878,7 +878,7 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
 
           }).catch(err => {
             console.log(` no se ha creado: ${err.message}`)
-            if (actionType != null){
+            if (actionType !== null){
               dispatch({
                 type: actionType,
                 params: 'errorNombre', // can be null
@@ -891,7 +891,7 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
       }).catch(function(error) {
         // An error happened.
         console.log (`el error es ${error.code}: ${error.message}`)
-        if (actionType != null){
+        if (actionType !== null){
           dispatch({
             type: actionType,
             params: 'errorUpdateProfile', // can be null
@@ -914,7 +914,7 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
               .set(user.datosPersonales).then(snapshot => {
 
                 console.log('creado los datos personales '+firebase.auth().currentUser.email)
-                if (actionType != null){
+                if (actionType !== null){
                   dispatch({
                     type: actionType,
                     params: 'okEmail', // can be null
@@ -924,7 +924,7 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
 
               }).catch(err => {
                 console.log(` no se ha creado: ${err.message}`)
-                if (actionType != null){
+                if (actionType !== null){
                   dispatch({
                     type: actionType,
                     params: 'errorNombre', // can be null
@@ -936,7 +936,7 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
               })
           }).catch(err => {
             console.log(` no se ha creado: ${err.message}`)
-            if (actionType != null){
+            if (actionType !== null){
               dispatch({
                 type: actionType,
                 params: 'errorNombre', // can be null
@@ -949,7 +949,7 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
       }).catch(function(error) {
         // An error happened.
         console.log (`el error es ${error.code}: ${error.message}`)
-        if (actionType != null){
+        if (actionType !== null){
           dispatch({
             type: actionType,
             params: 'errorUpdateProfile', // can be null
@@ -979,7 +979,7 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
               // Update successful.
                 console.log('ha actualizado el profile')
                 user.foto.photoURL = subirImagen.snapshot.downloadURL
-                if (actionType != null){
+                if (actionType !== null){
                   dispatch({
                     type: actionType,
                     params: 'okFoto', // can be null
@@ -988,7 +988,7 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
                 }
               }).catch(err => {
                 console.log(` no se ha actualizado: ${err.message}`)
-                if (actionType != null){
+                if (actionType !== null){
                   dispatch({
                     type: actionType,
                     params: 'errorUpdateProfile', // can be null
@@ -1001,7 +1001,7 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
 
           }).catch(err => {
             console.log(` no se ha creado: ${err.message}`)
-            if (actionType != null){
+            if (actionType !== null){
               dispatch({
                 type: actionType,
                 params: 'errorFoto', // can be null
@@ -1027,7 +1027,7 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
           .updateProfile({displayName: user.datosPersonales.nombre, }).then(function() {
           // Update successful.
             console.log('ha actualizado el profile displayName')
-            if (actionType != null){
+            if (actionType !== null){
               dispatch({
                 type: actionType,
                 params: 'okNombre', // can be null
@@ -1036,7 +1036,7 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
             }
           }).catch(err => {
             console.log(` no se ha actualizado: ${err.message}`)
-            if (actionType != null){
+            if (actionType !== null){
               dispatch({
                 type: actionType,
                 params: 'errorUpdateProfile', // can be null
@@ -1049,7 +1049,7 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
 
       }).catch(err => {
         console.log(` no se ha creado: ${err.message}`)
-        if (actionType != null){
+        if (actionType !== null){
           dispatch({
             type: actionType,
             params: 'errorName', // can be null

@@ -11,7 +11,7 @@ class ModalFeriasContainer extends Component {
 
     //cargo la lista para que el dropdown menu sea dinamico
 
-    if (this.props.storeFerias.FeriasLoaded == false){
+    if (this.props.storeFerias.FeriasLoaded === false){
       //en el reducer ya lo pone a true
       this.props.getFerias()
     }
@@ -41,7 +41,7 @@ class ModalFeriasContainer extends Component {
     }
     for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
-      if (this.props.storeContenidos.listaContenidos[i].id == 'ferias'){
+      if (this.props.storeContenidos.listaContenidos[i].id === 'ferias'){
         feriasContenidos = this.props.storeContenidos.listaContenidos[i]
         break
       }
@@ -88,4 +88,3 @@ const stateToProps = (state) => {
 }
 //                                   ****
 export default connect (stateToProps,dispatchToProps)(ModalFeriasContainer)
-

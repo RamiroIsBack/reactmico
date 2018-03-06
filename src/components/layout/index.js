@@ -2,7 +2,6 @@ import Home from './Home'
 import Diseños from './Diseños'
 import Productos from './Productos'
 import Ferias from './Ferias'
-import Registrarse from './Registrarse'
 import Carro from './Carro'
 import Conocenos from './Conocenos'
 import Amigo from './Amigo'
@@ -13,7 +12,6 @@ export {
   Diseños,
   Productos,
   Ferias,
-  Registrarse,
   Carro,
   Amigo,
 }
