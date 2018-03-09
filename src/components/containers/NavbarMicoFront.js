@@ -151,8 +151,10 @@ class NavbarMicoFront extends Component {
     let registrarseShowing = this.props.storeModal.registrarseShowing
     let menuXsShowing = this.props.storeModal.menuXsShowing
 
-
     let navbarPosition = {padding: 0,width:'100%',position:'absolute'}
+    if(this.props.navigation.screenSize ==='mobile'){
+      navbarPosition = {padding: 0,width:'100%',position:'fixed'}
+    }
     let navbarFadeIn = {animationName: 'fadeInNavbar2',}
     if(this.props.navigation){
       if (this.props.navigation.sticky){
