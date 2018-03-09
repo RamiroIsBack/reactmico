@@ -21,7 +21,9 @@ import ModalRealizarCompraContainer from './ModalRealizarCompraContainer'
 import MapaContainer from './MapaContainer'
 import ListaFeriasContainer from './ListaFeriasContainer'
 import ModalVolverArribaContainer from './ModalVolverArribaContainer'
+import LogoContainer from './LogoContainer'
 export{
+  LogoContainer,
   ModalVolverArribaContainer,
   ListaFeriasContainer,
   MapaContainer,

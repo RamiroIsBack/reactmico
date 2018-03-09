@@ -10,6 +10,17 @@ var initialState = {
     vendido:'',
     pic:'',
   },
+  carousellBackground:{
+    listaCarousellBackground:[
+      // 0='http://www.wpzoom.com/wp-content/uploads/2017/03/image-center.png'
+      // 1:'https://davidwalsh.name/demo/background-size-2.jpg'
+      // 2:'https://davidwalsh.name/demo/background-size-3.jpg'
+      // 3:'https://davidwalsh.name/demo/background-size-4.jpg'
+    ],
+    urlPic:'http://www.wpzoom.com/wp-content/uploads/2017/03/image-center.png',
+    num:0,
+
+  }
 
 }
 
@@ -54,6 +65,15 @@ export default (state = initialState, action) => {
           pic:newState.listaCreacionesSinOrdenar[action.data].pic
 
         }
+    }
+    if(newState.carousellBackground.listaCarousellBackground.length!==0){
+
+      newState.carousellBackground.urlPic = newState.listaCarousellBackground[newState.carousellBackground.num]
+      if(newState.carousellBackground.num===3){
+        newState.carousellBackground.num = 0
+      }else{
+        newState.carousellBackground.num++
+      }
     }
     return newState
 

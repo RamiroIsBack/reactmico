@@ -27,7 +27,6 @@ export default {
   MARKER_CLICKED:                     'MARKER_CLICKED',
   TOGGLE_YEAR:                        'TOGGLE_YEAR',
   ELEMENTO_VENDIDO:                   'ELEMENTO_VENDIDO',
-  INCRISE_OPACITY:                    'INCRISE_OPACITY',
   MOVE_CAROUSELL:                     'MOVE_CAROUSELL',
   LOAD_FROM_INSTAGRAM:                'LOAD_FROM_INSTAGRAM',
   CHANGE_SCREEN_WIDTH:                'CHANGE_SCREEN_WIDTH',

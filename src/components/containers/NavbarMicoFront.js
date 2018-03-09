@@ -113,12 +113,7 @@ class NavbarMicoFront extends Component {
       this.props.toggleModal('closeLogin')
       this.props.navActive(event.target.id, 'navbarMicoFront')
     }
-    else if(event.target.id=== 'home'){
-      this.props.toggleModal('closeCreaciones')
-      this.props.toggleModal('closeFerias')
-      this.props.toggleModal('closeLogin')
-      this.props.navActive('', 'navbarMicoFront')//no hay tab activa
-    }
+
     else{
       this.props.toggleModal('closeCreaciones')
       this.props.toggleModal('closeFerias')
@@ -148,9 +143,6 @@ class NavbarMicoFront extends Component {
     }else if (event.target.id === 'conocenos'){
       this.props.toggleModal('closeCreaciones')
       this.props.toggleModal('closeFerias')
-    }else if (event.target.id === 'home'){
-      this.props.toggleModal('closeCreaciones')
-      this.props.toggleModal('closeFerias')
     }
 
   }
@@ -159,19 +151,9 @@ class NavbarMicoFront extends Component {
     let registrarseShowing = this.props.storeModal.registrarseShowing
     let menuXsShowing = this.props.storeModal.menuXsShowing
 
-    let logoMico = ''
-    if (this.props.storeContenidos.listaContenidos.length !==0){
-      for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
-        if (this.props.storeContenidos.listaContenidos[i].id === 'mico'){
-
-          logoMico = this.props.storeContenidos.listaContenidos[i].logo.urlLogoMico
-          break
-        }
-
-      }
-    }
-    let navbarPosition = {padding: 0,width:'100%'}
+    let navbarPosition = {padding: 0,width:'100%',position:'absolute'}
+    let navbarFadeIn = {animationName: 'fadeInNavbar2',}
     if(this.props.navigation){
       if (this.props.navigation.sticky){
         navbarPosition={
@@ -179,6 +161,10 @@ class NavbarMicoFront extends Component {
           position:'fixed',
           top : 0,
           width:'100%',
+          backgroundColor:'white',
+        }
+        navbarFadeIn={
+          animationName: 'fadeInNavbar',
         }
       }
     }
@@ -250,7 +236,7 @@ class NavbarMicoFront extends Component {
       <div className = 'sticky__navbar__contanier' id= 'navbarContainer' style={navbarPosition}>
         {screenSize ==='laptop' &&
 
-          <div className='navbar__container' >
+          <div className='navbar__container' style={navbarFadeIn}>
             <div className = 'navbar__registrarse__container'>
               {this.props.users.currentUser === null &&
                 <div id='registrarse' onMouseOver={this.handleHoverOn.bind(this)}>

@@ -4,7 +4,6 @@ import { NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
 import actions from '../../actions'
 import history from '../../utils/history'
-import {FotoGrid} from '../../utils/css'
 
 class HomeContainer extends Component {
   constructor(){
@@ -93,12 +92,7 @@ class HomeContainer extends Component {
   handleImageLoaded(){
 
     this.setState({loading:false})
-    if (this.props.storeContenidos){
-      if(!this.props.storeContenidos.stopHomeOpacity){
-        this.props.incriseOpacityWithTimeOut(0)
-      }
 
-    }
     if (!this.props.creacion.creacionesLoaded){
       //en la accion ya lo pone a true
       this.props.getCreaciones()
@@ -164,13 +158,6 @@ class HomeContainer extends Component {
     let urlPicCreaciones = ''
     let headerCreaciones = ''
 
-    var micoContenido = {}
-    let headlineMico = ''
-    let desarrolloMico = ''
-
-    let opacity=0
-    let stiloOpacity = {}
-
     let carousellItem = {}
 
     if (this.props.storeContenidos.listaContenidos.length !==0){
@@ -193,14 +180,7 @@ class HomeContainer extends Component {
           }
 
         }
-        if (this.props.storeContenidos.listaContenidos[i].id === 'mico'){
-          micoContenido = this.props.storeContenidos.listaContenidos[i]
-          if(micoContenido.descripcion){
-            headlineMico = micoContenido.descripcion.headlineMico
-            desarrolloMico=micoContenido.descripcion.desarrolloMico
-          }
 
-        }
         if (this.props.storeContenidos.listaContenidos[i].id === 'conocenos'){
           conocenosContenido = this.props.storeContenidos.listaContenidos[i]
           if(conocenosContenido.headerFoto){
@@ -210,11 +190,7 @@ class HomeContainer extends Component {
 
         }
 
-        opacity = this.props.storeContenidos.homeOpacity
-        stiloOpacity = {
-          opacity: opacity,
 
-        }
       }
 
     }
@@ -230,84 +206,87 @@ class HomeContainer extends Component {
       }
     }
 
+    let backgrounImageObject= {
+      backgroundImage: 'url('+this.props.creacion.carousellBackground.urlPic+')',
+    }
     return (
-      <div
-        style = {paddingTop}
-        onClick = {this.cierraDialogosNavbar.bind(this)}
-      >
-        
+      <div>
         {this.state.loading &&
-          <div style= {{textAlign:'center',}}>
-            <img id='faviconFliping' src='/favicon.ico' style= {{maxHeight :'250px',maxWidth :'250px'}}/>
+          <div style= {{textAlign:'center',marginTop:'150px'}}>
+            <img id='faviconFliping' src='/favicon.ico' style= {{maxHeight :'150px',maxWidth :'150px'}}/>
           </div>
         }
-        {this.props.storeContenidos.startHomeOpacity &&
-          <div style= {stiloOpacity} >
-            <div className = 'container-fluid visible-xs-block hidden-sm hidden-md hidden-lg btn-group btn btn-block'
-              style={style.home.navlinkBtn}>
-              <NavLink className ='btn-group btn btn-block' to='/Diseños' id= 'creaciones' onClick = {this.handleClick.bind(this)} style={style.home.navlinkBtn}>
-                <div style= {{position: 'relative', top: 0, left: 0}}>
-                  <img role='presentation' src={urlPicCreaciones} id= 'creaciones' className ='img-rounded' style= {{maxWidth: '100%',minHeight : '200px',maxHeight : '300px', position: 'relative', top: 0, left: 0}}
-                    onLoad={this.handleImageLoaded.bind(this)}>
-                  </img>
+        <div
+          className ='home__container'
+          style = {paddingTop}
+          onClick = {this.cierraDialogosNavbar.bind(this)}
+        >
 
-                  { this.props.creacion.carousellItem.pic !== '' &&
-                    <img src= {carousellItem.pic} className="img-responsive " alt='creacion' draggable = 'false'
-                      style= {{maxWidth:'100%', maxHeight : '75px', position: 'absolute', bottom: 2, left: '35%', borderRadius:'50px'}}
-                    />
-                  }
 
-                  <div className = 'carousel-caption' id= 'creaciones' style = {{padding: '0px', top: 0, left: 10, right: 10}}>
-                    <h3  style = {{backgroundColor: 'rgba(0, 0, 0, 0.6)' ,borderRadius:'4px', padding: '0px',marginTop : 5,whiteSpace: 'initial', display: 'inline-block'}} >{headerCreaciones}</h3>
-                  </div>
-                </div>
-              </NavLink>
-            </div>
-            <div className = 'container-fluid hidden-xs btn-group btn btn-block '  style={style.home.navlinkBtn} >
-              <NavLink className ='btn-group btn btn-block' to='/Diseños' id= 'creaciones' onClick = {this.handleClick.bind(this)} style={style.home.navlinkBtn}>
-                <div style= {{position: 'relative', top: 0, left: 0}}>
-                  <img role='presentation' src={urlPicCreaciones}  className ='img-rounded'  id= 'creaciones' style= {{maxWidth: '100%',minHeight : '200px', maxHeight : '300px', position: 'relative', top: 0, left: 0}}>
-                  </img>
 
-                  { this.props.creacion.carousellItem.pic !== '' &&
-                    <img src= {carousellItem.pic} className="img-responsive " alt='creacion' draggable = 'false'
-                      style= {{maxWidth:'100%', maxHeight : '100px', position: 'absolute', bottom: 4, left: '44%', borderRadius:'50px'}}
-                    />
-                  }
+          <div className='home__carousell__container' style={backgrounImageObject}>
 
-                  <div className = 'carousel-caption' id= 'creaciones' style = {{padding: '0px', top: 0, left:'25%', right: '25%'}}>
-                    <h3  style = {{backgroundColor: 'rgba(0, 0, 0, 0.6)' ,borderRadius:'4px', padding: '0px',marginTop : 5,whiteSpace: 'initial', display: 'inline-block' }} >{headerCreaciones} </h3>
-                  </div>
-                </div>
-              </NavLink>
-            </div>
-            <hr/>
-            <div className ='container-fluid btn-group  btn-block ' style={style.home.navlinkBtn}>
-              <div className = 'container-fluid col-xs-12 col-sm-6 col-md-6 col-lg-6' style={style.home.navlinkBtn}>
-                <NavLink className ='container-fluid btn btn-block ' to='/Ferias' id= 'ferias' onClick = {this.handleClick.bind(this)} style={style.home.navlinkBtn}>
-                  <img role='presentation' src={urlPicFerias}  className ='img-rounded' id= 'ferias' style= {{maxHeight : '300px', maxWidth: '100%'}}>
-                  </img>
-                  <div className = 'carousel-caption ' id= 'ferias' style = {{padding: '0px', top: 0, left: 10, right: 10}}>
-                    <h3  style = {{backgroundColor: 'rgba(0, 0, 0, 0.6)' ,borderRadius:'4px', padding: '0px',marginTop : 5, overflow: 'hidden', display: 'inline-block'}}>{headerFerias}</h3>
-                  </div>
-                </NavLink>
-                <br/>
-              </div>
-              <div className = 'container-fluid col-xs-12 col-sm-6 col-md-6 col-lg-6'  >
-                <NavLink className ='container-fluid btn btn-block' to='/Conocenos' id= 'conocenos' onClick = {this.handleClick.bind(this)} style={style.home.navlinkBtn}>
-                  <img role='presentation' src={urlPicConocenos} id= 'conocenos'  className ='img-rounded' style= {{maxHeight : '300px', maxWidth: '100%'}}>
-                  </img>
-                  <div className = 'carousel-caption ' id= 'conocenos' style = {{padding: '0px', top: 0, left: 10, right: 10}}>
-                    <h3  style = {{backgroundColor: 'rgba(0, 0, 0, 0.6)' ,borderRadius:'4px', padding: '0px',marginTop : 5, overflow: 'hidden', display: 'inline-block'}}>{headerConocenos}</h3>
-                  </div>
-                </NavLink>
-              </div>
-            </div>
-            <hr/>
           </div>
-        }
-        <div className = 'instagram__foto__container'>
-          {instagramFeedComponentsList}
+
+          <div className = 'home__diseno__container'  >
+            <NavLink className ='' to='/Diseños' id= 'creaciones' onClick = {this.handleClick.bind(this)} style={style.home.navlinkBtn}>
+              <div style= {{position: 'relative', top: 0, left: 0}}>
+                <img
+                  alt=''
+                  src={urlPicCreaciones}
+                  className =''
+                  id= 'creaciones'
+                  style= {{maxWidth: '100%',minHeight : '200px', maxHeight : '300px', position: 'relative', top: 0, left: 0}}
+                  onLoad={this.handleImageLoaded.bind(this)}
+                >
+                </img>
+
+                { this.props.creacion.carousellItem.pic !== '' &&
+                  <img src= {carousellItem.pic} className='' alt='' draggable = 'false'
+                    style= {{maxWidth:'100%', maxHeight : '100px', position: 'absolute', bottom: 4, left: '44%', borderRadius:'50px'}}
+                  />
+                }
+
+                <div className = '' id= 'creaciones' style = {{padding: '0px', top: 0, left:'25%', right: '25%', position: 'absolute'}}>
+                  <h3  style = {{backgroundColor: 'rgba(0, 0, 0, 0.6)' ,borderRadius:'4px', padding: '0px',marginTop : 5,whiteSpace: 'initial', display: 'inline-block' ,color:'white'}} >{headerCreaciones} </h3>
+                </div>
+              </div>
+            </NavLink>
+          </div>
+
+          <hr/>
+
+
+          <div className = 'home__feria__container' >
+            <NavLink className =' ' to='/Ferias' id= 'ferias' onClick = {this.handleClick.bind(this)} style={{position:'relative',display:'inline-block'}}>
+              <img alt='' src={urlPicFerias}  className ='img-rounded' id= 'ferias' style= {{maxHeight : '300px', maxWidth: '100%', position: 'relative'}}>
+              </img>
+              <div className = '' id= 'ferias' style = {{position: 'absolute',padding: '0px', top: 0, left: 10, right: 10}}>
+                <h3  style = {{backgroundColor: 'rgba(0, 0, 0, 0.6)' ,borderRadius:'4px', padding: '0px',marginTop : 5, overflow: 'hidden', display: 'inline-block',color:'white'}}>{headerFerias}</h3>
+              </div>
+            </NavLink>
+            <br/>
+          </div>
+
+          <div className = 'home__conocenos__container'  >
+            <NavLink className ='' to='/Conocenos' id= 'conocenos' onClick = {this.handleClick.bind(this)} style={{position:'relative',display:'inline-block'}}>
+              <img
+                alt=''
+                src={urlPicConocenos}
+                id= 'conocenos'
+                className =''
+                style= {{maxHeight : '300px', maxWidth: '100%', position: 'relative'}}>
+              </img>
+              <div className = '' id= 'conocenos' style = {{padding: '0px', top: 0, left: 10, right: 10 , position: 'absolute'}}>
+                <h3  style = {{backgroundColor: 'rgba(0, 0, 0, 0.6)' ,borderRadius:'4px', padding: '0px',marginTop : 5, overflow: 'hidden', display: 'inline-block',color:'white'}}>{headerConocenos}</h3>
+              </div>
+            </NavLink>
+          </div>
+
+
+          <div className = 'instagram__foto__container'>
+            {instagramFeedComponentsList}
+          </div>
         </div>
       </div>
     )
@@ -320,7 +299,6 @@ const dispatchToProps = (dispatch) =>{
     getCreaciones:()=>dispatch (actions.getCreaciones()),
     getContenidos:()=>dispatch(actions.getContenidos()),
     toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
-    incriseOpacityWithTimeOut:(num) => dispatch(actions.incriseOpacityWithTimeOut(num)),
     startCarousellWithTimeOut:(pic,length) => dispatch(actions.startCarousellWithTimeOut(pic,length)),
     navActive:(activeTab,params) => dispatch(actions.navActive(activeTab,params)),
     loadFromInstagram: (feedList) => dispatch(actions.loadFromInstagram(feedList)),

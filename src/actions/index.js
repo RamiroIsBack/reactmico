@@ -16,42 +16,7 @@ export default {
     }
   },
 
-  incriseOpacityWithTimeOut:(num) =>{
-    return dispatch => {
-
-      let opacity =num
-      if(opacity === 0){
-        setTimeout(()=>{
-          setTimeout(() => {
-            dispatch(actions.incriseOpacity(opacity))
-            opacity +=0.1
-
-            if(opacity<1){
-              dispatch(actions.incriseOpacityWithTimeOut(opacity))
-            }
-          }, 70)
-        },1000)
-      }else{//ya no es la primera vez asi q no esperamos a q carge la pagina para incrementar
-
-        setTimeout(() => {
-          dispatch(actions.incriseOpacity(opacity))
-          opacity +=0.1
-
-          if(opacity<1){
-            dispatch(actions.incriseOpacityWithTimeOut(opacity))
-          }
-        }, 70)
-
-      }
-
-    }
-  },
-  incriseOpacity:(num) =>{
-    return{
-      type: constants.INCRISE_OPACITY,
-      data:num,
-    }
-  },
+  
   startCarousellWithTimeOut:(pic,length)=>{
     return dispatch =>{
       setTimeout(() => {

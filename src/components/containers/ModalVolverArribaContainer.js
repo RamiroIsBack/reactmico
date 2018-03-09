@@ -9,7 +9,7 @@ class ModalVolverArribaContainer extends Component{
   }
   render(){
     let show =false
-    let animation= {animationName: 'fadeIn'}
+    let animation= {animationName: 'fadeInVolver'}
     if (this.props.navigation.sticky){
       show = true
     }
@@ -28,7 +28,9 @@ class ModalVolverArribaContainer extends Component{
 }
 
 const dispatchToProps = (dispatch) =>{
+  return{
 
+  }
 }
 
 const stateToProps = (state) =>{

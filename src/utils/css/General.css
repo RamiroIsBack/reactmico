@@ -4,8 +4,8 @@
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(6,auto);
   grid-template-areas:
-      "l l l l l l l l l l l l"
       "n n n n n n n n n n n n"
+      "l l l l l l l l l l l l"
       "m m m m m m m m m m m m"
       "m m m m m m m m m m m m"
       "m m m m m m m m m m m m"
@@ -15,11 +15,14 @@
   grid-area: n;
   width: 100%;
   z-index:3000;
+  position: fixed;
 }
+
+
 .logo__top__container{
   grid-area: l;
   text-align: center;
-  cursor:pointer;
+  display:inline-block;
 
 }
 
@@ -38,6 +41,11 @@
   min-height: 150px;
 
 }
+.logo__top__img{
+  cursor:pointer;
+
+  width: 280px;
+}
 .volver__arriba__container{
   display: inline-block;
   position:fixed;
@@ -49,13 +57,14 @@
   color: white;
   background-color: rgba(0, 0, 0, 0.58);
   cursor: pointer;
-  animation-duration: 1s;
+  animation-duration: .5s;
   animation-timing-function: ease-in-out;
 }
-@keyframes fadeIn {
+@keyframes fadeInVolver {
   from {opacity: 0;}
   to {opacity:1;}
 }
+
 
 /* animation for the presentation */
 .bell__container {

@@ -18,6 +18,7 @@ import {AmigoPedidosContainer,
   FooterContainer,
   ModalRealizarCompraContainer,
   ModalVolverArribaContainer,
+  LogoContainer,
 } from './components/containers'
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -93,11 +94,7 @@ class ReactMico extends Component {
         <Router history={history}>
           <div>
             <div className = 'general__container' style = {settingMinHigthToScreen}>
-              <div className ='logo__top__container' id='logoTopContainer' >
-                <NavLink to='/' >
-                  <img className ='logo__top__img' src= '/mico_disegno_textil.jpg'></img>
-                </NavLink>
-              </div>
+              <LogoContainer/>
 
               <NavbarMicoFront/>
 

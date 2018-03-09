@@ -1,0 +1,103 @@
+.home__container{
+  display: grid;
+  grid-template-areas:
+  "c c c c c c c c c c c c"
+  "c c c c c c c c c c c c"
+  "i i i i i i i i i i i i"
+  "i i i i i i i i i i i i"
+  "e e e e e e o o o o o o"
+  "e e e e e e o o o o o o";
+  grid-gap: 3px;
+  grid-template-columns: repeat(12, auto);
+  grid-template-rows: repeat(6,auto);
+}
+.home__carousell__container{
+  grid-area: c;
+  padding-top: 7px;
+  width: 100%;
+  height: 450px;
+  border: 1px solid black;
+  margin-bottom: 1em;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+#cover { background-size: cover; }
+
+.home__feria__container{
+  grid-area: e;
+  text-align: center;
+  cursor:pointer;
+  padding-top: 7px;
+}
+
+.home__conocenos__container{
+  text-align: center;
+  cursor:pointer;
+  padding-top: 7px;
+  grid-area: o;
+}
+
+.home__diseno__container{
+  grid-area: i;
+  text-align: center;
+  cursor:pointer;
+  padding-top: 3px;
+}
+
+.instagram__foto__container{
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-auto-rows: repeat(auto-fit, minmax(120px, 280px));
+  grid-auto-flow: dense;
+}
+
+@media screen and (max-width: 705px) {
+
+
+}
+
+/*  mico flipping*/
+
+#faviconFliping {
+  -webkit-animation-name: flipping;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-duration: 2s;
+  animation-name: flipping;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 2s;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+
+/* WebKit and Opera browsers */
+@-webkit-keyframes flipping {
+  from
+  {
+    -webkit-transform: rotateY(0deg);
+  }
+  to {
+    -webkit-transform: rotateY(-360deg);
+  }
+}
+/* all other browsers */
+@keyframes flipping {
+   from {
+    -moz-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+   }
+   to
+   {
+    -moz-transform: rotateY(-360deg);
+    -ms-transform: rotateY(-360deg);
+    transform: rotateY(-360deg);
+
+   }
+}

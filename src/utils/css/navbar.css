@@ -3,9 +3,17 @@
   background-color: white;
   display: grid;
   grid-template-areas:
-  ". . d d f f c c . r r p p . .";
-  grid-template-columns: repeat(15, 1fr);
-  grid-template-rows: repeat(1,60px);
+  ". . . d d f f c c r r p p . . .";
+  animation-duration: .5s;
+  animation-timing-function: ease-in-out;
+}
+@keyframes fadeInNavbar {
+  from {opacity: 0;}
+  to {opacity:1;}
+}
+@keyframes fadeInNavbar2 {
+  from {opacity: 0;}
+  to {opacity:1;}
 }
 .navbar__diseno__container{
   grid-area: d;

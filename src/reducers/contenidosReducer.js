@@ -4,9 +4,6 @@ var initialState = {
 
   listaContenidos: [],
   ContenidosLoaded :false ,
-  startHomeOpacity : false,
-  stopHomeOpacity:false,
-  homeOpacity: 0
 
 }
 
@@ -23,23 +20,7 @@ export default (state = initialState, action) => {
     newState['startHomeOpacity'] = true
     return newState
 
-  case constants.INCRISE_OPACITY:
-
-    let homeOpacity = action.data
-    if(newState.homeOpacity > 0.8){
-      newState['stopHomeOpacity'] = true
-    }
-    newState['homeOpacity'] = homeOpacity
-
-    return newState
-
-  /*case constants.MOVETO_FERIA_SECTION:
-    newState['feriaSectionSelected'] = action.data
-    return newState
-*/
   default:
     return state
   }
 }
-
-
