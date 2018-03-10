@@ -12,10 +12,10 @@ var initialState = {
   },
   carousellBackground:{
     listaCarousellBackground:[
-      // 0='http://www.wpzoom.com/wp-content/uploads/2017/03/image-center.png'
-      // 1:'https://davidwalsh.name/demo/background-size-2.jpg'
-      // 2:'https://davidwalsh.name/demo/background-size-3.jpg'
-      // 3:'https://davidwalsh.name/demo/background-size-4.jpg'
+      'http://www.wpzoom.com/wp-content/uploads/2017/03/image-center.png',
+      'https://davidwalsh.name/demo/background-size-2.jpg',
+      '/3.png',
+      '/4.png',
     ],
     urlPic:'http://www.wpzoom.com/wp-content/uploads/2017/03/image-center.png',
     num:0,
@@ -57,23 +57,19 @@ export default (state = initialState, action) => {
     return newState
 
   case constants.MOVE_CAROUSELL:
-    if (newState.listaCreacionesSinOrdenar.length!==0){
-      newState['carousellItem'] =
-        {
-          tipo:newState.listaCreacionesSinOrdenar[action.data].tipo,
-          vendido:newState.listaCreacionesSinOrdenar[action.data].vendido,
-          pic:newState.listaCreacionesSinOrdenar[action.data].pic
-
-        }
-    }
+    // if (newState.listaCreacionesSinOrdenar.length!==0){
+    //   newState['carousellItem'] =
+    //     {
+    //       tipo:newState.listaCreacionesSinOrdenar[action.data].tipo,
+    //       vendido:newState.listaCreacionesSinOrdenar[action.data].vendido,
+    //       pic:newState.listaCreacionesSinOrdenar[action.data].pic
+    //
+    //     }
+    // }
     if(newState.carousellBackground.listaCarousellBackground.length!==0){
 
-      newState.carousellBackground.urlPic = newState.listaCarousellBackground[newState.carousellBackground.num]
-      if(newState.carousellBackground.num===3){
-        newState.carousellBackground.num = 0
-      }else{
-        newState.carousellBackground.num++
-      }
+      newState.carousellBackground.urlPic = newState.carousellBackground.listaCarousellBackground[action.data]
+      
     }
     return newState
 
