@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import {FeriaContainer,ContenidoFeriaContainer, MapaContainer,ListaFeriasContainer} from '../containers'
-export default class Ferias extends Component {
+import {Ferias_css} from '../../utils/css'
 
+export default class Ferias extends Component {
   render() {
     return (
-      <div className='container-fluid' id ='backgroundDiv' >
+      <div className='feria__container' id ='backgroundDiv' >
 
-        <div className = 'container col-xs-12 col-sm-12 col-md-12 col-lg-12' style = {{}}>
+        <div className = 'feria__mapa__container' style = {{}}>
 
           <MapaContainer
             googleMapURL='https://maps.googleapis.com/maps/api/js?key=AIzaSyClcb4B5oRktWDQWGU8Ev4hgYm5p_NXgL4&v=3.exp&libraries=geometry,drawing,places'
@@ -14,12 +15,12 @@ export default class Ferias extends Component {
           />
         </div>
 
-        <div className = 'col-xs-8 col-sm-8 col-md-9 col-lg-9' style = {{padding:2,paddingTop:10}}>
+        <div className = 'feria__descripcion__container' style = {{}}>
           <FeriaContainer/>
 
         </div>
 
-        <div className = 'col-xs-4 col-sm-4 col-md-3 col-lg-3' style = {{padding:2, borderLeft:'0.25px solid grey'}}>
+        <div className = 'feria__lista__container' style = {{ borderLeft:'0.25px solid grey'}}>
           <ListaFeriasContainer/>
         </div>
 

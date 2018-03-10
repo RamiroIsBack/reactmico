@@ -17,7 +17,7 @@ class Mapa extends Component {
     }
     let ferias = this.props.ferias
     for (let i = 0 ; i<ferias.length ; i++){
-      if(!ferias[i].caducada){
+      if(!ferias[i].caducada|| ferias[i].mostrarCaducada){
 
         let latLong =  ferias[i].mapsLink.split('@')[1] //cojo todo desde la @
         let lat = latLong.slice(0,latLong.indexOf(',')) // y hasta la primera coma

@@ -20,8 +20,8 @@ class ListaFeriasContainer extends Component {
       if(parts[2] !==currentYear){
         currentYear = parts[2]
         listaYearsFerias.push(
-          <div key= {j}  style = {{cursor: 'pointer',textDecoration: 'none',padding: 0, marginTop:2}}>
-            <button type='button' className= 'btn btn-secondary' style= {{padding:2 ,textDecoration: 'none'}}>
+          <div key= {j}  style = {{textAlign:'left',cursor: 'pointer',textDecoration: 'none',padding: 0, marginTop:2, }}>
+            <button type='button' className= 'btn btn-secondary' style= {{padding:2 ,textDecoration: 'none', marginLeft:'10px'}}>
               <h6 role='presentation' id={currentYear} style = {{
                 opacity: 0.9, padding:1,margin:1}} onClick={this.handleClick.bind(this)}>
                 {currentYear}
@@ -34,8 +34,8 @@ class ListaFeriasContainer extends Component {
           listaYearsFerias.push(
 
             <div key= {j} style = {{cursor: 'pointer',textDecoration: 'none',padding: 0}}>
-              <h5 style = {{paddingLeft:5 }} id= {list[i].id} onClick={this.handleShow.bind(this)}>{list[i].fecha}</h5>
-              <h4 style = {{paddingLeft:5 }} id= {list[i].id} onClick={this.handleShow.bind(this)}>{list[i].nombre}</h4>
+              <h5 style = {{ }} id= {list[i].id} onClick={this.handleShow.bind(this)}>{list[i].fecha}</h5>
+              <h4 style = {{ }} id= {list[i].id} onClick={this.handleShow.bind(this)}>{list[i].nombre}</h4>
               <hr/>
             </div>
 
@@ -46,8 +46,8 @@ class ListaFeriasContainer extends Component {
           listaYearsFerias.push(
 
             <div key= {j} style = {{border:'1.5px solid black',cursor: 'pointer',textDecoration: 'none',padding: 0}}>
-              <h5 style = {{paddingLeft:8 }} id= {list[i].id} onClick={this.handleShow.bind(this)}>{list[i].fecha}</h5>
-              <h4 style = {{paddingLeft:8 }} id= {list[i].id} onClick={this.handleShow.bind(this)}>{list[i].nombre}</h4>
+              <h5 style = {{ }} id= {list[i].id} onClick={this.handleShow.bind(this)}>{list[i].fecha}</h5>
+              <h4 style = {{}} id= {list[i].id} onClick={this.handleShow.bind(this)}>{list[i].nombre}</h4>
               <hr/>
             </div>
 
@@ -61,8 +61,8 @@ class ListaFeriasContainer extends Component {
           listaYearsFerias.push(
 
             <div key= {j} style = {{cursor: 'pointer',textDecoration: 'none',padding: 0}}>
-              <h5 style = {{paddingLeft:5 }} id= {list[i].id} onClick={this.handleShow.bind(this)}>{list[i].fecha}</h5>
-              <h4 style = {{paddingLeft:5 }} id= {list[i].id} onClick={this.handleShow.bind(this)}>{list[i].nombre}</h4>
+              <h5 style = {{ }} id= {list[i].id} onClick={this.handleShow.bind(this)}>{list[i].fecha}</h5>
+              <h4 style = {{ }} id= {list[i].id} onClick={this.handleShow.bind(this)}>{list[i].nombre}</h4>
               <hr/>
             </div>
 
@@ -73,8 +73,8 @@ class ListaFeriasContainer extends Component {
           listaYearsFerias.push(
 
             <div key= {j} style = {{border:'1.5px solid black',cursor: 'pointer',textDecoration: 'none',padding: 0}}>
-              <h5 style = {{paddingLeft:8 }} id= {list[i].id} onClick={this.handleShow.bind(this)}>{list[i].fecha}</h5>
-              <h4 style = {{paddingLeft:8 }} id= {list[i].id} onClick={this.handleShow.bind(this)}>{list[i].nombre}</h4>
+              <h5 style = {{ }} id= {list[i].id} onClick={this.handleShow.bind(this)}>{list[i].fecha}</h5>
+              <h4 style = {{ }} id= {list[i].id} onClick={this.handleShow.bind(this)}>{list[i].nombre}</h4>
               <hr/>
             </div>
 
@@ -121,4 +121,3 @@ const stateToProps = (state) => {
 //for listening d store, only dispatching actions but NOW I DO to get the
 //creaciones from firebase data base
 export default connect (stateToProps,dispatchToProps)(ListaFeriasContainer)
-

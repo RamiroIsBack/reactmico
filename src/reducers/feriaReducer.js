@@ -18,7 +18,7 @@ export default (state = initialState, action) => {
     newState['openYear'] = action.data
     return newState
 
-  case constants.MARKER_CLICKED://action.data= id de feria selected
+  case constants.MARKER_CLICKED:{//action.data= id de feria selected
     for (let i =0 ;i<newState.listaFerias.length;i++){
       if(action.data === newState.listaFerias[i].id){
         newState.listaFerias[i].showInfo = true
@@ -29,10 +29,10 @@ export default (state = initialState, action) => {
         newState.listaFerias[i].showInfo = false
       }
     }
-
+  }
     return newState
 
-  case constants.FERIAS_RECEIVED:
+  case constants.FERIAS_RECEIVED: {
 
     newState['FeriasLoaded'] = true
     let list = action.data
@@ -47,7 +47,6 @@ export default (state = initialState, action) => {
         return a[i]>b[i] ? 1 : a[i]<b[i] ? -1 : 0
       })
     }
-
     //lo paso a formato yyyy/mm/dd para poder operar con Date Object y miro a ver si est'a en curso o est'a caducada
     let firstNoCaducada = true //flag to set the idFeriaShowing
 
@@ -82,18 +81,37 @@ export default (state = initialState, action) => {
         list[i].enCurso = false
       }
     }
+    //me aseguro de que se muestren por lo menos 3 ferias en el mapa
+    if(list.length>=3){
+      if(list[list.length-3].caducada){
+        list[list.length-3].mostrarCaducada=true
+
+        if(list[list.length-2].caducada){
+          list[list.length-2].mostrarCaducada=true
+          if(list[list.length-1].caducada){
+            list[list.length-1].mostrarCaducada=true
+            newState['idFeriaShowing'] = list[list.length-1].id
+            list[list.length-1].showInfo=true
+            let date = list[list.length-1].fecha
+            let parts = date.split('/')
+            newState['openYear'] = parts[2]
+          }
+        }
+      }
+    }
 
     newState['listaFerias'] = list
     return newState
+  }
 
-  case constants.MOVETO_FERIA_SECTION:
+  case constants.MOVETO_FERIA_SECTION:{
     if(action.data){
       newState['feriaSectionSelected'] = action.data
     }
     return newState
+  }
 
   default:
     return state
   }
 }
-

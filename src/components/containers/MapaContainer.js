@@ -18,22 +18,12 @@ class MapaContainer extends Component {
 
     return (
       <div>
-        <div className='container visible-xs-block hidden-sm hidden-md hidden-lg '>
+        <div className=''>
 
           <Mapa
             ferias = {this.props.ferias.listaFerias}
             handleClick= {this.handleClick.bind(this)}
-            containerElement={<div style={{ height: '300px', maxWidth:'300px'}} />}
-            mapElement={<div style={{ height: '100%' }} />}
-          />
-        </div>
-
-        <div className='container row hidden-xs '>
-
-          <Mapa
-            ferias = {this.props.ferias.listaFerias}
-            handleClick= {this.handleClick.bind(this)}
-            containerElement={<div style={{ height: '400px', maxWidth:'1200px'}} />}
+            containerElement={<div style={{ height: '300px', maxWidth:'1200px'}} />}
             mapElement={<div style={{ height: '100%' }} />}
           />
         </div>

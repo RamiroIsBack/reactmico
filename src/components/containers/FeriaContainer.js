@@ -47,7 +47,7 @@ class FeriaContainer extends Component {
     if(feria===null){
       return (
         <div style= {{marginLeft:10}}>
-          <h4>Selecciona una feria de entre las que aparecen a la derecha</h4>
+          <h4>Selecciona una feria de la lista o del mapa para ver los detalles</h4>
         </div>
       )
     }

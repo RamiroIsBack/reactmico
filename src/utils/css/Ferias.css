@@ -1,0 +1,38 @@
+.feria__container{
+  display: grid;
+  grid-template-areas:
+  "m m m m m m m l l l l l"
+  "m m m m m m m l l l l l"
+  "d d d d d d d d d d d d"
+  "d d d d d d d d d d d d";
+  grid-gap: 3px;
+  grid-template-columns: repeat(12, auto);
+  grid-template-rows: repeat(4,auto);
+  text-align: center;
+}
+.feria__lista__container{
+  grid-area: l;
+}
+
+.feria__descripcion__container{
+  grid-area: d;
+}
+.feria__mapa__container{
+  grid-area: m;
+}
+
+@media screen and (max-width: 705px) {
+  .feria__container{
+    display: grid;
+    grid-template-areas:
+    "m m m m m m m m m m m m m m m m m m m m m m m m"
+    "m m m m m m m m m m m m m m m m m m m m m m m m"
+    "d d d d d d d d d d d d d d l l l l l l l l l ."
+    "d d d d d d d d d d d d d d l l l l l l l l l .";
+    grid-gap: 3px;
+    grid-template-columns: repeat(24, auto);
+    grid-template-rows: repeat(4,auto);
+    text-align: center;
+  }
+
+}
