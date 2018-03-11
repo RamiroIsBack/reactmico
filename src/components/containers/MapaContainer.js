@@ -23,7 +23,7 @@ class MapaContainer extends Component {
           <Mapa
             ferias = {this.props.ferias.listaFerias}
             handleClick= {this.handleClick.bind(this)}
-            containerElement={<div style={{ height: '300px', maxWidth:'1200px'}} />}
+            containerElement={<div style={{ height: '300px',minWidth:'300px', maxWidth:'1200px'}} />}
             mapElement={<div style={{ height: '100%' }} />}
           />
         </div>
