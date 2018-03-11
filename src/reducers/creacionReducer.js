@@ -14,8 +14,8 @@ var initialState = {
     listaCarousellBackground:[
       'http://www.wpzoom.com/wp-content/uploads/2017/03/image-center.png',
       'https://davidwalsh.name/demo/background-size-2.jpg',
-      '/3.png',
-      '/4.png',
+      'https://davidwalsh.name/demo/background-size-1.jpg',
+      'https://davidwalsh.name/demo/background-size-3.jpg',
     ],
     urlPic:'http://www.wpzoom.com/wp-content/uploads/2017/03/image-center.png',
     num:0,
@@ -69,7 +69,7 @@ export default (state = initialState, action) => {
     if(newState.carousellBackground.listaCarousellBackground.length!==0){
 
       newState.carousellBackground.urlPic = newState.carousellBackground.listaCarousellBackground[action.data]
-      
+
     }
     return newState
 

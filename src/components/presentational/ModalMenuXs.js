@@ -14,8 +14,8 @@ class ModalMenuXs extends React.Component {
   }
 
   gestionaIrACreacion(event){
-    if (event.target.name){
-      this.props.onSelectCreaciones(event.target.name)
+    if (event.target.id){
+      this.props.onSelectCreaciones(event.target.id)
     }
     else {
       this.props.onSelectCreaciones('allCreaciones')
@@ -34,20 +34,18 @@ class ModalMenuXs extends React.Component {
 
     var tipoList = this.props.creacionList.map((tipo,i)=>{
 
-      let estilo ={fontWeight: 400, cursor: 'pointer', color:'black',backgroundColor:'transparent',textDecoration: 'none',padding: 0 }
+      let estilo ={cursor: 'pointer', color:'black',backgroundColor:'transparent',textDecoration: 'none',padding: 0 }
 
       return(
         <div key = {i} style ={{padding:0}}>
 
           <div className= 'col-xs-offset-3 col-xs-9'
             style ={{padding:1}} >
-            <NavLink id='creaciones' name= {tipo.nombre} onClick = {this.gestionaIrACreacion.bind(this)} to = '/Diseños' style ={estilo}>
-              {tipo.nombre}
+            <NavLink id='creaciones' id= {tipo.nombre} onClick = {this.gestionaIrACreacion.bind(this)} to = '/Diseños' style ={estilo}>
+              <h4 id= {tipo.nombre}>{tipo.nombre}</h4>
             </NavLink>
           </div>
-          <div className= 'col-xs-offset-3 col-xs-8'  style ={{padding:1,textAlign:'center'}} >
-            <hr style= {{padding: 0,margin :0 }}></hr>
-          </div>
+
         </div>
       )
     }
@@ -56,17 +54,16 @@ class ModalMenuXs extends React.Component {
     var stiloModal ={
       position: 'absolute',
       backgroundColor: 'white',
-      maxWidth: 700,
+      maxWidth: '100%',
       minHeight: 300,
-      maxHeight: 700,
+      maxHeight: '100%',
       margin: '0 auto',
       //To make sure that it is really on top of all other elements, we set z-index to a high value (by default all elements have a z-index value of 0).
       zIndex: 6668,
-      top: '40px',
+      top: '20px',
       left: '2px',
       right: '70px',
-      bottom: '40px',
-      //border                     : '1px solid #ccc',
+      bottom:'40px',
       overflow: 'auto',
       WebkitOverflowScrolling: 'touch',
       borderRadius: '5px',
@@ -84,32 +81,26 @@ class ModalMenuXs extends React.Component {
                 style= {style.modal.btnClose}></button>
               <div className='col-xs-offset-1 col-xs-8' >
                 <NavLink id='creaciones' name= 'allCreaciones' onClick = {this.gestionaIrACreacion.bind(this)} to='/Diseños' style = {{cursor: 'pointer', color:'black',backgroundColor:'transparent',textDecoration: 'none',padding: 0}}>
-                  <h5  id='creaciones' name= 'allCreaciones' className='glyphicon glyphicon-asterisk'> Diseños:</h5>
+                  <h3  id='creaciones' name= 'allCreaciones' > Diseños:</h3>
                 </NavLink>
               </div>
-              <div className='col-xs-10' >
-                <hr style= {{padding: 0,margin :0 }}/>
-              </div>
+
               <div >
                 {tipoList}
               </div>
               <div className='col-xs-offset-1 col-xs-8' >
                 <NavLink id='creaciones' name= 'allFerias' onClick = {this.gestionaIrAFeria.bind(this)} to = '/Ferias' style = {{cursor: 'pointer', color:'black',backgroundColor:'transparent',textDecoration: 'none',padding: 0}}>
-                  <h5 name= 'allFerias' className='glyphicon glyphicon-asterisk'> Ferias</h5>
+                  <h3 name= 'allFerias'> Ferias</h3>
                 </NavLink>
               </div>
-              <div className='col-xs-10' >
-                <hr style= {{padding: 0,margin :0 }}/>
-              </div>
+
 
               <div className='col-xs-offset-1 col-xs-8' >
                 <NavLink to = '/Conocenos' style = {{cursor: 'pointer', color:'black',backgroundColor:'transparent',textDecoration: 'none',padding: 0}} onClick={this.props.onClose}>
-                  <h5 className='glyphicon glyphicon-asterisk'> Conocenos</h5>
+                  <h3> Conocenos</h3>
                 </NavLink>
               </div>
-              <div className='col-xs-10' >
-                <hr style= {{padding: 0,margin :0 }}/>
-              </div>
+
             </div>
           </div>
         </div>

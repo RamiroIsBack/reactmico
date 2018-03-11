@@ -172,9 +172,9 @@ class CarroContainer extends Component {
     let stiloCarroBuy = {}
     let paddingTop = {}
     if(this.props.navigation){
-      if(this.props.navigation.sticky){
+      if(this.props.navigation.sticky || this.props.navigation.screenSize==='mobile'){
         paddingTop = this.props.navigation.paddingTop4navbar
-        stiloCarroBuy = {position:'fixed', padding:0 , paddingLeft:3 ,marginRight:5,top:60, bottom:200 ,overflowY:'hidden', overflowX:'hidden' }
+        stiloCarroBuy = {position:'fixed', padding:0 , paddingLeft:3 ,marginRight:5,top:210, bottom:200 ,overflowY:'hidden', overflowX:'hidden' }
       }else{
         stiloCarroBuy = {position:'relative',padding:0 , paddingLeft:3 ,marginRight:5,top:0 , bottom:200 ,overflowY:'hidden', overflowX:'hidden' }
         paddingTop = {paddingTop:0}

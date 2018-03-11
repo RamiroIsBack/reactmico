@@ -326,10 +326,9 @@ class NavbarMicoFront extends Component {
                 </span>
               </NavLink>
             </div>
-            <div className = 'navbar__menuXS__container'>
-              <NavLink to='/' style = {{cursor: 'pointer', color:'white',backgroundColor:'transparent',textDecoration: 'none',padding: 0}}>
-                <img id='xsMenu' src={xsMenuIcon}  style={{paddingTop: 3, height:45}} onClick = {this.gestionaColapso.bind(this)}/>
-              </NavLink>
+            <div className = 'navbar__menuXS__container' >
+              <img id='xsMenu' src={xsMenuIcon}  style={{paddingTop: 3, height:45}} onClick = {this.gestionaColapso.bind(this)}/>
+
             </div>
 
 

@@ -100,13 +100,14 @@ class FotoContainer extends React.Component {
         totalList.push (
           <div className = 'container-fluid' key = {g} ref={(el) => this[ele] = el} >
             {g!==0 && <hr/>}
-            <div className = 'container-fluid row' id ={tipo} style={{marginTop:40}}>
+            <div className = 'container-fluid row' id ={tipo} style={{marginTop:75}}>
 
               <div className = ' text-center col-xs-12 col-sm-4 col-md-3 col-lg-3'>
-                <h2 style ={{fontWeight: 'bolder'}}> {tipo}</h2>
+                <h2 style ={{margin:0,paddingBottom:'5px',fontWeight: 'bolder'}}> {tipo}</h2>
               </div>
               { tipoObj &&
-                <div className = 'container col-xs-12 col-sm-6 col-md-7 col-lg-7 text-center'>
+                <div className = 'container col-xs-12 col-sm-6 col-md-7 col-lg-7 text-center'
+                  style={{padding:0}}>
                   {tipoObj.descripcionTipo.split('\n').map((item, key) => {
                     return <span key={key}>{item}<br/></span>})}
                 </div>
