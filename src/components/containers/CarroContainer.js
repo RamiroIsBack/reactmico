@@ -170,14 +170,20 @@ class CarroContainer extends Component {
       )
     })
     let stiloCarroBuy = {}
-    let paddingTop = {}
+    let paddingTop = {padding:0}
     if(this.props.navigation){
-      if(this.props.navigation.sticky || this.props.navigation.screenSize==='mobile'){
-        paddingTop = this.props.navigation.paddingTop4navbar
+      if(this.props.navigation.sticky && this.props.navigation.screenSize==='mobile'){
+        let newPadding = Object.assign({}, paddingTop)
+        newPadding.paddingTop = this.props.navigation.paddingTop4navbar
+        paddingTop=newPadding
         stiloCarroBuy = {position:'fixed', padding:0 , paddingLeft:3 ,marginRight:5,top:210, bottom:200 ,overflowY:'hidden', overflowX:'hidden' }
+      }else if(this.props.navigation.sticky && this.props.navigation.screenSize==='laptop'){
+        let newPadding = Object.assign({}, paddingTop)
+        newPadding.paddingTop = this.props.navigation.paddingTop4navbar
+        paddingTop=newPadding
+        stiloCarroBuy = {position:'fixed', padding:0 , paddingLeft:3 ,marginRight:5,top:70, bottom:200 ,overflowY:'hidden', overflowX:'hidden' }
       }else{
         stiloCarroBuy = {position:'relative',padding:0 , paddingLeft:3 ,marginRight:5,top:0 , bottom:200 ,overflowY:'hidden', overflowX:'hidden' }
-        paddingTop = {paddingTop:0}
       }
     }
 
@@ -186,6 +192,7 @@ class CarroContainer extends Component {
 
         <div >
           <div className='container-fluid col-xs-7 col-sm-8 col-md-7 col-lg-6' style={paddingTop}>
+
             <div className='visible-xs-block hidden-sm hidden-md hidden-lg' style={{padding :0 , borderRightStyle:'ridge',minHeight: window.innerHeight}}>
               {this.props.carro.cartList.length === 0 &&
                 <h3>
@@ -194,7 +201,7 @@ class CarroContainer extends Component {
               }
               {productList}
 
-              <NavLink onClick ={this.goToCreaciones.bind(this)} to='/Diseños' className= 'btn center-block' style= {{textAlign: 'center',fontSize: '17px',border: 'none',color:'black'}}> seguir comprando  <h4  className = 'glyphicon glyphicon-hand-left'></h4>
+              <NavLink onClick ={this.goToCreaciones.bind(this)} to='/Diseños' className= 'btn center-block' style= {{padding:0, extAlign: 'center',fontSize: '15px', color:'black',border: '1px solid black', borderRadius:'5px',}}> seguir comprando  <h4  className = 'glyphicon glyphicon-hand-left'></h4>
               </NavLink>
 
             </div>
@@ -212,8 +219,14 @@ class CarroContainer extends Component {
             </div>
           </div>
           <div className=' col-xs-5 col-sm-4 col-md-5 col-lg-6'>
-            <CarroBuy carroPropiedades = {this.props.carro} comprar= {this.comprar.bind(this)} postVentaContenido={postVentaContenido} pedidoContenido ={pedidoContenido}
-              stiloCarroBuy= {stiloCarroBuy}/>
+            <CarroBuy
+              carroPropiedades = {this.props.carro}
+              comprar= {this.comprar.bind(this)}
+              postVentaContenido={postVentaContenido}
+              pedidoContenido ={pedidoContenido}
+              stiloCarroBuy= {stiloCarroBuy}
+              screenSize = {this.props.navigation.screenSize}
+            />
           </div>
         </div>
 

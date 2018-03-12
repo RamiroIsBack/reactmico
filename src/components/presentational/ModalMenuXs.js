@@ -80,8 +80,8 @@ class ModalMenuXs extends React.Component {
               <button onClick={this.props.onClose} className = 'btn glyphicon glyphicon-remove pull-right'
                 style= {style.modal.btnClose}></button>
               <div className='col-xs-offset-1 col-xs-8' >
-                <NavLink id='creaciones' name= 'allCreaciones' onClick = {this.gestionaIrACreacion.bind(this)} to='/Diseños' style = {{cursor: 'pointer', color:'black',backgroundColor:'transparent',textDecoration: 'none',padding: 0}}>
-                  <h3  id='creaciones' name= 'allCreaciones' > Diseños:</h3>
+                <NavLink id='allCreaciones' name= 'allCreaciones' onClick = {this.gestionaIrACreacion.bind(this)} to='/Diseños' style = {{cursor: 'pointer', color:'black',backgroundColor:'transparent',textDecoration: 'none',padding: 0}}>
+                  <h3  id='allCreaciones' name= 'allCreaciones' > Diseños:</h3>
                 </NavLink>
               </div>
 

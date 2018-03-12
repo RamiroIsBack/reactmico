@@ -9,32 +9,26 @@ class Conocenos extends Component {
     //el conocenos primero deberia ser algo mas corto en xs
     return (
       <div>
-        <div className = 'container text-center'>
-          <h2>{this.props.conocenosContenido.headerFoto.headerConocenos}</h2>
-          <hr/>
-        </div>
-        <div className = 'col-xs-12 col-sm-6 col-md-6 col-lg-6'  >
-          {this.props.conocenosContenido.descripcion.descripcionConocenos.split('\n').map((item, key) => {
-            return <span key={key}>{item}<br/></span>})}
+        
+        <div className = 'col-xs-12 col-sm-12 col-md-12 col-lg-12' style={{fontSize: '17px'}} >
+          {this.props.conocenosContenido.descripcion.descripcionConocenos.split('\\n').map((item, key) => {
+            return <span  key={key}>{item}<div><br/></div></span>
+          })}
 
         </div>
-        <div className = 'col-xs-12 col-sm-6 col-md-6 col-lg-6'  >
-          <div className='container col-xs-8 col-sm-12 col-md-12 col-lg-12' style={style.foto.container} >
+
+        <div className='col-xs-6 col-sm-6 col-md-6 col-lg-6' style={style.foto.container} >
+          <img role='presentation' src={this.props.conocenosContenido.headerFoto.urlPicConocenos} className ='img-rounded' style={{maxWidth :'100%'}}>
+          </img>
+        </div>
+        <div className='container col-xs-6 col-sm-6 col-md-6 col-lg-6' style={style.foto.container} >
+          <a onClick={this.handleClick.bind(this)} style = {{cursor: 'pointer',}}>
+
             <img role='presentation' src={this.props.conocenosContenido.headerFoto.urlPicConocenos} className ='img-rounded' style={{maxWidth :'100%'}}>
             </img>
-          </div>
-          <div className = 'container col-xs-12 col-sm-12 col-md-12 col-lg-12' style = {{marginTop:10, marginBottom: 20}}>
-            {this.props.artesaniaContenido.headerFoto.relacionArtesania.split('\n').map((item, key) => {
-              return <span key={key}>{item}<br/></span>})}
-          </div>
-          <div className='container col-xs-12 col-sm-offset-2 col-sm-8 col-md-8 col-lg-8' style={style.foto.container} >
-            <a onClick={this.handleClick.bind(this)} style = {{cursor: 'pointer',}}>
-              <h4 className = 'text-center'>Artesanía de Galicia</h4>
-              <img role='presentation' src={this.props.artesaniaContenido.headerFoto.urlPicArtesania} className ='img-rounded' style={{maxWidth :'100%'}}>
-              </img>
-            </a>
-          </div>
+          </a>
         </div>
+
       </div>
     )
   }

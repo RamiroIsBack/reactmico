@@ -88,119 +88,89 @@ class Mapa extends Component {
       <GoogleMap
         defaultOptions={{styles : [
           {
-            'featureType': 'road',
-            'elementType': 'labels',
-            'stylers': [
-              {
-                'visibility': 'on'
-              }
-            ]
-          },
-          {
-            'featureType': 'poi',
-            'stylers': [
-              {
-                'visibility': 'off'
-              }
-            ]
-          },
-          {
             'featureType': 'administrative',
+            'elementType': 'all',
             'stylers': [
               {
-                'visibility': 'off'
-              }
-            ]
-          },
-          {
-            'featureType': 'road',
-            'elementType': 'geometry.fill',
-            'stylers': [
-              {
-                'color': '#000000'
-              },
-              {
-                'weight': 1
-              }
-            ]
-          },
-          {
-            'featureType': 'road',
-            'elementType': 'geometry.stroke',
-            'stylers': [
-              {
-                'color': '#000000'
-              },
-              {
-                'weight': 0.8
+                'visibility': 'simplified'
               }
             ]
           },
           {
             'featureType': 'landscape',
+            'elementType': 'geometry',
             'stylers': [
               {
-                'color': '#ffffff'
+                'visibility': 'simplified'
+              },
+              {
+                'color': '#fcfcfc'
               }
             ]
           },
+          {
+            'featureType': 'poi',
+            'elementType': 'geometry',
+            'stylers': [
+              {
+                'visibility': 'simplified'
+              },
+              {
+                'color': '#fcfcfc'
+              }
+            ]
+          },
+
+          {
+            'featureType': 'road.highway',
+            'elementType': 'geometry',
+            'stylers': [
+              {
+                'visibility': 'simplified'
+              },
+              {
+                'color': '#dddddd'
+              }
+            ]
+          },
+          {
+            'featureType': 'road.arterial',
+            'elementType': 'geometry',
+            'stylers': [
+              {
+                'visibility': 'simplified'
+              },
+              {
+                'color': '#dddddd'
+              }
+            ]
+          },
+          {
+            'featureType': 'road.local',
+            'elementType': 'geometry',
+            'stylers': [
+              {
+                'visibility': 'simplified'
+              },
+              {
+                'color': '#eeeeee'
+              }
+            ]
+          },
+
           {
             'featureType': 'water',
-            'elementType': 'all',
+            'elementType': 'geometry',
             'stylers': [
               {
-                'color': '#e5fcfc'
+                'visibility': 'simplified'
+              },
+              {
+                'color': '#dddddd'
               }
             ]
           },
-          {
-            'featureType': 'transit',
-            'stylers': [
-              {
-                'visibility': 'off'
-              }
-            ]
-          },
-          {
-            'elementType': 'labels',
-            'stylers': [
-              {
-                'visibility': 'off'
-              }
-            ]
-          },
-          {
-            'elementType': 'labels.text',
-            'stylers': [
-              {
-                'visibility': 'on'
-              }
-            ]
-          },
-          {
-            'elementType': 'labels.text.stroke',
-            'stylers': [
-              {
-                'color': '#ffffff'
-              }
-            ]
-          },
-          {
-            'elementType': 'labels.text.fill',
-            'stylers': [
-              {
-                'color': '#000000'
-              }
-            ]
-          },
-          {
-            'elementType': 'labels.icon',
-            'stylers': [
-              {
-                'visibility': 'on'
-              }
-            ]
-          }
+
         ]
         }}
         defaultZoom={7}

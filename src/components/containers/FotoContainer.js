@@ -38,10 +38,12 @@ class FotoContainer extends React.Component {
 
   focusDiv(tipo){
 
-    let creacionList = this.props.firebaseCreaciones.listaCreaciones
-    //he metido como ref el id del primer elemento de cada tipo
-    let ref = creacionList[tipo][0].id
-    var theDiv = this[ref]
+    if(this.props.firebaseCreaciones.listaCreaciones.length !==0){
+      let creacionList = this.props.firebaseCreaciones.listaCreaciones
+      //he metido como ref el id del primer elemento de cada tipo
+      let ref = creacionList[tipo][0].id
+      var theDiv = this[ref]
+    }
 
     if(theDiv){
       theDiv.scrollIntoView({block: 'start', behavior: 'smooth'})

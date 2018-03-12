@@ -4,11 +4,11 @@ import style from './styles'
 export default class CarroBuy extends Component {
   render() {
     let total = this.props.carroPropiedades.precioSubTotal + this.props.carroPropiedades.envio
-    let pedidoTitulo = '';
-    let pedidoInfo = '';
+    let pedidoTitulo = ''
+    let pedidoInfo = ''
     if(this.props.pedidoContenido.descripcion){
-      pedidoTitulo = this.props.pedidoContenido.descripcion.pedidoTitulo;
-      pedidoInfo = this.props.pedidoContenido.descripcion.pedidoInfo;
+      pedidoTitulo = this.props.pedidoContenido.descripcion.pedidoTitulo
+      pedidoInfo = this.props.pedidoContenido.descripcion.pedidoInfo
     }
     return (
       <div className ='row container-fluid' style={this.props.stiloCarroBuy}>
@@ -32,17 +32,19 @@ export default class CarroBuy extends Component {
           </div>
         </div>
         <br/>
-        <div className=' clear-fix container-fluid col-xs-12 col-sm-12 col-md-12 col-lg-6' style={{paddingLeft: 0}} >
+        {this.props.screenSize !== 'mobile' &&
+          <div className=' clear-fix container-fluid col-xs-12 col-sm-12 col-md-12 col-lg-6' style={{paddingLeft: 0}} >
 
-          <h4 style = {{whiteSpace: 'initial',paddingLeft: 0}}>{pedidoTitulo}</h4>
+            <h4 style = {{whiteSpace: 'initial',paddingLeft: 0}}>{pedidoTitulo}</h4>
 
-          <br/>
+            <br/>
 
 
-          {pedidoInfo.split('\n').map((item, key) => {
-            return <span style = {{whiteSpace: 'initial',paddingLeft: 0}} key={key}>{item}<br/></span>})}
+            {pedidoInfo.split('\n').map((item, key) => {
+              return <span style = {{whiteSpace: 'initial',paddingLeft: 0}} key={key}>{item}<br/></span>})}
 
-        </div>
+          </div>
+        }
 
       </div>
     )
