@@ -18,7 +18,7 @@ class HomeContainer extends Component {
     window.addEventListener('beforeunload', this.handleLeavingApp.bind(this))
 
     this.props.startCarousellWithTimeOut(0,4)
-    
+
     let albaAgrees = false
     if(albaAgrees){
       // url (required), options (optional)
@@ -145,7 +145,7 @@ class HomeContainer extends Component {
     }
 
     let backgrounImageObject= {
-      backgroundImage: 'url('+this.props.creacion.carousellBackground.urlPic+')',
+      backgroundImage: 'url('+this.props.storeContenidos.carousellBackground.urlPic+')',
     }
     return (
       <div>

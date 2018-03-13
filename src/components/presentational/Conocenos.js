@@ -24,7 +24,7 @@ class Conocenos extends Component {
         <div className='container col-xs-6 col-sm-6 col-md-6 col-lg-6' style={{textAlign: 'center'}} >
           <a onClick={this.handleClick.bind(this)} style = {{cursor: 'pointer',}}>
 
-            <img role='presentation' src={this.props.conocenosContenido.headerFoto.urlPicConocenos} className ='img-rounded' style={{maxWidth :'100%'}}>
+            <img role='presentation' src={this.props.artesaniaContenido.headerFoto.urlPicArtesania} className ='img-rounded' style={{maxWidth :'100%'}}>
             </img>
           </a>
         </div>
