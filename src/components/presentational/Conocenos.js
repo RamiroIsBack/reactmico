@@ -9,7 +9,7 @@ class Conocenos extends Component {
     //el conocenos primero deberia ser algo mas corto en xs
     return (
       <div>
-        
+
         <div className = 'col-xs-12 col-sm-12 col-md-12 col-lg-12' style={{fontSize: '17px'}} >
           {this.props.conocenosContenido.descripcion.descripcionConocenos.split('\\n').map((item, key) => {
             return <span  key={key}>{item}<div><br/></div></span>
@@ -17,11 +17,11 @@ class Conocenos extends Component {
 
         </div>
 
-        <div className='col-xs-6 col-sm-6 col-md-6 col-lg-6' style={style.foto.container} >
+        <div className='col-xs-6 col-sm-6 col-md-6 col-lg-6' style={{textAlign: 'center'}} >
           <img role='presentation' src={this.props.conocenosContenido.headerFoto.urlPicConocenos} className ='img-rounded' style={{maxWidth :'100%'}}>
           </img>
         </div>
-        <div className='container col-xs-6 col-sm-6 col-md-6 col-lg-6' style={style.foto.container} >
+        <div className='container col-xs-6 col-sm-6 col-md-6 col-lg-6' style={{textAlign: 'center'}} >
           <a onClick={this.handleClick.bind(this)} style = {{cursor: 'pointer',}}>
 
             <img role='presentation' src={this.props.conocenosContenido.headerFoto.urlPicConocenos} className ='img-rounded' style={{maxWidth :'100%'}}>
