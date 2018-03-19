@@ -8,7 +8,7 @@ var initialState = {
   envio : 0,
 
   amigoNavActive : {
-    datosActive:true,
+    datosActive:false,
     pedidosActive:false,
   },
   navbarMicoFrontActive : {

@@ -3,8 +3,7 @@ import {connect} from 'react-redux'
 import actions from '../../actions'
 import history from '../../utils/history'
 
-class ModalVolverArribaContainer extends Component{
-
+class CarousellContainer extends Component{
   handleClick(event){
     this.props.toggleModal('closeCreaciones')
     this.props.navActive('', 'navbarMicoFront')//no hay tab activa
@@ -12,23 +11,21 @@ class ModalVolverArribaContainer extends Component{
     //routing programatically, now i can prevent if there is an error
     history.push('/')
   }
-  onImgLoaded(){
+  handleImageLoaded(){
+    console.log(
+      'image loaded?'
+    )
+    //this.setState({loading:false})
   }
   render(){
-    let paddingTop = {}
-    if(this.props.navigation){
-      if(this.props.navigation.sticky){
-        paddingTop = {paddingTop:0}
-      }else{
-        paddingTop = this.props.navigation.paddingTop4navbar
-      }
-    }
+
     return(
-      <div className ='logo__top__container' id='logoTopContainer' style = {paddingTop} >
-        <img className ='logo__top__img' src= '/logoApaisado.png'
-          onClick ={this.handleClick.bind(this)}
-          onLoad = {this.onImgLoaded.bind(this)}
-        ></img>
+      <div className =''   >
+
+        <div className='home__carousell__container' style={this.props.backgrounImageObject}
+          onLoad= {this.handleImageLoaded.bind(this)}>
+
+        </div>
       </div>
     )
   }
@@ -48,4 +45,4 @@ const stateToProps = (state) =>{
   }
 }
 
-export default connect (stateToProps, dispatchToProps)(ModalVolverArribaContainer)
+export default connect (stateToProps, dispatchToProps)(CarousellContainer)

@@ -22,7 +22,9 @@ import MapaContainer from './MapaContainer'
 import ListaFeriasContainer from './ListaFeriasContainer'
 import ModalVolverArribaContainer from './ModalVolverArribaContainer'
 import LogoContainer from './LogoContainer'
+import CarousellContainer from './CarousellContainer'
 export{
+  CarousellContainer,
   LogoContainer,
   ModalVolverArribaContainer,
   ListaFeriasContainer,

@@ -77,7 +77,12 @@ class NavbarMicoFront extends Component {
       this.props.toggleModal('closeFerias')
 
       this.props.navActive(event.target.id, 'navbarMicoFront')
-      this.props.navActive('datos', 'amigoNav')
+      if(!this.props.navigation.amigoNavActive.pedidosActive &&
+        !this.props.navigation.amigoNavActive.pedidosActive){
+
+        this.props.navActive('datos', 'amigoNav')
+      }
+
     }
     //de los dropdown
     else if (event.target.id === 'creaciones'){

@@ -8,7 +8,7 @@ var initialState = {
   carousellBackground:{
     urlPic:'',
     num:0,
-
+    CarousellLength:4,
   }
 }
 
@@ -35,7 +35,7 @@ export default (state = initialState, action) => {
           let CarousellObject = 'pic'+numpic
           newState.carousellBackground.urlPic = carousellObjectList[CarousellObject].urlPicCarousell
 
-          newState.carousellBackground.num =action.data
+          newState.carousellBackground.num =numpic
         }
       }
     }

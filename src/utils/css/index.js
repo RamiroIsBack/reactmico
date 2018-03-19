@@ -5,7 +5,9 @@ import General_css  from './General.css'
 import navbar_css from './navbar.css'
 import Home__css from './Home.css'
 import Ferias__css from './Ferias.css'
+import Carousell_css from './Carousell.css'
 export {
+  Carousell_css,
   Ferias__css,
   Home__css,
   navbar_css,

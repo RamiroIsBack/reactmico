@@ -16,21 +16,6 @@ export default {
     }
   },
 
-  
-  startCarousellWithTimeOut:(pic,length)=>{
-    return dispatch =>{
-      setTimeout(() => {
-        dispatch(actions.moveCarousell(pic))
-        pic ++
-
-        if(pic != length){
-          dispatch(actions.startCarousellWithTimeOut(pic,length))
-        }else{
-          dispatch(actions.startCarousellWithTimeOut(0,length))
-        }
-      }, 8000)
-    }
-  },
   moveCarousell:(pic)=>{
     return{
       type: constants.MOVE_CAROUSELL,

@@ -18,7 +18,8 @@ class ModalRegistrarse extends React.Component {
       nombreExpectation2 : true,
       nombreExpectation3 : false,
 
-      mailExpectation : false,
+      mailExpectation1 : false,
+      mailExpectation2 : false,
 
       passwordExpectation1 : false,
       passwordExpectation2 : false,
@@ -71,10 +72,16 @@ class ModalRegistrarse extends React.Component {
 
     }else if (event.target.id ==='contactMail'){
       if(value.indexOf('@') > -1 && value.indexOf('.') >-1 && value.charAt(value.length-1)!== '.'){
-        this.setState({mailExpectation : true})
+        this.setState({mailExpectation1 : true})
       }else{
-        this.setState({mailExpectation : false})
+        this.setState({mailExpectation1 : false})
       }
+      if (this.props.comprobarEmail(value)) {
+        this.setState({mailExpectation2 : false})
+      }else{
+        this.setState({mailExpectation2 : true})
+      }
+
     }else if ( event.target.id === 'password' ){
       if(value.length >5 ){
         this.setState({passwordExpectation1 : true})
@@ -92,7 +99,7 @@ class ModalRegistrarse extends React.Component {
   }
   handleRegistrarse(event){
     let amigo = null
-    if(this.state.nombreExpectation1 && this.state.nombreExpectation2 && this.state.nombreExpectation3 && this.state.mailExpectation && this.state.passwordExpectation1 && this.state.passwordExpectation2){
+    if(this.state.nombreExpectation1 && this.state.nombreExpectation2 && this.state.nombreExpectation3 && this.state.mailExpectation1 && this.state.mailExpectation2 && this.state.passwordExpectation1 && this.state.passwordExpectation2){
       amigo ={
         nombre: document.getElementById('nombre').value,
         email: document.getElementById('contactMail').value,
@@ -163,7 +170,8 @@ class ModalRegistrarse extends React.Component {
     var estiloNom2 = {color: 'red', marginTop:0,marginBottom:0}
     var estiloNom3 = {color: 'red', marginTop:0,marginBottom:0}
 
-    var estiloMail = {color: 'red', marginTop:0,marginBottom:0}
+    var estiloMail1 = {color: 'red', marginTop:0,marginBottom:0}
+    var estiloMail2 = {color: 'red', marginTop:0,marginBottom:0}
 
     var estiloPassword1 = {color: 'red', marginTop:0,marginBottom:0}
     var estiloPassword2 = {color: 'red', marginTop:0,marginBottom:0}
@@ -172,7 +180,8 @@ class ModalRegistrarse extends React.Component {
     var nombreExpectation2Met = 'glyphicon glyphicon-remove'
     var nombreExpectation3Met = 'glyphicon glyphicon-remove'
 
-    var mailExpectationMet = 'glyphicon glyphicon-remove'
+    var mailExpectation1Met = 'glyphicon glyphicon-remove'
+    var mailExpectation2Met = 'glyphicon glyphicon-remove'
 
     var passwordExpectation1Met = 'glyphicon glyphicon-remove'
     var passwordExpectation2Met = 'glyphicon glyphicon-remove'
@@ -197,11 +206,18 @@ class ModalRegistrarse extends React.Component {
       forNombre ={border: '1.5px solid green',}
     }
 
-    if (this.state.mailExpectation){
-      mailExpectationMet = 'glyphicon glyphicon-ok'
-      estiloMail ={color: 'green', marginTop:0,marginBottom:0}
+    if (this.state.mailExpectation1){
+      mailExpectation1Met = 'glyphicon glyphicon-ok'
+      estiloMail1 ={color: 'green', marginTop:0,marginBottom:0}
+    }
+    if (this.state.mailExpectation2){
+      mailExpectation2Met = 'glyphicon glyphicon-ok'
+      estiloMail2 ={color: 'green', marginTop:0,marginBottom:0}
+    }
+    if(this.state.mailExpectation1 && this.state.mailExpectation2){
       forMail ={border: '1.5px solid green',}
     }
+
 
     if (this.state.passwordExpectation1){
       passwordExpectation1Met = 'glyphicon glyphicon-ok'
@@ -309,10 +325,18 @@ class ModalRegistrarse extends React.Component {
                             <tbody>
                               <tr>
                                 <td style = {{ paddingBottom:0}}>
-                                  <h6 style = {estiloMail}>email valido </h6>
+                                  <h6 style = {estiloMail1}>email valido </h6>
                                 </td>
                                 <td style = {{ paddingBottom:0}}>
-                                  <h6 className ={mailExpectationMet} style = {estiloMail}></h6>
+                                  <h6 className ={mailExpectation1Met} style = {estiloMail1}></h6>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style = {{ paddingBottom:0}}>
+                                  <h6 style = {estiloMail2}>email disponible </h6>
+                                </td>
+                                <td style = {{ paddingBottom:0}}>
+                                  <h6 className ={mailExpectation2Met} style = {estiloMail2}></h6>
                                 </td>
                               </tr>
                             </tbody>

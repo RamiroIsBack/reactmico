@@ -4,7 +4,7 @@ import { NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
 import actions from '../../actions'
 import history from '../../utils/history'
-
+import {CarousellContainer} from './'
 class HomeContainer extends Component {
   constructor(){
     super()
@@ -16,8 +16,6 @@ class HomeContainer extends Component {
 
   componentDidMount(){
     window.addEventListener('beforeunload', this.handleLeavingApp.bind(this))
-
-    this.props.startCarousellWithTimeOut(0,4)
 
     let albaAgrees = false
     if(albaAgrees){
@@ -42,7 +40,22 @@ class HomeContainer extends Component {
           console.log('algo fue mal al cargar desde instagram'+error)
         })
     }
+
+    this.intervalId = setInterval(this.nextPicCarousell.bind(this), 8000)
   }
+
+  componentWillUnmount(){
+    clearInterval(this.intervalId)
+  }
+
+  nextPicCarousell(){
+    if(this.props.storeContenidos.carousellBackground.CarousellLength === this.props.storeContenidos.carousellBackground.num){
+      this.props.moveCarousell(0)
+    }else{
+      this.props.moveCarousell(this.props.storeContenidos.carousellBackground.num)
+    }
+  }
+
   handleLeavingApp(){
     //console.log('back button pressed')//this triggers in the browser just when leaving the page!!
   }
@@ -69,12 +82,7 @@ class HomeContainer extends Component {
   handleClick(){
 
   }
-  handleImageLoaded(){
 
-    this.setState({loading:false})
-
-
-  }
   getInstagramFeed(){
     let instagramFeedComponentsList=[]
     let albaAgrees = false
@@ -118,7 +126,6 @@ class HomeContainer extends Component {
     var micoContenido = {}
     let headlineMico = ''
     let desarrolloMico = ''
-
     if (this.props.storeContenidos.listaContenidos.length !==0){
       for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
@@ -133,6 +140,7 @@ class HomeContainer extends Component {
       }
 
     }
+
     let instagramFeedComponentsList = this.getInstagramFeed()
 
     let paddingTop = {}
@@ -146,23 +154,29 @@ class HomeContainer extends Component {
 
     let backgrounImageObject= {
       backgroundImage: 'url('+this.props.storeContenidos.carousellBackground.urlPic+')',
+      //TODO::::meter animacion cada vez q cambie de foto
     }
     return (
       <div>
-        {this.state.loading && this.state.usingIt &&
-          <div style= {{textAlign:'center',marginTop:'150px'}}>
-            <img id='faviconFliping' src='/favicon.ico' style= {{maxHeight :'150px',maxWidth :'150px'}}/>
-          </div>
-        }
         <div
           className ='home__container'
           style = {paddingTop}
           onClick = {this.cierraDialogosNavbar.bind(this)}
         >
+          <div className="home__carousell__container">
+            {this.props.storeContenidos.carousellBackground.urlPic==='' &&
+              <div style= {{textAlign:'center',marginTop:'150px'}}>
+                <img id='faviconFliping' src='/favicon.ico' style= {{maxHeight :'150px',maxWidth :'150px'}}/>
+              </div>
+            }
+            <CarousellContainer
+              backgrounImageObject = {backgrounImageObject}
+            >
+            </CarousellContainer>
+          </div>
 
-          <div className='home__carousell__container' style={backgrounImageObject}
-            onLoad= {this.handleImageLoaded.bind(this)}>
-
+          <div className = 'instagram__foto__container'>
+            {instagramFeedComponentsList}
           </div>
 
           <div className = 'home__copy__container'>
@@ -170,10 +184,6 @@ class HomeContainer extends Component {
             <p>{desarrolloMico}</p>
           </div>
 
-          <div className = 'instagram__foto__container'>
-            {instagramFeedComponentsList}
-
-          </div>
         </div>
       </div>
     )
@@ -186,9 +196,9 @@ const dispatchToProps = (dispatch) =>{
     getCreaciones:()=>dispatch (actions.getCreaciones()),
     getContenidos:()=>dispatch(actions.getContenidos()),
     toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
-    startCarousellWithTimeOut:(pic,length) => dispatch(actions.startCarousellWithTimeOut(pic,length)),
     navActive:(activeTab,params) => dispatch(actions.navActive(activeTab,params)),
     loadFromInstagram: (feedList) => dispatch(actions.loadFromInstagram(feedList)),
+    moveCarousell:(pic) => dispatch(actions.moveCarousell(pic)),
   }
 }
 

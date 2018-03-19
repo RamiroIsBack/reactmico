@@ -71,6 +71,20 @@ class ModalRegistrarseContainer extends Component {
     }
     return repe
   }
+  comprobarEmail(email){
+    var listaUsers = []
+    var repe= false
+    if (this.props.users){
+      listaUsers = this.props.users.listaUsers
+    }
+    for (let i =0; i < listaUsers.length; i++){
+      if (listaUsers[i].datosPersonales.email === email){
+        repe = true
+        break
+      }
+    }
+    return repe
+  }
 
   render(){
     var registrarseShowing = false
@@ -96,7 +110,16 @@ class ModalRegistrarseContainer extends Component {
     return (
 
       <div>
-        <ModalRegistrarse entrarConGoogle = {this.entrarConGoogle.bind(this)} entrarConFacebook = {this.entrarConFacebook.bind(this)} show={registrarseShowing} subirNuevoAmigo={this.subirNuevoAmigo.bind(this)} onClose={this.toggleModal.bind(this)} contenido = {registrarseContenidos} comprobarNombre = {this.comprobarNombre.bind(this)}>
+        <ModalRegistrarse
+          show={registrarseShowing}
+          onClose={this.toggleModal.bind(this)}
+          entrarConGoogle = {this.entrarConGoogle.bind(this)}
+          entrarConFacebook = {this.entrarConFacebook.bind(this)}
+          subirNuevoAmigo={this.subirNuevoAmigo.bind(this)}
+          contenido = {registrarseContenidos}
+          comprobarNombre = {this.comprobarNombre.bind(this)}
+          comprobarEmail ={this.comprobarEmail.bind(this)}
+        >
         </ModalRegistrarse>
 
 
