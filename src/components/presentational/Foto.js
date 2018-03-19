@@ -58,7 +58,6 @@ export default class Foto extends Component {
   }
   handleFotoLoaded(){
     this.setState({fotoLoaded:true})
-    console.log ('foto loaded trueeeeee')
   }
 
   //TODO read about image preloading

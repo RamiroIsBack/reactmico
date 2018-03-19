@@ -9,8 +9,6 @@ class HomeContainer extends Component {
   constructor(){
     super()
     this.state={
-      loading:true,
-      usingIt:false,
     }
   }
 
@@ -41,7 +39,7 @@ class HomeContainer extends Component {
         })
     }
 
-    this.intervalId = setInterval(this.nextPicCarousell.bind(this), 8000)
+    this.intervalId = setInterval(this.nextPicCarousell.bind(this), 6000)
   }
 
   componentWillUnmount(){
@@ -151,7 +149,10 @@ class HomeContainer extends Component {
         paddingTop = {paddingTop:0}
       }
     }
-
+    let loading = true
+    if(this.props.storeContenidos.carousellBackground.urlPic !==''){
+      loading  = false
+    }
     let backgrounImageObject= {
       backgroundImage: 'url('+this.props.storeContenidos.carousellBackground.urlPic+')',
       //TODO::::meter animacion cada vez q cambie de foto
@@ -164,13 +165,14 @@ class HomeContainer extends Component {
           onClick = {this.cierraDialogosNavbar.bind(this)}
         >
           <div className="home__carousell__container">
-            {this.props.storeContenidos.carousellBackground.urlPic==='' &&
+            {loading &&
               <div style= {{textAlign:'center',marginTop:'150px'}}>
                 <img id='faviconFliping' src='/favicon.ico' style= {{maxHeight :'150px',maxWidth :'150px'}}/>
               </div>
             }
             <CarousellContainer
               backgrounImageObject = {backgrounImageObject}
+              loading = {loading}
             >
             </CarousellContainer>
           </div>

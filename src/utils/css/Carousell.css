@@ -1,0 +1,14 @@
+.carousell__arrow__left{
+  float: right;
+  padding: 40px 15px 40px 15px;
+  font-size: 33px;
+  color: #26d5b7;
+  cursor: pointer;
+}
+.carousell__arrow__right{
+  float: left;
+  padding: 40px 15px 40px 15px;
+  color: #26d5b7;
+  font-size: 33px;
+  cursor: pointer;
+}

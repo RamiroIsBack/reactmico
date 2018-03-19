@@ -7,7 +7,7 @@ var initialState = {
 
   carousellBackground:{
     urlPic:'',
-    num:0,
+    num:1,
     CarousellLength:4,
   }
 }
@@ -28,14 +28,32 @@ export default (state = initialState, action) => {
   case constants.MOVE_CAROUSELL:{
 
     if(newState.listaContenidos.length!==0){
+
       for (let i = 0 ; i < newState.listaContenidos.length ; i++) {
         let carousellObjectList= newState.listaContenidos[i]
         if(carousellObjectList.id ==='carousell'){
-          let numpic = action.data+1 //empieza en pic1 hasta pic4 no en 0
-          let CarousellObject = 'pic'+numpic
-          newState.carousellBackground.urlPic = carousellObjectList[CarousellObject].urlPicCarousell
+          let numpic = 0
+          let carousellObject= ''
+          if(action.data === 'atras'){
+            numpic = newState.carousellBackground.num -1
+            numpic = numpic <1? 4 :numpic
+            carousellObject = 'pic'+numpic
+            newState.carousellBackground.urlPic = carousellObjectList[carousellObject].urlPicCarousell
+            newState.carousellBackground.num =numpic
+          }else if(action.data === 'alante'){
+            numpic = newState.carousellBackground.num +1
+            numpic = numpic >4? 1 :numpic
+            carousellObject = 'pic'+numpic
+            newState.carousellBackground.urlPic = carousellObjectList[carousellObject].urlPicCarousell
+            newState.carousellBackground.num =numpic
 
-          newState.carousellBackground.num =numpic
+          }else{
+            numpic = action.data+1 //empieza en pic1 hasta pic4 no en 0
+            carousellObject = 'pic'+numpic
+            newState.carousellBackground.urlPic = carousellObjectList[carousellObject].urlPicCarousell
+
+            newState.carousellBackground.num =numpic
+          }
         }
       }
     }

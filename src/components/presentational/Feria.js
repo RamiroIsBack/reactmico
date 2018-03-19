@@ -1,9 +1,11 @@
 import React from 'react'
 import style from './styles'
 export default class Feria extends React.Component {
-  constructor(args) {
+  constructor() {
     super()
-  // code
+    this.state ={
+      fotoLoaded:false,
+    }
   }
 
   // methods
@@ -12,6 +14,9 @@ export default class Feria extends React.Component {
     if (event.target.id === 'pic'){
       this.props.whenClicked(this.props.feria.urlFeria)
     }
+  }
+  handleFotoLoaded(){
+    this.setState({fotoLoaded:true})
   }
 
   render(){
@@ -47,7 +52,12 @@ export default class Feria extends React.Component {
         </div>
         <div className ='row' style={{marginTop:'10px'}}>
           <div className = ' col-xs-12 col-sm-6 col-md-6 col-lg-6' style = {{padding : 0}}>
-            <img role='presentation' src={this.props.feria.pic} className ='img-rounded' alt='' id='pic' style = {{cursor:'pointer',maxWidth: '90%'}} onClick={this.handleClick.bind(this)}>
+            {!this.state.fotoLoaded &&
+              <div className='loader'>Cargando...</div>
+            }
+            <img role='presentation' src={this.props.feria.pic} className ='img-rounded' alt='' id='pic' style = {{cursor:'pointer',maxWidth: '90%'}} onClick={this.handleClick.bind(this)}
+              onLoad = {this.handleFotoLoaded.bind(this)}
+            >
             </img>
           </div>
           <div className = ' col-xs-11 col-sm-5 col-md-5 col-lg-5' style = {{textAlign:'left',padding : 0,paddingLeft:'10px'}}>
