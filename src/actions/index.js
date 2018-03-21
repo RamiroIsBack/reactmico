@@ -16,6 +16,13 @@ export default {
     }
   },
 
+  cierraCookiesAviso:()=>{
+    return{
+      type: constants.CIERRA_COOKIES_AVISO,
+      data: false,
+    }
+  },
+
   moveCarousell:(pic)=>{
     return{
       type: constants.MOVE_CAROUSELL,

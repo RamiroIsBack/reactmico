@@ -23,7 +23,9 @@ import ListaFeriasContainer from './ListaFeriasContainer'
 import ModalVolverArribaContainer from './ModalVolverArribaContainer'
 import LogoContainer from './LogoContainer'
 import CarousellContainer from './CarousellContainer'
+import CookiesAvisoContainer from './CookiesAvisoContainer'
 export{
+  CookiesAvisoContainer,
   CarousellContainer,
   LogoContainer,
   ModalVolverArribaContainer,

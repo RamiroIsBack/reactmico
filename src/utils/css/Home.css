@@ -44,8 +44,51 @@
     margin-bottom: 1em;
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: auto 550px;
-    background-attachment: scroll;
+    background-size: 700px auto ;
+    background-attachment: fixed;
+  }
+
+}
+@media screen and (max-width: 600px) {
+  .home__carousell__container{
+    grid-area: c;
+    padding: 0;
+    width: 100%;
+    height: 550px;
+    margin-bottom: 1em;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 550px auto ;
+    background-attachment: fixed;
+  }
+
+}
+@media screen and (max-width: 470px) {
+  .home__carousell__container{
+    grid-area: c;
+    padding: 0;
+    width: 100%;
+    height: 450px;
+    margin-bottom: 1em;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:450px auto ;
+    background-attachment: fixed;
+  }
+
+}
+
+@media screen and (max-width: 400px) {
+  .home__carousell__container{
+    grid-area: c;
+    padding: 0;
+    width: 100%;
+    height: 450px;
+    margin-bottom: 1em;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size:400px auto ;
+    background-attachment: fixed;
   }
 
 }

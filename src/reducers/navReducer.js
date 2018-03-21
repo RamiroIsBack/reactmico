@@ -24,6 +24,8 @@ var initialState = {
   },
   screenSize: 'laptop', //or mobile
 
+  showAvisoCookies:true,
+
 }
 
 export default (state = initialState, action) => {
@@ -64,6 +66,10 @@ export default (state = initialState, action) => {
   case constants.FIX_NAVBAR:
     newState.sticky = action.data
     console.log('fixNavbar: '+action.data)
+    return newState
+
+  case constants.CIERRA_COOKIES_AVISO:
+    newState.showAvisoCookies = action.data
     return newState
 
   default:

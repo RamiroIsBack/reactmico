@@ -2,13 +2,14 @@
   display: grid;
   grid-gap: 3px;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(6,auto);
+  grid-template-rows: repeat(7,auto);
   grid-template-areas:
       "n n n n n n n n n n n n"
       "l l l l l l l l l l l l"
       "m m m m m m m m m m m m"
       "m m m m m m m m m m m m"
       "m m m m m m m m m m m m"
+      "p p p p p p p p p p p p"
       "f f f f f f f f f f f f";
 }
 .sticky__navbar__contanier{
@@ -28,6 +29,7 @@
 
 .main__container{
   padding-top: 20px;
+  margin-bottom: 30px;
   background-color: white;
   grid-area: m;
 }
@@ -36,10 +38,20 @@
   background-color: black;
   display: inline-block;
   grid-area: f;
-  margin-top: 30px;
   padding-top: 20px;
   max-height : 800px;
   min-height: 150px;
+
+}
+.cookies__aviso__container{
+  grid-area: p;
+  display: inline-block;
+}
+.cookies__aviso{
+  background-color: rgba(0, 0, 0, 0.58);
+  color:white;
+  grid-area: p;
+  padding: 5px 5px 0 15px;
 
 }
 .logo__top__img{

@@ -32,4 +32,5 @@ export default {
   CHANGE_SCREEN_WIDTH:                'CHANGE_SCREEN_WIDTH',
   FIX_NAVBAR:                         'FIX_NAVBAR',
   VERIFY_EMAIL:                       'VERIFY_EMAIL',
+  CIERRA_COOKIES_AVISO:               'CIERRA_COOKIES_AVISO'
 }

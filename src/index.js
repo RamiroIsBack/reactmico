@@ -19,6 +19,7 @@ import {AmigoPedidosContainer,
   ModalRealizarCompraContainer,
   ModalVolverArribaContainer,
   LogoContainer,
+  CookiesAvisoContainer,
 } from './components/containers'
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -121,6 +122,12 @@ class ReactMico extends Component {
                 <ModalVolverArribaContainer/>
 
               </div>
+
+              <div className = 'cookies__aviso__container'>
+                <CookiesAvisoContainer>
+                </CookiesAvisoContainer>
+              </div>
+
               <div className = 'footer__container'>
                 <FooterContainer/>
               </div>

@@ -7,15 +7,7 @@ import {ModalEntrar} from '../presentational'
 
 class ModalEntrarContainer extends Component {
 
-  constructor(){
-    super()
-    this.state ={
-
-    }
-  }
-  componentWillMount() {
-
-  }
+  
   changePassword(payload,params){
     alert('en breve recibirás un email con un enlace para cambiar tu contraseña')
 
