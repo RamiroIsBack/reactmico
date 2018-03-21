@@ -157,7 +157,7 @@ export default (state = initialState, action) => {
     }
     return newState
 
-  case constants.USER_CREATED:
+  case constants.USER_CREATED:{
     let currentUser= {
       datosPersonales:{
         nombre: action.data.displayName,
@@ -187,7 +187,17 @@ export default (state = initialState, action) => {
       console.log('from USER_CREATED pero sin iniciar sesion xq ya habia alguien'+JSON.stringify(currentUser.datosPersonales.nombre))
     }
     return newState
+  }
 
+  case constants.VERIFY_EMAIL:{
+    if(action.params==='mailNoVerificado'){
+      //alert('tu email aún no ha sido verificado, porfavor busca el email en tu correo electrónico (puede que esté en correo no deseado) o si quieres te lo volvemos a mandar ,pincha en "email no verificado" en tu zona personal')
+    }
+    else{
+      newState.currentUser.datosPersonales.emailVerified= action.data
+    }
+    return newState
+  }
   case constants.PASSWORD_CHANGED:
     return newState
   case constants.RESEND_EMAIL:

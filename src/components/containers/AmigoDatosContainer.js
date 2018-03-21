@@ -6,7 +6,25 @@ import actions from '../../actions'
 
 
 class AmigoDatosContainer extends Component {
+  componentDidMount(){
+    if(this.props.users.currentUser){
+      if(!this.props.users.currentUser.datosPersonales.emailVerified &&
+        this.props.users.currentUser.datosPersonales.providerId==='firebase'){
 
+        this.props.checkEmailVerified(this.props.users.currentUser.datosPersonales.emailVerified)
+      }
+    }
+  }
+  componentDidUpdate(){
+    if(this.props.users.currentUser){
+      if(!this.props.users.currentUser.datosPersonales.emailVerified &&
+        this.props.users.currentUser.datosPersonales.providerId==='firebase'){
+
+        this.props.checkEmailVerified(this.props.users.currentUser.datosPersonales.emailVerified)
+      }
+    }
+  }
+  
   actualizarInfoUsuario(user, flag, posibleFoto) {
     //flag -> envio, nombre, foto, Warning
     this.props.addUserInfo(user,flag, posibleFoto)
@@ -88,6 +106,7 @@ const dispatchToProps = (dispatch) =>{
     cambiarCurrentUserModificables : (datos,flag) => dispatch (actions.cambiarCurrentUserModificables(datos,flag)),
     changePassword:(newPasword,params) =>dispatch(actions.changePassword(newPasword,params)),
     resendEmail:()=>dispatch(actions.resendEmail()),
+    checkEmailVerified:(flagEmailVerified)=>dispatch(actions.checkEmailVerified(flagEmailVerified)),
   }
 }
 

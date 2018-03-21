@@ -26,7 +26,7 @@ var listContenidos = []
 var listEnlaces = []
 var currentUserUid='' //identificador del currentUser. Lo guardo al logear y lo uso si tengo q hacer cambios en sus datos
 var currentUserEmail=''
-
+var currentUserPassword=''
 const getCreaciones = (params, actionType) => {
   return dispatch => DBcreaciones.once('value')
     .then(snapshot => {
@@ -244,7 +244,7 @@ const elementoVendido = (id,actionType) =>{
       dispatch({
         type: actionType,
         params: 'errorElementoVendido', // can be null
-        data: error, // err , no ha subido usuario
+        data: error, 
       })
     }
     throw error
@@ -303,8 +303,8 @@ const loadCarro = (carro,justLogedIn,actionType)=> {
             if (actionType !== null){
               dispatch({
                 type: actionType,
-                params: 'okCarro', // can be null
-                data: listaCarroConcat, // usuario subido correctamente
+                params: 'okCarro',
+                data: listaCarroConcat,
               })
             }
           }).catch(err => {
@@ -313,7 +313,7 @@ const loadCarro = (carro,justLogedIn,actionType)=> {
               dispatch({
                 type: actionType,
                 params: 'errorCarro', // can be null
-                data: err, // err , no ha subido usuario
+                data: err,
               })
             }
             throw err
@@ -361,7 +361,7 @@ const uploadCarro=(carro,actionType) =>{
         dispatch({
           type: actionType,
           params: 'okCarro', // can be null
-          data: carro, // usuario subido correctamente
+          data: carro,
         })
       }
     }).catch(err => {
@@ -370,7 +370,7 @@ const uploadCarro=(carro,actionType) =>{
         dispatch({
           type: actionType,
           params: 'errorCarro', // can be null
-          data: err, // err , no ha subido usuario
+          data: err,
         })
       }
       throw err
@@ -508,6 +508,7 @@ const loginWithEmailAndPassword = (user,actionType) => {
       }
       currentUserUid = result.uid
       currentUserEmail = result.email
+      currentUserPassword = user.password
 
       database.ref('users/'+result.uid+'/datosPersonales')
         .set(datosPers).then(snapshot => {
@@ -552,7 +553,7 @@ const logout = (params,actionType) => {
       //console.log(`${result.user.email} ha salido de la sesion`)
       currentUserUid = ''
       currentUserEmail = ''
-
+      currentUserPassword = ''
       console.log('bye bye')
       if (actionType !== null){
         dispatch({
@@ -597,6 +598,9 @@ const userCreated = (user, actionType) => {
               providerId: result.providerId,
               uid: result.uid, //user's unique ID lo usaremos para linkarlo con la DBUsers
             }
+            currentUserUid = result.uid
+            currentUserEmail = result.email
+            currentUserPassword = user.password
 
             database.ref('users/'+result.uid+'/datosPersonales')
               .set(datosPers).then(snapshot => {
@@ -831,6 +835,67 @@ const resendEmail = (params,actionType)=>{
         })
       }
       throw err
+    })
+}
+
+const checkEmailVerified=(flagEmailVerified,actionType)=>{ // VERIFY_EMAIL
+  let userRecord = firebase.auth().currentUser
+  let caca=''
+  var credentials = firebase.auth.EmailAuthProvider.credential(
+    userRecord.email,
+    currentUserPassword
+  )
+  return dispatch => userRecord.reauthenticateWithCredential(credentials)
+    .then(snapshot => {
+
+      if(flagEmailVerified === userRecord.emailVerified){
+        if (actionType !== null){
+          let dispatch =  {
+            type: actionType,
+            params: 'mailNoVerificado', // can be null
+            data: false, // nada ha cambiado
+          }
+          return dispatch
+        }
+      }else{//se ha verificado el mail
+
+        database.ref('users/'+currentUserUid+'/datosPersonales')
+          .update({
+            emailVerified:userRecord.emailVerified,
+
+          }).then (snapshot => {
+            console.log ('emailVerified')
+            if (actionType !== null){
+              dispatch({
+                type: actionType,
+                params: 'okemailverified', // can be null
+                data: userRecord.emailVerified,
+              })
+            }
+
+          }).catch(function(error){
+            console.log ('no se actualizaron los datos personales con email verificado '+ error)
+            if (actionType !== null){
+              dispatch({
+                type: actionType,
+                params: 'errorEmailVerified', // can be null
+                data: error,
+              })
+            }
+            throw error
+
+          })
+      }//else
+    }).catch(function(error){
+      console.log ('no se ha podido reautenticar '+ error)
+      if (actionType !== null){
+        dispatch({
+          type: actionType,
+          params: 'errorReauthenticateWithCredential', // can be null
+          data: error,
+        })
+      }
+      throw error
     })
 }
 
@@ -1084,4 +1149,5 @@ export default {
   guardarDatosPedido: guardarDatosPedido,
   vaciarCarro:vaciarCarro,
   elementoVendido:elementoVendido,
+  checkEmailVerified:checkEmailVerified,
 }

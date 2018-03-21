@@ -31,4 +31,5 @@ export default {
   LOAD_FROM_INSTAGRAM:                'LOAD_FROM_INSTAGRAM',
   CHANGE_SCREEN_WIDTH:                'CHANGE_SCREEN_WIDTH',
   FIX_NAVBAR:                         'FIX_NAVBAR',
+  VERIFY_EMAIL:                       'VERIFY_EMAIL',
 }

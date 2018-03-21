@@ -171,6 +171,11 @@ export default {
       return dispatch(Firebase.uploadCarro(carro,constants.LOAD_CARRO))
     }
   },
+  checkEmailVerified:(flagEmailVerified) =>{
+    return dispatch => {
+      return dispatch(Firebase.checkEmailVerified(flagEmailVerified,constants.VERIFY_EMAIL))
+    }
+  },
   currentUserToDB : (user) => {
     return dispatch => {
       return dispatch(Firebase.currentUserToDB( user, constants.CURRENT_USER_TO_DB))
