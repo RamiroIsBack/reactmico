@@ -24,7 +24,7 @@ class AmigoDatosContainer extends Component {
       }
     }
   }
-  
+
   actualizarInfoUsuario(user, flag, posibleFoto) {
     //flag -> envio, nombre, foto, Warning
     this.props.addUserInfo(user,flag, posibleFoto)
@@ -58,6 +58,20 @@ class AmigoDatosContainer extends Component {
     }
     return repe
   }
+  comprobarEmail(email){
+    var listaUsers = []
+    var repe= false
+    if (this.props.users){
+      listaUsers = this.props.users.listaUsers
+    }
+    for (let i =0; i < listaUsers.length; i++){
+      if (listaUsers[i].datosPersonales.email === email){
+        repe = true
+        break
+      }
+    }
+    return repe
+  }
 
   render(){
     var registrarseContenidos = {}
@@ -80,6 +94,7 @@ class AmigoDatosContainer extends Component {
           actualizarInfoUsuario={this.actualizarInfoUsuario.bind(this)}
           contenido = {registrarseContenidos}
           comprobarNombre = {this.comprobarNombre.bind(this)}
+          comprobarEmail ={this.comprobarEmail.bind(this)}
           currentUser = {this.props.users.currentUser}
           currentUserDatos={this.props.users.currentUserDatos}
           cambiarCurrentUserModificables ={this.cambiarCurrentUserModificables.bind(this)}

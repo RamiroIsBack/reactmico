@@ -19,7 +19,8 @@ class AmigoDatos extends React.Component {
       nombreExpectation2 : true,
       nombreExpectation3 : false,
 
-      mailExpectation : false,
+      mailExpectation1 : false,
+      mailExpectation2 : false,
 
       passwordExpectation1 : false,
       passwordExpectation2 : false,
@@ -95,9 +96,14 @@ class AmigoDatos extends React.Component {
 
     }else if (event.target.id ==='email'){
       if(value.indexOf('@') > -1 && value.indexOf('.') >-1 && value.charAt(value.length-1)!== '.'){
-        this.setState({mailExpectation : true})
+        this.setState({mailExpectation1 : true})
       }else{
-        this.setState({mailExpectation : false})
+        this.setState({mailExpectation1 : false})
+      }
+      if (this.props.comprobarEmail(value)) {
+        this.setState({mailExpectation2 : false})
+      }else{
+        this.setState({mailExpectation2 : true})
       }
     }else if ( event.target.id === 'password' ){
       if(value.length >5 ){
@@ -171,7 +177,7 @@ class AmigoDatos extends React.Component {
 
     }else if(event.target.id === 'email'){
 
-      if(this.state.mailExpectation){
+      if(this.state.mailExpectation1 && this.state.mailExpectation2 ){
         this.state.show = 'no'
         newCurrentUser.datosPersonales.email = document.getElementById('email').value
         //al apretar el boton para cambiarlo, lo pongo a false
@@ -248,7 +254,8 @@ class AmigoDatos extends React.Component {
     var estiloNom2 = {color: 'red', marginTop:0,marginBottom:0}
     var estiloNom3 = {color: 'red', marginTop:0,marginBottom:0}
 
-    var estiloMail = {color: 'red', marginTop:0,marginBottom:0}
+    var estiloMail1 = {color: 'red', marginTop:0,marginBottom:0}
+    var estiloMail2 = {color: 'red', marginTop:0,marginBottom:0}
 
     var estiloPassword1 = {color: 'red', marginTop:0,marginBottom:0}
     var estiloPassword2 = {color: 'red', marginTop:0,marginBottom:0}
@@ -257,7 +264,8 @@ class AmigoDatos extends React.Component {
     var nombreExpectation2Met = 'glyphicon glyphicon-remove'
     var nombreExpectation3Met = 'glyphicon glyphicon-remove'
 
-    var mailExpectationMet = 'glyphicon glyphicon-remove'
+    var mailExpectation1Met = 'glyphicon glyphicon-remove'
+    var mailExpectation2Met = 'glyphicon glyphicon-remove'
 
     var passwordExpectation1Met = 'glyphicon glyphicon-remove'
     var passwordExpectation2Met = 'glyphicon glyphicon-remove'
@@ -282,11 +290,18 @@ class AmigoDatos extends React.Component {
       forNombre ={border: '1.5px solid green',}
     }
 
-    if (this.state.mailExpectation){
-      mailExpectationMet = 'glyphicon glyphicon-ok'
-      estiloMail ={color: 'green', marginTop:0,marginBottom:0}
+    if (this.state.mailExpectation1){
+      mailExpectation1Met = 'glyphicon glyphicon-ok'
+      estiloMail1 ={color: 'green', marginTop:0,marginBottom:0}
+    }
+    if (this.state.mailExpectation2){
+      mailExpectation2Met = 'glyphicon glyphicon-ok'
+      estiloMail2 ={color: 'green', marginTop:0,marginBottom:0}
+    }
+    if(this.state.mailExpectation1 && this.state.mailExpectation2){
       forMail ={border: '1.5px solid green',}
     }
+
 
     if (this.state.passwordExpectation1){
       passwordExpectation1Met = 'glyphicon glyphicon-ok'
@@ -484,10 +499,18 @@ class AmigoDatos extends React.Component {
                           <tbody>
                             <tr>
                               <td style = {{ paddingBottom:0}}>
-                                <h6 style = {estiloMail}>email valido </h6>
+                                <h6 style = {estiloMail1}>email valido </h6>
                               </td>
                               <td style = {{ paddingBottom:0}}>
-                                <h6 className ={mailExpectationMet} style = {estiloMail}></h6>
+                                <h6 className ={mailExpectation1Met} style = {estiloMail1}></h6>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style = {{ paddingBottom:0}}>
+                                <h6 style = {estiloMail2}>email disponible </h6>
+                              </td>
+                              <td style = {{ paddingBottom:0}}>
+                                <h6 className ={mailExpectation2Met} style = {estiloMail2}></h6>
                               </td>
                             </tr>
                           </tbody>
@@ -688,13 +711,13 @@ class AmigoDatos extends React.Component {
                 <div className='col-xs-9 col-sm-10 col-md-10 col-lg-10' style = {{paddingRight: 0 }}>
                   <button id= 'datosEnvio' onClick={this.handleGuardarCambios.bind(this)} className='btn text-center form-control ' style = {{border: 'none',borderRadius: 4, backgroundColor: 'black',color:'white',width: '95%',paddingLeft: 5,}} >Guardar cambios</button>
                 </div>
-                {this.props.currentUser.datosEnvio && this.props.currentUser.datosEnvio.cp &&
-                  <div className='col-xs-3 col-sm-2 col-md-2 col-lg-2' style = {{paddingLeft: 0 ,paddingRight:0 }}>
-                    <button className='btn text-center form-control ' id= 'datosEnvio' onClick = {this.handleCurrentUserModificables.bind(this)}
-                      style = {{paddingLeft: 5 ,paddingRight:0, border: '1px solid',borderRadius: 4, backgroundColor: 'white',width: '95%',}}>cancelar
-                    </button>
-                  </div>
-                }
+
+                <div className='col-xs-3 col-sm-2 col-md-2 col-lg-2' style = {{paddingLeft: 0 ,paddingRight:0 }}>
+                  <button className='btn text-center form-control ' id= 'datosEnvio' onClick={()=> this.setState({quieroDatos:false})}
+                    style = {{paddingLeft: 5 ,paddingRight:0, border: '1px solid',borderRadius: 4, backgroundColor: 'white',width: '95%',}}>cancelar
+                  </button>
+                </div>
+
               </div>
 
             </div>
