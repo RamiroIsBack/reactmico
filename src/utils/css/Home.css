@@ -19,7 +19,7 @@
   background-repeat: no-repeat;
   background-position: center center;
   background-size: auto 600px;
-  background-attachment: fixed;
+
   transition: background-image 0.6s;
   }
   @keyframes fadeIn {
@@ -45,7 +45,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 700px auto ;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
   }
 
 }
@@ -59,7 +59,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 550px auto ;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
   }
 
 }
@@ -73,7 +73,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size:450px auto ;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
   }
 
 }
@@ -88,7 +88,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size:400px auto ;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
   }
 
 }

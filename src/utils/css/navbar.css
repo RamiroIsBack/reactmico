@@ -3,7 +3,7 @@
   background-color: white;
   display: grid;
   grid-template-areas:
-  ". . . d d f f c c r r p p . . .";
+  ". . . d d c c t t f f . . . . . r p";
   animation-duration: .5s;
   animation-timing-function: ease-in-out;
 }
@@ -17,6 +17,13 @@
 }
 .navbar__diseno__container{
   grid-area: d;
+padding-top: 7px;
+  text-align: center;
+  cursor:pointer;
+
+}
+.navbar__taller__container{
+  grid-area: t;
 padding-top: 7px;
   text-align: center;
   cursor:pointer;

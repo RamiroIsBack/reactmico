@@ -277,7 +277,7 @@ class NavbarMicoFront extends Component {
 
             <div id='creaciones' className = 'navbar__diseno__container' onMouseOver={this.handleHoverOn.bind(this)}>
               <NavLink  className='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false' style = {creacionesEstilo}
-                onClick = {this.gestionaColapso.bind(this)} id='creaciones' name ='allCreaciones' to='/Diseños'>Diseños
+                onClick = {this.gestionaColapso.bind(this)} id='creaciones' name ='allCreaciones' to='/Diseños'>Tienda
                 <span className='caret'>
                 </span>
               </NavLink>
@@ -292,7 +292,12 @@ class NavbarMicoFront extends Component {
             </div>
 
             <div className = 'navbar__conocenos__container' id='conocenos' onMouseOver={this.handleHoverOn.bind(this)}>
-              <NavLink to='/Conocenos' style = {conocenosEstilo} onClick = {this.gestionaColapso.bind(this)} id='conocenos' >Conocenos
+              <NavLink to='/Conocenos' style = {conocenosEstilo} onClick = {this.gestionaColapso.bind(this)} id='conocenos' >Sobre mi
+              </NavLink>
+            </div>
+
+            <div className = 'navbar__taller__container' id='taller' onMouseOver={this.handleHoverOn.bind(this)}>
+              <NavLink to='/Conocenos' style = {conocenosEstilo} onClick = {this.gestionaColapso.bind(this)} id='taller' >Taller
               </NavLink>
             </div>
           </div>
