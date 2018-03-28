@@ -83,9 +83,9 @@ export default {
       data: creacionTipo
     }
   },
-  moveToFeriasSection: (id)=>{
+  cambiaLengua: (id)=>{
     return{
-      type: constants.MOVETO_FERIA_SECTION,
+      type: constants.CAMBIA_LENGUA,
       data: id
     }
 

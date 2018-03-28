@@ -10,8 +10,6 @@ import {AmigoPedidosContainer,
   ModalLoginContainer,
   ModalWarningContainer,
   ModalMenuXsContainer,
-  ModalCreacionesContainer,
-  ModalFeriasContainer,
   ModalRegistrarseContainer,
   ModalEntrarContainer ,
   NavbarMicoFront,
@@ -102,7 +100,6 @@ class ReactMico extends Component {
               <ModalRealizarCompraContainer/>
               <ModalRegistrarseContainer/>
               <ModalMenuXsContainer/>
-              <ModalFeriasContainer/>
               <ModalWarningContainer/>
               <ModalLoginContainer/>
               <ModalEntrarContainer/>

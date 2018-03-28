@@ -1,20 +1,12 @@
 import React, { Component } from 'react'
 import {FeriaContainer,ContenidoFeriaContainer, MapaContainer,ListaFeriasContainer} from '../containers'
 import {Ferias_css} from '../../utils/css'
-import { connect } from 'react-redux'
 
 class Ferias extends Component {
   render() {
-    let paddingTop = {}
-    if(this.props.navigation){
-      if(this.props.navigation.sticky){
-        paddingTop = this.props.navigation.paddingTop4navbar
-      }else{
-        paddingTop = {paddingTop:0}
-      }
-    }
+    
     return (
-      <div className='feria__container' id ='backgroundDiv' style= {paddingTop} >
+      <div className='feria__container' id ='backgroundDiv' >
 
         <div className = 'feria__mapa__container' style = {{}}>
 
@@ -37,16 +29,5 @@ class Ferias extends Component {
     )
   }
 }
-const dispatchToProps = (dispatch) =>{
 
-  return{
-
-  }
-}
-const stateToProps = (state) => {
-  return{
-
-    navigation: state.navigation,
-  }
-}
-export default connect (stateToProps,dispatchToProps)(Ferias)
+export default Ferias

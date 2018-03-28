@@ -3,7 +3,7 @@ import constants from '../constants'
 var initialState = {
   registrarseShowing :false ,
   creacionesShowing : false,
-  feriasShowing : false,
+  lenguaShowing : false,
   menuXsShowing : false,
   warningShowing : false,
   menuLoginShowing: false,
@@ -25,12 +25,12 @@ export default (state = initialState, action) => {
     else if (action.data === 'openRegistrarse'){
       newState['registrarseShowing'] = true
     }
-    //ferias
-    else if (action.data === 'closeFerias'){
-      newState['feriasShowing'] = false
+    //lengua
+    else if (action.data === 'closeLengua'){
+      newState['lenguaShowing'] = false
     }
-    else if (action.data === 'openFerias'){
-      newState['feriasShowing'] = true
+    else if (action.data === 'openLengua'){
+      newState['lenguaShowing'] = true
     }
     //creaciones
     else if (action.data === 'closeCreaciones'){
@@ -57,7 +57,7 @@ export default (state = initialState, action) => {
     //tb con el hoover off en version desktop
     else if (action.data === 'closeDropdowns'){
       newState['creacionesShowing'] = false
-      newState['feriasShowing'] = false
+      newState['lenguaShowing'] = false
       newState['menuLoginShowing'] = false
     }
     // el menuXs blokea todo como el registrarse

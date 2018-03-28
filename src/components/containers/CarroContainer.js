@@ -172,18 +172,15 @@ class CarroContainer extends Component {
     let stiloCarroBuy = {}
     let paddingTop = {padding:0}
     if(this.props.navigation){
-      if(this.props.navigation.sticky && this.props.navigation.screenSize==='mobile'){
-        let newPadding = Object.assign({}, paddingTop)
-        newPadding.paddingTop = this.props.navigation.paddingTop4navbar
-        paddingTop=newPadding
-        stiloCarroBuy = {position:'fixed', padding:0 , paddingLeft:3 ,marginRight:5,top:210, bottom:200 ,overflowY:'hidden', overflowX:'hidden' }
-      }else if(this.props.navigation.sticky && this.props.navigation.screenSize==='laptop'){
-        let newPadding = Object.assign({}, paddingTop)
-        newPadding.paddingTop = this.props.navigation.paddingTop4navbar
-        paddingTop=newPadding
-        stiloCarroBuy = {position:'fixed', padding:0 , paddingLeft:3 ,marginRight:5,top:70, bottom:200 ,overflowY:'hidden', overflowX:'hidden' }
+      let newPadding = Object.assign({}, paddingTop)
+      newPadding.paddingTop = this.props.navigation.paddingTop4navbar
+      paddingTop=newPadding
+      if(this.props.navigation.screenSize==='mobile'){
+        stiloCarroBuy = {position:'sticky', padding:0 , paddingLeft:3 ,marginRight:5,top:210, bottom:200 ,overflowY:'hidden', overflowX:'hidden' }
+
       }else{
-        stiloCarroBuy = {position:'relative',padding:0 , paddingLeft:3 ,marginRight:5,top:0 , bottom:200 ,overflowY:'hidden', overflowX:'hidden' }
+
+        stiloCarroBuy = {position:'sticky', padding:0 , paddingLeft:3 ,marginRight:5,top:270, overflowY:'hidden', overflowX:'hidden' }
       }
     }
 
@@ -191,7 +188,7 @@ class CarroContainer extends Component {
       <div onClick = {this.cierraDialogosNavbar.bind(this)} >
 
         <div >
-          <div className='container-fluid col-xs-7 col-sm-8 col-md-7 col-lg-6' style={paddingTop}>
+          <div className='col-xs-7 col-sm-8 col-md-7 col-lg-6' style={{paddingLeft:2}}>
 
             <div className='visible-xs-block hidden-sm hidden-md hidden-lg' style={{padding :0 , borderRightStyle:'ridge',minHeight: window.innerHeight}}>
               {this.props.carro.cartList.length === 0 &&
@@ -218,7 +215,7 @@ class CarroContainer extends Component {
 
             </div>
           </div>
-          <div className=' col-xs-5 col-sm-4 col-md-5 col-lg-6'>
+          <div className='col-xs-5 col-sm-4 col-md-5 col-lg-6'  style={{minHeight: window.innerHeight, padding:0,}}>
             <CarroBuy
               carroPropiedades = {this.props.carro}
               comprar= {this.comprar.bind(this)}

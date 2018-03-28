@@ -3,7 +3,7 @@
   background-color: white;
   display: grid;
   grid-template-areas:
-  ". . . d d c c t t f f . . . . . r p";
+  ". . . . . . . . d d c c t t f f o o . . i b . . . . . . . l r p";
   animation-duration: .5s;
   animation-timing-function: ease-in-out;
 }
@@ -35,6 +35,12 @@ padding-top: 7px;
   cursor:pointer;
   padding-top: 7px;
 }
+.navbar__contacto__container{
+  grid-area: o;
+  text-align: center;
+  cursor:pointer;
+  padding-top: 7px;
+}
 
 .navbar__conocenos__container{
   text-align: center;
@@ -42,17 +48,42 @@ padding-top: 7px;
   padding-top: 7px;
   grid-area: c;
 }
-
+.navbar__facebook__container{
+  text-align: center;
+  cursor:pointer;
+  padding-top: 2px;
+  grid-area: b;
+  width: 40px;
+  height: 40px;
+  display:inline-block;
+}
+.navbar__instagram__container{
+  text-align: center;
+  cursor:pointer;
+  padding-top: 2px;
+  grid-area: i;
+  width: 40px;
+  height: 40px;
+  display:inline-block;
+}
+.navbar__lengua__container{
+  grid-area: l;
+  text-align: center;
+  cursor:pointer;
+  padding-top: 7px;
+  font-size: 15px;
+  opacity:.6;
+}
 .navbar__registrarse__container{
   grid-area: r;
   text-align: center;
   cursor:pointer;
-  padding-top: 3px;
+  padding-top: 7px;
 }
 .navbar__pagar__container{
   grid-area: p;
   text-align: center;
-padding-top: 7px;
+  padding-top: 7px;
   cursor:pointer;
 }
 @media screen and (max-width: 705px) {
@@ -61,28 +92,15 @@ padding-top: 7px;
     background-color: white;
     display: grid;
     grid-template-areas:
-    ". . x x r r p p . .";
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(1,60px);
+    " x x . i b . l r p p ";
   }
   .navbar__menuXS__container{
     grid-area: x;
     text-align: center;
     cursor:pointer;
-    padding-top: 3px;
+    padding:0;
   }
-  .navbar__registrarse__container{
-    grid-area: r;
-    text-align: center;
-    cursor:pointer;
-    padding-top: 3px;
-  }
-  .navbar__pagar__container{
-    grid-area: p;
-    text-align: center;
-  padding-top: 7px;
-    cursor:pointer;
-  }
+
 
 
 

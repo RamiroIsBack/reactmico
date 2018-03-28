@@ -17,13 +17,15 @@ var initialState = {
     conocenos: false,
     currentUser: false,
     carro: false,
+    taller:false,
+    contacto:false,
   },
-  sticky: false,
+  sticky: true,
   paddingTop4navbar:{
     paddingTop:60
   },
   screenSize: 'laptop', //or mobile
-
+  lengua:'es', //or ga
   showAvisoCookies:true,
 
 }
@@ -41,6 +43,8 @@ export default (state = initialState, action) => {
         conocenos: false,
         currentUser: false,
         carro: false,
+        taller:false,
+        contacto:false,
       }
       if(action.data !==''){
         newState.navbarMicoFrontActive[action.data]= true
@@ -70,6 +74,10 @@ export default (state = initialState, action) => {
 
   case constants.CIERRA_COOKIES_AVISO:
     newState.showAvisoCookies = action.data
+    return newState
+
+  case constants.CAMBIA_LENGUA:
+    newState.lengua = action.data
     return newState
 
   default:

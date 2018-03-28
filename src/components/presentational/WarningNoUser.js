@@ -12,7 +12,7 @@ class WarningNoUser extends Component {
         <div className = ' col-xs-12 col-sm-12 col-md-12 col-lg-12 '>
 
           <h4>Hola, </h4>
-          <h4>Aún no te has registrado como amigo de Mico, solo será un momento y luego podrás proceder con la compra</h4>
+          <h4>Aún no te has registrado, solo será un momento y luego podrás proceder con la compra</h4>
 
         </div>
         <div style= {{textAlign: 'center', padding: 5}}>

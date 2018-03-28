@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Conocenos} from '../presentational'
 
 
-class ConocenosContainer extends Component {
+class ContactoContainer extends Component {
   componentWillMount() {
 
     //make it start at the top of the page every time
@@ -74,9 +74,9 @@ const stateToProps = (state) => {
     //en state.blabla dices de que reducer quieres info
     //y tu le asignas una key q quieras
     storeContenidos: state.contenidos,
-
+    
 
   }
 }
 
-export default connect (stateToProps,dispatchToProps)(ConocenosContainer)
+export default connect (stateToProps,dispatchToProps)(ContactoContainer)

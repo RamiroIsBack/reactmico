@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import actions from '../../actions'
 import history from '../../utils/history'
 
-class ModalVolverArribaContainer extends Component{
+class LogoContainer extends Component{
 
   handleClick(event){
     this.props.toggleModal('closeCreaciones')
@@ -17,10 +17,11 @@ class ModalVolverArribaContainer extends Component{
   render(){
     let paddingTop = {}
     if(this.props.navigation){
-      if(this.props.navigation.sticky){
-        paddingTop = {paddingTop:0}
-      }else{
+      if(this.props.navigation.sticky ||this.props.navigation.screenSize==='mobile'){
         paddingTop = this.props.navigation.paddingTop4navbar
+      }else{
+        let paddingNumber= this.props.navigation.paddingTop4navbar.paddingTop
+        paddingTop = {paddingTop:paddingNumber}
       }
     }
     return(
@@ -48,4 +49,4 @@ const stateToProps = (state) =>{
   }
 }
 
-export default connect (stateToProps, dispatchToProps)(ModalVolverArribaContainer)
+export default connect (stateToProps, dispatchToProps)(LogoContainer)

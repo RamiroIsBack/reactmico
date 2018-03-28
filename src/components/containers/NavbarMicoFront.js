@@ -3,7 +3,7 @@ import { NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
 import actions from '../../actions'
 import style from './styles'
-import {ModalCreacionesContainer} from './'
+import {ModalCreacionesContainer,ModalLenguaContainer} from './'
 import navbar_css from '../../utils/css'
 class NavbarMicoFront extends Component {
 
@@ -68,13 +68,13 @@ class NavbarMicoFront extends Component {
       this.props.toggleModal('openEntrar')
       this.props.toggleModal('closeRegistrarse')
       this.props.toggleModal('closeCreaciones')
-      this.props.toggleModal('closeFerias')
+      this.props.toggleModal('closeLengua')
     }
     else if(event.target.id === 'currentUser'){
       this.props.toggleModal('closeLogin')
       this.props.toggleModal('closeRegistrarse')
       this.props.toggleModal('closeCreaciones')
-      this.props.toggleModal('closeFerias')
+      this.props.toggleModal('closeLengua')
 
       this.props.navActive(event.target.id, 'navbarMicoFront')
       if(!this.props.navigation.amigoNavActive.pedidosActive &&
@@ -88,7 +88,7 @@ class NavbarMicoFront extends Component {
     else if (event.target.id === 'creaciones'){
 
       this.props.toggleModal('openCreaciones')
-      this.props.toggleModal('closeFerias')
+      this.props.toggleModal('closeLengua')
       this.props.toggleModal('closeLogin')
       this.props.moveToCreacionesSection(event.target.name)
       this.props.navActive(event.target.id, 'navbarMicoFront')
@@ -98,58 +98,66 @@ class NavbarMicoFront extends Component {
     // otherwise it would be d [else] of the las [if] ;)
     //
     else if (event.target.id === 'ferias'){
-      //this.props.toggleModal('openFerias') //not using this now, client want it diferently
-      this.props.toggleModal('closeCreaciones')
-      this.props.toggleModal('closeLogin')
+      this.props.toggleModal('closeDropdowns')
       this.props.moveToFeriasSection(event.target.name)
       this.props.navActive(event.target.id, 'navbarMicoFront')
       window.scrollTo(0, 0)
     }
     //viene de otro lado as'i q cierra los 2
     else if(event.target.id=== 'carro'){
-      this.props.toggleModal('closeCreaciones')
-      this.props.toggleModal('closeFerias')
-      this.props.toggleModal('closeLogin')
+      this.props.toggleModal('closeDropdowns')
       this.props.navActive(event.target.id, 'navbarMicoFront')
     }
     else if(event.target.id=== 'conocenos'){
+      this.props.toggleModal('closeDropdowns')
+      this.props.navActive(event.target.id, 'navbarMicoFront')
+    }
+    else if(event.target.id=== 'lengua'){
       this.props.toggleModal('closeCreaciones')
-      this.props.toggleModal('closeFerias')
       this.props.toggleModal('closeLogin')
+      this.props.toggleModal('openLengua')
+    }
+    else if(event.target.id=== 'contacto'){
+      this.props.toggleModal('closeDropdowns')
+      this.props.navActive(event.target.id, 'navbarMicoFront')
+    }
+    else if(event.target.id=== 'taller'){
+      this.props.toggleModal('closeDropdowns')
       this.props.navActive(event.target.id, 'navbarMicoFront')
     }
 
     else{
-      this.props.toggleModal('closeCreaciones')
-      this.props.toggleModal('closeFerias')
-      this.props.toggleModal('closeLogin')
+      this.props.toggleModal('closeDropdowns')
     }
 
 
   }
 
   handleHoverOn(event){
-    //console.log('im on ' + event.target.id)
-    if(event.target.id === 'ferias'){
-      //this.props.toggleModal('openFerias') //not using this now, client want it diferently
-      this.props.toggleModal('closeCreaciones')
-      this.props.toggleModal('closeLogin')
-    }else if (event.target.id === 'creaciones'){
+    if (event.target.id === 'creaciones'){
       this.props.toggleModal('openCreaciones')
-      this.props.toggleModal('closeFerias')
+      this.props.toggleModal('closeLengua')
       this.props.toggleModal('closeLogin')
 
-    // no voy a sacar un dropdown para registrarse mejor
-    }else if (event.target.id === 'x ahora nada'){
-      this.props.toggleModal('openLogin')
+    }else if (event.target.id === 'lengua'){
+      this.props.toggleModal('openLengua')
       this.props.toggleModal('closeCreaciones')
-      this.props.toggleModal('closeFerias')
-      //solo xa cerrar loss dropdowns de los otros al pasar por ellos
-    }else if (event.target.id === 'conocenos'){
-      this.props.toggleModal('closeCreaciones')
-      this.props.toggleModal('closeFerias')
+    }else if (event.target.id === 'conocenos'||
+      event.target.id === 'taller'||
+      event.target.id ==='ferias'||
+      event.target.id === 'contacto'||
+      event.target.id === 'registrarse'||
+      event.target.id === 'carro'){
+
+      this.props.toggleModal('closeDropdowns')
+
     }
 
+  }
+
+  resdesSociales(event){
+    let urlToGo= event.target.id
+    window.open(urlToGo,'_blank')
   }
 
   render() {
@@ -179,7 +187,7 @@ class NavbarMicoFront extends Component {
     //           menuIcon en firebase
     var xsMenuIcon = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/menu-alt-256.png?alt=media&token=2d9dfa45-f974-4d90-9431-ec7de99f7e9c'
 
-    var loginIcon = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/loginIcon.png?alt=media&token=9df1a1ea-8b37-482b-919e-b0fb3be6b273'
+    var loginIcon = ''
     if (this.props.users.currentUser !== null){
       if (this.props.users.currentUser.foto){
         if (this.props.users.currentUser.foto.photoURL){
@@ -187,44 +195,43 @@ class NavbarMicoFront extends Component {
         }
       }
     }
-    //oscurecer un poco y no permitir clicks si se est'a mostrando el dialogo modal
-    var noClicks ={
-      pointerEvents:'none', //This makes it not clickable
-      opacity:0.6,          //This grays it out to look disabled
-      background: 'rgba(0,0,0,0.7)'
-    }
-    var navbarStilo
-    if (!registrarseShowing || !menuXsShowing){
-      navbarStilo = style.navbar.container
-    }else {
-      navbarStilo =noClicks
-    }
 
     // donde ir dentro de currentUser segun la tab seleccionada
     let currentUserNavTab = '/Amigo/Datos'
     //para ver que pesta;a est'a activa
-    let creacionesEstilo = {cursor: 'pointer', fontSize:'18px',color:'black'}
-    let feriasEstilo = {cursor: 'pointer',fontSize:'18px',color:'black'}
-    let conocenosEstilo ={cursor: 'pointer', fontSize:'18px',color:'black'}
-    let comprarButtonEstilo ={textDecoration: 'none',color:'black',fontSize:'19px' }
+    let creacionesEstilo = {cursor: 'pointer', fontSize:'16px',color:'black'}
+    let feriasEstilo = {cursor: 'pointer',fontSize:'16px',color:'black'}
+    let conocenosEstilo ={cursor: 'pointer', fontSize:'16px',color:'black'}
+    let tallerEstilo ={cursor: 'pointer', fontSize:'16px',color:'black'}
+    let contactoEstilo ={cursor: 'pointer', fontSize:'16px',color:'black'}
+    let registrarseEstilo ={cursor: 'pointer', fontSize:'15px',color:'black', opacity:.6}
+    let comprarButtonEstilo ={textDecoration: 'none',color:'black',fontSize:'17px', opacity:.6}
     let currentUserEstilo= { cursor: 'pointer' ,color:'black',textDecoration: 'none',}
 
     if (this.props.navigation.navbarMicoFrontActive.creaciones){
       creacionesEstilo = {
-        cursor: 'pointer', color:'black',textDecoration: 'none' ,borderBottom:'1px solid',fontSize:'18px',
+        cursor: 'pointer', color:'black',textDecoration: 'none' ,borderBottom:'1px solid',fontSize:'16px',
       }
     }else if (this.props.navigation.navbarMicoFrontActive.ferias){
       feriasEstilo = {
-        cursor: 'pointer', color:'black',textDecoration: 'none', borderBottom:'1px solid',fontSize:'18px',
+        cursor: 'pointer', color:'black',textDecoration: 'none', borderBottom:'1px solid',fontSize:'16px',
       }
 
     }else if (this.props.navigation.navbarMicoFrontActive.conocenos){
       conocenosEstilo ={
-        cursor: 'pointer', color:'black',backgroundColor:'transparent',textDecoration: 'none', borderBottom:'1px solid',fontSize:'18px',
+        cursor: 'pointer', color:'black',backgroundColor:'transparent',textDecoration: 'none', borderBottom:'1px solid',fontSize:'16px',
+      }
+    }else if (this.props.navigation.navbarMicoFrontActive.taller){
+      tallerEstilo ={
+        cursor: 'pointer', color:'black',backgroundColor:'transparent',textDecoration: 'none', borderBottom:'1px solid',fontSize:'16px',
+      }
+    }else if (this.props.navigation.navbarMicoFrontActive.contacto){
+      contactoEstilo ={
+        cursor: 'pointer', color:'black',backgroundColor:'transparent',textDecoration: 'none', borderBottom:'1px solid',fontSize:'16px',
       }
     }else if (this.props.navigation.navbarMicoFrontActive.carro){
       comprarButtonEstilo ={
-        textDecoration: 'none',color: 'black', borderBottom:'1px solid',fontSize:'19px',
+        textDecoration: 'none',color: 'black', borderBottom:'1px solid',fontSize:'17px',
       }
 
     }else if (this.props.navigation.navbarMicoFrontActive.currentUser){
@@ -233,21 +240,45 @@ class NavbarMicoFront extends Component {
       }
 
     }
+    let urlInstagram = ''
+    let urlFacebook = ''
+
+    if (this.props.storeEnlaces.listaEnlaces.length !==0){
+      for (let i = 0 ; i < this.props.storeEnlaces.listaEnlaces.length ; i++) {
+
+        if (this.props.storeEnlaces.listaEnlaces[i].id === 'instagram'){
+          urlInstagram = this.props.storeEnlaces.listaEnlaces[i].urlInstagram
+        }
+        if (this.props.storeEnlaces.listaEnlaces[i].id === 'facebook'){
+          urlFacebook = this.props.storeEnlaces.listaEnlaces[i].urlFacebook
+        }
+      }
+    }
     //digo donde va el link al pinchar en current user, arriba lo tengo inicializado a datos, as'i q lo cambio si es pedidos
     if(this.props.navigation.amigoNavActive.pedidosActive){
       currentUserNavTab = '/Amigo/Pedidos'
     }
     let screenSize =this.props.navigation.screenSize
-
+    let lengua = this. props.navigation.lengua
     return (
       <div className = 'sticky__navbar__contanier' id= 'navbarContainer' style={navbarPosition}>
         {screenSize ==='laptop' &&
 
           <div className='navbar__container' style={navbarFadeIn}>
+            <div id='lengua' className = 'navbar__lengua__container' onMouseOver={this.handleHoverOn.bind(this)}>
+              <div className='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false' style= {{color:'black'}}
+                onClick = {this.gestionaColapso.bind(this)} id='lengua'  >{lengua}
+                <span className='caret'>
+                </span>
+              </div>
+              <div style={{overflow: 'auto'}}>
+                <ModalLenguaContainer/>
+              </div>
+            </div>
+
             <div className = 'navbar__registrarse__container'>
               {this.props.users.currentUser === null &&
-                <div id='registrarse' onMouseOver={this.handleHoverOn.bind(this)}>
-                  <img id='registrarse' alt='Registrarse' src={loginIcon}  style={{borderRadius : 40, height:45}} onClick = {this.gestionaColapso.bind(this)}/>
+                <div onMouseOver={this.handleHoverOn.bind(this)} style = {registrarseEstilo} onClick = {this.gestionaColapso.bind(this)} id='registrarse'  >Registrarse
                 </div>
               }
 
@@ -267,7 +298,7 @@ class NavbarMicoFront extends Component {
             </div>
 
             <div className = 'navbar__pagar__container'>
-              <NavLink to='/Carro' type='button' className='aaaaa' style = {comprarButtonEstilo} onClick = {this.gestionaColapso.bind(this)} id='carro'>
+              <NavLink to='/Carro' type='button' className='aaaaa' style = {comprarButtonEstilo} onClick = {this.gestionaColapso.bind(this)} id='carro' onMouseOver={this.handleHoverOn.bind(this)}>
                 <span  id='carro' className='glyphicon glyphicon-shopping-cart'>
                 </span>
                 <span  id='carro'>({this.props.countCart.numProducts})
@@ -277,7 +308,7 @@ class NavbarMicoFront extends Component {
 
             <div id='creaciones' className = 'navbar__diseno__container' onMouseOver={this.handleHoverOn.bind(this)}>
               <NavLink  className='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false' style = {creacionesEstilo}
-                onClick = {this.gestionaColapso.bind(this)} id='creaciones' name ='allCreaciones' to='/Diseños'>Tienda
+                onClick = {this.gestionaColapso.bind(this)} id='creaciones' name ='allCreaciones' to='/Diseños'>TIENDA
                 <span className='caret'>
                 </span>
               </NavLink>
@@ -287,18 +318,39 @@ class NavbarMicoFront extends Component {
             </div>
 
             <div className = 'navbar__feria__container' id='ferias' onMouseOver={this.handleHoverOn.bind(this)} >
-              <NavLink style = {feriasEstilo} onClick = {this.gestionaColapso.bind(this)} id='ferias' name='allFerias' to='/Ferias'>Ferias
+              <NavLink style = {feriasEstilo} onClick = {this.gestionaColapso.bind(this)} id='ferias' name='allFerias' to='/Ferias'>FERIAS
               </NavLink>
             </div>
 
             <div className = 'navbar__conocenos__container' id='conocenos' onMouseOver={this.handleHoverOn.bind(this)}>
-              <NavLink to='/Conocenos' style = {conocenosEstilo} onClick = {this.gestionaColapso.bind(this)} id='conocenos' >Sobre mi
+              <NavLink to='/Conocenos' style = {conocenosEstilo} onClick = {this.gestionaColapso.bind(this)} id='conocenos' >SOBRE MI
+              </NavLink>
+            </div>
+            <div className = 'navbar__contacto__container' id='contacto' onMouseOver={this.handleHoverOn.bind(this)}>
+              <NavLink to='/Conocenos' style = {contactoEstilo} onClick = {this.gestionaColapso.bind(this)} id='contacto' >CONTACTO
               </NavLink>
             </div>
 
+
             <div className = 'navbar__taller__container' id='taller' onMouseOver={this.handleHoverOn.bind(this)}>
-              <NavLink to='/Conocenos' style = {conocenosEstilo} onClick = {this.gestionaColapso.bind(this)} id='taller' >Taller
+              <NavLink to='/Conocenos' style = {tallerEstilo} onClick = {this.gestionaColapso.bind(this)} id='taller' >TALLER
               </NavLink>
+            </div>
+            <div className = 'navbar__instagram__container'>
+              <div style={{marginLeft:5, marginBottom: 5, textAlign:'center'}}>
+                <a style={{color: 'white', cursor: 'pointer',padding: '2px',border: 'none',borderRadius:'5px',}} id={urlInstagram} onClick = {this.resdesSociales.bind(this)} >
+                  <img role='presentation' onMouseOver={this.handleHoverOn.bind(this)} style={{width: '30px', height: '30px'}} src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/instaTrans.png?alt=media&token=a3d2eb00-a265-4836-b748-b4e9b7b0ff5d' id={urlInstagram}>
+                  </img>
+                </a>
+              </div>
+            </div>
+            <div className = 'navbar__facebook__container'>
+              <div style={{marginLeft:5, marginBottom: 5, textAlign:'center',display: 'inline-block'}}>
+                <a style={{color: 'white', cursor: 'pointer',padding: '2px',border: 'none',borderRadius:'5px',}} id= {urlFacebook} onClick = {this.resdesSociales.bind(this)}>
+                  <img role='presentation'  style={{  width: '30px',height: '30px'}} onMouseOver={this.handleHoverOn.bind(this)} src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/facebookTrans.png?alt=media&token=f0f02332-86fc-4ccf-b89a-ad54a29a8c79' id= {urlFacebook}>
+                  </img>
+                </a>
+              </div>
             </div>
           </div>
         }
@@ -306,10 +358,21 @@ class NavbarMicoFront extends Component {
 
         {screenSize ==='mobile' &&
           <div className='navbar__container' >
+
+            <div id='lengua' className = 'navbar__lengua__container' onMouseOver={this.handleHoverOn.bind(this)}>
+              <div className='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false' style= {{color:'black'}}
+                onClick = {this.gestionaColapso.bind(this)} id='lengua'  >{lengua}
+                <span className='caret'>
+                </span>
+              </div>
+              <div style={{overflow: 'auto'}}>
+                <ModalLenguaContainer/>
+              </div>
+            </div>
+
             <div className = 'navbar__registrarse__container'>
               {this.props.users.currentUser === null &&
-                <div id='registrarse' onMouseOver={this.handleHoverOn.bind(this)}>
-                  <img id='registrarse' alt='Registrarse' src={loginIcon}  style={{borderRadius : 40, height:45}} onClick = {this.gestionaColapso.bind(this)}/>
+                <div onMouseOver={this.handleHoverOn.bind(this)} style = {registrarseEstilo} onClick = {this.gestionaColapso.bind(this)} id='registrarse'  >Registrarse
                 </div>
               }
 
@@ -319,17 +382,11 @@ class NavbarMicoFront extends Component {
 
                 </div>
               }
-              {this.props.users.currentUser !== null &&
-                <div id='currentUser' onMouseOver={this.handleHoverOn.bind(this)}>
-                  <NavLink to={currentUserNavTab} style = {{cursor: 'pointer', color:'white',backgroundColor:'transparent',textDecoration: 'none',padding: 0,}}>
-                    <img id='currentUser' src={loginIcon}  style={{ borderRadius : 30 ,paddingTop: 3 , height:35}} onClick = {this.gestionaColapso.bind(this)}/>
-                  </NavLink>
-                </div>
-              }
+              
             </div>
 
             <div className = 'navbar__pagar__container'>
-              <NavLink to='/Carro' type='button' className='aaaaa' style = {comprarButtonEstilo} onClick = {this.gestionaColapso.bind(this)} id='carro'>
+              <NavLink to='/Carro' type='button' style = {comprarButtonEstilo} onClick = {this.gestionaColapso.bind(this)} id='carro'>
                 <span  id='carro' className='glyphicon glyphicon-shopping-cart'>
                 </span>
                 <span  id='carro'>({this.props.countCart.numProducts})
@@ -337,10 +394,25 @@ class NavbarMicoFront extends Component {
               </NavLink>
             </div>
             <div className = 'navbar__menuXS__container' >
-              <img id='xsMenu' src={xsMenuIcon}  style={{paddingTop: 3, height:45}} onClick = {this.gestionaColapso.bind(this)}/>
+              <img id='xsMenu' src={xsMenuIcon}  style={{height:40}} onClick = {this.gestionaColapso.bind(this)}/>
 
             </div>
-
+            <div className = 'navbar__instagram__container'>
+              <div style={{marginLeft:5, marginBottom: 5, textAlign:'center'}}>
+                <a style={{color: 'white', cursor: 'pointer',padding: '2px',border: 'none',borderRadius:'5px',}} id={urlInstagram} onClick = {this.resdesSociales.bind(this)} >
+                  <img role='presentation' onMouseOver={this.handleHoverOn.bind(this)} style={{width: '30px', height: '30px'}} src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/instaTrans.png?alt=media&token=a3d2eb00-a265-4836-b748-b4e9b7b0ff5d' id={urlInstagram}>
+                  </img>
+                </a>
+              </div>
+            </div>
+            <div className = 'navbar__facebook__container'>
+              <div style={{marginLeft:5, marginBottom: 5, textAlign:'center',display: 'inline-block'}}>
+                <a style={{color: 'white', cursor: 'pointer',padding: '2px',border: 'none',borderRadius:'5px',}} id= {urlFacebook} onClick = {this.resdesSociales.bind(this)}>
+                  <img role='presentation'  style={{  width: '30px',height: '30px'}} onMouseOver={this.handleHoverOn.bind(this)} src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/facebookTrans.png?alt=media&token=f0f02332-86fc-4ccf-b89a-ad54a29a8c79' id= {urlFacebook}>
+                  </img>
+                </a>
+              </div>
+            </div>
 
           </div>
         }
@@ -362,10 +434,7 @@ const dispatchToProps = (dispatch) =>{
 }
 const stateToProps = (state) => {
   return{
-    // state is d store in this case for convenction
-    // cojo el producto d state(store) y lo paso a props xa cogerlo
-    //en state.blabla dices de que reducer quieres info
-    //y tu le asignas una key q quieras
+    storeEnlaces:state.enlaces,
     countCart:state.carro,
     storeContenidos: state.contenidos,
     users: state.user,

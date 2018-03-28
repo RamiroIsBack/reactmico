@@ -141,14 +141,7 @@ class HomeContainer extends Component {
 
     let instagramFeedComponentsList = this.getInstagramFeed()
 
-    let paddingTop = {}
-    if(this.props.navigation){
-      if(this.props.navigation.sticky){
-        paddingTop = this.props.navigation.paddingTop4navbar
-      }else{
-        paddingTop = {paddingTop:0}
-      }
-    }
+
     let loading = true
     if(this.props.storeContenidos.carousellBackground.urlPic !==''){
       loading  = false
@@ -161,7 +154,6 @@ class HomeContainer extends Component {
       <div>
         <div
           className ='home__container'
-          style = {paddingTop}
           onClick = {this.cierraDialogosNavbar.bind(this)}
         >
           <div className="home__carousell__container">
@@ -206,14 +198,11 @@ const dispatchToProps = (dispatch) =>{
 
 const stateToProps = (state) => {
   return{
-    // state is d store in this case for convenction
-    // cojo el producto d state(store) y lo paso a props xa cogerlo
-    //en state.blabla dices de que reducer quieres info
-    //y tu le asignas una key q quieras
+
     creacion:state.creacion,
     storeContenidos:state.contenidos,
     enlaces:state.enlaces,
-    navigation:state.navigation,
+
 
   }
 }

@@ -11,17 +11,17 @@ export default class CarroBuy extends Component {
       pedidoInfo = this.props.pedidoContenido.descripcion.pedidoInfo
     }
     return (
-      <div className ='row container-fluid' style={this.props.stiloCarroBuy}>
+      <div className ='row ' style={this.props.stiloCarroBuy}>
 
-        <div className='container-fluid col-xs-12 col-sm-12 col-md-12 col-lg-6' >
+        <div className=' col-xs-12 col-sm-12 col-md-12 col-lg-6' >
           <div className ='row '>
-            <div className='container-fluid col-xs-7 col-sm-6 col-md-6 col-lg-8' style= {style.foto.container}>
+            <div className=' col-xs-7 col-sm-6 col-md-6 col-lg-8' >
 
               <h5>elementos: </h5>
               <h5>envio: </h5>
               <h5>Total: </h5>
             </div>
-            <div className='container-fluid col-xs-5 col-sm-6 col-md-6 col-lg-4' style= {style.foto.container}>
+            <div className=' col-xs-5 col-sm-6 col-md-6 col-lg-4' >
 
               <h5>{this.props.carroPropiedades.numProducts}</h5>
               <h5 className = 'text-muted'>{this.props.carroPropiedades.envio} €</h5>

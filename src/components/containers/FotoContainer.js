@@ -133,18 +133,8 @@ class FotoContainer extends React.Component {
       }
     }
 
-
-    let paddingTop = {}
-    if(this.props.navigation){
-      if(this.props.navigation.sticky){
-        paddingTop = this.props.navigation.paddingTop4navbar
-      }else{
-        paddingTop = {paddingTop:0}
-      }
-    }
-
     return (
-      <div className= 'container' onClick = {this.cierraDialogosNavbar.bind(this)} style={paddingTop}>
+      <div className= 'container' onClick = {this.cierraDialogosNavbar.bind(this)} >
         <div className='clearfix visible-sm-block visible-md-block' style={{padding: 0}}></div>
 
         {totalList}
@@ -170,7 +160,6 @@ const stateToProps = (state) => {
     //y tu le asignas una key q quieras
     firebaseCreaciones:state.creacion,
     storeContenidos: state.contenidos,
-    navigation: state.navigation,
   }
 }
 //it would be null at d first argument cos i was not registering

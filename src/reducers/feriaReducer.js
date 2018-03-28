@@ -3,7 +3,7 @@ import constants from '../constants'
 var initialState = {
 
   listaFerias: [],
-  FeriasLoaded :false ,
+  feriasLoaded :false ,
   feriaSectionSelected : 'allFerias',
   idFeriaShowing : '',
   openYear: '',
@@ -34,7 +34,7 @@ export default (state = initialState, action) => {
 
   case constants.FERIAS_RECEIVED: {
 
-    newState['FeriasLoaded'] = true
+    newState['feriasLoaded'] = true
     let list = action.data
     //sort it by date,by day, then month, then year (y esto funciona en serio??)
     //it did work

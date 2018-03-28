@@ -10,30 +10,16 @@
 .vendido__container{
   top:4px;
   right: 4px;
-  background-color: black;
-  color:white;
+  background-color: transparent;
+  color:black;
+  opacity: .6;
   padding:0 5px 0 5px;
   position: absolute;
-  -webkit-animation-name: cornerit;
-  animation-name: cornerit;
-  animation-duration: 1s;
-  -ms-transform: rotate(20deg); /* IE 9 */
-  -webkit-transform: rotate(30deg); /* Safari */
-  transform: rotate(30deg);
+
 
 }
 
-@-webkit-keyframes cornerit {
-  from
-  {
-    -webkit-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);/* IE 9 */
-  }
-  to {
-    -webkit-transform: rotate(30deg);
-    -ms-transform: rotate(30deg);/* IE 9 */
-  }
-}
+
 /* normal flipping */
 
 .loader {

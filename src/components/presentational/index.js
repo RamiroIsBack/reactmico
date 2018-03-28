@@ -7,7 +7,7 @@ import ProductSpecification from './ProductSpecification'
 import CarroBuy from './CarroBuy'
 import CarroProduct from './CarroProduct'
 import Feria from './Feria'
-import ModalFerias from './ModalFerias'
+import ModalLengua from './ModalLengua'
 import ModalCreaciones from './ModalCreaciones'
 import ModalMenuXs from './ModalMenuXs'
 import ModalEntrar from './ModalEntrar'
@@ -44,7 +44,7 @@ export{
   ModalMenuXs,
   Conocenos,
   ModalCreaciones,
-  ModalFerias,
+  ModalLengua,
   ModalRegistrarse,
   Foto,
   Product,
