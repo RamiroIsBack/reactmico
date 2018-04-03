@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import actions from '../../actions'
 import {connect} from 'react-redux'
-import {MagnifyingProduct, Product, ProductSpecification} from '../presentational'
+import {MagnifyingProduct, ProductSpecification} from '../presentational'
 import history from '../../utils/history'
 
 
@@ -46,23 +46,20 @@ class ProductContainer extends Component {
         }
       }
     }
-    let paddingTop = {}
-    if(this.props.navigation){
-      if(this.props.navigation.sticky){
-        paddingTop = this.props.navigation.paddingTop4navbar
-      }else{
-        paddingTop = {paddingTop:0}
-      }
-    }
+
 
     return (
-      <div onClick = {this.cierraDialogosNavbar.bind(this)} style= {paddingTop}>
+      <div onClick = {this.cierraDialogosNavbar.bind(this)}>
         <div className='container-fluid col-xs-12 col-sm-6 col-md-6 col-lg-6'>
           <MagnifyingProduct propiedades = {product} whenClicked={this.selectProduct.bind(this)}/>
         </div>
         {artesania.headerFoto &&
           <div className='container-fluid col-xs-12 col-sm-6 col-md-6 col-lg-6'>
-            <ProductSpecification propiedades = {product} contenido = {artesania}/>
+            <ProductSpecification
+              propiedades = {product}
+              contenido = {artesania}
+              lengua= {this.props.navigation.lengua}
+            />
           </div>
         }
       </div>
@@ -90,7 +87,7 @@ const stateToProps = (state) => {
     productToshow:state.product,
     storeContenidos: state.contenidos,
     users: state.user,
-    navigation:state.navigation,
+    navigation:state.navigation
   }
 }
 

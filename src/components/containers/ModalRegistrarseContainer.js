@@ -8,7 +8,6 @@ class ModalRegistrarseContainer extends Component {
 
 
   subirNuevoAmigo(user ){
-    //TODO: log this new amigo to d DB
     if (user === null){
       this.props.showNotificationWithTimeout('Trabajando')
     }else{

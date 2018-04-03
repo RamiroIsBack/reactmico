@@ -19,11 +19,7 @@ class FeriaContainer extends Component {
 
 
   }
-  componentDidUpdate(){
-
-  }
-
-
+  
   selectFeria(urlFeria){
     window.open(urlFeria,'_blank')
   }
@@ -58,7 +54,9 @@ class FeriaContainer extends Component {
       <div  onClick = {this.cierraDialogosNavbar.bind(this)} >
 
         <Feria
-          feria ={feria} whenClicked={this.selectFeria.bind(this)}
+          feria ={feria}
+          whenClicked={this.selectFeria.bind(this)}
+          lengua = {this.props.navigation.lengua}
         />
 
       </div>
@@ -75,8 +73,7 @@ const dispatchToProps = (dispatch) =>{
 }
 const stateToProps = (state) => {
   return{
-    //en state.blabla dices de que reducer quieres info
-    //y tu le asignas una key q quieras
+    navigation:state.navigation,
     ferias:state.feria,
   }
 }

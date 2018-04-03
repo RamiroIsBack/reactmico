@@ -7,7 +7,7 @@ import {ModalEntrar} from '../presentational'
 
 class ModalEntrarContainer extends Component {
 
-  
+
   changePassword(payload,params){
     alert('en breve recibirás un email con un enlace para cambiar tu contraseña')
 
@@ -115,18 +115,27 @@ class ModalEntrarContainer extends Component {
   handleLoginGoogle(){
     this.props.loginGoogle()
       .then(response => {
-        this.toggleModalYrecargaCreacionesYgestionaCarroUser()
+        if(response.additionalUserInfo.isNewUser){
+          this.props.toggleModal('closeEntrar')
+          this.props.toggleModal('openConsentimiento')
+        }else{
+          this.toggleModalYrecargaCreacionesYgestionaCarroUser()
+        }
       })
       .catch(err => {
         alert(err.message+ 'fallo al logearte con google, prueba otra vez en un par de minutos')
       })
-    this.props.toggleModal('closeEntrar')
 
   }
   handleLoginFacebook(){
     this.props.loginFacebook()
       .then(response => {
-        this.toggleModalYrecargaCreacionesYgestionaCarroUser()
+        if(response.additionalUserInfo.isNewUser){
+          this.props.toggleModal('closeEntrar')
+          this.props.toggleModal('openConsentimiento')
+        }else{
+          this.toggleModalYrecargaCreacionesYgestionaCarroUser()
+        }
       })
       .catch(err => {
         alert(err.message+ 'fallo al logearte con facebook, prueba en un par de minutos')

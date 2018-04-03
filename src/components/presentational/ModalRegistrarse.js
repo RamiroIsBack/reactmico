@@ -12,7 +12,7 @@ class ModalRegistrarse extends React.Component {
       nombreCorrect:false,
       emailCorrect:false,
       passwordCorrect:false,
-      recibir: true,
+      acepto: false,
 
       nombreExpectation1 : false,
       nombreExpectation2 : true,
@@ -26,10 +26,10 @@ class ModalRegistrarse extends React.Component {
     }
   }
 
-  handleClick(event){
-    if(event.target.name === 'sino'){
-      this.setState({recibir: !this.state.recibir})
-    }
+  handleClick(){
+
+    this.setState({acepto: !this.state.acepto})
+
   }
   handleFocus(event){
     this.setState({show: event.target.id})
@@ -99,19 +99,49 @@ class ModalRegistrarse extends React.Component {
   }
   handleRegistrarse(event){
     let amigo = null
-    if(this.state.nombreExpectation1 && this.state.nombreExpectation2 && this.state.nombreExpectation3 && this.state.mailExpectation1 && this.state.mailExpectation2 && this.state.passwordExpectation1 && this.state.passwordExpectation2){
-      amigo ={
-        nombre: document.getElementById('nombre').value,
-        email: document.getElementById('contactMail').value,
-        password: document.getElementById('password').value,
-        newsletter: this.state.recibir,
+    if(this.state.nombreExpectation1 && this.state.nombreExpectation2 && this.state.nombreExpectation3 && this.state.mailExpectation1 && this.state.mailExpectation2 && this.state.passwordExpectation1 && this.state.passwordExpectation2 && this.state.acepto){
+      fetch('https://ipapi.co/json/')
+        .then((response) => response.json())
+        .then((responseJson) => {
+          console.log(responseJson)
 
-      }
-      this.props.subirNuevoAmigo(amigo)
+          var today = new Date()
+          var dd = today.getDate()
+          var mm = today.getMonth()+1 //January is 0!
+          var yyyy = today.getFullYear()
+
+          if(dd<10) {
+            dd = '0'+dd
+          }
+
+          if(mm<10) {
+            mm = '0'+mm
+          }
+
+          today = dd + '/' + mm + '/' + yyyy
+          amigo ={
+            nombre: document.getElementById('nombre').value,
+            email: document.getElementById('contactMail').value,
+            password: document.getElementById('password').value,
+            aceptaPoliticaDatos: this.state.acepto,
+            fechaAltaYacepta:today,
+            ip:responseJson.ip,
+            ciudad:responseJson.city,
+          }
+          this.props.subirNuevoAmigo(amigo)
+
+        })
+        .catch((error) => {
+          console.log('algo fue mal al cargar desde instagram'+error)
+        })
+
     }else{
-
+      if(!this.state.acepto){
+        alert ('tienes que aceptar la politica de privacidad de datos')
+      }else{
+        alert ('porfavor comprueba el campo que este en rojo')
+      }
       // TODO: hacer bien esto diciendo exactamente cual es el fallo y con un dialogo con timeout
-      alert ('porfavor comprueba el campo que este en rojo')
     }
   }
   handleGLogin(){
@@ -233,11 +263,10 @@ class ModalRegistrarse extends React.Component {
 
     //setting the news letter to yes or no
 
-    var sino = 'Sí'
+
     var newsletter = 'glyphicon glyphicon-ok text-center pull-right'
-    if (!this.state.recibir){
-      newsletter = 'glyphicon glyphicon-remove text-center pull-right'
-      sino = 'No'
+    if (!this.state.acepto){
+      newsletter = 'glyphicon glyphicon-unchecked text-center pull-right'
     }
     var loginGIcon='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/login%20gplus.png?alt=media&token=3bb269b6-fae5-4c0f-99b0-666f4388e494'
     var loginFIcon='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/fb_icon_325x325.png?alt=media&token=f82e3369-9844-4929-a8f8-af1faa665624'
@@ -257,8 +286,8 @@ class ModalRegistrarse extends React.Component {
                 <hr style={{padding:0,marginTop :0,marginBottom:2}}/>
               </div>
               <div className = 'container-fluid row hidden-xs'>
-                <h3 className='text-center'>{registrarseTitulo}</h3>
-                <hr/>
+                <h4 className='text-center'>{registrarseTitulo}</h4>
+                <hr style={{padding:0,marginTop :5,marginBottom:7}}/>
               </div>
 
               <div >
@@ -392,21 +421,27 @@ class ModalRegistrarse extends React.Component {
                       </div>
                     }
                   </div>
-                  <div className='form-group row' style={{marginBottom: 2}}>
+                  <div className='form-group row' name ='sino' style={{marginBottom: 2}}>
                     <div className='col-xs-3 col-sm-2 col-md-2 col-lg-2'>
-                      <a className ={newsletter} name ='sino' onClick={this.handleClick.bind(this)} style= {style.modal.btnNewsletter} id='newsletter'></a>
+                      {this.state.acepto &&
+                        <a className ={newsletter} onClick={this.handleClick.bind(this)} style= {{border: '2px solid green', borderRadius:'4px' ,cursor:'pointer', color:'black', textDecoration:'none',paddingTop:1}} id='newsletter'></a>
+                      }
+                      {!this.state.acepto &&
+                        <a className ={newsletter} onClick={this.handleClick.bind(this)} style= {{cursor:'pointer',color:'red', textDecoration:'none', fontSize:'19px'}} id='newsletter'></a>
+                      }
                     </div>
-                    <div className='col-xs-9 col-sm-10 col-md-10 col-lg-10'>
-                      <p>{sino} quiero recibir información por e-mail</p>
+                    <div className='col-xs-9 col-sm-10 col-md-10 col-lg-10'
+                      onClick={this.handleClick.bind(this)}
+                      style={{cursor:'pointer',paddingLeft:0}}>
+                      <p>He leido y acepto la política de privacidad</p>
                     </div>
                   </div>
-                  <p className= 'text-muted' style= {{padding: 0}}>(nunca mandamos spam ni publicidad ajena a Mico)</p>
                   <div className='form-group row'>
                     <button onClick={this.handleRegistrarse.bind(this)} className='btn text-center form-control ' style = {style.modal.btnRegistrarse} >Registrarse</button>
                   </div>
                 </div>
               </div>
-              <div className='hidden-xs col-sm-10 text-center'>
+              <div className='hidden-xs col-sm-12 text-center'>
                 {registrarseInfo.split('\n').map((item, key) => {
                   return <span key={key}>{item}<br/></span>})}
               </div>

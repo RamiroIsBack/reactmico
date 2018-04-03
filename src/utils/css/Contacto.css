@@ -1,0 +1,28 @@
+.contacto__container{
+  display: grid;
+  grid-template-areas:
+  "f f . . "
+  "f f d d "
+  "f f . . ";
+  grid-gap: 3px;
+  text-align: center;
+}
+.contacto__foto__container{
+  grid-area: f;
+}
+
+.contacto__descripcion__container{
+  grid-area: d;
+}
+
+@media screen and (max-width: 705px) {
+  .contacto__container{
+    display: grid;
+    grid-template-areas:
+    " f f d d ";
+    grid-gap: 3px;
+
+    text-align: center;
+  }
+
+}

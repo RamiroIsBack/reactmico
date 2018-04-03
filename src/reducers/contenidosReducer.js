@@ -8,7 +8,7 @@ var initialState = {
   carousellBackground:{
     urlPic:'',
     num:1,
-    CarousellLength:4,
+    carousellLength:5,
   }
 }
 
@@ -36,19 +36,19 @@ export default (state = initialState, action) => {
           let carousellObject= ''
           if(action.data === 'atras'){
             numpic = newState.carousellBackground.num -1
-            numpic = numpic <1? 4 :numpic
+            numpic = numpic <1? newState.carousellBackgroundcarousellLength :numpic
             carousellObject = 'pic'+numpic
             newState.carousellBackground.urlPic = carousellObjectList[carousellObject].urlPicCarousell
             newState.carousellBackground.num =numpic
           }else if(action.data === 'alante'){
             numpic = newState.carousellBackground.num +1
-            numpic = numpic >4? 1 :numpic
+            numpic = numpic >newState.carousellBackgroundcarousellLength? 1 :numpic
             carousellObject = 'pic'+numpic
             newState.carousellBackground.urlPic = carousellObjectList[carousellObject].urlPicCarousell
             newState.carousellBackground.num =numpic
 
           }else{
-            numpic = action.data+1 //empieza en pic1 hasta pic4 no en 0
+            numpic = action.data+1 //empieza en pic1 hasta pic5 no en 0
             carousellObject = 'pic'+numpic
             newState.carousellBackground.urlPic = carousellObjectList[carousellObject].urlPicCarousell
 

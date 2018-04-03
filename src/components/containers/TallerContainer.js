@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import actions from '../../actions'
 import {connect} from 'react-redux'
-import {Conocenos} from '../presentational'
+import {Taller} from '../presentational'
 
 
 class TallerContainer extends Component {
@@ -20,19 +20,19 @@ class TallerContainer extends Component {
     window.open('http://artesaniadegalicia.xunta.gal/es/fundacion/la-marca','_blank')
   }
 
-  cierraDialogosNavbar(event){
+  cierraDialogosNavbar(){
     this.props.toggleModal('closeDropdowns')
 
   }
 
   render() {
-    let conocenosContenido = {}
+    let tallerContenido = {}
     let artesaniaContenido = {}
     if (this.props.storeContenidos.listaContenidos.length !==0){
       for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
-        if (this.props.storeContenidos.listaContenidos[i].id === 'conocenos'){
-          conocenosContenido = this.props.storeContenidos.listaContenidos[i]
+        if (this.props.storeContenidos.listaContenidos[i].id === 'taller'){
+          tallerContenido = this.props.storeContenidos.listaContenidos[i]
           break
         }
       }
@@ -48,10 +48,10 @@ class TallerContainer extends Component {
 
     return (
       <div onClick = {this.cierraDialogosNavbar.bind(this)} >
-        {conocenosContenido.headerFoto &&
-          <Conocenos conocenosContenido = {conocenosContenido} artesaniaContenido = {artesaniaContenido}
-            whenClicked={this.goArtesania.bind(this)}/>
-        }
+        <Taller
+          tallerContenido = {tallerContenido}
+          artesaniaContenido = {artesaniaContenido}
+          whenClicked={this.goArtesania.bind(this)}/>
 
       </div>
     )
@@ -74,7 +74,7 @@ const stateToProps = (state) => {
     //en state.blabla dices de que reducer quieres info
     //y tu le asignas una key q quieras
     storeContenidos: state.contenidos,
-    
+
 
   }
 }

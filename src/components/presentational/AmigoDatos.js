@@ -137,10 +137,9 @@ class AmigoDatos extends React.Component {
         localidad: document.getElementById('localidad').value,
         provincia: document.getElementById('provincia').value,
         cp: document.getElementById('cp').value,
-        newsletter: this.state.recibir,
         hayDatos:true,
       }
-      if (newDatosEnvio.nombreCompletoEnvio.length !== 0 && newDatosEnvio.calle.length !== 0 && newDatosEnvio.localidad.length !== 0 && newDatosEnvio.provincia.length !== 0 && newDatosEnvio.cp.length !== 0 && newDatosEnvio.newsletter.length !== 0 ){
+      if (newDatosEnvio.nombreCompletoEnvio.length !== 0 && newDatosEnvio.calle.length !== 0 && newDatosEnvio.localidad.length !== 0 && newDatosEnvio.provincia.length !== 0 && newDatosEnvio.cp.length !== 0 ){
 
         newCurrentUser.datosEnvio=newDatosEnvio
         this.props.cambiarCurrentUserModificables('currentUserDatosEnvio', true)
@@ -429,7 +428,7 @@ class AmigoDatos extends React.Component {
                           <div className='form-group row' style={{marginBottom: 1}}>
                             <div className='col-xs-3 col-sm-2 col-md-2 col-lg-2' style={{paddingRight:0}}>
                               <a className ='glyphicon glyphicon-alert' name ='verified' onClick={this.handleClick.bind(this)}
-                                style= {{cursor: 'pointer',textDecoration:'none',color:'gold'}} id='newsletter'></a>
+                                style= {{cursor: 'pointer',textDecoration:'none',color:'gold'}}></a>
                             </div>
                             <div className='col-xs-9 col-sm-10 col-md-10 col-lg-10' style= {{paddingLeft:2}}>
                               <a style= {{cursor: 'pointer',textDecoration:'none', marginBottom:1 ,color:'goldenRod'}}
@@ -447,7 +446,7 @@ class AmigoDatos extends React.Component {
                           <div className='form-group row' style={{marginBottom: 1}}>
                             <div className='col-xs-3 col-sm-2 col-md-2 col-lg-2' style={{paddingRight:0}}>
                               <a className ='glyphicon glyphicon-alert' name ='verified' onClick={this.handleClick.bind(this)}
-                                style= {{cursor: 'pointer',textDecoration:'none',color:'gold'}} id='newsletter'></a>
+                                style= {{cursor: 'pointer',textDecoration:'none',color:'gold'}}></a>
                             </div>
                             <div className='col-xs-9 col-sm-10 col-md-10 col-lg-10' style= {{paddingLeft:2}}>
                               <a style= {{cursor: 'pointer',textDecoration:'none', marginBottom:1 ,color:'goldenRod'}}
@@ -607,13 +606,6 @@ class AmigoDatos extends React.Component {
   }
 
   renderDatosParaEnvio(){
-    //setting the news letter to yes or no
-    var sino = 'Sí'
-    var newsletter = 'glyphicon glyphicon-ok text-center pull-right'
-    if (!this.state.recibir){
-      newsletter = 'glyphicon glyphicon-remove text-center pull-right'
-      sino = 'No'
-    }
 
     if(this.props.currentUser){
       if(this.props.currentUserDatos.currentUserDatosEnvio){ //mostrar los datos que hay
@@ -624,8 +616,6 @@ class AmigoDatos extends React.Component {
               <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.calle} </p>
               <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.localidad} </p>
               <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.cp+' , '+this.props.currentUser.datosEnvio.provincia} </p>
-
-              <p style= {{marginBottom: 0,paddingTop: 2}}> {sino+', quiero recibir información'} </p>
             </div>
 
             <div className= 'hidden-sm hidden-md hidden-lg visible-xs-block col-xs-9' style = {{paddingLeft: 0, paddingRight: 0}}>
@@ -633,8 +623,6 @@ class AmigoDatos extends React.Component {
               <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.calle} </p>
               <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.localidad} </p>
               <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.cp+' , '+this.props.currentUser.datosEnvio.provincia} </p>
-
-              <p style= {{marginBottom: 0,paddingTop: 2}}> {sino+', quiero recibir información'} </p>
             </div>
 
 
@@ -695,18 +683,6 @@ class AmigoDatos extends React.Component {
                 </div>
               </div>
 
-              <div className='form-group row' style={{marginBottom: 2}}>
-                <div className='col-xs-3 col-sm-2 col-md-2 col-lg-2'>
-                  <a className ={newsletter} name ='sino' onClick={this.handleClick.bind(this)} style= {style.modal.btnNewsletter} id='newsletter'></a>
-                </div>
-                <div className='col-xs-9 col-sm-10 col-md-10 col-lg-10' style= {{paddingLeft:2}}>
-                  <p>{sino} quiero recibir información por e-mail</p>
-                </div>
-                <div className='col-xs-12 col-sm-12 col-md-12 col-lg-12' style= {{paddingLeft:5}}>
-                  <p className= 'text-muted' style= {{padding: 0, }}>(nunca mandamos spam ni publicidad ajena a Mico)</p>
-                </div>
-              </div>
-
               <div className='form-group row'>
                 <div className='col-xs-9 col-sm-10 col-md-10 col-lg-10' style = {{paddingRight: 0 }}>
                   <button id= 'datosEnvio' onClick={this.handleGuardarCambios.bind(this)} className='btn text-center form-control ' style = {{border: 'none',borderRadius: 4, backgroundColor: 'black',color:'white',width: '95%',paddingLeft: 5,}} >Guardar cambios</button>
@@ -726,7 +702,7 @@ class AmigoDatos extends React.Component {
           return(
             <div>
               <div className= 'col-xs-7 col-sm-8 col-md-8 col-lg-8' style = {{paddingRight: 2,paddingLeft:0}}>
-                No necesitas rellenar datos de envio porque se te preguntará en el proceso de pago.
+                No necesitas rellenar datos de envio porque se te preguntará en el proceso de pago con PayPal.
               </div>
               <div className= 'col-xs-5 col-sm-4 col-md-4 col-lg-4' style = {{paddingRight: 0,paddingLeft:0}}>
                 <button id= 'datosEnvio' onClick={()=> this.setState({quieroDatos:true})}

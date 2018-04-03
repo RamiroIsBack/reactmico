@@ -97,7 +97,6 @@ class CarroContainer extends Component {
         let justLogedIn =true
         this.props.loadCarro(this.props.carro.cartList,justLogedIn )
           .then(carro =>{
-            //TODO ::: corregir el carro del user si hay algun elemento q haya sido vendido
             let listaSinVendidos = []
             let listaDescartados= []
             let tienesVendidos = false
@@ -163,7 +162,7 @@ class CarroContainer extends Component {
     this.props.carro.cartList.map((productInCart,i)=>{
       return(
         <div className ='container-fluid' style={{padding: 0}} key ={i}>
-          <CarroProduct indice ={i} propiedades = {productInCart} whenClicked={this.goToProduct.bind(this)} whenErase={this.deleteProduct.bind(this)} changeQtty={this.QttyToggle.bind(this)} />
+          <CarroProduct indice ={i} propiedades = {productInCart} whenClicked={this.goToProduct.bind(this)} whenErase={this.deleteProduct.bind(this)} changeQtty={this.QttyToggle.bind(this)} lengua= {this.props.navigation.lengua} />
         </div>
 
 
@@ -223,6 +222,7 @@ class CarroContainer extends Component {
               pedidoContenido ={pedidoContenido}
               stiloCarroBuy= {stiloCarroBuy}
               screenSize = {this.props.navigation.screenSize}
+
             />
           </div>
         </div>

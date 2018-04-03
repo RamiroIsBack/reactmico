@@ -47,7 +47,7 @@ class HomeContainer extends Component {
   }
 
   nextPicCarousell(){
-    if(this.props.storeContenidos.carousellBackground.CarousellLength === this.props.storeContenidos.carousellBackground.num){
+    if(this.props.storeContenidos.carousellBackground.carousellLength === this.props.storeContenidos.carousellBackground.num){
       this.props.moveCarousell(0)
     }else{
       this.props.moveCarousell(this.props.storeContenidos.carousellBackground.num)

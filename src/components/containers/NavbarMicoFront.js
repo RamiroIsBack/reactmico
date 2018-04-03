@@ -90,8 +90,8 @@ class NavbarMicoFront extends Component {
       this.props.toggleModal('openCreaciones')
       this.props.toggleModal('closeLengua')
       this.props.toggleModal('closeLogin')
-      this.props.moveToCreacionesSection(event.target.name)
       this.props.navActive(event.target.id, 'navbarMicoFront')
+
     }
     //
     // remember [else if] links them all and makes d last [else] apply to all
@@ -99,9 +99,7 @@ class NavbarMicoFront extends Component {
     //
     else if (event.target.id === 'ferias'){
       this.props.toggleModal('closeDropdowns')
-      this.props.moveToFeriasSection(event.target.name)
       this.props.navActive(event.target.id, 'navbarMicoFront')
-      window.scrollTo(0, 0)
     }
     //viene de otro lado as'i q cierra los 2
     else if(event.target.id=== 'carro'){
@@ -260,6 +258,7 @@ class NavbarMicoFront extends Component {
     }
     let screenSize =this.props.navigation.screenSize
     let lengua = this. props.navigation.lengua
+
     return (
       <div className = 'sticky__navbar__contanier' id= 'navbarContainer' style={navbarPosition}>
         {screenSize ==='laptop' &&
@@ -318,22 +317,22 @@ class NavbarMicoFront extends Component {
             </div>
 
             <div className = 'navbar__feria__container' id='ferias' onMouseOver={this.handleHoverOn.bind(this)} >
-              <NavLink style = {feriasEstilo} onClick = {this.gestionaColapso.bind(this)} id='ferias' name='allFerias' to='/Ferias'>FERIAS
+              <NavLink style = {feriasEstilo} onClick = {this.gestionaColapso.bind(this)} id='ferias' to='/Ferias'> FERIAS
               </NavLink>
             </div>
 
             <div className = 'navbar__conocenos__container' id='conocenos' onMouseOver={this.handleHoverOn.bind(this)}>
-              <NavLink to='/Conocenos' style = {conocenosEstilo} onClick = {this.gestionaColapso.bind(this)} id='conocenos' >SOBRE MI
+              <NavLink to='/Conocenos' style = {conocenosEstilo} onClick = {this.gestionaColapso.bind(this)} id='conocenos' > SOBRE MI
               </NavLink>
             </div>
             <div className = 'navbar__contacto__container' id='contacto' onMouseOver={this.handleHoverOn.bind(this)}>
-              <NavLink to='/Conocenos' style = {contactoEstilo} onClick = {this.gestionaColapso.bind(this)} id='contacto' >CONTACTO
+              <NavLink to='/Contacto' style = {contactoEstilo} onClick = {this.gestionaColapso.bind(this)} id='contacto' > CONTACTO
               </NavLink>
             </div>
 
 
             <div className = 'navbar__taller__container' id='taller' onMouseOver={this.handleHoverOn.bind(this)}>
-              <NavLink to='/Conocenos' style = {tallerEstilo} onClick = {this.gestionaColapso.bind(this)} id='taller' >TALLER
+              <NavLink to='/Taller' style = {tallerEstilo} onClick = {this.gestionaColapso.bind(this)} id='taller' > TALLER
               </NavLink>
             </div>
             <div className = 'navbar__instagram__container'>
@@ -382,7 +381,7 @@ class NavbarMicoFront extends Component {
 
                 </div>
               }
-              
+
             </div>
 
             <div className = 'navbar__pagar__container'>
@@ -423,8 +422,6 @@ class NavbarMicoFront extends Component {
 const dispatchToProps = (dispatch) =>{
 
   return{
-    moveToCreacionesSection:(creacionTipo)=>dispatch(actions.moveToCreacionesSection(creacionTipo)),
-    moveToFeriasSection: (feriaName)=>dispatch(actions.moveToFeriasSection(feriaName)),
     getContenidos:()=>dispatch(actions.getContenidos()),
     toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
     navActive:(activeTab,params) => dispatch(actions.navActive(activeTab,params)),
@@ -442,5 +439,5 @@ const stateToProps = (state) => {
     navigation: state.navigation,
   }
 }
-//                                   ****
+
 export default connect (stateToProps,dispatchToProps)(NavbarMicoFront)

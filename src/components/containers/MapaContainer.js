@@ -22,6 +22,7 @@ class MapaContainer extends Component {
 
           <Mapa
             ferias = {this.props.ferias.listaFerias}
+            lengua = {this.props.navigation.lengua}
             handleClick= {this.handleClick.bind(this)}
             containerElement={<div style={{ height: '300px',minWidth:'300px', maxWidth:'1200px'}} />}
             mapElement={<div style={{ height: '100%' }} />}
@@ -41,8 +42,7 @@ const dispatchToProps = (dispatch) =>{
 
 const stateToProps = (state) => {
   return{
-    //en state.blabla dices de que reducer quieres info
-    //y tu le asignas una key q quieras
+    navigation:state.navigation,
     ferias: state.feria,
   }
 }

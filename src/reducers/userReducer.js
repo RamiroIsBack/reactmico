@@ -25,13 +25,18 @@ export default (state = initialState, action) => {
     return newState
 
   case constants.ADD_USER_INFO:
-    //params : okEnvio, okFoto, okNombre
+    //params : okEnvio, okFoto, okNombre, okEmail
     if (action.params === 'okEnvio'){
       newState.currentUserDatosEnvio = true
+      newState.currentUser.datosEnvio = action.data
     }else if (action.params ==='okFoto'){
+      newState.currentUser.foto = action.data
       newState.currentUserFoto= true
+    }else if (action.params ==='okNombre'){
+      newState.currentUser.datosPersonales.nombre = action.data
+    }else if (action.params ==='okEmail'){
+      newState.currentUser.datosPersonales.email = action.data
     }
-    newState['currentUser'] = action.data
     //force it to refresh the listausers
     newState['usersLoaded'] = false
     return newState
@@ -47,89 +52,42 @@ export default (state = initialState, action) => {
     }else if (action.params ==='okGoogle' || action.params ==='okFacebook'){
       // se ha logeado con google, colocar los datos
       console.log(`${action.data} t has logeado con google o facebook`)
-      newState.currentUser= {
-        datosPersonales:{
-          nombre: action.data.user.displayName,
-          email: action.data.user.email,
-          phoneNumber: action.data.user.phoneNumber,
-          emailVerified:action.data.user.emailVerified,
-          providerId: action.data.user.providerData[0].providerId,
-          uid: action.data.user.uid, //user's unique ID lo usaremos para linkarlo con la DBUsers
-        },
-        foto:{
-          photoURL: action.data.user.photoURL,
-        }
-      }
-      let loTenemos=false
-      if(newState.currentUser.foto.photoURL !== null){
-        newState.currentUserFoto =true
-      }
+
       for (let i =0; i < newState.listaUsers.length; i++){
-        if (newState.listaUsers[i].id === newState.currentUser.datosPersonales.uid){
-          //ya lo tenemos en la base de datos le metemos todos los datos
+        if (newState.listaUsers[i].id === action.data){
+
           newState.currentUser= newState.listaUsers[i]
-          loTenemos = true
-          if(newState.currentUser.datosEnvio.cp){//vale est'a en la DB pero igual est'a todo a false
-            //hay datos mostrables en la db, si no lo ubiera , seria false y el user tendr'ia q rellenarlos
-            newState.currentUserDatos.currentUserDatosEnvio = true
-          }
           break
         }
       }
-      if(!loTenemos){
-        newState.currentUser.datosEnvio = {
-          nombreCompletoEnvio: false,
-          calle: false,
-          localidad: false,
-          provincia: false,
-          cp: false,
-          newsletter: true,
 
-        }
-      }
-      newState['usersLoaded'] = false
-      return newState
-    }else if (action.params ==='okPassword'){
-      // se ha logeado con password, colocar los datos
-      console.log(`${action.data.displayName} t has logeado con email y password`)
-      newState.currentUser= {
-        datosPersonales:{
-          nombre: action.data.displayName,
-          email: action.data.email,
-          phoneNumber: action.data.phoneNumber,
-          emailVerified: action.data.emailVerified,
-          providerId: action.data.providerId,
-          uid: action.data.uid, //user's unique ID lo usaremos para linkarlo con la DBUsers
-        },
-        foto:{
-          photoURL: action.data.photoURL,
-        }
-      }
+    
       if(newState.currentUser.foto.photoURL !== null){
         newState.currentUserDatos.currentUserFoto =true
       }
-      let loTenemos=false
+      if(newState.currentUser.datosEnvio.cp ){
+        newState.currentUserDatos.currentUserDatosEnvio = true
+      }
+      newState['usersLoaded'] = false
+      return newState
+
+    }else if (action.params ==='okPassword'){
+      // se ha logeado con password, colocar los datos
+      console.log(`${action.data.displayName} t has logeado con email y password`)
+
       for (let i =0; i < newState.listaUsers.length; i++){
-        if (newState.listaUsers[i].id === newState.currentUser.datosPersonales.uid){
-          // le metemos los datos q ya tenemos en la base de datos
+        if (newState.listaUsers[i].id === action.data){
+
           newState.currentUser= newState.listaUsers[i]
-          loTenemos = true
-          if(newState.listaUsers[i].datosEnvio.cp){
-            newState.currentUserDatos.currentUserDatosEnvio = true
-            break
-          }
+          break
         }
       }
-      if(!loTenemos){
-        newState.currentUser.datosEnvio = {
-          nombreCompletoEnvio: false,
-          calle: false,
-          localidad: false,
-          provincia: false,
-          cp: false,
-          newsletter: true,
 
-        }
+      if(newState.currentUser.foto.photoURL !== null){
+        newState.currentUserDatos.currentUserFoto =true
+      }
+      if(newState.currentUser.datosEnvio.cp ){
+        newState.currentUserDatos.currentUserDatosEnvio = true
       }
       newState['usersLoaded'] = false
       return newState
@@ -166,6 +124,10 @@ export default (state = initialState, action) => {
         emailVerified: action.data.emailVerified,
         providerId: action.data.providerId,
         uid: action.data.uid, //user's unique ID lo usaremos para linkarlo con la DBUsers
+        aceptaPoliticaDatos: action.data.aceptaPoliticaDatos,
+        fechaAltaYacepta:action.data.fechaAltaYacepta,
+        ip:action.data.ip,
+        ciudad:action.data.ciudad,
       },
       datosEnvio:{
         nombreCompletoEnvio: false,
@@ -173,7 +135,7 @@ export default (state = initialState, action) => {
         localidad: false,
         provincia: false,
         cp: false,
-        newsletter: action.data.newsletter,
+        hayDatos:false,
       },
       foto:{
         photoURL: action.data.photoURL,

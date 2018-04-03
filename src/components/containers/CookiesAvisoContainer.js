@@ -21,7 +21,7 @@ class CookiesAvisoContainer extends Component{
     return(
       <div className = 'cookies__aviso'>
         <h6 style = {{display:'inline-block'}}>
-          Utilizamos cookies propias y de terceros para obtener datos estadísticos de la navegación de nuestros usuarios y mejorar nuestros servicios. Si acepta o continúa navegando, consideramos que acepta su uso. Puede cambiar la configuración u obtener más información
+          Esta web usa cookies operativas propias que tienen una pura finalidad funcional y cookies de terceros (tipo analytics) que permiten conocer sus hábitos de navegación para dar mejores servicios de información. Si continuas navegando, aceptas su uso. Puedes cambiar la configuración, desactivarlas u obtener más información
           <h5
             id = 'masInfo'
             onClick = {this.handleClick.bind(this)} style = {{display:'inline', fontWeight: 'bold',cursor:'pointer'}}> aquí </h5>

@@ -1,0 +1,41 @@
+.taller__container{
+  display: grid;
+  grid-template-areas:
+  "t1 t1 t2 t2"
+  "d  d  d  d "
+  "t3 t3 t4 t4";
+  grid-gap: 3px;
+  text-align: center;
+}
+.taller__foto1__container{
+  grid-area: t1;
+}
+.taller__foto2__container{
+  grid-area: t2;
+}
+.taller__foto3__container{
+  grid-area: t3;
+}
+.taller__foto4__container{
+  grid-area: t4;
+}
+
+.taller__descripcion__container{
+  grid-area: d;
+}
+.taller__mapa__container{
+  grid-area: m;
+}
+
+@media screen and (max-width: 705px) {
+  .taller__container{
+    display: grid;
+    grid-template-areas:
+    "t1 t1 t2 t2"
+    "d  d  d  d "
+    "t3 t3 t4 t4";
+    grid-gap: 3px;
+    text-align: center;
+  }
+
+}

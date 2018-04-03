@@ -9,6 +9,7 @@ var initialState = {
   menuLoginShowing: false,
   menuEntrarShowing:false,
   realizarCompraShowing: false,
+  consentimientoShowing:false,
 
   submodalWarning: '',
 }
@@ -31,6 +32,13 @@ export default (state = initialState, action) => {
     }
     else if (action.data === 'openLengua'){
       newState['lenguaShowing'] = true
+    }
+    //consentimiento
+    else if (action.data === 'closeConsentimiento'){
+      newState['consentimientoShowing'] = false
+    }
+    else if (action.data === 'openConsentimiento'){
+      newState['consentimientoShowing'] = true
     }
     //creaciones
     else if (action.data === 'closeCreaciones'){

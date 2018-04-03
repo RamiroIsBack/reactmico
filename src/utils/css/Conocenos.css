@@ -1,0 +1,32 @@
+.conocenos__container{
+  display: grid;
+  grid-template-areas:
+  "f f . ."
+  "f f d d "
+  "f f . .";
+  grid-gap: 3px;
+  text-align: center;
+}
+.conocenos__foto__container{
+  grid-area: f;
+}
+
+.conocenos__descripcion__container{
+  grid-area: d;
+}
+
+@media screen and (max-width: 705px) {
+  .conocenos__container{
+    display: grid;
+    grid-template-areas:
+    "m m m m m m m m m m m m m m m m m m m m m m m m"
+    "m m m m m m m m m m m m m m m m m m m m m m m m"
+    ". d d d d d d d d d d d d d d . l l l l l l l ."
+    ". d d d d d d d d d d d d d d . l l l l l l l .";
+    grid-gap: 3px;
+    grid-template-columns: repeat(24, auto);
+    grid-template-rows: repeat(4,auto);
+    text-align: center;
+  }
+
+}

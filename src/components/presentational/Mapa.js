@@ -25,6 +25,11 @@ class Mapa extends Component {
         if(!ferias[i].showInfo){
           ferias[i].showInfo = false //pongo todas a false x defecto si no hay
         }
+        let direccion = ferias[i].direccion
+
+        if(this.props.lengua ==='ga'){
+          direccion = (ferias[i].direccionGalego)? ferias[i].direccionGalego : ferias[i].direccion
+        }
         markers.push(
           <Marker
             key = {ferias[i].id}
@@ -58,7 +63,7 @@ class Mapa extends Component {
                       </img>
                     </div>
                     <div className='container-fluid col-xs-9 col-sm-9 col-md-9 col-lg-9' style = {{padding : 0}} >
-                      <h6 id='mapsLink' style = {{whiteSpace: 'initial'}}>{ferias[i].direccion}</h6>
+                      <h6 id='mapsLink' style = {{whiteSpace: 'initial'}}>{direccion} </h6>
                     </div>
 
                   </div>

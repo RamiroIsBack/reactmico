@@ -7,18 +7,9 @@ import actions from '../../actions'
 
 class ModalMenuXsContainer extends Component {
 
-  componentDidMount() {
-    //no hago nada d esto xq ya los cargo en los otros modales y da la casualidad
-    //de que en el feriasReducer entra a la vez 2 veces y me carga el doble de ferias
-
-  }
 
   moveToCreacionesSection(Name){
     this.props.moveToCreacionesSection(Name)
-    this.props.toggleModal('closeMenuXs')
-  }
-  moveToFeriasSection(Name){
-    this.props.moveToFeriasSection(Name)
     this.props.toggleModal('closeMenuXs')
   }
 
@@ -28,7 +19,6 @@ class ModalMenuXsContainer extends Component {
   render(){
     var menuXsShowing = false
     var creacionesContenidos = {}
-    var feriasContenidos = {}
 
     if (this.props.storeModal){
       menuXsShowing = this.props.storeModal.menuXsShowing
@@ -43,17 +33,10 @@ class ModalMenuXsContainer extends Component {
         creacionesContenidos = this.props.storeContenidos.listaContenidos[i]
 
       }
-      if (this.props.storeContenidos.listaContenidos[i].id === 'ferias'){
-        feriasContenidos = this.props.storeContenidos.listaContenidos[i]
-        break
-      }
     }
     let creacionDB =this.props.storeCreaciones.listaCreaciones
 
     var creacionList =[]
-    //TODO:
-    //si lista.length > 3 hacer 2 filas con el conditional rendering
-    //valorar hacer 2 componentes presentational
 
     for (var tipo in creacionDB) {
       if (creacionDB.hasOwnProperty(tipo)) {
@@ -65,14 +48,12 @@ class ModalMenuXsContainer extends Component {
         )
       }
     }
-    let feriaDB = this.props.storeFerias.listaFerias
-
 
 
     return (
 
       <div>
-        <ModalMenuXs show={menuXsShowing} onSelectCreaciones={this.moveToCreacionesSection.bind(this)} onSelectFerias={this.moveToFeriasSection.bind(this)} onClose={this.toggleModal.bind(this)} creacionesContenidos = {creacionesContenidos} feriasContenidos = {feriasContenidos} creacionList ={creacionList} feriaDB = {feriaDB}>
+        <ModalMenuXs show={menuXsShowing} onSelectCreaciones={this.moveToCreacionesSection.bind(this)}  onClose={this.toggleModal.bind(this)} creacionesContenidos = {creacionesContenidos} creacionList ={creacionList} >
         </ModalMenuXs>
 
 

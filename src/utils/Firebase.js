@@ -244,7 +244,7 @@ const elementoVendido = (id,actionType) =>{
       dispatch({
         type: actionType,
         params: 'errorElementoVendido', // can be null
-        data: error, 
+        data: error,
       })
     }
     throw error
@@ -385,40 +385,20 @@ const loginFacebook = (params,actionType) => {
   // when your page loads :  firebase.auth().getRedirectResult().then(function(result) {
 
     .then(result =>{
-      console.log ('t has logeado con facebook'+ result.user.email)
-      let datosPers={
-        nombre: result.user.displayName,
-        email: result.user.email,
-        emailVerified:result.user.emailVerified,
-        phoneNumber: result.user.phoneNumber,
-        providerId: result.user.providerData[0].providerId,
-        uid: result.user.uid, //user's unique ID lo usaremos para linkarlo con la DBUsers
+      if (!result.additionalUserInfo.isNewUser){
+        console.log ('t has logeado con facebook'+ result.user.email)
+        if (actionType !== null){
+          dispatch({
+            type: actionType,
+            params: 'okGoogle', // can be null
+            data: result.user.uid, //
+          })
+        }
       }
       currentUserUid = result.user.uid
       currentUserEmail = result.user.email
-      database.ref('users/'+result.user.uid+'/datosPersonales')
-        .set(datosPers).then(snapshot => {
 
-          console.log('creado los datos personales')
-          if (actionType !== null){
-            dispatch({
-              type: actionType,
-              params: 'okFacebook', // can be null
-              data: result, // usuario subido correctamente
-            })
-          }
-        }).catch(err => {
-          console.log(` no se ha creado: ${err.message}`)
-          if (actionType !== null){
-            dispatch({
-              type: actionType,
-              params: 'error', // can be null
-              data: err, // err , no ha subido usuario
-            })
-          }
-          throw err
-
-        })
+      return result
     })
     .catch(function(error) {
       // Handle Errors here.
@@ -444,43 +424,20 @@ const loginGoogle = (params,actionType) => {
   firebase.auth().useDeviceLanguage()
   return dispatch => firebase.auth().signInWithPopup(providerGoogle)
     .then (result => {
-      console.log(`${result.user.email} ha iniciado sesion`)
-
-      let datosPers={
-        nombre: result.user.displayName,
-        email: result.user.email,
-        emailVerified:result.user.emailVerified,
-        phoneNumber: result.user.phoneNumber,
-        providerId: result.user.providerData[0].providerId,
-        uid: result.user.uid, //user's unique ID lo usaremos para linkarlo con la DBUsers
+      if (!result.additionalUserInfo.isNewUser){
+        console.log(`${result.user.email} ha iniciado sesion`)
+        if (actionType !== null){
+          dispatch({
+            type: actionType,
+            params: 'okGoogle', // can be null
+            data: result.user.uid, //
+          })
+        }
       }
       currentUserUid = result.user.uid
       currentUserEmail = result.user.email
 
-      database.ref('users/'+result.user.uid+'/datosPersonales')
-        .set(datosPers).then(snapshot => {
-
-          console.log('creado los datos personales')
-          if (actionType !== null){
-            dispatch({
-              type: actionType,
-              params: 'okGoogle', // can be null
-              data: result, // usuario subido correctamente
-            })
-          }
-        }).catch(err => {
-          console.log(` no se ha creado: ${err.message}`)
-          if (actionType !== null){
-            dispatch({
-              type: actionType,
-              params: 'error', // can be null
-              data: err, // err , no ha subido usuario
-            })
-          }
-          throw err
-
-        })
-
+      return result
     })
     .catch(error =>{
       console.log (`el error es ${error.code}: ${error.message}`)
@@ -488,7 +445,7 @@ const loginGoogle = (params,actionType) => {
         dispatch({
           type: actionType,
           params: 'error', // can be null
-          data: error, // usuario subido correctamente
+          data: error, //
         })
       }
     })
@@ -498,41 +455,18 @@ const loginWithEmailAndPassword = (user,actionType) => {
     .then (result => {
       console.log(`${result.email} ha iniciado sesion`)
 
-      let datosPers={
-        nombre: result.displayName,
-        email: result.email,
-        emailVerified:result.emailVerified,
-        phoneNumber: result.phoneNumber,
-        providerId: result.providerId,
-        uid: result.uid, //user's unique ID lo usaremos para linkarlo con la DBUsers
-      }
       currentUserUid = result.uid
       currentUserEmail = result.email
       currentUserPassword = user.password
 
-      database.ref('users/'+result.uid+'/datosPersonales')
-        .set(datosPers).then(snapshot => {
-
-          console.log('creado los datos personales')
-          if (actionType !== null){
-            dispatch({
-              type: actionType,
-              params: 'okPassword', // can be null
-              data: result, // usuario subido correctamente
-            })
-          }
-        }).catch(err => {
-          console.log(` no se ha creado: ${err.message}`)
-          if (actionType !== null){
-            dispatch({
-              type: actionType,
-              params: 'error', // can be null
-              data: err, // err , no ha subido usuario
-            })
-          }
-          throw err
-
+      if (actionType !== null){
+        dispatch({
+          type: actionType,
+          params: 'okPassword', // can be null
+          data: currentUserUid, // usuario subido correctamente
         })
+      }
+
 
     })
     .catch(error =>{
@@ -597,6 +531,10 @@ const userCreated = (user, actionType) => {
               phoneNumber: result.phoneNumber,
               providerId: result.providerId,
               uid: result.uid, //user's unique ID lo usaremos para linkarlo con la DBUsers
+              aceptaPoliticaDatos: user.aceptaPoliticaDatos,
+              fechaAltaYacepta:user.fechaAltaYacepta,
+              ip:user.ip,
+              ciudad:user.ciudad,
             }
             currentUserUid = result.uid
             currentUserEmail = result.email
@@ -620,14 +558,15 @@ const userCreated = (user, actionType) => {
                       localidad: false,
                       provincia: false,
                       cp: false,
-                      newsletter: user.newsletter,
                       hayDatos:false,
                     }
                     database.ref('users/'+result.uid+'/datosEnvio')
                       .set(datosEnv).then(snapshot => {
                         console.log('creado los datos envio')
-
-                        result.newsletter=user.newsletter
+                        result.aceptaPoliticaDatos = user.aceptaPoliticaDatos
+                        result.fechaAltaYacepta=user.fechaAltaYacepta
+                        result.ip=user.ip
+                        result.ciudad=user.ciudad
                         if (actionType !== null){
                           dispatch({
                             type: actionType,
@@ -762,7 +701,7 @@ const changePassword = (payload,params,actionType) =>{
   if(params === 'change'){
     return dispatch => firebase.auth().currentUser.updatePassword(payload)
       .then(function() {
-        console.log('se ha cambiado el password'+ payload)
+
         if (actionType !== null){
           dispatch({
             type: actionType,
@@ -910,7 +849,7 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
           dispatch({
             type: actionType,
             params: 'okEnvio', // can be null
-            data: user, // usuario subido correctamente
+            data: user.datosEnvio, // usuario subido correctamente
           })
         }
 
@@ -930,14 +869,14 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
     return dispatch => firebase.auth().currentUser.updateProfile({displayName: user.datosPersonales.nombre,})
       .then(function() {
         database.ref('users/'+user.datosPersonales.uid+'/datosPersonales')
-          .set(user.datosPersonales).then(snapshot => {
-            console.log('creado los datos personales')
+          .update({nombre:user.datosPersonales.nombre}).then(snapshot => {
+            console.log('actualizado los datos personales')
 
             if (actionType !== null){
               dispatch({
                 type: actionType,
                 params: 'okNombre', // can be null
-                data: user, // usuario subido correctamente
+                data: user.datosPersonales.nombre, // usuario subido correctamente
               })
             }
 
@@ -975,15 +914,16 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
           .sendEmailVerification().then(function() {
             alert('se ha mandado un email, mira en la bandeja de correo no deseado!!')
             console.log('email sent')
+            currentUserEmail = user.datosPersonales.email
             database.ref('users/'+user.datosPersonales.uid+'/datosPersonales')
-              .set(user.datosPersonales).then(snapshot => {
+              .update({email:user.datosPersonales.email}).then(snapshot => {
 
                 console.log('creado los datos personales '+firebase.auth().currentUser.email)
                 if (actionType !== null){
                   dispatch({
                     type: actionType,
                     params: 'okEmail', // can be null
-                    data: user, // usuario subido correctamente
+                    data: user.datosPersonales.email, // usuario subido correctamente
                   })
                 }
 
@@ -1048,7 +988,7 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
                   dispatch({
                     type: actionType,
                     params: 'okFoto', // can be null
-                    data: user, // usuario subido correctamente
+                    data: user.foto, // usuario subido correctamente
                   })
                 }
               }).catch(err => {
@@ -1079,53 +1019,10 @@ const addUserInfo = (user,params, posibleFoto, actionType) => {
       })
 
 
-
-
-
-  }else if(params === 'nombre'){
-    return dispatch => database.ref('users/'+user.datosPersonales.uid+'/datosPersonales')
-      .set(user.datosPersonales).then(snapshot => {
-        console.log('hemos cambiado los datosPersonales para cambiar el nombre')
-        //we need to change it on the firebase user too
-
-        firebase.auth().currentUser
-          .updateProfile({displayName: user.datosPersonales.nombre, }).then(function() {
-          // Update successful.
-            console.log('ha actualizado el profile displayName')
-            if (actionType !== null){
-              dispatch({
-                type: actionType,
-                params: 'okNombre', // can be null
-                data: user, // usuario subido correctamente
-              })
-            }
-          }).catch(err => {
-            console.log(` no se ha actualizado: ${err.message}`)
-            if (actionType !== null){
-              dispatch({
-                type: actionType,
-                params: 'errorUpdateProfile', // can be null
-                data: err, // err , no ha subido usuario
-              })
-            }
-            throw err
-
-          })
-
-      }).catch(err => {
-        console.log(` no se ha creado: ${err.message}`)
-        if (actionType !== null){
-          dispatch({
-            type: actionType,
-            params: 'errorName', // can be null
-            data: err, // err , no ha subido usuario
-          })
-        }
-        throw err
-
-      })
-
   }
+
+
+
 
 }
 

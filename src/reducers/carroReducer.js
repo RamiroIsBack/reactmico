@@ -29,7 +29,11 @@ export default (state = initialState, action) => {
       //saco el numero total de elementos de cada '.unidades'
       newState['cartList'].forEach((value,index)=>{
         unidadesTotales += value.unidades
-        precioSubTotal += value.precio * value.unidades
+        if(!value.precioRebajado){
+          precioSubTotal += value.precio * value.unidades
+        }else{
+          precioSubTotal += value.precioRebajado * value.unidades
+        }
       })
       newState['numProducts'] = unidadesTotales
       newState['precioSubTotal'] = precioSubTotal
@@ -44,9 +48,12 @@ export default (state = initialState, action) => {
     //saco el numero total de elementos de cada '.unidades'
     newState['cartList'].forEach((value,index)=>{
       unidadesTotales += value.unidades
-      precioSubTotal += value.precio * value.unidades
-    }
-    )
+      if(!value.precioRebajado){
+        precioSubTotal += value.precio * value.unidades
+      }else{
+        precioSubTotal += value.precioRebajado * value.unidades
+      }
+    })
     newState['numProducts'] = unidadesTotales
     newState['precioSubTotal'] = precioSubTotal
     return newState
@@ -64,7 +71,11 @@ export default (state = initialState, action) => {
     //saco el numero total de elementos de cada '.unidades'
     newState['cartList'].forEach((value,index)=>{
       unidadesTotales += value.unidades
-      precioSubTotal += value.precio * value.unidades
+      if(!value.precioRebajado){
+        precioSubTotal += value.precio * value.unidades
+      }else{
+        precioSubTotal += value.precioRebajado * value.unidades
+      }
     }
     )
     newState['numProducts'] = unidadesTotales
@@ -85,7 +96,11 @@ export default (state = initialState, action) => {
       newState['cartList'].forEach((value,index)=>{
         //en realidad no estoy dejando q suban unidades pero lo dejo preparado xa el futuro x si acaso
         unidadesTotales += value.unidades
-        precioSubTotal += value.precio * value.unidades
+        if(!value.precioRebajado){
+          precioSubTotal += value.precio * value.unidades
+        }else{
+          precioSubTotal += value.precioRebajado * value.unidades
+        }
       })
       newState['precioSubTotal'] = precioSubTotal
     }else if(action.params === 'okCarroVacio'){//se ha realizado una compra hay q vaciar el carro

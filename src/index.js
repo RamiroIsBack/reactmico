@@ -4,7 +4,7 @@ import history from './utils/history'
 import {General_css} from './utils'
 import store from './stores'
 import { Provider } from 'react-redux'
-import {Home,Carro,Diseños,Ferias,Conocenos,Productos, Amigo} from './components/layout'
+import {Home,Carro,Diseños,Ferias,Conocenos,Productos, Amigo, Contacto, Taller} from './components/layout'
 import {AmigoPedidosContainer,
   AmigoDatosContainer,
   ModalLoginContainer,
@@ -115,7 +115,8 @@ class ReactMico extends Component {
                 <Route path='/Amigo' component = {Amigo}/>
                 <Route path='/Amigo/Datos' component = {AmigoDatosContainer}/>
                 <Route path='/Amigo/Pedidos' component = {AmigoPedidosContainer}/>
-
+                <Route path='/Contacto' component = {Contacto}/>
+                <Route path='/Taller' component = {Taller}/>
                 <ModalVolverArribaContainer/>
 
               </div>

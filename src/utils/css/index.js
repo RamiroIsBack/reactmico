@@ -6,7 +6,9 @@ import navbar_css from './navbar.css'
 import Home__css from './Home.css'
 import Ferias__css from './Ferias.css'
 import Carousell_css from './Carousell.css'
+import Taller_css from './Taller.css'
 export {
+  Taller_css,
   Carousell_css,
   Ferias__css,
   Home__css,

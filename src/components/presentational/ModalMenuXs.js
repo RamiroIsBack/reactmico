@@ -42,7 +42,7 @@ class ModalMenuXs extends React.Component {
           <div className= 'col-xs-offset-3 col-xs-9'
             style ={{padding:1}} >
             <NavLink id='creaciones' id= {tipo.nombre} onClick = {this.gestionaIrACreacion.bind(this)} to = '/Diseños' style ={estilo}>
-              <h4 id= {tipo.nombre}>{tipo.nombre}</h4>
+              <h5 id= {tipo.nombre}>{tipo.nombre}</h5>
             </NavLink>
           </div>
 
@@ -81,23 +81,35 @@ class ModalMenuXs extends React.Component {
                 style= {style.modal.btnClose}></button>
               <div className='col-xs-offset-1 col-xs-8' >
                 <NavLink id='allCreaciones' name= 'allCreaciones' onClick = {this.gestionaIrACreacion.bind(this)} to='/Diseños' style = {{cursor: 'pointer', color:'black',backgroundColor:'transparent',textDecoration: 'none',padding: 0}}>
-                  <h3  id='allCreaciones' name= 'allCreaciones' > Diseños:</h3>
+                  <h4  id='allCreaciones' name= 'allCreaciones' > TIENDA:</h4>
                 </NavLink>
               </div>
 
               <div >
                 {tipoList}
               </div>
-              <div className='col-xs-offset-1 col-xs-8' >
-                <NavLink id='creaciones' name= 'allFerias' onClick = {this.gestionaIrAFeria.bind(this)} to = '/Ferias' style = {{cursor: 'pointer', color:'black',backgroundColor:'transparent',textDecoration: 'none',padding: 0}}>
-                  <h3 name= 'allFerias'> Ferias</h3>
-                </NavLink>
-              </div>
-
 
               <div className='col-xs-offset-1 col-xs-8' >
                 <NavLink to = '/Conocenos' style = {{cursor: 'pointer', color:'black',backgroundColor:'transparent',textDecoration: 'none',padding: 0}} onClick={this.props.onClose}>
-                  <h3> Conocenos</h3>
+                  <h4> SOBRE MI</h4>
+                </NavLink>
+              </div>
+
+              <div className='col-xs-offset-1 col-xs-8' >
+                <NavLink to = '/Taller' style = {{cursor: 'pointer', color:'black',backgroundColor:'transparent',textDecoration: 'none',padding: 0}} onClick={this.props.onClose}>
+                  <h4> TALLER</h4>
+                </NavLink>
+              </div>
+
+              <div className='col-xs-offset-1 col-xs-8' >
+                <NavLink id='creaciones' to = '/Ferias' style = {{cursor: 'pointer', color:'black',backgroundColor:'transparent',textDecoration: 'none',padding: 0}} onClick={this.props.onClose}>
+                  <h4> FERIAS</h4>
+                </NavLink>
+              </div>
+
+              <div className='col-xs-offset-1 col-xs-8' >
+                <NavLink to = '/Contacto' style = {{cursor: 'pointer', color:'black',backgroundColor:'transparent',textDecoration: 'none',padding: 0}} onClick={this.props.onClose}>
+                  <h4> CONTACTO</h4>
                 </NavLink>
               </div>
 

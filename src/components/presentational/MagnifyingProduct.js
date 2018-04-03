@@ -24,7 +24,7 @@ export default class extends Component {
   render() {
     let numPic = '1/2'
     if(this.state.picToShow === 'pic2'){
-      numPic = '2/1'
+      numPic = '2/2'
     }
     let picToShow = this.props.propiedades.pic
     if(this.state.picToShow ==='' ||this.state.picToShow === 'pic1'){
@@ -54,9 +54,12 @@ export default class extends Component {
             pressDuration:300,//default 500
             //enlargedImagePosition: default is 'beside'(en mouse) and 'over' (en touch).
           }} />
-          <div className = 'col-xs-offset-10 col-xs-2 col-sm-offset-10 col-sm-2 col-md-offset-10 col-md-2 col-lg-offset-10 col-lg-2 carousel-caption ' style = {{width : 25, padding: '0px', top: 0, left: 10, right: 10}}>
-            <h6  style = {{backgroundColor: 'rgba(0,0,0,0.50)' ,borderRadius:'25px', padding: '0px',marginTop : 5, overflow: 'hidden'}}>{numPic}</h6>
-          </div>
+          <h6  style = {{top:0,left:15,position:'absolute' ,opacity:0.5, padding: '0px', overflow: 'hidden', margin:0}}>{numPic}</h6>
+          {this.props.propiedades.precioRebajado &&
+            <div className = 'vendido__container' style={{right:10}}>
+              <h4 style={{padding:1,margin:0}}>Rebajado</h4>
+            </div>
+          }
         </div>
         <div className="pic1__container">
           <a  style = {{cursor: 'pointer', color:'white',backgroundColor:'transparent',textDecoration: 'none',padding: 0}}>

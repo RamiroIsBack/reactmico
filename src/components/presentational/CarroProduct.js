@@ -33,9 +33,16 @@ export default class CarroProduct extends Component {
   }
   //<small>(x{this.props.propiedades.unidades})</small>
   render() {
+
     let name = this.props.propiedades.nombre
+    let descripcion = this.props.propiedades.descripcion
+    let precio = this.props.propiedades.precio
+
+    if(this.props.lengua ==='ga'){
+      name = (this.props.propiedades.nombreGalego)? this.props.propiedades.nombreGalego : this.props.propiedades.nombre
+      descripcion = (this.props.propiedades.descripcionGalego)? this.props.propiedades.descripcionGalego : this.props.propiedades.descripcion
+    }
     let url = this.props.propiedades.pic
-    var precio = this.props.propiedades.precio * this.props.propiedades.unidades
     return (
 
       <div className = 'container-fluid' style= {{display : 'inline-block', padding: '0px', border: '1px solid #2C6549', borderRadius:'10px', width : '98%'}}>
@@ -75,14 +82,22 @@ export default class CarroProduct extends Component {
               {this.state.showDescripcion &&
                 <tr>
                   <td role='button' onClick = {this.toogleDescripcion.bind(this)} >
-                    {this.props.propiedades.descripcion}
+                    {descripcion}
                   </td>
                   <td className = 'glyphicon glyphicon-chevron-up' role='button' onClick = {this.toogleDescripcion.bind(this)}></td>
                 </tr>
               }
               <tr>
                 <td>precio:</td>
-                <td className = 'pull-right' style = {style.carroProduct.texto}>{precio} €</td>
+                {!this.props.propiedades.precioRebajado&&
+                  <td><h5>{precio}€</h5></td>
+                }
+                {this.props.propiedades.precioRebajado&&
+                  <td>
+                    <h6 className = 'text-muted ' style={{textDecoration: 'line-through',marginTop:'1px',marginBottom:'1px'}}>{precio}€</h6>
+                    <h5 style={{marginTop:'1px'}}>{this.props.propiedades.precioRebajado}€</h5>
+                  </td>
+                }
 
               </tr>
             </tbody>
@@ -92,4 +107,3 @@ export default class CarroProduct extends Component {
     )
   }
 }
-
