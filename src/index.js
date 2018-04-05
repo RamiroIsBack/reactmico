@@ -7,7 +7,6 @@ import { Provider } from 'react-redux'
 import {Home,Carro,Diseños,Ferias,Conocenos,Productos, Amigo, Contacto, Taller} from './components/layout'
 import {AmigoPedidosContainer,
   AmigoDatosContainer,
-  ModalLoginContainer,
   ModalWarningContainer,
   ModalMenuXsContainer,
   ModalRegistrarseContainer,
@@ -18,6 +17,8 @@ import {AmigoPedidosContainer,
   ModalVolverArribaContainer,
   LogoContainer,
   CookiesAvisoContainer,
+  ModalConsentimientoContainer,
+  ModalPoliticaPrivacidadContainer,
 } from './components/containers'
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -101,9 +102,9 @@ class ReactMico extends Component {
               <ModalRegistrarseContainer/>
               <ModalMenuXsContainer/>
               <ModalWarningContainer/>
-              <ModalLoginContainer/>
               <ModalEntrarContainer/>
-
+              <ModalConsentimientoContainer/>
+              <ModalPoliticaPrivacidadContainer/>
 
               <div className = 'main__container'  >
                 <Route exact path='/' component={Home}/>

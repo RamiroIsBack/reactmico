@@ -25,7 +25,11 @@ import WarningNoVerifyedEmail from './WarningNoVerifyedEmail'
 import WarningTienesVendidos from './WarningTienesVendidos'
 import WarningBasicConfigurable from './WarningBasicConfigurable'
 import Taller from './Taller'
+import ModalConsentimiento from './ModalConsentimiento'
+import ModalPoliticaPrivacidad from './ModalPoliticaPrivacidad'
 export{
+  ModalPoliticaPrivacidad,
+  ModalConsentimiento,
   Taller,
   WarningBasicConfigurable,
   WarningTienesVendidos,

@@ -26,7 +26,11 @@ import LogoContainer from './LogoContainer'
 import CarousellContainer from './CarousellContainer'
 import CookiesAvisoContainer from './CookiesAvisoContainer'
 import ModalLenguaContainer from './ModalLenguaContainer'
+import ModalConsentimientoContainer from './ModalConsentimientoContainer'
+import ModalPoliticaPrivacidadContainer from './ModalPoliticaPrivacidadContainer'
 export{
+  ModalPoliticaPrivacidadContainer,
+  ModalConsentimientoContainer,
   ModalLenguaContainer,
   CookiesAvisoContainer,
   CarousellContainer,

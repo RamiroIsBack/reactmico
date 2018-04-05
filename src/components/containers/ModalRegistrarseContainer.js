@@ -19,37 +19,86 @@ class ModalRegistrarseContainer extends Component {
 
     }
   }
-  entrarConGoogle(){
+  handleLoginGoogle(){
     this.props.loginGoogle()
       .then(response => {
-        this.props.toggleModal('closeEntrar')
-        //puede que haya algo en el carro d ates y habr'a q combinarlo x eso lo paso, digo q est'a recien logeado
-        // y tb paso el uid de user para buscar en la base de ddatos
-        this.props.loadCarro(this.props.carro.cartList,true )
-
+        if(response.additionalUserInfo.isNewUser){
+          this.props.toggleModal('closeRegistrarse')
+          this.props.toggleModal('openConsentimiento')
+        }else{
+          this.toggleModalYrecargaCreacionesYgestionaCarroUser()
+        }
       })
       .catch(err => {
-        alert(err.message+ 'cacafuti ModalEntrarContainer l-134')
+        console.log(err.message+ 'fallo al logearte con google, prueba otra vez en un par de minutos')
       })
-
-    this.props.toggleModal('closeRegistrarse')
 
   }
-  entrarConFacebook(){
-    this.props.loginGoogle()
+  handleLoginFacebook(){
+    this.props.loginFacebook()
       .then(response => {
-        this.props.toggleModal('closeEntrar')
-        //puede que haya algo en el carro d ates y habr'a q combinarlo x eso lo paso, digo q est'a recien logeado
-        // y tb paso el uid de user para buscar en la base de ddatos
-        this.props.loadCarro(this.props.carro.cartList,true )
-
+        if(response.additionalUserInfo.isNewUser){
+          this.props.toggleModal('closeRegistrarse')
+          this.props.toggleModal('openConsentimiento')
+        }else{
+          this.toggleModalYrecargaCreacionesYgestionaCarroUser()
+        }
       })
       .catch(err => {
-        alert(err.message+ 'cacafuti ModalEntrarContainer l-134')
+        console.log(err.message+ 'fallo al logearte con facebook, prueba en un par de minutos')
       })
 
+  }
+  toggleModalYrecargaCreacionesYgestionaCarroUser(){
     this.props.toggleModal('closeRegistrarse')
+    //puede que haya algo en el carro d ates y habr'a q combinarlo x eso lo paso, digo q est'a recien logeado
+    // y tb paso el uid de user para buscar en la base de ddatos
+    this.props.getCreaciones()
+      .then(creaciones=>{
+        let justLogedIn =true
+        this.props.loadCarro(this.props.carro.cartList,justLogedIn )
+          .then(carro =>{
+            let listaSinVendidos = []
+            let listaDescartados= []
+            let tienesVendidos = false
 
+            for(let i=0 ; i<carro.length ; i++){
+              let elementoEnCarro = carro[i]
+              for (var key in creaciones) {
+                if (creaciones.hasOwnProperty(key)) {
+                  let elementoEnCreaciones = creaciones[key]
+                  elementoEnCreaciones.id = key
+                  if(elementoEnCarro.id === elementoEnCreaciones.id){
+                    if(elementoEnCreaciones.vendido){
+                      listaDescartados.push(elementoEnCreaciones.nombre)
+                      tienesVendidos= true
+                    }else{
+                      listaSinVendidos.push(elementoEnCreaciones)
+                    }
+                    break
+                  }
+                }
+              }
+            }
+            if(tienesVendidos){
+              this.props.uploadCarro(listaSinVendidos)
+              let objetosVendidos={
+                listaDescartados :listaDescartados,
+                nombre: 'tienesVendidos',
+              }
+              this.props.showNotificationWithTimeout('Warning',objetosVendidos)
+            }else{
+              this.props.uploadCarro(listaSinVendidos)
+            }
+
+          })
+          .catch(err=>{
+            console.log(err.message+ 'fallo al cargar el carro')
+          })
+      })
+      .catch(err=>{
+        console.log(err.message+ 'fallo al cargar las creaciones')
+      })
   }
 
   toggleModal(){
@@ -85,6 +134,10 @@ class ModalRegistrarseContainer extends Component {
     return repe
   }
 
+  politica(){
+    this.props.toggleModal('openPolitica')
+  }
+
   render(){
     var registrarseShowing = false
     var registrarseContenidos = {}
@@ -112,12 +165,13 @@ class ModalRegistrarseContainer extends Component {
         <ModalRegistrarse
           show={registrarseShowing}
           onClose={this.toggleModal.bind(this)}
-          entrarConGoogle = {this.entrarConGoogle.bind(this)}
-          entrarConFacebook = {this.entrarConFacebook.bind(this)}
+          entrarConGoogle = {this.handleLoginGoogle.bind(this)}
+          entrarConFacebook = {this.handleLoginFacebook.bind(this)}
           subirNuevoAmigo={this.subirNuevoAmigo.bind(this)}
           contenido = {registrarseContenidos}
           comprobarNombre = {this.comprobarNombre.bind(this)}
           comprobarEmail ={this.comprobarEmail.bind(this)}
+          politica={this.politica.bind(this)}
         >
         </ModalRegistrarse>
 
@@ -133,14 +187,15 @@ const dispatchToProps = (dispatch) =>{
 
   return{
 
-
+    getCreaciones:() =>dispatch(actions.getCreaciones()),
+    loadCarro:(carro,justLogedIn)=>dispatch(actions.loadCarro(carro,justLogedIn)),
+    uploadCarro:(carro)=>dispatch(actions.uploadCarro(carro)),
     getContenidos: () => dispatch(actions.getContenidos()),
     toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
     showNotificationWithTimeout: (modalName) =>dispatch(actions.showNotificationWithTimeout(modalName)),
     userCreated:(user) => dispatch(actions.userCreated(user)),
     loginGoogle:() =>dispatch(actions.loginGoogle()),
     loginFacebook:() =>dispatch(actions.loginFacebook()),
-    loadCarro:(carro,justLogedIn)=>dispatch(actions.loadCarro(carro,justLogedIn)),
 
   }
 }

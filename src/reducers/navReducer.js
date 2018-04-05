@@ -25,7 +25,7 @@ var initialState = {
     paddingTop:60
   },
   screenSize: 'laptop', //or mobile
-  lengua:'es', //or ga
+  lengua:'ga', //or ga
   showAvisoCookies:true,
 
 }

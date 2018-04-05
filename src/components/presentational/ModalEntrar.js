@@ -3,7 +3,7 @@ import style from './styles'
 //I think I don't need this
 //import PropTypes from 'prop-types'
 
-class ModalRegistrarse extends React.Component {
+class ModalEntrar extends React.Component {
 
   constructor() {
     super()
@@ -57,7 +57,7 @@ class ModalRegistrarse extends React.Component {
 
     var stiloModal ={
       position: 'absolute',
-      //borderRadius: 10,
+      backgroundColor:'white',
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
@@ -167,6 +167,7 @@ class ModalRegistrarse extends React.Component {
                   </div>
                   <div className = 'container-fluid row hidden-xs'>
                     <h4 className='text-center'>Estamos gestionando el registro con google...</h4>
+                    <h6 className='text-center'>tiene que aparecer una ventana emergente [pop up], si no aparece, puede que lo tengas deshabilitado en tu navegador</h6>
                   </div>
                 </div>
               }
@@ -174,6 +175,7 @@ class ModalRegistrarse extends React.Component {
                 <div className = 'container-fluid row'>
                   <div className = 'container-fluid row visible-xs-block hidden-sm hidden-md hidden-lg'>
                     <h6 className='text-center' style={{fontWeight:'bold'}}>Estamos gestionando el registro con Facebook</h6>
+                    <h6 className='text-center'>tiene que aparecer una ventana emergente [pop up], si no aparece, puede que lo tengas deshabilitado en tu navegador</h6>
                   </div>
                   <div className = 'container-fluid row hidden-xs'>
                     <h4 className='text-center'>Estamos gestionando el registro con Facebook...</h4>
@@ -263,4 +265,4 @@ class ModalRegistrarse extends React.Component {
   children: PropTypes.node
 }*/
 
-export default ModalRegistrarse
+export default ModalEntrar

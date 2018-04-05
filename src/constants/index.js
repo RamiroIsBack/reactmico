@@ -34,4 +34,5 @@ export default {
   VERIFY_EMAIL:                       'VERIFY_EMAIL',
   CIERRA_COOKIES_AVISO:               'CIERRA_COOKIES_AVISO',
   CAMBIA_LENGUA:                      'CAMBIA_LENGUA',
+
 }

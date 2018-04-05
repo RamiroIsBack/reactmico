@@ -316,7 +316,7 @@ class AmigoDatos extends React.Component {
     }
 
     var loginIcon = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/loginIcon.png?alt=media&token=9df1a1ea-8b37-482b-919e-b0fb3be6b273'
-    if (this.props.currentUser !== null){
+    if (this.props.currentUser){
       if (this.props.currentUser.foto.photoURL){
         loginIcon = this.props.currentUser.foto.photoURL
       }

@@ -10,6 +10,9 @@ var initialState = {
   menuEntrarShowing:false,
   realizarCompraShowing: false,
   consentimientoShowing:false,
+  politicaShowing:false,
+
+  showOnlyCookies:false,
 
   submodalWarning: '',
 }
@@ -39,6 +42,20 @@ export default (state = initialState, action) => {
     }
     else if (action.data === 'openConsentimiento'){
       newState['consentimientoShowing'] = true
+    }
+    //politica
+    else if (action.data === 'closePolitica'){
+      newState['politicaShowing'] = false
+    }
+    else if (action.data === 'openPolitica'){
+      newState['politicaShowing'] = true
+    }
+    //cookies
+    else if (action.data === 'closeCookies'){
+      newState['cookiesShowing'] = false
+    }
+    else if (action.data === 'openCookies'){
+      newState['cookiesShowing'] = true
     }
     //creaciones
     else if (action.data === 'closeCreaciones'){

@@ -7,6 +7,13 @@ import {ModalEntrar} from '../presentational'
 
 class ModalEntrarContainer extends Component {
 
+  componentDidMount() {
+
+    if (this.props.users.usersLoaded === false){
+      //en la accion ya lo pone a true
+      this.props.getUsers()
+    }
+  }
 
   changePassword(payload,params){
     alert('en breve recibirás un email con un enlace para cambiar tu contraseña')
@@ -106,7 +113,7 @@ class ModalEntrarContainer extends Component {
         })
 
     }else if (!nombreOEmailValido){
-      alert('el email o el nombre no se corresponde con ningun amigo de mico, comprueba que los has escrito bien porfavor y recuerda si pusiste alguna mayuscula que tambien cuenta ;)')
+      alert('el email o el nombre no se corresponde con ningun registro, comprueba que los has escrito bien porfavor y recuerda si pusiste alguna mayuscula que tambien cuenta ;)')
 
     }
   }
@@ -123,7 +130,7 @@ class ModalEntrarContainer extends Component {
         }
       })
       .catch(err => {
-        alert(err.message+ 'fallo al logearte con google, prueba otra vez en un par de minutos')
+        console.log(err.message+ 'fallo al logearte con google, prueba otra vez en un par de minutos')
       })
 
   }
@@ -138,7 +145,7 @@ class ModalEntrarContainer extends Component {
         }
       })
       .catch(err => {
-        alert(err.message+ 'fallo al logearte con facebook, prueba en un par de minutos')
+        console.log(err.message+ 'fallo al logearte con facebook, prueba en un par de minutos')
       })
 
   }

@@ -61,7 +61,7 @@ export default (state = initialState, action) => {
         }
       }
 
-    
+
       if(newState.currentUser.foto.photoURL !== null){
         newState.currentUserDatos.currentUserFoto =true
       }
@@ -114,7 +114,7 @@ export default (state = initialState, action) => {
       }
     }
     return newState
-
+  
   case constants.USER_CREATED:{
     let currentUser= {
       datosPersonales:{

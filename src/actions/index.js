@@ -206,6 +206,13 @@ export default {
     }
 
   },
+
+  guardarConsentimientoFGLogin: (params)=>{
+    return dispatch => {
+      return dispatch(Firebase.guardarConsentimientoFGLogin(params, constants.USER_CREATED))
+    }
+
+  },
   getUsers: (params)=>{
     return dispatch => {
       return dispatch(Firebase.getUsers(params, constants.USERS_RECEIVED))

@@ -26,9 +26,13 @@ class ModalRegistrarse extends React.Component {
     }
   }
 
-  handleClick(){
-
-    this.setState({acepto: !this.state.acepto})
+  handleClick(e){
+    if (e.target.id ==='acepto'){
+      this.setState({acepto: !this.state.acepto})
+    }
+    if (e.target.id ==='politica'){
+      this.props.politica()
+    }
 
   }
   handleFocus(event){
@@ -168,7 +172,7 @@ class ModalRegistrarse extends React.Component {
     var stiloModal ={
       position: 'absolute',
       //backgroundImage: 'url(' + contenido.pic.urlPicRegistrarse + ')',
-      //borderRadius: 10,
+      backgroundColor:'white',
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
@@ -424,16 +428,17 @@ class ModalRegistrarse extends React.Component {
                   <div className='form-group row' name ='sino' style={{marginBottom: 2}}>
                     <div className='col-xs-3 col-sm-2 col-md-2 col-lg-2'>
                       {this.state.acepto &&
-                        <a className ={newsletter} onClick={this.handleClick.bind(this)} style= {{border: '2px solid green', borderRadius:'4px' ,cursor:'pointer', color:'black', textDecoration:'none',paddingTop:1}} id='newsletter'></a>
+                        <a className ={newsletter} onClick={this.handleClick.bind(this)} style= {{border: '2px solid green', borderRadius:'4px' ,cursor:'pointer', color:'black', textDecoration:'none',paddingTop:1}} id='acepto'></a>
                       }
                       {!this.state.acepto &&
-                        <a className ={newsletter} onClick={this.handleClick.bind(this)} style= {{cursor:'pointer',color:'red', textDecoration:'none', fontSize:'19px'}} id='newsletter'></a>
+                        <a className ={newsletter} onClick={this.handleClick.bind(this)} style= {{cursor:'pointer',color:'red', textDecoration:'none', fontSize:'19px'}} id='acepto'></a>
                       }
                     </div>
                     <div className='col-xs-9 col-sm-10 col-md-10 col-lg-10'
-                      onClick={this.handleClick.bind(this)}
-                      style={{cursor:'pointer',paddingLeft:0}}>
-                      <p>He leido y acepto la política de privacidad</p>
+                      style={{display:'inline-block',paddingLeft:0}}>
+                      <p style={{display:'inline',}}>He leido y acepto la </p>
+                      <p style={{display:'inline',fontWeight:'bold',cursor:'pointer'}}
+                        onClick={this.handleClick.bind(this)} id ='politica'>  política de privacidad</p>
                     </div>
                   </div>
                   <div className='form-group row'>
@@ -441,7 +446,7 @@ class ModalRegistrarse extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className='hidden-xs col-sm-12 text-center'>
+              <div className='col-sm-12 text-center'>
                 {registrarseInfo.split('\n').map((item, key) => {
                   return <span key={key}>{item}<br/></span>})}
               </div>
@@ -454,7 +459,7 @@ class ModalRegistrarse extends React.Component {
                   <hr/>
                 </div>
                 <div className='col-xs-12 col-sm-4 col-md-4 col-lg-4'>
-                  o tambien puedes entra con:
+                  Tambien puedes entra con:
                 </div>
                 <div className='col-xs-12 col-sm-4 col-md-4 col-lg-4' >
                   <a  style = {{cursor: 'pointer', color:'white',backgroundColor:'transparent',textDecoration: 'none',padding: 0, }}>
