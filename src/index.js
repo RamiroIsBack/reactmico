@@ -12,6 +12,7 @@ import {AmigoPedidosContainer,
   ModalRegistrarseContainer,
   ModalEntrarContainer ,
   NavbarMicoFront,
+  OldFooterContainer,
   FooterContainer,
   ModalRealizarCompraContainer,
   ModalVolverArribaContainer,
@@ -80,7 +81,7 @@ class ReactMico extends Component {
                   </div>
                 </div>
                 <div className = 'footer__container'>
-                  <FooterContainer/>
+                  <OldFooterContainer/>
                 </div>
               </div>
             </div>

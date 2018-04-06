@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Footer_css} from '../../utils/css'
 
 
-class FooterContainer extends Component {
+class OldFooterContainer extends Component {
 
   componentWillMount() {
     if (this.props.storeEnlaces.enlacesLoaded === false){
@@ -20,18 +20,6 @@ class FooterContainer extends Component {
   }
   cierraDialogosNavbar(event){
     this.props.toggleModal('closeDropdowns')
-  }
-  politicaLinks(e){
-    if (e.target.id ==='politica'){
-      this.props.toggleModal('openPolitica')
-    }
-    if (e.target.id ==='cookies'){
-      this.props.toggleModal('openCookies')
-      this.props.toggleModal('openPolitica')
-    }
-    if (e.target.id ==='condiciones'){
-      this.props.toggleModal('openCondicionesVenta')
-    }
   }
   render() {
     let contactMail = ''
@@ -69,10 +57,12 @@ class FooterContainer extends Component {
     return (
       <div onClick = {this.cierraDialogosNavbar.bind(this)} >
 
-        <div className='footer__space'>
-          <div className='footer__contact' style={{padding: 0}}>
+        <div className='container'>
+          <div className='container-fluid col-xs-12 col-sm-4 col-md-4 col-lg-4' style={{padding: 0}}>
+            <p style={{color: 'white', textAlign:'center'}}>Contacta conmigo:</p>
             <div style={{textAlign:'center'}}>
               <a href={'mailto:' + contactMail} style={{color: 'white'}}>{contactMail}</a>
+              <hr style={{padding: 0 ,marginRight:12,marginLeft: 12,marginTop: 0, marginBottom: 0}} />
             </div>
             { contactPhone != 'no' &&
               <div style={{textAlign:'center'}}>
@@ -81,8 +71,10 @@ class FooterContainer extends Component {
               </div>
             }
 
+            <p style={{color: 'white', textAlign:'center'}}>{contactHours}</p>
+
           </div>
-          <div className='footer__sicial__media' >
+          <div className='container-fluid col-xs-6 col-sm-4 col-md-4 col-lg-4' style={{padding: 0}}>
             <p style={{color: 'white', textAlign:'center'}}>Síguenos en:</p>
 
             <div className='container-fluid col-xs-6 col-sm-6 col-md-6 col-lg-6' style={{padding: 0,display: 'inline-block'}}>
@@ -111,25 +103,9 @@ class FooterContainer extends Component {
 
 
           </div>
-          <div className='footer__copyright' >
-            <p className='text-muted' style={{color: 'white'}}>© 2011 Mico diseño textil </p>
+          <div className='container-fluid col-xs-6 col-sm-4 col-md-4 col-lg-4' style={{padding: 0,}}>
+            <p className='text-muted pull-right' style={{color: 'white', textAlign:'center'}}>© 2011 Mico diseño textil </p>
           </div>
-
-          <div className='footer__links' style={{padding: 0,}}>
-            <div style= {{marginLeft:8}}>
-              <a style={{color: 'white', cursor: 'pointer',padding: '2px',border: 'none',}} id='condiciones'  onClick = {this.politicaLinks.bind(this)}>-Condiciones de venta y devoluciones
-              </a>
-            </div>
-            <div style= {{marginLeft:8}}>
-              <a style={{color: 'white', cursor: 'pointer',padding: '2px',border: 'none',}} id='cookies'  onClick = {this.politicaLinks.bind(this)}>-Uso de cookies
-              </a>
-            </div>
-            <div style= {{marginLeft:8}}>
-              <a style={{color: 'white', cursor: 'pointer',padding: '2px',border: 'none',}} id='politica'  onClick = {this.politicaLinks.bind(this)}>-Política de privacidad de datos
-              </a>
-            </div>
-          </div>
-
 
         </div>
       </div>
@@ -160,4 +136,4 @@ const stateToProps = (state) => {
   }
 }
 
-export default connect (stateToProps,dispatchToProps)(FooterContainer)
+export default connect (stateToProps,dispatchToProps)(OldFooterContainer)

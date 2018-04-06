@@ -14,10 +14,12 @@ class NavbarMicoFront extends Component {
     }
     this.handleWindowSizeChange()
     window.addEventListener('resize', this.handleWindowSizeChange.bind(this))
-    window.addEventListener('scroll', this.handleScroll.bind(this))
+    //not doing this now cos doesn't work of all borwsers
+    //window.addEventListener('scroll', this.handleScroll.bind(this))
   }
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll.bind(this))
+    //not doing this now cos doesn't work of all borwsers
+    //window.removeEventListener('scroll', this.handleScroll.bind(this))
     window.removeEventListener('resize', this.handleWindowSizeChange.bind(this))
   }
   handleScroll(){

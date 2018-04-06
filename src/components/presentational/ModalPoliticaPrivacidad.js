@@ -47,7 +47,7 @@ En el caso de los menores de trece años se requiere el consentimiento de los pa
 En ningún caso se recabarán del menor de edad datos relativos a la situación profesional, económica o a la intimidad de los otros miembros de la familia, sin el consentimiento de estos.
 Si eres menor de trece años y has accedido a este sitio web sin avisar a tus padres no debes registrarte como usuario.
 
-Por mi parte, nunca solicito información personal a menos que realmente sea necesaria para prestarte los servicios requeridos.
+Por mi parte, nunca solicito información personal a menos que realmente sea necesaria para prestarte los servicios requeridos y simpre podrás retirar este consentimiento de uso de datos.
 Nunca comparto información personal de mis usuarios con nadie, excepto para cumplir con la ley o en caso que cuente con tu autorización expresa. ley vigente desde mayo 2018 (Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo de 27 de abril de 2016 relativo a la protección de las personas físicas)
 Nunca utilizo tus datos personales con una finalidad diferente a la expresada en esta política de privacidad.`
     let principios = `Principio de licitud, lealtad y transparencia: siempre voy a requerir tu consentimiento para el tratamiento de tus datos personales para uno o varios fines específicos que te informaré previamente con absoluta transparencia.
@@ -74,6 +74,8 @@ Solicitar a la portabilidad de los datos.
 El ejercicio de estos derechos es personal y debe por tanto ser ejercido directamente por el interesado. La rectificación o liminatación podrás hacerlo tu mismo desde tu apartado de cliente. La supresión se realizará mediante correo electrónico en un espacio breve de tiempo, siempre y cuando no haya un trámite pendiente, en ese caso se eliminarían tus datos al haber finalizado la transacción.
 
 No puedo proporcionar portabilidad de datos a otras empresas puesto que me cedes los datos para un determinado propósito y no trabajo más que con la empresa de transportes.
+
+También tienes derecho a presentar una reclamación ante la autoridad de control, en este caso, la Agencia Española de Protección de Datos, si consideras que el tratamiento de datos personales infringe el reglamento.
 
 Y porsupuesto siempre puedes ponerte en contacto conmigo para realizar cualquier trámite relativo a la privacidad de datos al correo contacto@micotextil.com`
 
@@ -177,37 +179,37 @@ Al realizar el pago , las cookies que usa Paypal para su transacción
           <div >
             <button onClick={this.props.onClose} className = 'btn glyphicon glyphicon-remove pull-right'
               style= {style.modal.btnClose}></button>
-            <div className = 'col-xs-11 col-sm-11 col-md-11 col-lg-11' style = {style.modal.formContainer}>
+            <div className = 'col-xs-10 col-sm-10 col-md-10 col-lg-10' style = {style.modal.formContainer}>
               {!this.props.showOnlyCookies &&
-                  <div>
-                    <div className='col-sm-12 '>
+                  <div style = {{paddingRight:0,}}>
+                    <div className='col-sm-12 ' style = {{paddingRight:0,}}>
                       <h3>Politica de privacidad de datos y cookies</h3>
                       <hr style={{padding:0,marginTop :5,marginBottom:7}}/>
                     </div>
-                    <div className='col-sm-12 '>
+                    <div className='col-sm-12 ' style = {{paddingRight:0,}}>
                       <p>Aquí podrás ver como se piden, gestionan, almacenan y utilizan tus datos como usuario de esta página web.</p>
                     </div>
 
-                    <div className='col-sm-12 '>
+                    <div className='col-sm-12 ' style = {{paddingRight:0,}}>
                       <h4>Condiciones</h4>
                       <hr style={{padding:0,marginTop :5,marginBottom:7}}/>
                     </div>
-                    <div className='col-sm-12 ' style={{ marginBottom: 10}}>
+                    <div className='col-sm-12 ' style={{paddingRight:0, marginBottom: 10}}>
                       {condiciones.split('\n').map((item, key) => {
                         return <span key={key}>{item}<br/></span>})}
                     </div>
 
-                    <div className='col-sm-12 '>
+                    <div className='col-sm-12 ' style = {{paddingRight:0,}}>
                       <h4>Principios</h4>
                       <hr style={{padding:0,marginTop :5,marginBottom:7}}/>
                     </div>
-                    <div className='col-sm-12 '>
+                    <div className='col-sm-12 ' style = {{paddingRight:0,}}>
                       <p style = {{whiteSpace: 'pre-line'}}>{principios}
                       </p>
 
                     </div>
 
-                    <div className='col-sm-12 '>
+                    <div className='col-sm-12 ' style = {{paddingRight:0,}}>
                       <h4>Identidad de la responsable de los datos:</h4>
                       <hr style={{padding:0,marginTop :5,marginBottom:7}}/>
                       <h5>Alba Gomez Sanz</h5>
@@ -216,75 +218,75 @@ Al realizar el pago , las cookies que usa Paypal para su transacción
                         <h5>contacto@micotextil.com</h5>
                       </a>
                     </div>
-                    <div className='col-sm-12 '>
+                    <div className='col-sm-12 ' style = {{paddingRight:0,}}>
 
                       <h4>Finalidad</h4>
                       <hr style={{padding:0,marginTop :5,marginBottom:7}}/>
                     </div>
-                    <div className='col-sm-12 ' style={{ marginBottom: 10}}>
+                    <div className='col-sm-12 ' style={{paddingRight:0, marginBottom: 10}}>
                       {finalidad.split('\n').map((item, key) => {
                         return <span key={key}>{item}<br/></span>})}
                     </div>
-                    <div className='col-sm-12 '>
+                    <div className='col-sm-12 ' style = {{paddingRight:0,}}>
                       <h4>Legitimacion</h4>
                       <hr style={{padding:0,marginTop :5,marginBottom:7}}/>
                     </div>
-                    <div className='col-sm-12 ' style={{ marginBottom: 10}}>
+                    <div className='col-sm-12 ' style={{paddingRight:0, marginBottom: 10}}>
                       {legitimacion.split('\n').map((item, key) => {
                         return <span key={key}>{item}<br/></span>})}
                     </div>
 
-                    <div className='col-sm-12 '>
+                    <div className='col-sm-12 ' style = {{paddingRight:0,}}>
                       <h4>Derechos</h4>
                       <hr style={{padding:0,marginTop :5,marginBottom:7}}/>
                     </div>
-                    <div className='col-sm-12 ' style={{ marginBottom: 10}}>
+                    <div className='col-sm-12 ' style={{paddingRight:0, marginBottom: 10}}>
                       {derechos.split('\n').map((item, key) => {
                         return <span key={key}>{item}<br/></span>})}
                     </div>
 
-                    <div className='col-sm-12 '>
+                    <div className='col-sm-12 ' style = {{paddingRight:0,}}>
                       <h4>Navegacion</h4>
                       <hr style={{padding:0,marginTop :5,marginBottom:7}}/>
                     </div>
-                    <div className='col-sm-12 ' style={{ marginBottom: 10}}>
+                    <div className='col-sm-12 ' style={{paddingRight:0, marginBottom: 10}}>
                       {navegacion.split('\n').map((item, key) => {
                         return <span key={key}>{item}<br/></span>})}
                     </div>
 
-                    <div className='col-sm-12 '>
+                    <div className='col-sm-12 ' style = {{paddingRight:0,}}>
                       <h4>Seguridad</h4>
                       <hr style={{padding:0,marginTop :5,marginBottom:7}}/>
                     </div>
-                    <div className='col-sm-12 ' style={{ marginBottom: 10}}>
+                    <div className='col-sm-12 ' style={{paddingRight:0, marginBottom: 10}}>
                       {seguridad.split('\n').map((item, key) => {
                         return <span key={key}>{item}<br/></span>})}
                     </div>
 
-                    <div className='col-sm-12 '>
+                    <div className='col-sm-12 ' style = {{paddingRight:0,}}>
                       <h4>Exactitud</h4>
                       <hr style={{padding:0,marginTop :5,marginBottom:7}}/>
                     </div>
-                    <div className='col-sm-12 ' style={{ marginBottom: 10}}>
+                    <div className='col-sm-12 ' style={{paddingRight:0, marginBottom: 10}}>
                       {exactitud.split('\n').map((item, key) => {
                         return <span key={key}>{item}<br/></span>})}
                     </div>
 
-                    <div className='col-sm-12 '>
+                    <div className='col-sm-12 ' style = {{paddingRight:0,}}>
                       <h4>Conclusion</h4>
                       <hr style={{padding:0,marginTop :5,marginBottom:7}}/>
                     </div>
-                    <div className='col-sm-12 ' style={{ marginBottom: 10}}>
+                    <div className='col-sm-12 ' style={{paddingRight:0, marginBottom: 10}}>
                       {conclusion.split('\n').map((item, key) => {
                         return <span key={key}>{item}<br/></span>})}
                     </div>
                   </div>
               }
-              <div className='col-sm-12 '>
+              <div className='col-sm-12 ' style = {{paddingRight:0,}}>
                 <h4>Uso de cookies</h4>
                 <hr style={{padding:0,marginTop :5,marginBottom:7}}/>
               </div>
-              <div className='col-sm-12 ' style={{ marginBottom: 10}}>
+              <div className='col-sm-12 ' style={{paddingRight:0, marginBottom: 10}}>
                 {UsoCookies.split('\n').map((item, key) => {
                   return <span key={key}>{item}<br/></span>})}
               </div>

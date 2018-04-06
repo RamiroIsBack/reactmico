@@ -11,6 +11,7 @@ var initialState = {
   realizarCompraShowing: false,
   consentimientoShowing:false,
   politicaShowing:false,
+  condicionesVentaShowing:false,
 
   showOnlyCookies:false,
 
@@ -56,6 +57,13 @@ export default (state = initialState, action) => {
     }
     else if (action.data === 'openCookies'){
       newState['cookiesShowing'] = true
+    }
+    //condicionesVenta
+    else if (action.data === 'closeCondicionesVenta'){
+      newState['condicionesVentaShowing'] = false
+    }
+    else if (action.data === 'openCondicionesVenta'){
+      newState['condicionesVentaShowing'] = true
     }
     //creaciones
     else if (action.data === 'closeCreaciones'){

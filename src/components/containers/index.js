@@ -13,6 +13,7 @@ import ConocenosContainer from './ConocenosContainer'
 import ContactoContainer from './ContactoContainer'
 import TallerContainer from './TallerContainer'
 import FooterContainer from './FooterContainer'
+import OldFooterContainer from './OldFooterContainer'
 import ModalCreacionesContainer from './ModalCreacionesContainer'
 import ModalMenuXsContainer from './ModalMenuXsContainer'
 import ModalWarningContainer from './ModalWarningContainer'
@@ -48,6 +49,7 @@ export{
   ModalMenuXsContainer,
   ModalCreacionesContainer,
   FooterContainer,
+  OldFooterContainer,
   HomeContainer,
   ModalRegistrarseContainer,
   ConocenosContainer,

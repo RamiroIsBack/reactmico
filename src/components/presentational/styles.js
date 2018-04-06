@@ -88,7 +88,7 @@ export default {
       //marginTop:6,
       //borderBottom: '1px solid'
     },
-    
+
     mapsLink:{
 
       paddingRight: 5,
