@@ -26,7 +26,7 @@ class LogoContainer extends Component{
     }
     return(
       <div className ='logo__top__container' id='logoTopContainer' style = {paddingTop} >
-        <img className ='logo__top__img' src= '/logoApaisado.png'
+        <img className ='logo__top__img' src= 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/logoApaisado.png?alt=media&token=34e5b690-df60-4234-bf66-d62346dfbb3e'
           onClick ={this.handleClick.bind(this)}
           onLoad = {this.onImgLoaded.bind(this)}
         ></img>

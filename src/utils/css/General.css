@@ -85,7 +85,7 @@
   height:136px;
   width: 122px;
   left: 150px;
-  top: 90px;
+  top: 205px;
   transform: rotate(4deg);
   animation-name: rotate-container;
   animation-delay: 2.33s;
@@ -96,6 +96,15 @@
   animation-timing-function: ease-in-out;
   z-index: 100;
 }
+.crane__contanier {
+  position: absolute;
+  height:420px;
+  width: 200px;
+  left: 15px;
+  top: 110px;
+  z-index: 99;
+}
+
 .bellImg {
   height: 100%;
   width: 100%;
@@ -122,5 +131,31 @@
   }
   100% {
     transform: rotate(-4deg);
+  }
+}
+@media screen and (max-width: 750px) {
+  .bell__container {
+    position: absolute;
+    height:136px;
+    width: 122px;
+    left: 150px;
+    top: 105px;
+    transform: rotate(4deg);
+    animation-name: rotate-container;
+    animation-delay: 2.33s;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    transform-origin: 50% 0%;
+    animation-timing-function: ease-in-out;
+    z-index: 100;
+  }
+  .crane__contanier {
+    position: absolute;
+    height:420px;
+    width: 200px;
+    left: 15px;
+    top: 10px;
+    z-index: 99;
   }
 }

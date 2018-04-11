@@ -4,9 +4,8 @@ import history from './utils/history'
 import {General_css} from './utils'
 import store from './stores'
 import { Provider } from 'react-redux'
-import {Home,Carro,Diseños,Ferias,Conocenos,Productos, Amigo, Contacto, Taller} from './components/layout'
-import {AmigoPedidosContainer,
-  AmigoDatosContainer,
+//import {Home,Carro,Ferias,Conocenos,Productos, Amigo, Contacto, Taller} from './components/layout'
+import {
   ModalWarningContainer,
   ModalMenuXsContainer,
   ModalRegistrarseContainer,
@@ -26,13 +25,12 @@ import 'bootstrap/dist/css/bootstrap.css'
 import {
   Router as Router,
   Route,
-  Link,
-  NavLink,
 } from 'react-router-dom'
 import registerServiceWorker from './registerServiceWorker'
-/* The Elements components is a summary of basic presentation componets
- * available for use in this theme
- */
+
+import {AsyncHome, AsyncDiseños, AsyncProductos, AsyncFerias ,AsyncContacto ,AsyncConocenos, AsyncTaller, AsyncCarro, AsyncAmigo, AsyncAmigoPedidosContainer, AsyncAmigoDatosContainer} from './components/AsyncComponentsReady'
+
+
 
 class ReactMico extends Component {
 
@@ -54,22 +52,28 @@ class ReactMico extends Component {
                 <img className="bellImg" src='https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/mico%20poster%20bigger.png?alt=media&token=28883b94-a403-4a8d-87aa-07fe19a027eb'>
                 </img>
               </div>
+              <div className = 'crane__contanier' >
+                <img id='foto' src={picConstruccion}  style={{height:420,width:300}} />
+              </div>
+
               <div className = 'general__container' style = {settingMinHigthToScreen} >
 
                 <div className = 'main__container visible-xs-block hidden-sm hidden-md hidden-lg' >
-                  <div className = 'col-xs-12' >
-                    <img id='foto' src={picConstruccion}  style={{height:420,width:300}} />
+                  <div className = 'col-xs-12 col-sm-6 col-md-6 col-lg-4' style={{height:420,width:300}}>
+
                   </div>
-                  <div className = 'col-xs-11'>
-                    <h4>Hola!,</h4>
-                    <h5>Estamos dando los últimos retoques a la pagina.</h5>
-                    <p>Dentro de muy poco tendrás una guía con todas las ferias para que puedas ir a verme y una tienda online donde podrás comprar mis productos desde casa si lo prefieres </p>
-                    <p>hasta entonces, sígueme en las redes sociales o contacta conmigo cuando quieras :) </p>
+                  <div className = 'col-xs-12 col-sm-6 col-md-6 col-lg-6' >
+                    <h1>Hola!,</h1>
+                    <h4>Estamos dando los últimos retoques a la pagina.</h4>
+                    <h5>Dentro de muy poco tendrás una guía con todas las ferias para que puedas ir a verme y una tienda online donde podrás comprar mis productos desde casa si lo prefieres </h5>
+                    <br/>
+
+                    <h5>hasta entonces, sígueme en las redes sociales o contacta conmigo cuando quieras :) </h5>
                   </div>
                 </div>
                 <div className = 'main__container hidden-xs' >
                   <div className = 'col-xs-12 col-sm-6 col-md-6 col-lg-4'>
-                    <img id='foto' src={picConstruccion}  style={{height:420,width:300}} />
+
                   </div>
                   <div className = 'col-xs-12 col-sm-6 col-md-6 col-lg-6'>
                     <h1>Hola!,</h1>
@@ -108,17 +112,17 @@ class ReactMico extends Component {
               <ModalPoliticaPrivacidadContainer/>
 
               <div className = 'main__container'  >
-                <Route exact path='/' component={Home}/>
-                <Route path='/Diseños' component={Diseños}/>
-                <Route path='/Carro' component={Carro}/>
-                <Route path='/Ferias' component={Ferias}/>
-                <Route path='/Conocenos' component={Conocenos}/>
-                <Route path='/Productos' component={Productos}/>
-                <Route path='/Amigo' component = {Amigo}/>
-                <Route path='/Amigo/Datos' component = {AmigoDatosContainer}/>
-                <Route path='/Amigo/Pedidos' component = {AmigoPedidosContainer}/>
-                <Route path='/Contacto' component = {Contacto}/>
-                <Route path='/Taller' component = {Taller}/>
+                <Route exact path='/' component={AsyncHome}/>
+                <Route path='/Diseños' component={AsyncDiseños}/>
+                <Route path='/Carro' component={AsyncCarro}/>
+                <Route path='/Ferias' component={AsyncFerias}/>
+                <Route path='/Conocenos' component={AsyncConocenos}/>
+                <Route path='/Productos' component={AsyncProductos}/>
+                <Route path='/Amigo' component = {AsyncAmigo}/>
+                <Route path='/Amigo/Datos' component = {AsyncAmigoDatosContainer}/>
+                <Route path='/Amigo/Pedidos' component = {AsyncAmigoPedidosContainer}/>
+                <Route path='/Contacto' component = {AsyncContacto}/>
+                <Route path='/Taller' component = {AsyncTaller}/>
                 <ModalVolverArribaContainer/>
 
               </div>
