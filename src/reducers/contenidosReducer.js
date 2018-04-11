@@ -22,7 +22,13 @@ export default (state = initialState, action) => {
     let list = action.data
 
     newState['listaContenidos'] = list
-    newState['startHomeOpacity'] = true
+    for (let i = 0 ; i < newState.listaContenidos.length ; i++) {
+      let carousellObjectList= newState.listaContenidos[i]
+      if(carousellObjectList.id ==='carousell'){
+        newState.carousellBackground.urlPic = carousellObjectList['pic1'].urlPicCarousell
+        break
+      }
+    }
     return newState
   }
   case constants.MOVE_CAROUSELL:{
