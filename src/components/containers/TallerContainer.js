@@ -6,7 +6,6 @@ import {Taller} from '../presentational'
 
 class TallerContainer extends Component {
   componentWillMount() {
-
     //make it start at the top of the page every time
     window.scrollTo(0, 0)
 

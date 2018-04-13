@@ -3,8 +3,11 @@
   grid-template-areas:
   "t1 t1 t2 t2"
   "d  d  d  d "
-  "t3 t3 t4 t4";
+  "t3 t3 t4 t4"
+  ".  .  .  a";
   grid-gap: 3px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3,auto);
   text-align: center;
 }
 .taller__foto1__container{
@@ -19,23 +22,25 @@
 .taller__foto4__container{
   grid-area: t4;
 }
-
 .taller__descripcion__container{
   grid-area: d;
+  margin:35px 0 35px 0;
 }
-.taller__mapa__container{
-  grid-area: m;
+.taller__artesania__container{
+  grid-area: a;
+  cursor: pointer;
+}
+.taller__foto{
+  width: 80%;
 }
 
 @media screen and (max-width: 705px) {
-  .taller__container{
-    display: grid;
-    grid-template-areas:
-    "t1 t1 t2 t2"
-    "d  d  d  d "
-    "t3 t3 t4 t4";
-    grid-gap: 3px;
-    text-align: center;
+  .taller__descripcion__container{
+    grid-area: d;
+    margin:15px 0 15px 0;
+  }
+  .taller__foto{
+    width: 100%;
   }
 
 }

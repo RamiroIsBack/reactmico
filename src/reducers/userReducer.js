@@ -42,59 +42,33 @@ export default (state = initialState, action) => {
     return newState
 
   case constants.CURRENT_USER_RECEIVED:
-    if (action.data === 'null'){
+    if (action.data === null){
       newState['currentUser'] = null
       return newState
     }else if (action.params === 'error'){
       //el login ha ido mal , dicir algo al respecto
       newState['currentUser'] = null
       return newState
-    }else if (action.params ==='okGoogle' || action.params ==='okFacebook'){
-      // se ha logeado con google, colocar los datos
-      console.log(`${action.data} t has logeado con google o facebook`)
-
-      for (let i =0; i < newState.listaUsers.length; i++){
-        if (newState.listaUsers[i].id === action.data){
-
-          newState.currentUser= newState.listaUsers[i]
-          break
-        }
-      }
-
-
-      if(newState.currentUser.foto.photoURL !== null){
-        newState.currentUserDatos.currentUserFoto =true
-      }
-      if(newState.currentUser.datosEnvio.cp ){
-        newState.currentUserDatos.currentUserDatosEnvio = true
-      }
-      newState['usersLoaded'] = false
-      return newState
-
-    }else if (action.params ==='okPassword'){
-      // se ha logeado con password, colocar los datos
-      console.log(`${action.data.displayName} t has logeado con email y password`)
-
-      for (let i =0; i < newState.listaUsers.length; i++){
-        if (newState.listaUsers[i].id === action.data){
-
-          newState.currentUser= newState.listaUsers[i]
-          break
-        }
-      }
-
-      if(newState.currentUser.foto.photoURL !== null){
-        newState.currentUserDatos.currentUserFoto =true
-      }
-      if(newState.currentUser.datosEnvio.cp ){
-        newState.currentUserDatos.currentUserDatosEnvio = true
-      }
-      newState['usersLoaded'] = false
-      return newState
-
     }else{
-      newState['currentUser'] = action.data
+
+      for (let i =0; i < newState.listaUsers.length; i++){
+        if (newState.listaUsers[i].id === action.data){
+
+          newState.currentUser= newState.listaUsers[i]
+          break
+        }
+      }
+
+      if(newState.currentUser.foto.photoURL !== null){
+        newState.currentUserDatos.currentUserFoto =true
+      }
+      if(newState.currentUser.datosEnvio.cp ){
+        newState.currentUserDatos.currentUserDatosEnvio = true
+      }
+      newState['usersLoaded'] = false
       return newState
+
+
     }
 
 
@@ -114,7 +88,7 @@ export default (state = initialState, action) => {
       }
     }
     return newState
-  
+
   case constants.USER_CREATED:{
     let currentUser= {
       datosPersonales:{

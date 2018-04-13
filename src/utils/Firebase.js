@@ -377,6 +377,36 @@ const uploadCarro=(carro,actionType) =>{
 
     })
 }
+
+const amIlogedIn = (params,actionType) => {
+
+  return dispatch => firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      currentUserUid=user.uid
+      currentUserEmail =user.email
+      dispatch({
+        type: actionType,
+        params: 'si user', // can be null
+        data: user.uid, //
+      })
+      console.log ('ya estabas logeado')
+      return true
+    } else {
+      // No user is signed in.
+      dispatch({
+        type: actionType,
+        params: 'no user', // can be null
+        data: null, //
+      })
+      console.log('no estas logeado')
+      return null
+
+    }
+  })
+}
+
+
 const loginFacebook = (params,actionType) => {
   var provider = new firebase.auth.FacebookAuthProvider()
   firebase.auth().useDeviceLanguage()
@@ -1129,6 +1159,7 @@ export default {
   loginGoogle : loginGoogle,
   loginWithEmailAndPassword: loginWithEmailAndPassword,
   currentUserToDB: currentUserToDB,
+  amIlogedIn: amIlogedIn,
   logout: logout,
   changePassword:  changePassword,
   loginFacebook: loginFacebook,

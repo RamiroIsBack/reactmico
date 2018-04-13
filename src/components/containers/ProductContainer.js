@@ -21,6 +21,11 @@ class ProductContainer extends Component {
   selectProduct(selectedProduct){
     this.props.navActive('carro', 'navbarMicoFront')
     this.props.productToCart(selectedProduct)
+    setTimeout(() => {
+      if(this.props.users.currentUser){
+        this.props.loadCarro(this.props.carro.cartList,false )
+      }
+    }, 800)
 
   }
 
@@ -75,6 +80,7 @@ const dispatchToProps = (dispatch) =>{
     productToCart: (selectedProduct) =>dispatch(actions.productToCart(selectedProduct)),
     toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
     navActive:(activeTab,params) => dispatch(actions.navActive(activeTab,params)),
+    loadCarro:(carro,justLogedIn)=>dispatch(actions.loadCarro(carro,justLogedIn)),
   }
 }
 
@@ -87,7 +93,8 @@ const stateToProps = (state) => {
     productToshow:state.product,
     storeContenidos: state.contenidos,
     users: state.user,
-    navigation:state.navigation
+    navigation:state.navigation,
+    carro:state.carro
   }
 }
 

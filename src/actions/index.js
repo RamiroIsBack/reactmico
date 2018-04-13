@@ -248,6 +248,11 @@ export default {
       return dispatch (Firebase.logout(params,constants.CURRENT_USER_RECEIVED))
     }
   },
+  amIlogedIn :(params) =>{
+    return dispatch =>{
+      return dispatch (Firebase.amIlogedIn(params,constants.CURRENT_USER_RECEIVED))
+    }
+  },
   changePassword : (newPassword,params)=>{
     //params: change or forgot
     return dispatch =>{

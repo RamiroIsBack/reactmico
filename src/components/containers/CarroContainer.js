@@ -7,35 +7,6 @@ import { NavLink} from 'react-router-dom'
 
 
 class CarroContainer extends Component {
-  constructor(){
-    super()
-    this.state = {
-      oldCartListLength: 0
-    }
-  }
-  componentWillMount(){
-    if (this.props.carro){
-      if(this.props.users.currentUser){ //si hay un usuario logeado
-        if(this.state.oldCartListLength !== this.props.carro.cartList.length){//si hay cambio en el carro
-          this.props.loadCarro(this.props.carro.cartList,false )
-          let newcount = this.props.carro.cartList.length
-          this.setState({oldCartListLength: newcount})
-        }
-      }
-    }
-  }
-  componentWillUpdate(){
-    if (this.props.carro){
-      if(this.props.users.currentUser){
-        if(this.state.oldCartListLength !== this.props.carro.cartList.length){
-          this.props.loadCarro(this.props.carro.cartList,false )
-          let newcount = this.props.carro.cartList.length
-          this.setState({oldCartListLength: newcount})
-        }
-      }
-    }
-  }
-
 
   goToProduct(foto){
     this.props.selectFoto(foto)
@@ -45,6 +16,12 @@ class CarroContainer extends Component {
   }
   deleteProduct(indice){
     this.props.eraseProduct(indice)
+    setTimeout(() => {
+      if(this.props.users.currentUser){
+        this.props.loadCarro(this.props.carro.cartList,false )
+      }
+    }, 800)
+    
   }
   //no vamos a usar esto x ahora xq no se puede gestionar que pidan muchas unidades
   QttyToggle(indice,qtty){

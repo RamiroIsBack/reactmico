@@ -188,7 +188,8 @@ class ModalEntrarContainer extends Component {
               }
               this.props.showNotificationWithTimeout('Warning',objetosVendidos)
             }else{
-              this.props.uploadCarro(listaSinVendidos)
+              //no need cos it didn't change
+              //this.props.uploadCarro(listaSinVendidos)
             }
 
           })

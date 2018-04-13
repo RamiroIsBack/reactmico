@@ -13,6 +13,73 @@ class LogoContainer extends Component{
     history.push('/')
   }
   onImgLoaded(){
+    if (this.props.users.usersLoaded === false){
+      //en la accion ya lo pone a true
+      this.props.getUsers()
+        .then(response => {
+          if(this.props.users.listaUsers.length > 0){
+            this.props.amIlogedIn()
+            setTimeout(() => {
+              if(this.props.users.currentUser){
+                this.gestionaCarroUser()
+              }
+            }, 800)
+
+          }
+        })
+        .catch((error) => {
+          console.log('algo fue mal al cargar los usuarios'+error)
+        })
+    }
+
+  }
+  gestionaCarroUser(){
+    this.props.getCreaciones()
+      .then(creaciones=>{
+        let justLogedIn =true
+        this.props.loadCarro(this.props.carro.cartList,justLogedIn )
+          .then(carro =>{
+            let listaSinVendidos = []
+            let listaDescartados= []
+            let tienesVendidos = false
+
+            for(let i=0 ; i<carro.length ; i++){
+              let elementoEnCarro = carro[i]
+              for (var key in creaciones) {
+                if (creaciones.hasOwnProperty(key)) {
+                  let elementoEnCreaciones = creaciones[key]
+                  elementoEnCreaciones.id = key
+                  if(elementoEnCarro.id === elementoEnCreaciones.id){
+                    if(elementoEnCreaciones.vendido){
+                      listaDescartados.push(elementoEnCreaciones.nombre)
+                      tienesVendidos= true
+                    }else{
+                      listaSinVendidos.push(elementoEnCreaciones)
+                    }
+                    break
+                  }
+                }
+              }
+            }
+            if(tienesVendidos){
+              this.props.uploadCarro(listaSinVendidos)
+              let objetosVendidos={
+                listaDescartados :listaDescartados,
+                nombre: 'tienesVendidos',
+              }
+              this.props.showNotificationWithTimeout('Warning',objetosVendidos)
+            }else{
+              this.props.uploadCarro(listaSinVendidos)
+            }
+
+          })
+          .catch(err=>{
+            console.log(err.message+ 'fallo al cargar el carro')
+          })
+      })
+      .catch(err=>{
+        console.log(err.message+ 'fallo al cargar las creaciones')
+      })
   }
   render(){
     let paddingTop = {}
@@ -37,8 +104,13 @@ class LogoContainer extends Component{
 
 const dispatchToProps = (dispatch) =>{
   return{
+    getCreaciones:() =>dispatch(actions.getCreaciones()),
+    getUsers: () => dispatch(actions.getUsers()),
+    amIlogedIn:()=>dispatch(actions.amIlogedIn()),
     toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
     navActive:(activeTab,params) => dispatch(actions.navActive(activeTab,params)),
+    loadCarro:(carro,justLogedIn)=>dispatch(actions.loadCarro(carro,justLogedIn)),
+    uploadCarro:(carro)=>dispatch(actions.uploadCarro(carro)),
   }
 
 }
@@ -46,6 +118,8 @@ const dispatchToProps = (dispatch) =>{
 const stateToProps = (state) =>{
   return{
     navigation: state.navigation,
+    users:state.user,
+    carro:state.carro,
   }
 }
 

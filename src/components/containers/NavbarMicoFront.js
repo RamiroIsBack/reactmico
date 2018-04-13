@@ -12,6 +12,8 @@ class NavbarMicoFront extends Component {
       //en la accion ya lo pone a true
       this.props.getContenidos()
     }
+
+
     this.handleWindowSizeChange()
     window.addEventListener('resize', this.handleWindowSizeChange.bind(this))
     //not doing this now cos doesn't work of all borwsers

@@ -94,12 +94,11 @@ export default (state = initialState, action) => {
       newState.numProducts = action.data.length
 
       newState['cartList'].forEach((value,index)=>{
-        //en realidad no estoy dejando q suban unidades pero lo dejo preparado xa el futuro x si acaso
-        unidadesTotales += value.unidades
+
         if(!value.precioRebajado){
-          precioSubTotal += value.precio * value.unidades
+          precioSubTotal += parseInt(value.precio)
         }else{
-          precioSubTotal += value.precioRebajado * value.unidades
+          precioSubTotal += parseInt(value.precioRebajado)
         }
       })
       newState['precioSubTotal'] = precioSubTotal

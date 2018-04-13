@@ -41,7 +41,7 @@ class ModalMenuXs extends React.Component {
 
           <div className= 'col-xs-offset-3 col-xs-9'
             style ={{padding:1}} >
-            <NavLink id='creaciones' id= {tipo.nombre} onClick = {this.gestionaIrACreacion.bind(this)} to = '/Diseños' style ={estilo}>
+            <NavLink id= {tipo.nombre} onClick = {this.gestionaIrACreacion.bind(this)} to = '/Diseños' style ={estilo}>
               <h5 id= {tipo.nombre}>{tipo.nombre}</h5>
             </NavLink>
           </div>
