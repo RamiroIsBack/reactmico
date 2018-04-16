@@ -1,18 +1,15 @@
 import React, { Component } from 'react'
 import actions from '../../actions'
 import {connect} from 'react-redux'
-import {Conocenos} from '../presentational'
+import {Contacto} from '../presentational'
 
 
 class ContactoContainer extends Component {
   componentWillMount() {
-
-    //make it start at the top of the page every time
     window.scrollTo(0, 0)
 
   }
   compomentDidUpdate(){
-    //make it start at the top of the page every time
     window.scrollTo(0, 0)
   }
 
@@ -26,33 +23,42 @@ class ContactoContainer extends Component {
   }
 
   render() {
-    let conocenosContenido = {}
-    let artesaniaContenido = {}
+    let contactoContenido = {}
+    let contactoLinks = {}
+
     if (this.props.storeContenidos.listaContenidos.length !==0){
       for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
-        if (this.props.storeContenidos.listaContenidos[i].id === 'conocenos'){
-          conocenosContenido = this.props.storeContenidos.listaContenidos[i]
+        if (this.props.storeContenidos.listaContenidos[i].id === 'contacto'){
+          contactoContenido = this.props.storeContenidos.listaContenidos[i]
           break
         }
       }
-      for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
+    }
+    if (this.props.storeEnlaces.listaEnlaces.length !==0){
+      for (let i = 0 ; i < this.props.storeEnlaces.listaEnlaces.length ; i++) {
 
-        if (this.props.storeContenidos.listaContenidos[i].id === 'artesania'){
-          artesaniaContenido = this.props.storeContenidos.listaContenidos[i]
-          break
+        if (this.props.storeEnlaces.listaEnlaces[i].id === 'contact'){
+          contactoLinks ={
+            contactMail : this.props.storeEnlaces.listaEnlaces[i].contactMail,
+            contactHours : this.props.storeEnlaces.listaEnlaces[i].contactHours,
+            contactPhone : this.props.storeEnlaces.listaEnlaces[i].contactPhone,
+            contactPost : this.props.storeEnlaces.listaEnlaces[i].contactPost,
+          }
         }
+
       }
     }
 
 
     return (
       <div onClick = {this.cierraDialogosNavbar.bind(this)} >
-        {conocenosContenido.headerFoto &&
-          <Conocenos conocenosContenido = {conocenosContenido} artesaniaContenido = {artesaniaContenido}
-            whenClicked={this.goArtesania.bind(this)}/>
-        }
 
+        <Contacto contactoContenido = {contactoContenido}
+          contactoLinks ={contactoLinks}
+          whenClicked={this.goArtesania.bind(this)}
+          lengua = {this.props.navigation.lengua}
+        />
       </div>
     )
   }
@@ -69,12 +75,9 @@ const dispatchToProps = (dispatch) =>{
 
 const stateToProps = (state) => {
   return{
-    // state is d store in this case for convenction
-    // cojo el producto d state(store) y lo paso a props xa cogerlo
-    //en state.blabla dices de que reducer quieres info
-    //y tu le asignas una key q quieras
+    storeEnlaces:state.enlaces,
     storeContenidos: state.contenidos,
-    
+    navigation:state.navigation,
 
   }
 }

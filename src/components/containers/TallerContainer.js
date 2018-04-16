@@ -50,8 +50,9 @@ class TallerContainer extends Component {
         <Taller
           tallerContenido = {tallerContenido}
           artesaniaContenido = {artesaniaContenido}
-          whenClicked={this.goArtesania.bind(this)}/>
-
+          whenClicked={this.goArtesania.bind(this)}
+          lengua = {this.props.navigation.lengua}
+        />
       </div>
     )
   }
@@ -68,10 +69,7 @@ const dispatchToProps = (dispatch) =>{
 
 const stateToProps = (state) => {
   return{
-    // state is d store in this case for convenction
-    // cojo el producto d state(store) y lo paso a props xa cogerlo
-    //en state.blabla dices de que reducer quieres info
-    //y tu le asignas una key q quieras
+    navigation:state.navigation,
     storeContenidos: state.contenidos,
 
 

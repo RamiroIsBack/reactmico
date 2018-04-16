@@ -27,7 +27,6 @@ class ConocenosContainer extends Component {
 
   render() {
     let conocenosContenido = {}
-    let artesaniaContenido = {}
     if (this.props.storeContenidos.listaContenidos.length !==0){
       for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
@@ -36,23 +35,17 @@ class ConocenosContainer extends Component {
           break
         }
       }
-      for (let i = 0 ; i < this.props.storeContenidos.listaContenidos.length ; i++) {
 
-        if (this.props.storeContenidos.listaContenidos[i].id === 'artesania'){
-          artesaniaContenido = this.props.storeContenidos.listaContenidos[i]
-          break
-        }
-      }
     }
 
 
     return (
       <div onClick = {this.cierraDialogosNavbar.bind(this)} >
-        {conocenosContenido.headerFoto &&
-          <Conocenos conocenosContenido = {conocenosContenido} artesaniaContenido = {artesaniaContenido}
-            whenClicked={this.goArtesania.bind(this)}/>
-        }
 
+        <Conocenos conocenosContenido = {conocenosContenido}
+          whenClicked={this.goArtesania.bind(this)}
+          lengua = {this.props.navigation.lengua}
+        />
       </div>
     )
   }
@@ -69,10 +62,7 @@ const dispatchToProps = (dispatch) =>{
 
 const stateToProps = (state) => {
   return{
-    // state is d store in this case for convenction
-    // cojo el producto d state(store) y lo paso a props xa cogerlo
-    //en state.blabla dices de que reducer quieres info
-    //y tu le asignas una key q quieras
+    navigation:state.navigation,
     storeContenidos: state.contenidos,
 
 

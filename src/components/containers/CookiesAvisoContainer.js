@@ -4,6 +4,7 @@ import actions from '../../actions'
 import history from '../../utils/history'
 
 class CookiesAvisoContainer extends Component{
+
   handleClick(event){
     if(event.target.id === 'masInfo'){
       this.props.toggleModal('openCookies')
@@ -15,7 +16,7 @@ class CookiesAvisoContainer extends Component{
   }
   render(){
     if (this.props.navigation){
-      if (!this.props.navigation.showAvisoCookies){
+      if (!this.props.navigation.showAvisoCookies || this.props.user.currentUser){
         return null
       }
     }
@@ -49,7 +50,7 @@ const stateToProps = (state) => {
   return{
 
     navigation : state.navigation,
-
+    user: state.user,
 
   }
 }

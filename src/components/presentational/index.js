@@ -1,4 +1,5 @@
 import Conocenos from './Conocenos'
+import Contacto from './Contacto'
 import ModalRegistrarse from './ModalRegistrarse'
 import Foto from './Foto'
 import MagnifyingProduct from './MagnifyingProduct'
@@ -48,6 +49,7 @@ export{
   ModalEntrar,
   ModalMenuXs,
   Conocenos,
+  Contacto,
   ModalCreaciones,
   ModalLengua,
   ModalRegistrarse,

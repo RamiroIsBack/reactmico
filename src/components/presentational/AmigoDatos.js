@@ -702,7 +702,9 @@ class AmigoDatos extends React.Component {
           return(
             <div>
               <div className= 'col-xs-7 col-sm-8 col-md-8 col-lg-8' style = {{paddingRight: 2,paddingLeft:0}}>
-                No necesitas rellenar datos de envio porque se te preguntará en el proceso de pago con PayPal.
+                {
+                  (this.props.lengua ==='es')? 'No necesitas rellenar datos de envio porque se te preguntará en el proceso de pago con PayPal.' : 'non fai falla que enchas os datos do envio xa que se te pedirán no proceso do pago con PayPal.'
+                }
               </div>
               <div className= 'col-xs-5 col-sm-4 col-md-4 col-lg-4' style = {{paddingRight: 0,paddingLeft:0}}>
                 <button id= 'datosEnvio' onClick={()=> this.setState({quieroDatos:true})}
@@ -710,7 +712,9 @@ class AmigoDatos extends React.Component {
                 </button>
               </div>
               <div className= 'col-xs-12 col-sm-8 col-md-8 col-lg-8' style = {{paddingRight: 0,paddingLeft:0}}>
-                De todas formas, si quieres tener una dirección predeterminada para Mico, puedes guardarla aquí y, a la hora de pagar, te daremos a elegir entre la que tengas guardada con nosotros y la que elijas en el proceso de pago de paypal.
+                {
+                  (this.props.lengua ==='es')? 'De todas formas, si quieres tener una dirección predeterminada para Mico, puedes guardarla aquí y, a la hora de pagar, te daremos a elegir entre la que tengas guardada con nosotros y la que elijas en el proceso de pago de paypal.' : 'De todas formas , si quieres tener una dirección predeterminada para Mico, puedes guardarla aquí y, a la hora de pagar, te daremos a elegir entre la que tengas guardada con nosotros y la que elijas en el proceso de pago de paypal.'
+                }
               </div>
             </div>
           )

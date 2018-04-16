@@ -101,6 +101,7 @@ class AmigoDatosContainer extends Component {
           changePassword ={this.changePassword.bind(this)}
           resendEmail= {this.resendEmail.bind(this)}
           showWarning= {this.showWarning.bind(this)}
+          lengua={this.props.navigation.lengua}
         >
         </AmigoDatos>
 
@@ -128,10 +129,7 @@ const dispatchToProps = (dispatch) =>{
 
 const stateToProps = (state) => {
   return{
-    // state is d store in this case for convenction
-    // cojo el producto d state(store) y lo paso a props xa cogerlo
-    //en state.blabla dices de que reducer quieres info
-    //y tu le asignas una key q quieras
+    navigation:state.navigation,
     storeContenidos: state.contenidos,
     storeModal:state.modal,
     users: state.user,

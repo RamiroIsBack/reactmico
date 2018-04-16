@@ -2,6 +2,13 @@ import React, { Component } from 'react'
 import style from './styles'
 import {Taller_css} from '../../utils/css'
 class Taller extends Component {
+  constructor() {
+    super()
+    this.state ={
+      fotoLoaded:false,
+    }
+  }
+
   handleClick(event){
     this.props.whenClicked()
   }
@@ -13,6 +20,9 @@ class Taller extends Component {
       pic3 = this.props.tallerContenido.pic3.urlPicTaller
       pic4 = this.props.tallerContenido.pic4.urlPicTaller
       descripcion = this.props.tallerContenido.descripcion.descripcionTaller
+      if(this.props.lengua ==='ga'){
+        descripcion = (this.props.tallerContenido.descripcion.descripcionTallerGalego)? this.props.tallerContenido.descripcion.descripcionTallerGalego : this.props.tallerContenido.descripcion.descripcionTaller
+      }
     }
     if(this.props.artesaniaContenido.logo){
       artesaniaLogo = this.props.artesaniaContenido.logo.urlLogoArtesania
@@ -21,16 +31,39 @@ class Taller extends Component {
       <div className = 'taller__container'>
 
         <div className= 'taller__foto1__container'>
-          <img className= 'taller__foto' alt='taller' src= {pic1}></img>
+          {!this.state.fotoLoaded &&
+            <div className='loader'>Cargando...</div>
+          }
+          <img
+            className= 'taller__foto'
+            alt=''
+            src= {pic1}
+            onLoad = {()=>{this.setState({fotoLoaded:true})}}
+          ></img>
         </div>
         <div className= 'taller__foto2__container'>
-          <img className= 'taller__foto' alt='taller' src= {pic2}></img>
+          {!this.state.fotoLoaded &&
+            <div className='loader'>Cargando...</div>
+          }
+          {this.state.fotoLoaded &&
+            <img className= 'taller__foto' alt='taller' src= {pic2}></img>
+          }
         </div>
         <div className= 'taller__foto3__container'>
-          <img className= 'taller__foto' alt='taller' src= {pic3}></img>
+          {!this.state.fotoLoaded &&
+            <div className='loader'>Cargando...</div>
+          }
+          {this.state.fotoLoaded &&
+            <img className= 'taller__foto' alt='taller' src= {pic3}></img>
+          }
         </div>
         <div className= 'taller__foto4__container'>
-          <img className= 'taller__foto' alt='taller' src= {pic4}></img>
+          {!this.state.fotoLoaded &&
+            <div className='loader'>Cargando...</div>
+          }
+          {this.state.fotoLoaded &&
+            <img className= 'taller__foto' alt='taller' src= {pic4}></img>
+          }
         </div>
         <div className= 'taller__descripcion__container'>
           <p> {descripcion}</p>

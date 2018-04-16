@@ -510,7 +510,21 @@ const loginWithEmailAndPassword = (user,actionType) => {
       }
     })
 }
+const eliminarCurrentCuenta = (params,actionType) =>{
+  let user = firebase.auth().currentUser
+  return dispatch => user.delete().then(function(){
+    if (actionType !== null){
+      dispatch({
+        type: actionType,
+        params: 'byebye forever', // can be null
+        data: null, // usuario salio de la sesion y eliminado
+      })
+    }
+  }).catch(function(error){
+    throw error
+  })
 
+}
 const logout = (params,actionType) => {
   return dispatch => firebase.auth().signOut()
     .then (result => {
@@ -1161,6 +1175,7 @@ export default {
   currentUserToDB: currentUserToDB,
   amIlogedIn: amIlogedIn,
   logout: logout,
+  eliminarCurrentCuenta: eliminarCurrentCuenta,
   changePassword:  changePassword,
   loginFacebook: loginFacebook,
   loadCarro: loadCarro,

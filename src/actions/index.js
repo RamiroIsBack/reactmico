@@ -248,6 +248,11 @@ export default {
       return dispatch (Firebase.logout(params,constants.CURRENT_USER_RECEIVED))
     }
   },
+  eliminarCurrentCuenta: (params) =>{
+    return dispatch =>{
+      return dispatch (Firebase.eliminarCurrentCuenta(params,constants.CURRENT_USER_RECEIVED))
+    }
+  },
   amIlogedIn :(params) =>{
     return dispatch =>{
       return dispatch (Firebase.amIlogedIn(params,constants.CURRENT_USER_RECEIVED))

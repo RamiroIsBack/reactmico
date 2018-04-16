@@ -112,7 +112,7 @@ export default class Foto extends Component {
             >
             </img>
             <div className = 'vendido__container'>
-              <h4 style={{padding:1,margin:0}}>Vendido</h4>
+              <h4 style={{padding:1,margin:0}}>No disponible</h4>
             </div>
           </div>
         }

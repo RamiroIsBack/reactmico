@@ -8,7 +8,7 @@ class ModalConsentimientoContainer extends Component {
 
 
   toggleModal(){
-    //this.props.eliminarCurrentCuenta()
+    this.props.eliminarCurrentCuenta()
     this.props.toggleModal('closeConsentimiento')
   }
   politica(){
@@ -97,6 +97,7 @@ class ModalConsentimientoContainer extends Component {
 const dispatchToProps = (dispatch) =>{
 
   return{
+    eliminarCurrentCuenta: () =>dispatch(actions.eliminarCurrentCuenta()),
     getContenidos: () => dispatch(actions.getContenidos()),
     toggleModal: (modalName) =>dispatch(actions.toggleModal(modalName)),
     guardarConsentimientoFGLogin:(user) =>dispatch(actions.guardarConsentimientoFGLogin(user)),
