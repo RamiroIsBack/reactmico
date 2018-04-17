@@ -19,7 +19,7 @@ class FeriaContainer extends Component {
 
 
   }
-  
+
   selectFeria(urlFeria){
     window.open(urlFeria,'_blank')
   }
@@ -57,6 +57,7 @@ class FeriaContainer extends Component {
           feria ={feria}
           whenClicked={this.selectFeria.bind(this)}
           lengua = {this.props.navigation.lengua}
+          screenSize = {this.props.navigation.screenSize}
         />
 
       </div>
