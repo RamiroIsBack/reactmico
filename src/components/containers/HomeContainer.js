@@ -130,8 +130,15 @@ class HomeContainer extends Component {
         if (this.props.storeContenidos.listaContenidos[i].id === 'mico'){
           micoContenido = this.props.storeContenidos.listaContenidos[i]
           if(micoContenido.descripcion){
-            headlineMico = micoContenido.descripcion.headlineMico
-            desarrolloMico=micoContenido.descripcion.desarrolloMico
+            if(this.props.navigation.lengua ==='ga'){
+              headlineMico =(micoContenido.descripcion.headlineMicoGalego)? micoContenido.descripcion.headlineMicoGalego : micoContenido.descripcion.headlineMico
+              desarrolloMico= (micoContenido.descripcion.desarrolloMicoGalego)? micoContenido.descripcion.desarrolloMicoGalego : micoContenido.descripcion.desarrolloMico
+            }else{
+
+              headlineMico = micoContenido.descripcion.headlineMico
+              desarrolloMico=micoContenido.descripcion.desarrolloMico
+            }
+
           }
 
         }
@@ -198,7 +205,7 @@ const dispatchToProps = (dispatch) =>{
 
 const stateToProps = (state) => {
   return{
-
+    navigation:state.navigation,
     creacion:state.creacion,
     storeContenidos:state.contenidos,
     enlaces:state.enlaces,

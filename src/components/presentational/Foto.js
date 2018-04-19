@@ -72,7 +72,7 @@ export default class Foto extends Component {
     let nombre = this.props.creacion.nombre
 
     if(this.props.lengua ==='ga'){
-      nombre = (this.props.propiedades.nombreGalego)? this.props.propiedades.nombreGalego : this.props.propiedades.nombre
+      nombre = (this.props.creacion.nombreGalego)? this.props.creacion.nombreGalego : this.props.creacion.nombre
     }
     let precio =this.props.creacion.precio
     let imgLoaded = this.state.fotoLoaded

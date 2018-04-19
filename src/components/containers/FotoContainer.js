@@ -52,8 +52,6 @@ class FotoContainer extends React.Component {
   }
 
   selectFoto(foto){
-    //console.log ('caca '+ JSON.stringify(foto))
-    //this fires an action down below in this
     this.props.selectFoto(foto)
     window.scrollTo(0, 0)
     //routing programatically, now i can prevent if there is an error
@@ -89,7 +87,7 @@ class FotoContainer extends React.Component {
           listItem = sorted[tipo].map((foto,i)=>{
             return(
               <div className= 'container' style= {{maxWidth: 300}} key ={foto.id}>
-                <Foto creacion ={foto} whenClicked={this.selectFoto.bind(this)}/>
+                <Foto lengua={this.props.navigation.lengua} creacion ={foto} whenClicked={this.selectFoto.bind(this)}/>
               </div>
             )
           })
@@ -99,6 +97,12 @@ class FotoContainer extends React.Component {
         //console.log ('la ref '+ele)
         //saco el contenido de cada tipo de lo que hay en la DB
         let tipoObj= creacionesContenido.tipo[tipo.toString()]
+
+        let descripcionTipo = tipoObj.descripcionTipo
+
+        if(this.props.navigation.lengua ==='ga'){
+          descripcionTipo = (tipoObj.descripcionTipoGalego)? tipoObj.descripcionTipoGalego : tipoObj.descripcionTipo
+        }
         totalList.push (
           <div className = 'container-fluid' key = {g} ref={(el) => this[ele] = el} >
             {g!==0 && <hr/>}
@@ -110,7 +114,7 @@ class FotoContainer extends React.Component {
               { tipoObj &&
                 <div className = 'container col-xs-12 col-sm-6 col-md-7 col-lg-7 text-center'
                   style={{padding:0}}>
-                  {tipoObj.descripcionTipo.split('\n').map((item, key) => {
+                  {descripcionTipo.split('\n').map((item, key) => {
                     return <span key={key}>{item}<br/></span>})}
                 </div>
               }
@@ -156,8 +160,7 @@ const dispatchToProps = (dispatch) =>{
 }
 const stateToProps = (state) => {
   return{
-    //en state.blabla dices de que reducer quieres info
-    //y tu le asignas una key q quieras
+    navigation:state.navigation,
     firebaseCreaciones:state.creacion,
     storeContenidos: state.contenidos,
   }

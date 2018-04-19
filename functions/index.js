@@ -3,10 +3,6 @@
 const nodemailer = require('nodemailer');
 const functions = require('firebase-functions');
 
-
-// Configure the email transport using the default SMTP transport and a GMail account.
-// For other types of transports such as Sendgrid see https://nodemailer.com/transports/
-// TODO: Configure the `gmail.email` and `gmail.password` Google Cloud environment variables.
 const gmailEmail = functions.config().gmail.email;
 const gmailPassword = functions.config().gmail.password;
 const mailTransport = nodemailer.createTransport({
@@ -15,7 +11,7 @@ const mailTransport = nodemailer.createTransport({
     user: gmailEmail,
     pass: gmailPassword
   }
-});
+})
 
 // Sends an email confirmation when a user buys a product or when mico sends that product
 exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos/{pushId}').onWrite(event => {
@@ -68,6 +64,10 @@ exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos
        +' <a href="http://www.micotextil.com/"><img src="cid:logo@micotextil.com" height="150" width="150"/> </a>'
        +'<div style="opacity: 0.7">'
        +'<p>Cualquier problema que surja con el pedido, no dudes en contestar a este email a la dirección de correo pedidos@micotextil.com </p>'
+       +'<br/>'
+       +'<br/>'
+       +'<p>ADVERTENCIA LEGAL</p>'
+       +'<p>Este mensaje y, en su caso, sus anexos se dirigen exclusivamente a su destinatario, por contener información confidencial. Se informa a quien lo reciba sin ser su destinatario que la información contenida en el mismo es reservada y su utilización o divulgación está prohibida legalmente, debiendo abstenerse de copiarla o remitirla a terceros, procediéndose a su borrado inmediato, por lo que en tal caso le rogamos nos lo comunique por la misma vía.</p>'
        +'</div>'
        +'</div>'
        +'</div>'
@@ -112,6 +112,10 @@ exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos
        +' <a href="http://www.micotextil.com/"><img src="cid:logo@micotextil.com" height="150" width="150"/> </a>'
        +'<div style="opacity: 0.7">'
        +'<p>Cualquier problema que surja con el pedido, no dudes en contestar a este email a la dirección de correo pedidos@micotextil.com </p>'
+       +'<br/>'
+       +'<br/>'
+       +'<p>ADVERTENCIA LEGAL</p>'
+       +'<p>Este mensaje y, en su caso, sus anexos se dirigen exclusivamente a su destinatario, por contener información confidencial. Se informa a quien lo reciba sin ser su destinatario que la información contenida en el mismo es reservada y su utilización o divulgación está prohibida legalmente, debiendo abstenerse de copiarla o remitirla a terceros, procediéndose a su borrado inmediato, por lo que en tal caso le rogamos nos lo comunique por la misma vía.</p>'
        +'</div>'
        +'</div>'
        +'</div>'
@@ -158,6 +162,10 @@ exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos
        +' <a href="http://www.micotextil.com/"><img src="cid:logo@micotextil.com" height="150" width="150"/> </a>'
        +'<div style="opacity: 0.7">'
        +'<p>Cualquier problema que surja con el pedido, no dudes en contestar a este email a la dirección de correo pedidos@micotextil.com </p>'
+       +'<br/>'
+       +'<br/>'
+       +'<p>ADVERTENCIA LEGAL</p>'
+       +'<p>Este mensaje y, en su caso, sus anexos se dirigen exclusivamente a su destinatario, por contener información confidencial. Se informa a quien lo reciba sin ser su destinatario que la información contenida en el mismo es reservada y su utilización o divulgación está prohibida legalmente, debiendo abstenerse de copiarla o remitirla a terceros, procediéndose a su borrado inmediato, por lo que en tal caso le rogamos nos lo comunique por la misma vía.</p>'
        +'</div>'
        +'</div>'
        +'</div>'
