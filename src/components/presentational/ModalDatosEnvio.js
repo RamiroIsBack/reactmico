@@ -138,57 +138,56 @@ class ModalDatosEnvio extends React.Component {
                 <hr/>
               </div>
 
+              {this.props.currentUser.datosEnvio.hayDatos &&
+                <div>
+                  <div className= 'hidden-xs col-sm-6 col-md-4  col-lg-4 ' style = {{paddingRight: 10}}>
+                    <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.nombreCompletoEnvio} </p>
+                    <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.calle} </p>
+                    <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.localidad} </p>
+                    <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.cp+' , '+this.props.currentUser.datosEnvio.provincia} </p>
 
-              <div>
-                <div className= 'hidden-xs col-sm-6 col-md-4  col-lg-4 ' style = {{paddingRight: 10}}>
-                  <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.nombreCompletoEnvio} </p>
-                  <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.calle} </p>
-                  <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.localidad} </p>
-                  <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.cp+' , '+this.props.currentUser.datosEnvio.provincia} </p>
-
-                  <button className='btn text-center form-control ' id= 'datosEnvio' onClick = {this.corregirDatos.bind(this)}
-                    style = {{cursor: 'pointer',border: '1px solid',borderRadius: 4, backgroundColor: 'white',width: '95%',paddingLeft: 5}}>corregir datos
-                  </button>
-                </div>
-
-                <div className= 'hidden-sm hidden-md hidden-lg visible-xs-block col-xs-12' style = {{paddingLeft: 0, paddingRight: 0, paddingBottom: 5}}>
-                  <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.nombreCompletoEnvio} </p>
-                  <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.calle} </p>
-                  <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.localidad} </p>
-                  <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.cp+' , '+this.props.currentUser.datosEnvio.provincia} </p>
-
-
-                  <button className='btn text-center form-control ' id= 'datosEnvio' onClick = {this.corregirDatos.bind(this)}
-                    style = {{cursor: 'pointer',border: '1px solid',borderRadius: 4, backgroundColor: 'white',width: '95%',paddingLeft: 5}}>corregir datos
-                  </button>
-                </div>
-
-
-                <div className= 'col-xs-12 col-sm-6 col-md-8 col-lg-8' style = {{paddingRight: 0,paddingLeft:0}}>
-                  <div style = {{backgroundColor:'#FAFAFA', paddingRight: 0,paddingLeft:0,border: '1px solid #2C6549', borderRadius:'4px'}} >
-
-                    {/*AQUI EL CARRO */}
-                    {carroLista}
-
+                    <button className='btn text-center form-control ' id= 'datosEnvio' onClick = {this.corregirDatos.bind(this)}
+                      style = {{cursor: 'pointer',border: '1px solid',borderRadius: 4, backgroundColor: 'white',width: '95%',paddingLeft: 5}}>corregir datos
+                    </button>
                   </div>
 
-                  <button className='btn text-center form-control ' id= 'datosEnvio' onClick = {this.cambiarCarro.bind(this)}
-                    style = {{cursor: 'pointer',border: '1px solid',borderRadius: 4, backgroundColor: 'white',width: '95%',paddingLeft: 5,}}>corregir carro
-                  </button>
-                </div>
-                <div className= 'col-xs-12 col-sm-12 col-md-12 col-lg-12' style = {{paddingRight: 0,paddingLeft:0,paddingBottom:5}}>
-                  {/* ESTE SER'A EL BOTON DE PASAR AL SIGUIENTE PASO */}
-                  <button id= 'datosEnvio' onClick = {this.irAformaDePago.bind(this)}
-                    style = {{cursor: 'pointer',border: 'none',borderRadius: 4, backgroundColor: 'black',color:'white',width: '100%',paddingLeft: 5,marginTop: 5}}>
-                    <span style= {{color : 'white' }} id='carro'>siguiente </span>
-                    <span style= {{color : 'white' }} id='carro' className='glyphicon glyphicon-arrow-right'>
-                    </span>
-                  </button>
-                </div>
-                {/*comentario sin mas */}
+                  <div className= 'hidden-sm hidden-md hidden-lg visible-xs-block col-xs-12' style = {{paddingLeft: 0, paddingRight: 0, paddingBottom: 5}}>
+                    <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.nombreCompletoEnvio} </p>
+                    <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.calle} </p>
+                    <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.localidad} </p>
+                    <p style= {{marginBottom: 1}}> {this.props.currentUser.datosEnvio.cp+' , '+this.props.currentUser.datosEnvio.provincia} </p>
 
+
+                    <button className='btn text-center form-control ' id= 'datosEnvio' onClick = {this.corregirDatos.bind(this)}
+                      style = {{cursor: 'pointer',border: '1px solid',borderRadius: 4, backgroundColor: 'white',width: '95%',paddingLeft: 5}}>corregir datos
+                    </button>
+                  </div>
+
+                </div>
+              }
+              
+              <div className= 'col-xs-12 col-sm-6 col-md-8 col-lg-8' style = {{paddingRight: 0,paddingLeft:0}}>
+                <div style = {{backgroundColor:'#FAFAFA', paddingRight: 0,paddingLeft:0,border: '1px solid #2C6549', borderRadius:'4px'}} >
+
+                  {/*AQUI EL CARRO */}
+                  {carroLista}
+
+                </div>
+
+                <button className='btn text-center form-control ' id= 'datosEnvio' onClick = {this.cambiarCarro.bind(this)}
+                  style = {{cursor: 'pointer',border: '1px solid',borderRadius: 4, backgroundColor: 'white',width: '95%',paddingLeft: 5,}}>corregir carro
+                </button>
               </div>
 
+              <div className= 'col-xs-12 col-sm-12 col-md-12 col-lg-12' style = {{paddingRight: 0,paddingLeft:0,paddingBottom:5}}>
+                {/* ESTE SER'A EL BOTON DE PASAR AL SIGUIENTE PASO */}
+                <button id= 'datosEnvio' onClick = {this.irAformaDePago.bind(this)}
+                  style = {{cursor: 'pointer',border: 'none',borderRadius: 4, backgroundColor: 'black',color:'white',width: '100%',paddingLeft: 5,marginTop: 5}}>
+                  <span style= {{color : 'white' }} id='carro'>siguiente </span>
+                  <span style= {{color : 'white' }} id='carro' className='glyphicon glyphicon-arrow-right'>
+                  </span>
+                </button>
+              </div>
 
             </div>
           </div>
