@@ -169,6 +169,7 @@ class AmigoDatos extends React.Component {
         this.props.cambiarCurrentUserModificables('currentUserPassword',true)
 
         this.props.changePassword(this.state.password,'change')
+        alert('se ha cambiado la contraseña correctamente')
 
       }else{
         this.props.showWarning('noPassword')

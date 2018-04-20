@@ -43,7 +43,7 @@ exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos
   // si el paquete ha sido enviado hay un localizador
   if (val.datosCompra.localizador && !val.datosCompra.entregado) {
     mailOptions.subject = val.datosEnvio.nombreCompletoEnvio+ ' tu paquete desde Mico ha sido enviado!'
-    mailOptions.text = 'dentro de poco recibiras tu paquete en '+ val.datosEnvio.calle+', hasta entonces puedes consultar el estado de tu envio en la seccion de pedidos en tu apartado personal como amigo de Mico y con este localizador/cogido de envio: '+val.datosCompra.localizador+' puedes ver el seguimiento de tu paquete en la pagina web '+val.datosCompra.urlMensajeria
+    mailOptions.text = 'dentro de poco recibiras tu paquete en '+ val.datosEnvio.calle+', hasta entonces puedes consultar el estado de tu envio en la seccion de pedidos en tu apartado personal de usuario y con este localizador/cogido de envio: '+val.datosCompra.localizador+' puedes ver el seguimiento de tu paquete en la pagina web '+val.datosCompra.urlMensajeria
     mailOptions.html =
       '<div style ="margin:5px; max-width: 600px ">'
        +'<div style = "max-width: 550px; margin:8px">'
@@ -142,18 +142,24 @@ exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos
 
     // el paquete se est'a preparando
     mailOptions.subject = val.datosEnvio.nombreCompletoEnvio+', estamos preparando tu envio!'
-    mailOptions.text = 'Holaa, en breve nos pondremos manos a la obra para que puedas tener tu compra lo mas pronto posible en '+ val.datosEnvio.calle+' , si quieres cambiar esta direccion, mandanos un correo a pedidos@micotextil.com , si cambias tu direccion en tu perfil como amigo de Mico, afectara para futuros envios pero no para este '
+    mailOptions.text = 'Holaa, en breve me pondré manos a la obra para que puedas tener tu compra lo mas pronto posible en '+ val.datosEnvio.calle+' , si quieres cambiar esta direccion, mandanos un correo a pedidos@micotextil.com , si cambias tu direccion en tu perfil como amigo de Mico, afectara para futuros envios pero no para este '
     mailOptions.html =
        '<div style ="margin:5px; max-width: 600px ">'
        +'<div style = "max-width: 550px; margin:8px">'
        +' <a href="http://www.micotextil.com/" style = "float:right"> <img src="cid:logo@micotextil.com"  height="82" width="82"/> </a>'
        +'<p>Hola '+val.datosEnvio.nombreCompletoEnvio+' !</p> <hr></hr>'
 
-       +'<p>en breve nos pondremos manos a la obra para que puedas tener tu compra lo mas pronto posible en <b style="font-size:17px">'+val.datosEnvio.calle+'</b> </p>'
+       +'<p>en breve me pondré manos a la obra para que puedas tener tu compra lo mas pronto posible, los datos del envio son:</p>'
+       +'<div style = "border: 1px solid black; border-radius:5px; text-align: center; margin-left:35px; margin-right: 35px">'
+       +'<p style="font-size:17px">'+val.datosEnvio.nombreCompletoEnvio+'</p>'
+       +'<p style="font-size:17px">'+val.datosEnvio.calle+'</p>'
+       +'<p style="font-size:17px">'+val.datosEnvio.localidad+'</p>'
+       +'<p style="font-size:17px">'+val.datosEnvio.provincia+' '+val.datosEnvio.cp+'</p>'
+       +'</div>'
 
-       +'<p>si quieres cambiar esta direccion, mandanos un correo a pedidos@micotextil.com , con el asunto : "cambio de direccion" </p>'
+       +'<p>si quieres cambiar la direccion o alguno de los datos, mandame un correo lo antes posible a pedidos@micotextil.com , con el asunto : "cambio de direccion" </p>'
 
-       +'<p> si cambias tu direccion en tu perfil como amigo de Mico, afectara para futuros envios pero no para este </p>'
+       +'<p> si cambias tu direccion en tu perfil de usuario, afectara para futuros envios pero no para este </p>'
        +'</div>'
 
        +'<div style = "max-width: 550px; margin:8px">'

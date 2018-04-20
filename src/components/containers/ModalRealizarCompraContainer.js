@@ -62,10 +62,9 @@ class ModalRealizarCompraContainer extends Component {
 
     let paypalEnvio = {
       calle : data.paypalAddress.line1
-        +''+(data.paypalAddress.line2!==undefined ||data.paypalAddress.line2!==null ? data.paypalAddress.line2 :'' ),
+        +' '+(data.paypalAddress.line2!==undefined ? data.paypalAddress.line2 :'' ),
       cp: data.paypalAddress.postal_code,
       localidad:data.paypalAddress.city,
-      newsletter:dbEnvio.newsletter,
       nombreCompletoEnvio:data.paypalAddress.recipient_name,
       provincia:data.paypalAddress.state,
     }
@@ -88,7 +87,7 @@ class ModalRealizarCompraContainer extends Component {
   }
 
   wrapPedido(data){
-    
+
     this.props.guardarDatosPedido(data.envioDefinitivo ,this.props.carro,data)
       .then(response =>{
 

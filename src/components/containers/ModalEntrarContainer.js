@@ -15,22 +15,16 @@ class ModalEntrarContainer extends Component {
     }
   }
 
-  changePassword(payload,params){
-    alert('en breve recibirás un email con un enlace para cambiar tu contraseña')
+  changePassword(amigo,params){
 
-    //hay q coger el email desde el nombre d usuario o desde el email q meta en lo de entrar antes de poder
-    //mandar el cambio de contrase;a x email xq no sabemos a aquien mandarlo
-    //sacar un popup dialog xa q est'e seguro de q ha puesto bien el mail o algo
-
-    /*if(amigo.nombre.indexOf('@') > -1){
-      //esta entrando con el mail
-      if (amigo.nombre.indexOf('.') >-1 && amigo.nombre.charAt(amigo.nombre.length-1)!== '.'){
-        //alert('parece un email valido, vamos a compararlo con los que tenemos')
-        for (i =0; i < listaUsers.length; i++){
-          if (listaUsers[i].datosPersonales.email === amigo.nombre){
-            nombreOEmailValido = true
-            alert('yes here you are' + listaUsers[i].datosPersonales.nombre)*/
-    this.props.changePassword(payload,params)
+    let user = this.comprobarNombreOEmailValido(amigo)
+    if(user !== null){
+      alert('hola, en breve recibirás um email a '+user.email+' para cambiar la contraseña, porfavor mira en la carpeta de correo no deseado por si acaso')
+      this.props.changePassword(user.email,params)
+    }
+    if(user ===null){
+      alert('el nombre o contraseña introducidos no coinciden con niguno de los usuarios registrados, porfavor comprueba que lo has escrito bien')
+    }
   }
 
   isLetterOrNumber(str) {
@@ -59,11 +53,10 @@ class ModalEntrarContainer extends Component {
       this.props.toggleModal('openRegistrarse')
     }
   }
-
-  entrar(amigo){
+  comprobarNombreOEmailValido(amigo){
     var listaUsers = []
     var nombreOEmailValido= false
-    //var passwordValido = false
+
     var user = {}
     var i =0
     if (this.props.users){
@@ -97,8 +90,18 @@ class ModalEntrarContainer extends Component {
         //alert('parece un nombre valido, vamos a compararlo con los que tenemos')
       }
     }
-
     if (nombreOEmailValido){
+      return user
+    }else{
+      return null
+    }
+
+  }
+
+  entrar(amigo){
+
+    let user = this.comprobarNombreOEmailValido(amigo)
+    if(user !==null){
       this.props.toggleModal('closeEntrar')
       //make it start at the top of the page every time
       window.scrollTo(0, 0)
@@ -112,7 +115,7 @@ class ModalEntrarContainer extends Component {
           console.log(err.message+ 'fallo al logearte con email y password')
         })
 
-    }else if (!nombreOEmailValido){
+    }else {
       alert('el email o el nombre no se corresponde con ningun registro, comprueba que los has escrito bien porfavor y recuerda si pusiste alguna mayuscula que tambien cuenta ;)')
 
     }

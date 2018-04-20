@@ -46,7 +46,12 @@ class ModalEntrar extends React.Component {
     }
   }
   changePassword(){
-    this.props.changePassword(document.getElementById('nombre').value,'forgot')
+    let amigo = null
+    amigo ={
+      nombre: document.getElementById('nombre').value,
+      password: document.getElementById('password').value,
+    }
+    this.props.changePassword(amigo,'forgot')
   }
   render() {
     // Render nothing if the 'show' prop is false
