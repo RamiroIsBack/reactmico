@@ -46,6 +46,8 @@
 .cookies__aviso__container{
   grid-area: p;
   display: inline-block;
+  position: relative;
+  z-index: 68;
 }
 .cookies__aviso{
   background-color: rgba(0, 0, 0, 0.58);
@@ -56,7 +58,8 @@
 }
 .logo__top__img{
   cursor:pointer;
-
+  position: relative;
+  z-index: 68;
   width: 280px;
 }
 .volver__arriba__container{

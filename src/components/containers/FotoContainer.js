@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import { Foto } from '../presentational'
+import { Foto, ModalRespiro } from '../presentational'
 import actions from '../../actions'
 import { connect } from 'react-redux'
 import history from '../../utils/history'
@@ -77,6 +77,9 @@ class FotoContainer extends React.Component {
     let h = 1000
     var listItem ={}
     var totalList = []
+    let tiendaActiva = true
+    let mensajeTiendaInactiva = ''
+    let mensajeTiendaInactivaGalego = false
 
     if(this.props.firebaseCreaciones.listaCreaciones!=={} &&
       this.props.storeContenidos.listaContenidos.length !== 0 ){
@@ -135,12 +138,24 @@ class FotoContainer extends React.Component {
         //console.log ('caca '+ g +JSON.stringify(key))
         g++
       }
+      tiendaActiva = creacionesContenido.respiro.activo
+      mensajeTiendaInactiva = creacionesContenido.respiro.mensaje
+      if(this.props.navigation.lengua ==='ga'){
+        mensajeTiendaInactivaGalego = creacionesContenido.respiro.mensajeGalego
+      }
     }
 
     return (
       <div className= 'container' onClick = {this.cierraDialogosNavbar.bind(this)} >
         <div className='clearfix visible-sm-block visible-md-block' style={{padding: 0}}></div>
-
+        {!tiendaActiva&&
+          <ModalRespiro
+            tiendaActiva = {tiendaActiva}
+            mensajeTiendaInactivaGalego={mensajeTiendaInactivaGalego}
+            mensajeTiendaInactiva={mensajeTiendaInactiva}
+          >
+          </ModalRespiro>
+        }
         {totalList}
       </div>
     )

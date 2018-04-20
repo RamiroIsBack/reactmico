@@ -28,7 +28,9 @@ import WarningBasicConfigurable from './WarningBasicConfigurable'
 import Taller from './Taller'
 import ModalConsentimiento from './ModalConsentimiento'
 import ModalPoliticaPrivacidad from './ModalPoliticaPrivacidad'
+import ModalRespiro from './ModalRespiro'
 export{
+  ModalRespiro,
   ModalPoliticaPrivacidad,
   ModalConsentimiento,
   Taller,

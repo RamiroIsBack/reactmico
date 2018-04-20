@@ -1,10 +1,12 @@
 .footer__space{
+  position: relative;
   display: grid;
   grid-template-areas:
   " c c c c . . . . . . . r r r "
   " c c c c . . . . . . . l l l "
   " s s s s . . . . . . . l l l ";
   grid-gap: 3px;
+  z-index: 68;
 
 }
 .footer__contact{
