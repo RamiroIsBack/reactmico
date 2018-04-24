@@ -5,10 +5,7 @@ class WarningNoDatos extends Component {
     this.props.redirecciona('datos')
   }
   render() {
-    var loginIcon = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/loginIcon.png?alt=media&token=9df1a1ea-8b37-482b-919e-b0fb3be6b273'
-    if(this.props.photoURL !== ''){
-      loginIcon = this.props.photoURL
-    }
+
     return (
       <div>
 
@@ -30,7 +27,6 @@ class WarningNoDatos extends Component {
               backgroundColor: 'transparent'
             }}
           > Registrarse
-            <img id='Zona personal' src={loginIcon}  style={{borderRadius : 40, paddingTop: 3, height:45}} />
           </button>
         </div>
       </div>

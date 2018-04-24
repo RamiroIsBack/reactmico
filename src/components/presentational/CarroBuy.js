@@ -6,9 +6,16 @@ export default class CarroBuy extends Component {
     let total = this.props.carroPropiedades.precioSubTotal + this.props.carroPropiedades.envio
     let pedidoTitulo = ''
     let pedidoInfo = ''
+    let condicionesLink = 'Condiciones de venta y devoluciones'
     if(this.props.pedidoContenido.descripcion){
-      pedidoTitulo = this.props.pedidoContenido.descripcion.pedidoTitulo
-      pedidoInfo = this.props.pedidoContenido.descripcion.pedidoInfo
+      if(this.props.lengua ==='ga'){
+        pedidoTitulo =(this.props.pedidoContenido.descripcion.pedidoTituloGalego)?  this.props.pedidoContenido.descripcion.pedidoTituloGalego: this.props.pedidoContenido.descripcion.pedidoTitulo
+        pedidoInfo =(this.props.pedidoContenido.descripcion.pedidoInfoGalego)? this.props.pedidoContenido.descripcion.pedidoInfoGalego: this.props.pedidoContenido.descripcion.pedidoInfo
+      }else{
+        pedidoTitulo = this.props.pedidoContenido.descripcion.pedidoTitulo
+        pedidoInfo =this.props.pedidoContenido.descripcion.pedidoInfo
+      }
+
     }
     return (
       <div className ='row ' style={this.props.stiloCarroBuy}>
@@ -30,21 +37,27 @@ export default class CarroBuy extends Component {
             <a className= 'btn col-xs-10 col-sm-11 col-md-11 col-lg-11' style= {style.carroProduct.btnPedido} onClick = {this.props.comprar}> REALIZAR PEDIDO <h4  className = 'glyphicon glyphicon-ok-circle'></h4>
             </a>
           </div>
-        </div>
-        <br/>
-        {this.props.screenSize !== 'mobile' &&
-          <div className=' clear-fix container-fluid col-xs-12 col-sm-12 col-md-12 col-lg-6' style={{paddingLeft: 0}} >
-
-            <h4 style = {{whiteSpace: 'initial',paddingLeft: 0}}>{pedidoTitulo}</h4>
-
-            <br/>
-
-
-            {pedidoInfo.split('\n').map((item, key) => {
-              return <span style = {{whiteSpace: 'initial',paddingLeft: 0}} key={key}>{item}<br/></span>})}
-
+          <div style= {{marginTop: 10 ,marginBottom: 10,}}>
+            <a
+              style= {{fontWeight: 'bold', color:'black',cursor:'pointer'}}
+              onClick = {()=>{this.props.openCondicionesVenta}}>{condicionesLink}
+            </a>
           </div>
-        }
+        </div>
+
+
+        <div className='col-xs-12 col-sm-12 col-md-12 col-lg-6' style={{paddingLeft: 0}} >
+          <p style = {{whiteSpace: 'initial',paddingLeft: 0}}>{pedidoTitulo}</p>
+
+          <br/>
+          {this.props.screenSize !== 'mobile' &&
+            <div>
+              {pedidoInfo.split('\n').map((item, key) => {
+                return <span style = {{whiteSpace: 'initial',paddingLeft: 0}} key={key}>{item}<br/></span>})}
+            </div>
+
+          }
+        </div>
 
       </div>
     )

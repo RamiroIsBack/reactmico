@@ -16,40 +16,13 @@ class NavbarMicoFront extends Component {
 
     this.handleWindowSizeChange()
     window.addEventListener('resize', this.handleWindowSizeChange.bind(this))
-    //not doing this now cos doesn't work of all borwsers
-    //window.addEventListener('scroll', this.handleScroll.bind(this))
   }
+
   componentWillUnmount() {
-    //not doing this now cos doesn't work of all borwsers
-    //window.removeEventListener('scroll', this.handleScroll.bind(this))
     window.removeEventListener('resize', this.handleWindowSizeChange.bind(this))
-  }
-  handleScroll(){
-    var logoTopContainerEl = document.getElementById('logoTopContainer')
-    //var navbarContainerEl = document.getElementById('navbarContainer')
-    //var mainContainerEl = document.getElementById('mainContainer')
-    let windowHight = window.innerHeight
-    let scrollTopPosition = document.body.scrollTop
-    this.checkElementIntoView(windowHight,logoTopContainerEl,scrollTopPosition)
-    //this.checkElementIntoView(windowHight,navbarContainerEl,scrollTopPosition)
-    //this.checkElementIntoView(windowHight,mainContainerEl,scrollTopPosition)
-
-  }
-  checkElementIntoView(windowHight,el,scrollTopPosition){
-    let elementTop =el.offsetTop
-    let elementBottom = elementTop + el.scrollHeight
-
-    if(scrollTopPosition > elementBottom && !this.props.navigation.sticky){
-      //make navbar position: fixed
-      this.props.fixNavbar(true)
-    }
-    if(scrollTopPosition < elementBottom && this.props.navigation.sticky){
-      this.props.fixNavbar(false)
-    }
   }
 
   handleWindowSizeChange(){
-
     if(window.innerWidth < 705  && this.props.navigation.screenSize !== 'mobile' ){
       this.props.chageScreenWidth('mobile')
     }
@@ -163,28 +136,8 @@ class NavbarMicoFront extends Component {
   }
 
   render() {
-    let registrarseShowing = this.props.storeModal.registrarseShowing
-    let menuXsShowing = this.props.storeModal.menuXsShowing
 
-    let navbarPosition = {padding: 0,width:'100%',position:'absolute'}
-    if(this.props.navigation.screenSize ==='mobile'){
-      navbarPosition = {padding: 0,width:'100%',position:'fixed'}
-    }
-    let navbarFadeIn = {animationName: 'fadeInNavbar2',}
-    if(this.props.navigation){
-      if (this.props.navigation.sticky){
-        navbarPosition={
-          padding: 0,
-          position:'fixed',
-          top : 0,
-          width:'100%',
-          backgroundColor:'white',
-        }
-        navbarFadeIn={
-          animationName: 'fadeInNavbar',
-        }
-      }
-    }
+    let navbarPosition = {padding: 0,width:'100%',position:'fixed'}
 
     //           menuIcon en firebase
     var xsMenuIcon = 'https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/menu-alt-256.png?alt=media&token=2d9dfa45-f974-4d90-9431-ec7de99f7e9c'
@@ -263,11 +216,27 @@ class NavbarMicoFront extends Component {
     let screenSize =this.props.navigation.screenSize
     let lengua = this. props.navigation.lengua
 
+    let creacionesNombre = 'TIENDA'
+    let conocenosNombre = 'SOBRE MI'
+    let tallerNombre = 'TALLER'
+    let feriasNombre = 'FERIAS'
+    let contactoNombre = 'CONTACTO'
+    let registrarseNombre = 'Registrarse'
+
+    if(lengua ==='ga'){
+      creacionesNombre = 'TENDA'
+      conocenosNombre = 'EU'
+      tallerNombre = 'TALLER'
+      feriasNombre = 'FEIRAS'
+      contactoNombre = 'CONTACTA'
+      registrarseNombre = 'Registrarse'
+    }
+
     return (
       <div className = 'sticky__navbar__contanier' id= 'navbarContainer' style={navbarPosition}>
         {screenSize ==='laptop' &&
 
-          <div className='navbar__container' style={navbarFadeIn}>
+          <div className='navbar__container'>
             <div id='lengua' className = 'navbar__lengua__container' onMouseOver={this.handleHoverOn.bind(this)}>
               <div className='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false' style= {{color:'black'}}
                 onClick = {this.gestionaColapso.bind(this)} id='lengua'  >{lengua}
@@ -281,7 +250,7 @@ class NavbarMicoFront extends Component {
 
             <div className = 'navbar__registrarse__container'>
               {this.props.users.currentUser === null &&
-                <div onMouseOver={this.handleHoverOn.bind(this)} style = {registrarseEstilo} onClick = {this.gestionaColapso.bind(this)} id='registrarse'  >Registrarse
+                <div onMouseOver={this.handleHoverOn.bind(this)} style = {registrarseEstilo} onClick = {this.gestionaColapso.bind(this)} id='registrarse'  >{registrarseNombre}
                 </div>
               }
 
@@ -311,7 +280,7 @@ class NavbarMicoFront extends Component {
 
             <div id='creaciones' className = 'navbar__diseno__container' onMouseOver={this.handleHoverOn.bind(this)}>
               <NavLink  className='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false' style = {creacionesEstilo}
-                onClick = {this.gestionaColapso.bind(this)} id='creaciones' name ='allCreaciones' to='/Diseños'>TIENDA
+                onClick = {this.gestionaColapso.bind(this)} id='creaciones' name ='allCreaciones' to='/Diseños'>{creacionesNombre}
                 <span className='caret'>
                 </span>
               </NavLink>
@@ -321,22 +290,22 @@ class NavbarMicoFront extends Component {
             </div>
 
             <div className = 'navbar__feria__container' id='ferias' onMouseOver={this.handleHoverOn.bind(this)} >
-              <NavLink style = {feriasEstilo} onClick = {this.gestionaColapso.bind(this)} id='ferias' to='/Ferias'> FERIAS
+              <NavLink style = {feriasEstilo} onClick = {this.gestionaColapso.bind(this)} id='ferias' to='/Ferias'> {feriasNombre}
               </NavLink>
             </div>
 
             <div className = 'navbar__conocenos__container' id='conocenos' onMouseOver={this.handleHoverOn.bind(this)}>
-              <NavLink to='/Conocenos' style = {conocenosEstilo} onClick = {this.gestionaColapso.bind(this)} id='conocenos' > SOBRE MI
+              <NavLink to='/Conocenos' style = {conocenosEstilo} onClick = {this.gestionaColapso.bind(this)} id='conocenos' > {conocenosNombre}
               </NavLink>
             </div>
             <div className = 'navbar__contacto__container' id='contacto' onMouseOver={this.handleHoverOn.bind(this)}>
-              <NavLink to='/Contacto' style = {contactoEstilo} onClick = {this.gestionaColapso.bind(this)} id='contacto' > CONTACTO
+              <NavLink to='/Contacto' style = {contactoEstilo} onClick = {this.gestionaColapso.bind(this)} id='contacto' > {contactoNombre}
               </NavLink>
             </div>
 
 
             <div className = 'navbar__taller__container' id='taller' onMouseOver={this.handleHoverOn.bind(this)}>
-              <NavLink to='/Taller' style = {tallerEstilo} onClick = {this.gestionaColapso.bind(this)} id='taller' > TALLER
+              <NavLink to='/Taller' style = {tallerEstilo} onClick = {this.gestionaColapso.bind(this)} id='taller' > {tallerNombre}
               </NavLink>
             </div>
             <div className = 'navbar__instagram__container'>

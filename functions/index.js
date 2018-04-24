@@ -51,7 +51,7 @@ exports.sendEmailPreparingPackage = functions.database.ref('/users/{uid}/pedidos
        +'<p>Hola '+val.datosEnvio.nombreCompletoEnvio+' !</p> <hr></hr>'
 
        +'<p>Dentro de poco recibiras tu paquete en <b style="font-size:17px">'+val.datosEnvio.calle+'</b> </p>'
-       +'<p> hasta entonces puedes consultar el estado de tu envio en la seccion de pedidos en tu apartado personal como amigo de Mico</p> </br>'
+       +'<p> hasta entonces puedes consultar el estado de tu envio en la seccion de pedidos en tu apartado personal de usuario</p> </br>'
 
        +'<p>Y con este localizador/cogido de envio: <b style="font-size:19px"> '+ val.datosCompra.localizador +' </b> puedes ver el seguimiento de tu paquete en la pagina web</p>'
 

@@ -21,7 +21,7 @@ class CarroContainer extends Component {
         this.props.loadCarro(this.props.carro.cartList,false )
       }
     }, 800)
-    
+
   }
   //no vamos a usar esto x ahora xq no se puede gestionar que pidan muchas unidades
   QttyToggle(indice,qtty){
@@ -159,6 +159,23 @@ class CarroContainer extends Component {
         stiloCarroBuy = {position:'sticky', padding:0 , paddingLeft:3 ,marginRight:5,top:270, overflowY:'hidden', overflowX:'hidden' }
       }
     }
+    var productListContainerDiv = null
+    if(this.props.navigation.screenSize ==='laptop'){
+      productListContainerDiv = document.getElementById('productListContainer')
+    }
+    if(this.props.navigation.screenSize ==='mobile'){
+      productListContainerDiv = document.getElementById('productListContainerXS')
+    }
+    let estiloCarroBuy ={
+      padding :0 ,
+    }
+    if(productListContainerDiv){
+      estiloCarroBuy ={
+        height: productListContainerDiv.scrollHeight,
+        padding :0 ,
+      }
+
+    }
 
     return (
       <div onClick = {this.cierraDialogosNavbar.bind(this)} >
@@ -166,7 +183,7 @@ class CarroContainer extends Component {
         <div >
           <div className='col-xs-7 col-sm-8 col-md-7 col-lg-6' style={{paddingLeft:2}}>
 
-            <div className='visible-xs-block hidden-sm hidden-md hidden-lg' style={{padding :0 , borderRightStyle:'ridge',minHeight: window.innerHeight}}>
+            <div className='visible-xs-block hidden-sm hidden-md hidden-lg' id='productListContainerXS' style={{padding :0 , borderRightStyle:'ridge'}}>
               {this.props.carro.cartList.length === 0 &&
                 <h3>
                   No tienes nungun producto en el carro para comprar.
@@ -178,7 +195,7 @@ class CarroContainer extends Component {
               </NavLink>
 
             </div>
-            <div className='hidden-xs' style={{padding :0 , borderRightStyle:'ridge',minHeight: window.innerHeight}}>
+            <div className='hidden-xs' id='productListContainer' style={{padding :0 , borderRightStyle:'ridge'}}>
               {this.props.carro.cartList.length === 0 &&
                 <h2>
                   No tienes nungun producto en el carro para comprar.
@@ -191,7 +208,7 @@ class CarroContainer extends Component {
 
             </div>
           </div>
-          <div className='col-xs-5 col-sm-4 col-md-5 col-lg-6'  style={{minHeight: window.innerHeight, padding:0,}}>
+          <div className='col-xs-5 col-sm-4 col-md-5 col-lg-6'  style={estiloCarroBuy}>
             <CarroBuy
               carroPropiedades = {this.props.carro}
               comprar= {this.comprar.bind(this)}
@@ -199,7 +216,8 @@ class CarroContainer extends Component {
               pedidoContenido ={pedidoContenido}
               stiloCarroBuy= {stiloCarroBuy}
               screenSize = {this.props.navigation.screenSize}
-
+              lengua= {this.props.navigation.lengua}
+              openCondicionesVenta = {()=>this.props.toggleModal('openCondicionesVenta')}
             />
           </div>
         </div>

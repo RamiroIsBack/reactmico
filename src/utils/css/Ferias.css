@@ -1,15 +1,15 @@
 .feria__container{
   display: grid;
-  
+
   grid-template-areas:
-  "d d d d d d d d m m m m"
-  "d d d d d d d d m m m m"
-  "d d d d d d d d m m m m"
-  "d d d d d d d d m m m m"
-  "d d d d d d d d l l l l"
-  "d d d d d d d d l l l l";
+  ". l l l l . m m m m m m"
+  ". l l l l . m m m m m m"
+  ". l l l l . m m m m m m"
+  ". l l l l . m m m m m m"
+  ". l l l l . d d d d d d"
+  ". l l l l . d d d d d d";
   grid-gap: 3px;
-  grid-template-columns: repeat(12, auto);
+  grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(6,auto);
   text-align: center;
 }

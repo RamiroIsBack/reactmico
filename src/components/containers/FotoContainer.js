@@ -102,9 +102,11 @@ class FotoContainer extends React.Component {
         let tipoObj= creacionesContenido.tipo[tipo.toString()]
 
         let descripcionTipo = tipoObj.descripcionTipo
+        let nameTipo = tipoObj.tipo
 
         if(this.props.navigation.lengua ==='ga'){
           descripcionTipo = (tipoObj.descripcionTipoGalego)? tipoObj.descripcionTipoGalego : tipoObj.descripcionTipo
+          nameTipo = (tipoObj.tipoGalego)? tipoObj.tipoGalego : tipoObj.tipo
         }
         totalList.push (
           <div className = 'container-fluid' key = {g} ref={(el) => this[ele] = el} >
@@ -112,7 +114,7 @@ class FotoContainer extends React.Component {
             <div className = 'container-fluid row' id ={tipo} style={{marginTop:75}}>
 
               <div className = ' text-center col-xs-12 col-sm-4 col-md-3 col-lg-3'>
-                <h2 style ={{margin:0,paddingBottom:'5px',fontWeight: 'bolder'}}> {tipo}</h2>
+                <h2 style ={{margin:0,paddingBottom:'5px',fontWeight: 'bolder'}}> {nameTipo}</h2>
               </div>
               { tipoObj &&
                 <div className = 'container col-xs-12 col-sm-6 col-md-7 col-lg-7 text-center'

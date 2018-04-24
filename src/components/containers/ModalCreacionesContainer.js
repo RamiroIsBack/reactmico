@@ -55,9 +55,9 @@ class ModalCreacionesContainer extends Component {
 
     for (var tipo in creacionDB) {
       if (creacionDB.hasOwnProperty(tipo)) {
-
         creacionList.push (
           {
+            nombreGalego:creacionesContenidos.tipo[tipo].tipoGalego,
             nombre: tipo,
             //urlIcon: creacionesContenidos.tipo[tipo].urlIcon,
           }
@@ -70,7 +70,13 @@ class ModalCreacionesContainer extends Component {
     return (
 
       <div onMouseLeave={this.handleHoverOff.bind(this)} >
-        <ModalCreaciones show={creacionesShowing} onSelect={this.moveToCreacionesSection.bind(this)} contenido = {creacionesContenidos} creacionList ={creacionList}>
+        <ModalCreaciones
+          show={creacionesShowing}
+          onSelect={this.moveToCreacionesSection.bind(this)}
+          contenido = {creacionesContenidos}
+          creacionList ={creacionList}
+          lengua = {this.props.navigation.lengua}
+        >
         </ModalCreaciones>
 
 
@@ -95,10 +101,7 @@ const dispatchToProps = (dispatch) =>{
 
 const stateToProps = (state) => {
   return{
-    // state is d store in this case for convenction
-    // cojo el producto d state(store) y lo paso a props xa cogerlo
-    //en state.blabla dices de que reducer quieres info
-    //y tu le asignas una key q quieras
+    navigation:state.navigation,
     storeContenidos: state.contenidos,
     storeModal:state.modal,
     storeCreaciones:state.creacion,
