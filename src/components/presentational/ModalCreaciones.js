@@ -23,7 +23,7 @@ export default class ModalCreaciones extends Component {
 
 
           <div className= 'col-xs-12 col-sm-12 col-md-12 col-lg-12 ' style ={{padding:1, paddingLeft:10}} >
-            <NavLink id='creaciones' name= {name} onClick = {this.gestionaIrACreacion.bind(this)} to = '/Diseños' style ={estilo}>
+            <NavLink id='creaciones' name= {tipo.nombre} onClick = {this.gestionaIrACreacion.bind(this)} to = '/Diseños' style ={estilo}>
               {name}
             </NavLink>
           </div>

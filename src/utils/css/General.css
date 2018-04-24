@@ -24,7 +24,8 @@
   grid-area: l;
   text-align: center;
   display:inline-block;
-
+  background-color: white;
+  z-index: 68;
 }
 
 .main__container{
@@ -59,7 +60,6 @@
 .logo__top__img{
   cursor:pointer;
   position: relative;
-  z-index: 68;
   width: 280px;
 }
 .volver__arriba__container{

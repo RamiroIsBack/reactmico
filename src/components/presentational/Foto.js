@@ -60,7 +60,6 @@ export default class Foto extends Component {
     this.setState({fotoLoaded:true})
   }
 
-  //TODO read about image preloading
   render() {
     let url = this.props.creacion.pic
     let numPic = '1/2'

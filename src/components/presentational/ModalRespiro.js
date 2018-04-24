@@ -23,13 +23,14 @@ class ModalRespiro extends React.Component {
       left: 0,
       width: '100%',
       height: '100%',
-      backgroundColor: 'transparent',
+      backgroundColor: 'rgba(0,0,0,0.25)',
       zIndex: 67,
     }
     var stiloModal ={
       position: 'absolute',
-      backgroundColor:'black',
-      color:'white',
+      backgroundColor:'white',
+      color:'black',
+      textAlign:'center',
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
