@@ -47,23 +47,28 @@ class CarroContainer extends Component {
   }
   comprar(){
     if(this.props.carro){//hay conexion con el carroReducer
-      if(this.props.carro.cartList.length !== 0){//hay algo en el carro
-        if(this.props.users.currentUser){//hay user
-          let currentUserBuying = this.props.users.currentUser
+      if(this.props.storeContenidos.respiro.activo){
+        if(this.props.carro.cartList.length !== 0){//hay algo en el carro
+          if(this.props.users.currentUser){//hay user
+            let currentUserBuying = this.props.users.currentUser
 
-          if(currentUserBuying.datosPersonales.emailVerified || currentUserBuying.datosPersonales.providerId !=='firebase'){
+            if(currentUserBuying.datosPersonales.emailVerified || currentUserBuying.datosPersonales.providerId !=='firebase'){
 
-            this.gestionarSiTengoVendidosEnCarro()
+              this.gestionarSiTengoVendidosEnCarro()
+
+            }else{
+              this.props.showNotificationWithTimeout('Warning','noVerifyedEmail')
+            }
 
           }else{
-            this.props.showNotificationWithTimeout('Warning','noVerifyedEmail')
+            this.props.showNotificationWithTimeout('Warning','noUser')
           }
-
         }else{
-          this.props.showNotificationWithTimeout('Warning','noUser')
+          this.props.showNotificationWithTimeout('Warning','carroVacio')
         }
       }else{
-        this.props.showNotificationWithTimeout('Warning','carroVacio')
+        //TODO:: condicional con el idioma y sacar un notification con timeout
+        alert(this.props.storeContenidos.respiro.mensaje);
       }
     }
   }

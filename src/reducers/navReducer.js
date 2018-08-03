@@ -1,86 +1,82 @@
-
-import constants from '../constants'
+import constants from "../constants";
 
 var initialState = {
-  cartList:[],
+  cartList: [],
   numProducts: 0,
-  precioSubTotal : 0,
-  envio : 0,
+  precioSubTotal: 0,
+  envio: 0,
 
-  amigoNavActive : {
-    datosActive:false,
-    pedidosActive:false,
+  amigoNavActive: {
+    datosActive: false,
+    pedidosActive: false
   },
-  navbarMicoFrontActive : {
-    creaciones : false,
-    ferias : false,
+  navbarMicoFrontActive: {
+    creaciones: false,
+    ferias: false,
     conocenos: false,
     currentUser: false,
     carro: false,
-    taller:false,
-    contacto:false,
+    taller: false,
+    contacto: false
   },
   sticky: true,
-  paddingTop4navbar:{
-    paddingTop:60
+  paddingTop4navbar: {
+    paddingTop: 60
   },
-  screenSize: 'laptop', //or mobile
-  lengua:'ga', //or ga
-  showAvisoCookies:true,
-
-}
+  screenSize: "laptop", //or mobile
+  lengua: "es", //or ga
+  showAvisoCookies: true
+};
 
 export default (state = initialState, action) => {
-  let newState = Object.assign({}, state)
+  let newState = Object.assign({}, state);
 
   switch (action.type) {
-
-  case constants.NAV_ACTIVE:
-    if (action.params ==='navbarMicoFront'){
-      newState.navbarMicoFrontActive = {
-        creaciones : false,
-        ferias : false,
-        conocenos: false,
-        currentUser: false,
-        carro: false,
-        taller:false,
-        contacto:false,
+    case constants.NAV_ACTIVE:
+      if (action.params === "navbarMicoFront") {
+        newState.navbarMicoFrontActive = {
+          creaciones: false,
+          ferias: false,
+          conocenos: false,
+          currentUser: false,
+          carro: false,
+          taller: false,
+          contacto: false
+        };
+        if (action.data !== "") {
+          newState.navbarMicoFrontActive[action.data] = true;
+        }
       }
-      if(action.data !==''){
-        newState.navbarMicoFrontActive[action.data]= true
+      if (action.params === "amigoNav") {
+        if (action.data === "datos") {
+          newState.amigoNavActive.datosActive = true;
+          newState.amigoNavActive.pedidosActive = false;
+        } else if (action.data === "pedidos") {
+          newState.amigoNavActive.pedidosActive = true;
+          newState.amigoNavActive.datosActive = false;
+        }
       }
-    }
-    if (action.params==='amigoNav'){
-      if(action.data ==='datos'){
-        newState.amigoNavActive.datosActive =true
-        newState.amigoNavActive.pedidosActive = false
-      }else if(action.data ==='pedidos'){
-        newState.amigoNavActive.pedidosActive = true
-        newState.amigoNavActive.datosActive = false
-      }
-    }
-    return newState
+      return newState;
 
-  case constants.CHANGE_SCREEN_WIDTH:
+    case constants.CHANGE_SCREEN_WIDTH:
+      newState.screenSize = action.data;
+      console.log("chageScreenWidth: " + action.data);
+      return newState;
 
-    newState.screenSize = action.data
-    console.log('chageScreenWidth: '+action.data)
-    return newState
+    case constants.FIX_NAVBAR:
+      newState.sticky = action.data;
+      console.log("fixNavbar: " + action.data);
+      return newState;
 
-  case constants.FIX_NAVBAR:
-    newState.sticky = action.data
-    console.log('fixNavbar: '+action.data)
-    return newState
+    case constants.CIERRA_COOKIES_AVISO:
+      newState.showAvisoCookies = action.data;
+      return newState;
 
-  case constants.CIERRA_COOKIES_AVISO:
-    newState.showAvisoCookies = action.data
-    return newState
+    case constants.CAMBIA_LENGUA:
+      newState.lengua = action.data;
+      return newState;
 
-  case constants.CAMBIA_LENGUA:
-    newState.lengua = action.data
-    return newState
-
-  default:
-    return state
+    default:
+      return state;
   }
-}
+};
