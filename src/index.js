@@ -110,7 +110,7 @@ class ReactMico extends Component {
                     </h3>
                   </div>
                 </div>
-                <div className="footer__container">
+                <div className="footer__container" style={{ zIndex: 101 }}>
                   <OldFooterContainer />
                 </div>
               </div>
@@ -118,57 +118,61 @@ class ReactMico extends Component {
           </Router>
         </Provider>
       );
-    }
-    return (
-      <Provider store={store.configure(null)}>
-        <Router history={history}>
-          <div>
-            <div className="general__container" style={settingMinHigthToScreen}>
-              <LogoContainer />
+    } else {
+      return (
+        <Provider store={store.configure(null)}>
+          <Router history={history}>
+            <div>
+              <div
+                className="general__container"
+                style={settingMinHigthToScreen}
+              >
+                <LogoContainer />
 
-              <NavbarMicoFront />
+                <NavbarMicoFront />
 
-              <ModalRealizarCompraContainer />
-              <ModalRegistrarseContainer />
-              <ModalMenuXsContainer />
-              <ModalWarningContainer />
-              <ModalEntrarContainer />
-              <ModalConsentimientoContainer />
-              <ModalPoliticaPrivacidadContainer />
+                <ModalRealizarCompraContainer />
+                <ModalRegistrarseContainer />
+                <ModalMenuXsContainer />
+                <ModalWarningContainer />
+                <ModalEntrarContainer />
+                <ModalConsentimientoContainer />
+                <ModalPoliticaPrivacidadContainer />
 
-              <div className="main__container">
-                <Route exact path="/" component={AsyncHome} />
-                <Route path="/Diseños" component={AsyncDiseños} />
-                <Route path="/Carro" component={AsyncCarro} />
-                <Route path="/Ferias" component={AsyncFerias} />
-                <Route path="/Conocenos" component={AsyncConocenos} />
-                <Route path="/Productos" component={AsyncProductos} />
-                <Route path="/Amigo" component={AsyncAmigo} />
-                <Route
-                  path="/Amigo/Datos"
-                  component={AsyncAmigoDatosContainer}
-                />
-                <Route
-                  path="/Amigo/Pedidos"
-                  component={AsyncAmigoPedidosContainer}
-                />
-                <Route path="/Contacto" component={AsyncContacto} />
-                <Route path="/Taller" component={AsyncTaller} />
-                <ModalVolverArribaContainer />
-              </div>
+                <div className="main__container">
+                  <Route exact path="/" component={AsyncHome} />
+                  <Route path="/Diseños" component={AsyncDiseños} />
+                  <Route path="/Carro" component={AsyncCarro} />
+                  <Route path="/Ferias" component={AsyncFerias} />
+                  <Route path="/Conocenos" component={AsyncConocenos} />
+                  <Route path="/Productos" component={AsyncProductos} />
+                  <Route path="/Amigo" component={AsyncAmigo} />
+                  <Route
+                    path="/Amigo/Datos"
+                    component={AsyncAmigoDatosContainer}
+                  />
+                  <Route
+                    path="/Amigo/Pedidos"
+                    component={AsyncAmigoPedidosContainer}
+                  />
+                  <Route path="/Contacto" component={AsyncContacto} />
+                  <Route path="/Taller" component={AsyncTaller} />
+                  <ModalVolverArribaContainer />
+                </div>
 
-              <div className="cookies__aviso__container">
-                <CookiesAvisoContainer />
-              </div>
+                <div className="cookies__aviso__container">
+                  <CookiesAvisoContainer />
+                </div>
 
-              <div className="footer__container">
-                <FooterContainer />
+                <div className="footer__container">
+                  <FooterContainer />
+                </div>
               </div>
             </div>
-          </div>
-        </Router>
-      </Provider>
-    );
+          </Router>
+        </Provider>
+      );
+    }
   }
 }
 
