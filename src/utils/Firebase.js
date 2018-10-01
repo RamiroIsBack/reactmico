@@ -438,15 +438,13 @@ const amIlogedIn = (params, actionType) => {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         // User is signed in.
-        currentUserUid = user.uid;
-        currentUserEmail = user.email;
-        dispatch({
-          type: actionType,
-          params: "si user", // can be null
-          data: user.uid //
-        });
-        console.log("ya estabas logeado");
-        return true;
+        getCurrentUserFromDBAndDispatchIt(
+          user,
+          actionType,
+          dispatch,
+          "si user",
+          "error al comprobar si hay usuario"
+        );
       } else {
         // No user is signed in.
         dispatch({
@@ -459,6 +457,41 @@ const amIlogedIn = (params, actionType) => {
       }
     });
 };
+const getCurrentUserFromDBAndDispatchIt = (
+  user,
+  actionType,
+  dispatch,
+  positiveMessage,
+  negativeMessage
+) => {
+  database
+    .ref("users/" + user.uid)
+    .once("value")
+    .then(snapshot => {
+      let currentUser = snapshot.val();
+
+      if (actionType !== null) {
+        dispatch({
+          type: actionType,
+          params: positiveMessage, // can be null
+          data: currentUser // usuario subido correctamente
+        });
+      }
+      currentUserUid = user.uid;
+      currentUserEmail = user.email;
+      return true;
+    })
+    .catch(err => {
+      if (actionType !== null) {
+        dispatch({
+          type: actionType,
+          params: negativeMessage, // can be null
+          data: err // err , no ha subido usuario
+        });
+      }
+      throw err;
+    });
+};
 
 const loginFacebook = (params, actionType) => {
   var provider = new firebase.auth.FacebookAuthProvider();
@@ -467,42 +500,29 @@ const loginFacebook = (params, actionType) => {
     firebase
       .auth()
       .signInWithPopup(provider)
-      //.signInWithRedirect(provider) (is suposed to be more mobile friendly)
-      // when your page loads :  firebase.auth().getRedirectResult().then(function(result) {
-
       .then(result => {
         if (!result.additionalUserInfo.isNewUser) {
           console.log("t has logeado con facebook" + result.user.email);
-          if (actionType !== null) {
-            dispatch({
-              type: actionType,
-              params: "okGoogle", // can be null
-              data: result.user.uid //
-            });
-          }
+          getCurrentUserFromDBAndDispatchIt(
+            result.user,
+            actionType,
+            dispatch,
+            "si loginFacebook",
+            "error al logear usuario facebook"
+          );
         }
-        currentUserUid = result.user.uid;
-        currentUserEmail = result.user.email;
-
         return result;
       })
-      .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
-        console.log(`el error es ${errorCode}: ${errorMessage}`);
+      .catch(err => {
+        console.log(` no te has podido logear con facebook: ${err.message}`);
         if (actionType !== null) {
           dispatch({
             type: actionType,
-            params: "error", // can be null
-            data: error // usuario subido correctamente
+            params: "error login con facebook", // can be null
+            data: err // err , no ha subido usuario
           });
         }
+        throw err;
       });
 };
 
@@ -515,28 +535,26 @@ const loginGoogle = (params, actionType) => {
       .then(result => {
         if (!result.additionalUserInfo.isNewUser) {
           console.log(`${result.user.email} ha iniciado sesion`);
-          if (actionType !== null) {
-            dispatch({
-              type: actionType,
-              params: "okGoogle", // can be null
-              data: result.user.uid //
-            });
-          }
+          getCurrentUserFromDBAndDispatchIt(
+            result.user,
+            actionType,
+            dispatch,
+            "si loginGoogle",
+            "error al logear usuario google"
+          );
         }
-        currentUserUid = result.user.uid;
-        currentUserEmail = result.user.email;
-
         return result;
       })
-      .catch(error => {
-        console.log(`el error es ${error.code}: ${error.message}`);
+      .catch(err => {
+        console.log(` no te has podido logear con google: ${err.message}`);
         if (actionType !== null) {
           dispatch({
             type: actionType,
-            params: "error", // can be null
-            data: error //
+            params: "error login con google", // can be null
+            data: err // err , no ha subido usuario
           });
         }
+        throw err;
       });
 };
 const loginWithEmailAndPassword = (user, actionType) => {
@@ -546,28 +564,27 @@ const loginWithEmailAndPassword = (user, actionType) => {
       .signInWithEmailAndPassword(user.email, user.password)
       .then(result => {
         console.log(`${result.email} ha iniciado sesion`);
-
-        currentUserUid = result.uid;
-        currentUserEmail = result.email;
+        getCurrentUserFromDBAndDispatchIt(
+          result.user,
+          actionType,
+          dispatch,
+          "si login emailpassword",
+          "error al logear usuario con email y password"
+        );
         currentUserPassword = user.password;
-
-        if (actionType !== null) {
-          dispatch({
-            type: actionType,
-            params: "okPassword", // can be null
-            data: currentUserUid // usuario subido correctamente
-          });
-        }
       })
-      .catch(error => {
-        console.log(`el error es ${error.code}: ${error.message}`);
+      .catch(err => {
+        console.log(
+          ` no te has podido logear con email and password: ${err.message}`
+        );
         if (actionType !== null) {
           dispatch({
             type: actionType,
-            params: "error", // can be null
-            data: error // usuario subido correctamente
+            params: "error login con email and password", // can be null
+            data: err // err , no ha subido usuario
           });
         }
+        throw err;
       });
 };
 const eliminarCurrentCuenta = (params, actionType) => {
