@@ -485,8 +485,8 @@ const getCurrentUserFromDBAndDispatchIt = (
       if (actionType !== null) {
         dispatch({
           type: actionType,
-          params: negativeMessage, // can be null
-          data: err // err , no ha subido usuario
+          params: "error", // can be null
+          data: negativeMessage // err , no ha subido usuario
         });
       }
       throw err;
@@ -518,8 +518,8 @@ const loginFacebook = (params, actionType) => {
         if (actionType !== null) {
           dispatch({
             type: actionType,
-            params: "error login con facebook", // can be null
-            data: err // err , no ha subido usuario
+            params: "error", // can be null
+            data: "error login con facebook" // err , no ha subido usuario
           });
         }
         throw err;
@@ -550,8 +550,8 @@ const loginGoogle = (params, actionType) => {
         if (actionType !== null) {
           dispatch({
             type: actionType,
-            params: "error login con google", // can be null
-            data: err // err , no ha subido usuario
+            params: "error", // can be null
+            data: "error login con google" // err , no ha subido usuario
           });
         }
         throw err;
@@ -580,8 +580,8 @@ const loginWithEmailAndPassword = (user, actionType) => {
         if (actionType !== null) {
           dispatch({
             type: actionType,
-            params: "error login con email and password", // can be null
-            data: err // err , no ha subido usuario
+            params: "error", // can be null
+            data: "error login con email and password" // err , no ha subido usuario
           });
         }
         throw err;
@@ -745,7 +745,7 @@ const userCreated = (user, actionType) => {
           })
           .then(function() {
             // Update successful.
-            console.log(`${result.displayName} ha actualizado el profile`);
+            console.log(`${result.user.displayName} ha actualizado el profile`);
             firebase
               .auth()
               .currentUser.sendEmailVerification()
@@ -754,85 +754,50 @@ const userCreated = (user, actionType) => {
                   "se ha mandado un email, mira en la bandeja de correo no deseado!!"
                 );
                 console.log("email sent");
-                let datosPers = {
-                  nombre: result.displayName,
-                  email: result.email,
-                  emailVerified: result.emailVerified,
-                  phoneNumber: result.phoneNumber,
-                  providerId: result.providerId,
-                  uid: result.uid, //user's unique ID lo usaremos para linkarlo con la DBUsers
-                  aceptaPoliticaDatos: user.aceptaPoliticaDatos,
-                  fechaAltaYacepta: user.fechaAltaYacepta,
-                  ip: user.ip,
-                  ciudad: user.ciudad
+                var NewUser = {
+                  datosPersonales: {
+                    nombre: result.user.displayName,
+                    email: result.user.email,
+                    emailVerified: result.user.emailVerified,
+                    phoneNumber: result.user.phoneNumber,
+                    providerId: result.user.providerId,
+                    uid: result.user.uid, //user's unique ID lo usaremos para linkarlo con la DBUsers
+                    aceptaPoliticaDatos: user.aceptaPoliticaDatos,
+                    fechaAltaYacepta: user.fechaAltaYacepta,
+                    ip: user.ip,
+                    ciudad: user.ciudad
+                  },
+                  datosEnvio: {
+                    nombreCompletoEnvio: false, //false xq null no lo sube a BD
+                    calle: false,
+                    localidad: false,
+                    provincia: false,
+                    cp: false,
+                    hayDatos: false
+                  },
+                  foto: {
+                    photoURL: result.user.photoURL
+                      ? result.user.photoURL
+                      : false
+                  }
                 };
-                currentUserUid = result.uid;
-                currentUserEmail = result.email;
+                currentUserUid = result.user.uid;
+                currentUserEmail = result.user.email;
                 currentUserPassword = user.password;
 
                 database
-                  .ref("users/" + result.uid + "/datosPersonales")
-                  .set(datosPers)
+                  .ref("users/" + result.user.uid)
+                  .set(NewUser)
                   .then(snapshot => {
-                    console.log("creado los datos personales");
-                    let foto = false;
-                    if (result.photoURL) {
-                      foto = result.photoURL;
-                    }
-                    database
-                      .ref("users/" + result.uid + "/foto")
-                      .set({ photoURL: foto })
-                      .then(snapshot => {
-                        console.log("creado la foto");
-                        let datosEnv = {
-                          nombreCompletoEnvio: false, //false xq null no lo sube a BD
-                          calle: false,
-                          localidad: false,
-                          provincia: false,
-                          cp: false,
-                          hayDatos: false
-                        };
-                        database
-                          .ref("users/" + result.uid + "/datosEnvio")
-                          .set(datosEnv)
-                          .then(snapshot => {
-                            console.log("creado los datos envio");
-                            result.aceptaPoliticaDatos =
-                              user.aceptaPoliticaDatos;
-                            result.fechaAltaYacepta = user.fechaAltaYacepta;
-                            result.ip = user.ip;
-                            result.ciudad = user.ciudad;
-                            if (actionType !== null) {
-                              dispatch({
-                                type: actionType,
-                                params: "ok", // can be null
-                                data: result // usuario subido correctamente
-                              });
-                            }
-                          })
-                          .catch(err => {
-                            console.log(` no se ha creado: ${err.message}`);
-                            if (actionType !== null) {
-                              dispatch({
-                                type: actionType,
-                                params: "error", // can be null
-                                data: err // err , no ha subido usuario
-                              });
-                            }
-                            throw err;
-                          });
-                      })
-                      .catch(err => {
-                        console.log(` no se ha creado: ${err.message}`);
-                        if (actionType !== null) {
-                          dispatch({
-                            type: actionType,
-                            params: "error", // can be null
-                            data: err // err , no ha subido usuario
-                          });
-                        }
-                        throw err;
+                    console.log("creado newUser");
+
+                    if (actionType !== null) {
+                      dispatch({
+                        type: actionType,
+                        params: "user created ok", // can be null
+                        data: NewUser // usuario subido correctamente
                       });
+                    }
                   })
                   .catch(err => {
                     console.log(` no se ha creado: ${err.message}`);
@@ -846,6 +811,7 @@ const userCreated = (user, actionType) => {
                     throw err;
                   });
               })
+
               .catch(function(error) {
                 console.log(`el error es ${error.code}: ${error.message}`);
                 // An error happened. de enviar el mail
