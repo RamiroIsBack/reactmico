@@ -58,27 +58,6 @@ export default (state = initialState, action) => {
         return newState;
       }
 
-    case constants.USERS_RECEIVED:
-      newState["usersLoaded"] = true;
-      newState["listaUsers"] = action.data;
-      //console.log('usersloaded '+JSON.stringify(action.data))
-      if (newState.currentUser) {
-        for (let i = 0; i < action.data.length; i++) {
-          if (
-            newState.listaUsers[i].id ===
-            newState.currentUser.datosPersonales.uid
-          ) {
-            //ya lo tenemos en la base de datos, lo actualizamos con los nuevos datos
-            newState["currentUser"] = newState.listaUsers[i];
-            console.log(
-              "usersloaded " + JSON.stringify(newState.listaUsers[i])
-            );
-            break;
-          }
-        }
-      }
-      return newState;
-
     case constants.USER_CREATED: {
       if (!newState.currentUser) {
         newState["currentUser"] = action.data;

@@ -141,7 +141,6 @@ class ModalLoginContainer extends Component {
 }
 const dispatchToProps = dispatch => {
   return {
-    getUsers: () => dispatch(actions.getUsers()),
     toggleModal: modalName => dispatch(actions.toggleModal(modalName)),
     showNotificationWithTimeout: modalName =>
       dispatch(actions.showNotificationWithTimeout(modalName))

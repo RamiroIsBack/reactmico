@@ -49,9 +49,9 @@ class ModalEntrarContainer extends Component {
   comprobarEmailPasswordValido(amigo) {
     //comprobar que existe este user
     if (
-      amigo.nombre.indexOf("@") > -1 &&
-      amigo.nombre.indexOf(".") > -1 &&
-      amigo.nombre.charAt(amigo.nombre.length - 1) !== "."
+      amigo.email.indexOf("@") > -1 &&
+      amigo.email.indexOf(".") > -1 &&
+      amigo.email.charAt(amigo.email.length - 1) !== "."
     ) {
       return amigo.password.length > 5 ? "ok" : "el password no es valido";
     } else {
@@ -62,12 +62,20 @@ class ModalEntrarContainer extends Component {
   entrar(amigo) {
     let message = this.comprobarEmailPasswordValido(amigo);
     if (message === "ok") {
-      this.props.toggleModal("closeEntrar");
       //make it start at the top of the page every time
       window.scrollTo(0, 0);
       this.props
         .loginWithEmailAndPassword(amigo)
         .then(response => {
+          if (response.code) {
+            alert(
+              "fallo al logearte con email y password",
+              "comprueba que lo has escrito bien :)"
+            );
+            //error
+            return 0;
+          }
+          this.props.toggleModal("closeEntrar");
           //routing programatically, now i can prevent if there is an error
           history.push("/Amigo/Datos");
           this.toggleModalYrecargaCreacionesYgestionaCarroUser();

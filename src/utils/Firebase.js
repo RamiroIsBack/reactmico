@@ -532,11 +532,11 @@ const loginGoogle = (params, actionType) => {
         console.log(err);
       });
 };
-const loginWithEmailAndPassword = (user, actionType) => {
+const loginWithEmailAndPassword = ({ email, password }, actionType) => {
   return dispatch =>
     firebase
       .auth()
-      .signInWithEmailAndPassword(user.email, user.password)
+      .signInWithEmailAndPassword(email, password)
       .then(result => {
         console.log(`${result.email} ha iniciado sesion`);
         getCurrentUserFromDBAndDispatchIt(
@@ -546,7 +546,7 @@ const loginWithEmailAndPassword = (user, actionType) => {
           "si login emailpassword",
           "error al logear usuario con email y password"
         );
-        currentUserPassword = user.password;
+        currentUserPassword = password;
         return true;
       })
       .catch(err => {
