@@ -42,7 +42,7 @@ const getCreaciones = (params, actionType) => {
         return snapshot.val();
       })
       .catch(err => {
-        throw err;
+        console.log(err);
       });
 };
 const getFerias = (params, actionType) => {
@@ -65,7 +65,7 @@ const getFerias = (params, actionType) => {
         return snapshot.val();
       })
       .catch(err => {
-        throw err;
+        console.log(err);
       });
 };
 
@@ -89,7 +89,7 @@ const getContenidos = (params, actionType) => {
         return snapshot.val();
       })
       .catch(err => {
-        throw err;
+        console.log(err);
       });
 };
 
@@ -113,35 +113,10 @@ const getEnlaces = (params, actionType) => {
         return snapshot.val();
       })
       .catch(err => {
-        throw err;
+        console.log(err);
       });
 };
 
-const getUsers = (params, actionType) => {
-  //actionType=USERS_RECEIVED
-  return dispatch =>
-    DBusers.once("value")
-      .then(snapshot => {
-        let listaUsuarios = [];
-        snapshot.forEach(function(childSnapshot) {
-          const valor = childSnapshot.val();
-          valor.id = childSnapshot.key;
-          listaUsuarios.push(valor);
-        });
-        if (actionType !== null) {
-          dispatch({
-            type: actionType,
-            params: params, // can be null
-            data: listaUsuarios // list with all d objects
-          });
-        }
-
-        return snapshot.val();
-      })
-      .catch(err => {
-        throw err;
-      });
-};
 const guardarDatosPedido = (datosEnvio, carro, paymentData, actionType) => {
   return dispatch =>
     database
@@ -200,7 +175,7 @@ const guardarDatosPedido = (datosEnvio, carro, paymentData, actionType) => {
                         data: err // err , no ha subido usuario
                       });
                     }
-                    throw err;
+                    console.log(err);
                   });
               })
               .catch(err => {
@@ -216,7 +191,7 @@ const guardarDatosPedido = (datosEnvio, carro, paymentData, actionType) => {
                     data: err // err , no ha subido usuario
                   });
                 }
-                throw err;
+                console.log(err);
               });
           })
           .catch(err => {
@@ -232,7 +207,7 @@ const guardarDatosPedido = (datosEnvio, carro, paymentData, actionType) => {
                 data: err // err , no ha subido usuario
               });
             }
-            throw err;
+            console.log(err);
           });
       })
       .catch(err => {
@@ -246,7 +221,7 @@ const guardarDatosPedido = (datosEnvio, carro, paymentData, actionType) => {
             data: err // err , no ha subido usuario
           });
         }
-        throw err;
+        console.log(err);
       });
 };
 const elementoVendido = (id, actionType) => {
@@ -291,7 +266,7 @@ const elementoVendido = (id, actionType) => {
             data: error
           });
         }
-        throw error;
+        console.log(error);
       });
 };
 const vaciarCarro = actionType => {
@@ -318,7 +293,7 @@ const vaciarCarro = actionType => {
             data: err // err , no ha subido usuario
           });
         }
-        throw err;
+        console.log(err);
       });
 };
 const loadCarro = (carro, justLogedIn, actionType) => {
@@ -367,13 +342,13 @@ const loadCarro = (carro, justLogedIn, actionType) => {
                   data: err
                 });
               }
-              throw err;
+              console.log(err);
             });
 
           return snapshot.val();
         })
         .catch(err => {
-          throw err;
+          console.log(err);
         });
   } else {
     //solo hay q escribir encima
@@ -401,7 +376,7 @@ const loadCarro = (carro, justLogedIn, actionType) => {
               data: err // err , no ha subido usuario
             });
           }
-          throw err;
+          console.log(err);
         });
   }
 };
@@ -429,7 +404,7 @@ const uploadCarro = (carro, actionType) => {
             data: err
           });
         }
-        throw err;
+        console.log(err);
       });
 };
 
@@ -489,7 +464,7 @@ const getCurrentUserFromDBAndDispatchIt = (
           data: negativeMessage // err , no ha subido usuario
         });
       }
-      throw err;
+      console.log(err);
     });
 };
 
@@ -522,7 +497,7 @@ const loginFacebook = (params, actionType) => {
             data: "error login con facebook" // err , no ha subido usuario
           });
         }
-        throw err;
+        console.log(err);
       });
 };
 
@@ -554,7 +529,7 @@ const loginGoogle = (params, actionType) => {
             data: "error login con google" // err , no ha subido usuario
           });
         }
-        throw err;
+        console.log(err);
       });
 };
 const loginWithEmailAndPassword = (user, actionType) => {
@@ -572,6 +547,7 @@ const loginWithEmailAndPassword = (user, actionType) => {
           "error al logear usuario con email y password"
         );
         currentUserPassword = user.password;
+        return true;
       })
       .catch(err => {
         console.log(
@@ -584,7 +560,7 @@ const loginWithEmailAndPassword = (user, actionType) => {
             data: "error login con email and password" // err , no ha subido usuario
           });
         }
-        throw err;
+        return err;
       });
 };
 const eliminarCurrentCuenta = (params, actionType) => {
@@ -602,7 +578,7 @@ const eliminarCurrentCuenta = (params, actionType) => {
         }
       })
       .catch(function(error) {
-        throw error;
+        console.log(error);
       });
 };
 const logout = (params, actionType) => {
@@ -702,7 +678,7 @@ const guardarConsentimientoFGLogin = (user, actionType) => {
                     data: err // err , no ha subido usuario
                   });
                 }
-                throw err;
+                console.log(err);
               });
           })
           .catch(err => {
@@ -714,7 +690,7 @@ const guardarConsentimientoFGLogin = (user, actionType) => {
                 data: err // err , no ha subido usuario
               });
             }
-            throw err;
+            console.log(err);
           });
       })
       .catch(err => {
@@ -726,7 +702,7 @@ const guardarConsentimientoFGLogin = (user, actionType) => {
             data: err // err , no ha subido usuario
           });
         }
-        throw err;
+        console.log(err);
       });
 };
 
@@ -808,7 +784,7 @@ const userCreated = (user, actionType) => {
                         data: err // err , no ha subido usuario
                       });
                     }
-                    throw err;
+                    console.log(err);
                   });
               })
 
@@ -868,7 +844,7 @@ const currentUserToDB = (user, actionType) => {
                     data: err // err , no ha subido usuario
                   });
                 }
-                throw err;
+                console.log(err);
               });
           })
           .catch(err => {
@@ -880,7 +856,7 @@ const currentUserToDB = (user, actionType) => {
                 data: err // err , no ha subido usuario
               });
             }
-            throw err;
+            console.log(err);
           });
       })
       .catch(err => {
@@ -892,7 +868,7 @@ const currentUserToDB = (user, actionType) => {
             data: err // err , no ha subido usuario
           });
         }
-        throw err;
+        console.log(err);
       });
 };
 const changePassword = (payload, params, actionType) => {
@@ -921,7 +897,7 @@ const changePassword = (payload, params, actionType) => {
               data: error // err , no ha subido usuario
             });
           }
-          throw error;
+          console.log(error);
         });
   } else if (params === "forgot") {
     return dispatch =>
@@ -950,7 +926,7 @@ const changePassword = (payload, params, actionType) => {
               data: err // no se ha mandado el mail
             });
           }
-          throw err;
+          console.log(err);
         });
   }
 };
@@ -981,7 +957,7 @@ const resendEmail = (params, actionType) => {
             data: err // err , no ha mandado el mail
           });
         }
-        throw err;
+        console.log(err);
       });
 };
 
@@ -1036,7 +1012,7 @@ const checkEmailVerified = (flagEmailVerified, actionType) => {
                   data: error
                 });
               }
-              throw error;
+              console.log(error);
             });
         } //else
       })
@@ -1049,7 +1025,7 @@ const checkEmailVerified = (flagEmailVerified, actionType) => {
             data: error
           });
         }
-        throw error;
+        console.log(error);
       });
 };
 
@@ -1080,7 +1056,7 @@ const addUserInfo = (user, params, posibleFoto, actionType) => {
               data: err // err , no ha subido usuario
             });
           }
-          throw err;
+          console.log(err);
         });
   } else if (params === "nombre") {
     return dispatch =>
@@ -1111,7 +1087,7 @@ const addUserInfo = (user, params, posibleFoto, actionType) => {
                   data: err // err , no ha subido usuario
                 });
               }
-              throw err;
+              console.log(err);
             });
         })
         .catch(function(error) {
@@ -1124,7 +1100,7 @@ const addUserInfo = (user, params, posibleFoto, actionType) => {
               data: error // err , no ha subido usuario
             });
           }
-          throw error;
+          console.log(error);
         });
   } else if (params === "email") {
     let oldEmail = firebase.auth().currentUser.email;
@@ -1172,7 +1148,7 @@ const addUserInfo = (user, params, posibleFoto, actionType) => {
                       data: err // err , no ha subido usuario
                     });
                   }
-                  throw err;
+                  console.log(err);
                 });
             })
             .catch(err => {
@@ -1184,7 +1160,7 @@ const addUserInfo = (user, params, posibleFoto, actionType) => {
                   data: err // err , no ha subido usuario
                 });
               }
-              throw err;
+              console.log(err);
             });
         })
         .catch(function(error) {
@@ -1197,7 +1173,7 @@ const addUserInfo = (user, params, posibleFoto, actionType) => {
               data: error // err , no ha subido usuario
             });
           }
-          throw error;
+          console.log(error);
         });
   } else if (params === "foto") {
     var subirImagen = storageRef
@@ -1246,7 +1222,7 @@ const addUserInfo = (user, params, posibleFoto, actionType) => {
                       data: err // err , no ha subido usuario
                     });
                   }
-                  throw err;
+                  console.log(err);
                 });
             })
             .catch(err => {
@@ -1258,7 +1234,7 @@ const addUserInfo = (user, params, posibleFoto, actionType) => {
                   data: err // err , no ha subido usuario
                 });
               }
-              throw err;
+              console.log(err);
             });
         }
       );
@@ -1270,7 +1246,6 @@ export default {
   getCreaciones: getCreaciones,
   getContenidos: getContenidos,
   getEnlaces: getEnlaces,
-  getUsers: getUsers,
   guardarConsentimientoFGLogin: guardarConsentimientoFGLogin,
   userCreated: userCreated,
   addUserInfo: addUserInfo,

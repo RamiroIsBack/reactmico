@@ -1,272 +1,293 @@
-import constants from '../constants'
-import { Firebase } from '../utils'
-import actions from './'
+import constants from "../constants";
+import { Firebase } from "../utils";
+import actions from "./";
 
 export default {
-
-
-  showNotificationWithTimeout: (notificationMaysuculaLaPrimera,submodalName) => {
+  showNotificationWithTimeout: (
+    notificationMaysuculaLaPrimera,
+    submodalName
+  ) => {
     return dispatch => {
-      let modalName = 'open'
-      modalName = modalName +notificationMaysuculaLaPrimera
-      dispatch(actions.toggleModal(modalName,submodalName))
+      let modalName = "open";
+      modalName = modalName + notificationMaysuculaLaPrimera;
+      dispatch(actions.toggleModal(modalName, submodalName));
       setTimeout(() => {
-        dispatch(actions.toggleModal('close'+notificationMaysuculaLaPrimera))
-      }, 8000)
-    }
+        dispatch(actions.toggleModal("close" + notificationMaysuculaLaPrimera));
+      }, 8000);
+    };
   },
 
-  cierraCookiesAviso:()=>{
-    return{
+  cierraCookiesAviso: () => {
+    return {
       type: constants.CIERRA_COOKIES_AVISO,
-      data: false,
-    }
+      data: false
+    };
   },
 
-  moveCarousell:(pic)=>{
-    return{
+  moveCarousell: pic => {
+    return {
       type: constants.MOVE_CAROUSELL,
-      data: pic,
-    }
+      data: pic
+    };
   },
-  loadFromInstagram:(feedList) =>{
-    return{
-      type:constants.LOAD_FROM_INSTAGRAM,
-      data:feedList
-    }
+  loadFromInstagram: feedList => {
+    return {
+      type: constants.LOAD_FROM_INSTAGRAM,
+      data: feedList
+    };
   },
-  chageScreenWidth: (screenSize) =>{
-    return{
-      type:constants.CHANGE_SCREEN_WIDTH,
-      data: screenSize,
-    }
+  chageScreenWidth: screenSize => {
+    return {
+      type: constants.CHANGE_SCREEN_WIDTH,
+      data: screenSize
+    };
   },
-  fixNavbar:(flag) =>{
-    return{
-      type:constants.FIX_NAVBAR,
-      data: flag,
-    }
+  fixNavbar: flag => {
+    return {
+      type: constants.FIX_NAVBAR,
+      data: flag
+    };
   },
-  toggleYear: (year) => {
+  toggleYear: year => {
     return {
       type: constants.TOGGLE_YEAR,
-      data: year,
-    }
+      data: year
+    };
   },
-  markerClicked:(markerId,params) =>{
-    return{
+  markerClicked: (markerId, params) => {
+    return {
       type: constants.MARKER_CLICKED,
       params: params,
-      data: markerId,
-    }
+      data: markerId
+    };
   },
 
-  navActive:(activeTab,params) =>{
-    return{
+  navActive: (activeTab, params) => {
+    return {
       type: constants.NAV_ACTIVE,
       params: params,
-      data: activeTab,
-    }
+      data: activeTab
+    };
   },
 
-  toggleModal: (modalName,submodalName) => {
+  toggleModal: (modalName, submodalName) => {
     return {
       type: constants.TOGGLE_MODAL,
       params: submodalName,
-      data: modalName,
-    }
+      data: modalName
+    };
   },
 
-  moveToCreacionesSection:(creacionTipo)=>{
-    return{
+  moveToCreacionesSection: creacionTipo => {
+    return {
       type: constants.MOVETO_CREACION_SECTION,
       data: creacionTipo
-    }
+    };
   },
-  cambiaLengua: (id)=>{
-    return{
+  cambiaLengua: id => {
+    return {
       type: constants.CAMBIA_LENGUA,
       data: id
-    }
-
+    };
   },
-  getEnlaces: (params)=>{
+  getEnlaces: params => {
     return dispatch => {
-      return dispatch(Firebase.getEnlaces(params, constants.ENLACES_RECEIVED))
-    }
-
+      return dispatch(Firebase.getEnlaces(params, constants.ENLACES_RECEIVED));
+    };
   },
-  getContenidos: (params)=>{
+  getContenidos: params => {
     return dispatch => {
-      return dispatch(Firebase.getContenidos(params, constants.CONTENIDOS_RECEIVED))
-    }
-
+      return dispatch(
+        Firebase.getContenidos(params, constants.CONTENIDOS_RECEIVED)
+      );
+    };
   },
 
-  getCreaciones: (params)=>{
+  getCreaciones: params => {
     return dispatch => {
-      return dispatch(Firebase.getCreaciones(params, constants.CREACIONES_RECEIVED))
-    }
-
+      return dispatch(
+        Firebase.getCreaciones(params, constants.CREACIONES_RECEIVED)
+      );
+    };
   },
-  getFerias: (params)=>{
+  getFerias: params => {
     return dispatch => {
-      return dispatch (Firebase.getFerias(params, constants.FERIAS_RECEIVED))
-    }
+      return dispatch(Firebase.getFerias(params, constants.FERIAS_RECEIVED));
+    };
   },
   // Another simple pure action creator
-  selectedFoto: (foto) => {
+  selectedFoto: foto => {
     // key 'type' is mandatory after that, u can send whatever
     //console.log ('selectedfoto action' + JSON.stringify(foto))
     return {
       type: constants.SELECT_FOTO,
       data: foto
-    }
-
+    };
   },
-  eraseProduct: (indice) => {
+  eraseProduct: indice => {
     // key 'type' is mandatory after that, u can send whatever
     //console.log ('erasing from cart ' + JSON.stringify(indice))
     return {
       type: constants.ERASE_PRODUCT,
       data: indice
-    }
-
+    };
   },
-  changeQtty: (indice,qtty) => {
+  changeQtty: (indice, qtty) => {
     // key 'type' is mandatory after that, u can send whatever
-    var data = {indice: indice, qtty: qtty}
-    console.log ('changing qtty ' + JSON.stringify(data))
+    var data = { indice: indice, qtty: qtty };
+    console.log("changing qtty " + JSON.stringify(data));
     return {
       type: constants.CHANGE_QTTY,
       data: data
-    }
-
+    };
   },
-  productToCart: (product) => {
-
+  productToCart: product => {
     return {
       type: constants.PRODCUT_TO_CART,
       data: product
-    }
-
-
+    };
   },
-  guardarDatosPedido:(datosEnvio,carro,paymentData) =>{
-    return dispatch =>{
-      return dispatch(Firebase.guardarDatosPedido(datosEnvio,carro,paymentData,constants.GUARDAR_DATOS_PEDIDO))
-    }
-
-  },
-  elementoVendido:(id) =>{
+  guardarDatosPedido: (datosEnvio, carro, paymentData) => {
     return dispatch => {
-      return dispatch (Firebase.elementoVendido(id,constants.ELEMENTO_VENDIDO))
-    }
+      return dispatch(
+        Firebase.guardarDatosPedido(
+          datosEnvio,
+          carro,
+          paymentData,
+          constants.GUARDAR_DATOS_PEDIDO
+        )
+      );
+    };
   },
-  vaciarCarro:() =>{
+  elementoVendido: id => {
     return dispatch => {
-      return dispatch (Firebase.vaciarCarro(constants.LOAD_CARRO))
-    }
+      return dispatch(Firebase.elementoVendido(id, constants.ELEMENTO_VENDIDO));
+    };
   },
-  loadCarro:(carro,justLogedIn) =>{//combinar el carro que haya con el de la DB si t acabas de logear
-    return dispatch=> {            //si no, simplemente sustituir el de la DB x el nuevo
-      return dispatch(Firebase.loadCarro(carro,justLogedIn,constants.LOAD_CARRO))
-    }
-  },
-  uploadCarro:(carro) =>{
-    return dispatch=> {            //simplemente sustituir el de la DB x el nuevo
-      return dispatch(Firebase.uploadCarro(carro,constants.LOAD_CARRO))
-    }
-  },
-  checkEmailVerified:(flagEmailVerified) =>{
+  vaciarCarro: () => {
     return dispatch => {
-      return dispatch(Firebase.checkEmailVerified(flagEmailVerified,constants.VERIFY_EMAIL))
-    }
+      return dispatch(Firebase.vaciarCarro(constants.LOAD_CARRO));
+    };
   },
-  currentUserToDB : (user) => {
+  loadCarro: (carro, justLogedIn) => {
+    //combinar el carro que haya con el de la DB si t acabas de logear
     return dispatch => {
-      return dispatch(Firebase.currentUserToDB( user, constants.CURRENT_USER_TO_DB))
-    }
+      //si no, simplemente sustituir el de la DB x el nuevo
+      return dispatch(
+        Firebase.loadCarro(carro, justLogedIn, constants.LOAD_CARRO)
+      );
+    };
   },
-  addUserInfo: (user , params, posibleFoto) => {
+  uploadCarro: carro => {
     return dispatch => {
-      return dispatch(Firebase.addUserInfo(user, params, posibleFoto, constants.ADD_USER_INFO))
-    }
+      //simplemente sustituir el de la DB x el nuevo
+      return dispatch(Firebase.uploadCarro(carro, constants.LOAD_CARRO));
+    };
   },
-  cambiarCurrentUserModificables : (currentUserModificable, params) => {
+  checkEmailVerified: flagEmailVerified => {
+    return dispatch => {
+      return dispatch(
+        Firebase.checkEmailVerified(flagEmailVerified, constants.VERIFY_EMAIL)
+      );
+    };
+  },
+  currentUserToDB: user => {
+    return dispatch => {
+      return dispatch(
+        Firebase.currentUserToDB(user, constants.CURRENT_USER_TO_DB)
+      );
+    };
+  },
+  addUserInfo: (user, params, posibleFoto) => {
+    return dispatch => {
+      return dispatch(
+        Firebase.addUserInfo(user, params, posibleFoto, constants.ADD_USER_INFO)
+      );
+    };
+  },
+  cambiarCurrentUserModificables: (currentUserModificable, params) => {
     return {
       type: constants.CAMBIAR_CURRENT_USER_MODIFICABLE,
       params: params,
       data: currentUserModificable
-    }
+    };
   },
-  userCreated: (params)=>{
+  userCreated: params => {
     return dispatch => {
-      return dispatch(Firebase.userCreated(params, constants.USER_CREATED))
-    }
-
+      return dispatch(Firebase.userCreated(params, constants.USER_CREATED));
+    };
   },
 
-  guardarConsentimientoFGLogin: (params)=>{
+  guardarConsentimientoFGLogin: params => {
     return dispatch => {
-      return dispatch(Firebase.guardarConsentimientoFGLogin(params, constants.USER_CREATED))
-    }
-
+      return dispatch(
+        Firebase.guardarConsentimientoFGLogin(params, constants.USER_CREATED)
+      );
+    };
   },
-  getUsers: (params)=>{
-    return dispatch => {
-      return dispatch(Firebase.getUsers(params, constants.USERS_RECEIVED))
-    }
 
-  },
-  currentUserRecieved: (user) => {
+  currentUserRecieved: user => {
     return {
       type: constants.CURRENT_USER_RECEIVED,
       data: user
-    }
+    };
   },
 
+  loginWithEmailAndPassword: params => {
+    return dispatch => {
+      return dispatch(
+        Firebase.loginWithEmailAndPassword(
+          params,
+          constants.CURRENT_USER_RECEIVED
+        )
+      );
+    };
+  },
 
-  loginWithEmailAndPassword: (params) => {
+  loginGoogle: params => {
     return dispatch => {
-      return dispatch(Firebase.loginWithEmailAndPassword(params, constants.CURRENT_USER_RECEIVED))
-    }
+      return dispatch(
+        Firebase.loginGoogle(params, constants.CURRENT_USER_RECEIVED)
+      );
+    };
   },
-
-  loginGoogle :(params) =>{
+  loginFacebook: params => {
     return dispatch => {
-      return dispatch (Firebase.loginGoogle(params,constants.CURRENT_USER_RECEIVED))
-    }
+      return dispatch(
+        Firebase.loginFacebook(params, constants.CURRENT_USER_RECEIVED)
+      );
+    };
   },
-  loginFacebook :(params) =>{
+  logout: params => {
     return dispatch => {
-      return dispatch (Firebase.loginFacebook(params,constants.CURRENT_USER_RECEIVED))
-    }
+      return dispatch(Firebase.logout(params, constants.CURRENT_USER_RECEIVED));
+    };
   },
-  logout :(params) =>{
+  eliminarCurrentCuenta: params => {
     return dispatch => {
-      return dispatch (Firebase.logout(params,constants.CURRENT_USER_RECEIVED))
-    }
+      return dispatch(
+        Firebase.eliminarCurrentCuenta(params, constants.CURRENT_USER_RECEIVED)
+      );
+    };
   },
-  eliminarCurrentCuenta: (params) =>{
-    return dispatch =>{
-      return dispatch (Firebase.eliminarCurrentCuenta(params,constants.CURRENT_USER_RECEIVED))
-    }
+  amIlogedIn: params => {
+    return dispatch => {
+      return dispatch(
+        Firebase.amIlogedIn(params, constants.CURRENT_USER_RECEIVED)
+      );
+    };
   },
-  amIlogedIn :(params) =>{
-    return dispatch =>{
-      return dispatch (Firebase.amIlogedIn(params,constants.CURRENT_USER_RECEIVED))
-    }
-  },
-  changePassword : (newPassword,params)=>{
+  changePassword: (newPassword, params) => {
     //params: change or forgot
-    return dispatch =>{
-      return dispatch(Firebase.changePassword(newPassword,params, constants.PASSWORD_CHANGED))
-    }
+    return dispatch => {
+      return dispatch(
+        Firebase.changePassword(newPassword, params, constants.PASSWORD_CHANGED)
+      );
+    };
   },
-  resendEmail:(params)=>{
-    return dispatch =>{
-      return dispatch(Firebase.resendEmail(params, constants.RESEND_EMAIL))
-    }
-  },
-}
+  resendEmail: params => {
+    return dispatch => {
+      return dispatch(Firebase.resendEmail(params, constants.RESEND_EMAIL));
+    };
+  }
+};

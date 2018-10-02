@@ -12,24 +12,12 @@ class LogoContainer extends Component {
     history.push("/");
   }
   onImgLoaded() {
-    if (this.props.users.usersLoaded === false) {
-      //en la accion ya lo pone a true
-      this.props
-        .getUsers()
-        .then(response => {
-          if (this.props.users.listaUsers.length > 0) {
-            this.props.amIlogedIn();
-            setTimeout(() => {
-              if (this.props.users.currentUser) {
-                this.gestionaCarroUser();
-              }
-            }, 800);
-          }
-        })
-        .catch(error => {
-          console.log("algo fue mal al cargar los usuarios" + error);
-        });
-    }
+    this.props.amIlogedIn();
+    setTimeout(() => {
+      if (this.props.users.currentUser) {
+        this.gestionaCarroUser();
+      }
+    }, 800);
   }
   gestionaCarroUser() {
     this.props
@@ -116,7 +104,6 @@ class LogoContainer extends Component {
 const dispatchToProps = dispatch => {
   return {
     getCreaciones: () => dispatch(actions.getCreaciones()),
-    getUsers: () => dispatch(actions.getUsers()),
     amIlogedIn: () => dispatch(actions.amIlogedIn()),
     toggleModal: modalName => dispatch(actions.toggleModal(modalName)),
     navActive: (activeTab, params) =>
