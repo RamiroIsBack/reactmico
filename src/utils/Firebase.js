@@ -13,7 +13,7 @@ const DBferias = database.ref("ferias/");
 const DBcreaciones = database.ref("creaciones/");
 const DBcontenidos = database.ref("contenidos/");
 const DBenlaces = database.ref("enlaces/");
-const DBusers = database.ref("users/");
+
 var listCreaciones = [];
 var listFerias = [];
 var listContenidos = [];
@@ -614,84 +614,45 @@ const logout = (params, actionType) => {
 
 const guardarConsentimientoFGLogin = (user, actionType) => {
   let result = firebase.auth().currentUser;
-  user.nombre = result.displayName;
-  user.email = result.email;
-  user.uid = result.uid;
-  let datosPers = {
-    nombre: result.displayName,
-    email: result.email,
-    emailVerified: result.emailVerified,
-    phoneNumber: result.phoneNumber,
-    providerId: result.providerData["0"].providerId,
-    uid: result.uid, //user's unique ID lo usaremos para linkarlo con la DBUsers
-    aceptaPoliticaDatos: user.aceptaPoliticaDatos,
-    fechaAltaYacepta: user.fechaAltaYacepta,
-    ip: user.ip,
-    ciudad: user.ciudad
+  var NewUser = {
+    datosPersonales: {
+      nombre: result.displayName,
+      email: result.email,
+      providerId: result.providerData[0].providerId,
+      uid: result.uid, //user's unique ID lo usaremos para linkarlo con la DBUsers
+      aceptaPoliticaDatos: user.aceptaPoliticaDatos,
+      fechaAltaYacepta: user.fechaAltaYacepta,
+      ip: user.ip,
+      ciudad: user.ciudad
+    },
+    datosEnvio: {
+      nombreCompletoEnvio: false, //false xq null no lo sube a BD
+      calle: false,
+      localidad: false,
+      provincia: false,
+      cp: false,
+      hayDatos: false
+    },
+    foto: {
+      photoURL: result.photoURL ? result.photoURL : false
+    }
   };
+  currentUserUid = result.uid;
+  currentUserEmail = result.email;
+
   return dispatch =>
     database
-      .ref("users/" + user.uid + "/datosPersonales")
-      .set(datosPers)
+      .ref("users/" + result.uid)
+      .set(NewUser)
       .then(snapshot => {
-        console.log("creado los datos personales");
-        let foto = false;
-        if (result.photoURL) {
-          foto = result.photoURL;
-        }
-        database
-          .ref("users/" + result.uid + "/foto")
-          .set({ photoURL: foto })
-          .then(snapshot => {
-            console.log("creado la foto");
-            let datosEnv = {
-              nombreCompletoEnvio: false, //false xq null no lo sube a BD
-              calle: false,
-              localidad: false,
-              provincia: false,
-              cp: false,
-              hayDatos: false
-            };
-            database
-              .ref("users/" + result.uid + "/datosEnvio")
-              .set(datosEnv)
-              .then(snapshot => {
-                console.log("creado los datos envio");
-                result.aceptaPoliticaDatos = user.aceptaPoliticaDatos;
-                result.fechaAltaYacepta = user.fechaAltaYacepta;
-                result.ip = user.ip;
-                result.ciudad = user.ciudad;
-                if (actionType !== null) {
-                  dispatch({
-                    type: actionType,
-                    params: "ok", // can be null
-                    data: result // usuario subido correctamente
-                  });
-                }
-              })
-              .catch(err => {
-                console.log(` no se ha creado: ${err.message}`);
-                if (actionType !== null) {
-                  dispatch({
-                    type: actionType,
-                    params: "error", // can be null
-                    data: err // err , no ha subido usuario
-                  });
-                }
-                console.log(err);
-              });
-          })
-          .catch(err => {
-            console.log(` no se ha creado: ${err.message}`);
-            if (actionType !== null) {
-              dispatch({
-                type: actionType,
-                params: "error", // can be null
-                data: err // err , no ha subido usuario
-              });
-            }
-            console.log(err);
+        console.log("creado new user");
+        if (actionType !== null) {
+          dispatch({
+            type: actionType,
+            params: "ok", // can be null
+            data: NewUser // usuario subido correctamente
           });
+        }
       })
       .catch(err => {
         console.log(` no se ha creado: ${err.message}`);

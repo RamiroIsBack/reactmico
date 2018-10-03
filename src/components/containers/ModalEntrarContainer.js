@@ -69,8 +69,7 @@ class ModalEntrarContainer extends Component {
         .then(response => {
           if (response.code) {
             alert(
-              "fallo al logearte con email y password",
-              "comprueba que lo has escrito bien :)"
+              "fallo al logearte con email y password , comprueba que lo has escrito bien :)"
             );
             //error
             return 0;
@@ -92,8 +91,13 @@ class ModalEntrarContainer extends Component {
   }
 
   handleLoginGoogle() {
-    this.props
-      .loginGoogle()
+    this.sendActionForLogin(this.props.loginGoogle());
+  }
+  handleLoginFacebook() {
+    this.sendActionForLogin(this.props.loginFacebook());
+  }
+  sendActionForLogin(providerAction) {
+    providerAction
       .then(response => {
         if (response.additionalUserInfo.isNewUser) {
           this.props.toggleModal("closeEntrar");
@@ -106,24 +110,6 @@ class ModalEntrarContainer extends Component {
         console.log(
           err.message +
             "fallo al logearte con google, prueba otra vez en un par de minutos"
-        );
-      });
-  }
-  handleLoginFacebook() {
-    this.props
-      .loginFacebook()
-      .then(response => {
-        if (response.additionalUserInfo.isNewUser) {
-          this.props.toggleModal("closeEntrar");
-          this.props.toggleModal("openConsentimiento");
-        } else {
-          this.toggleModalYrecargaCreacionesYgestionaCarroUser();
-        }
-      })
-      .catch(err => {
-        console.log(
-          err.message +
-            "fallo al logearte con facebook, prueba en un par de minutos"
         );
       });
   }
