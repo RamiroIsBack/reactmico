@@ -159,6 +159,13 @@ export default {
       );
     };
   },
+  getCurrentUser: userUid => {
+    return dispatch => {
+      return dispatch(
+        Firebase.getCurrentUser(userUid, constants.GET_CURRENT_USER)
+      );
+    };
+  },
   elementoVendido: id => {
     return dispatch => {
       return dispatch(Firebase.elementoVendido(id, constants.ELEMENTO_VENDIDO));

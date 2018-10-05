@@ -21,7 +21,6 @@ class ModalLoginContainer extends Component {
 
   render() {
     var menuLoginShowing = false;
-    var listaUsers = [];
 
     if (this.props.storeModal) {
       menuLoginShowing = this.props.storeModal.menuLoginShowing;
@@ -30,9 +29,7 @@ class ModalLoginContainer extends Component {
     if (!menuLoginShowing) {
       return null;
     }
-    if (this.props.users) {
-      listaUsers = this.props.users.listaUsers;
-    }
+
     var estiloModal = {
       position: "fixed",
       //backgroundImage: 'url(' + contenido.pic.urlPicRegistrarse + ')',

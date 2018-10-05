@@ -432,6 +432,17 @@ const amIlogedIn = (params, actionType) => {
       }
     });
 };
+const getCurrentUser = (userUid, actionType) => {
+  return dispatch => {
+    getCurrentUserFromDBAndDispatchIt(
+      { user: { uid: userUid } },
+      actionType,
+      dispatch,
+      "user refreshed",
+      "error al obtener el usuario de la base de datos"
+    );
+  };
+};
 const getCurrentUserFromDBAndDispatchIt = (
   user,
   actionType,
@@ -772,19 +783,19 @@ const currentUserToDB = (user, actionType) => {
   return dispatch =>
     database
       .ref("users/" + user.datosPersonales.uid + "/datosPersonales")
-      .set(user.datosPersonales)
+      .update(user.datosPersonales)
       .then(snapshot => {
         console.log("creado los datos personales");
 
         database
           .ref("users/" + user.datosPersonales.uid + "/foto")
-          .set({ photoURL: user.foto.photoURL })
+          .update({ photoURL: user.foto.photoURL })
           .then(snapshot => {
             console.log("creado la foto");
 
             database
               .ref("users/" + user.datosPersonales.uid + "/datosEnvio")
-              .set(user.datosEnvio)
+              .update(user.datosEnvio)
               .then(snapshot => {
                 console.log("creado los datos envio");
 
@@ -1224,5 +1235,6 @@ export default {
   guardarDatosPedido: guardarDatosPedido,
   vaciarCarro: vaciarCarro,
   elementoVendido: elementoVendido,
-  checkEmailVerified: checkEmailVerified
+  checkEmailVerified: checkEmailVerified,
+  getCurrentUser: getCurrentUser
 };

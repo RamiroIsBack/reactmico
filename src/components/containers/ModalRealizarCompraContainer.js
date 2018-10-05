@@ -87,7 +87,9 @@ class ModalRealizarCompraContainer extends Component {
     this.props
       .guardarDatosPedido(data.envioDefinitivo, this.props.carro, data)
       .then(response => {
-        //this.props.getUsers()//para q est'e incluido el nuevo pedido
+        this.props.getCurrentUser(
+          this.props.users.currentUser.datosPersonales.uid
+        ); //para q est'e incluido el nuevo pedido
       })
       .catch(err => {
         console.log(err.message + "fallo al guardarDatosPedido");
@@ -215,12 +217,8 @@ class ModalRealizarCompraContainer extends Component {
 }
 const dispatchToProps = dispatch => {
   return {
-    getContenidos: () => dispatch(actions.getContenidos()),
     toggleModal: modalName => dispatch(actions.toggleModal(modalName)),
-    showNotificationWithTimeout: modalName =>
-      dispatch(actions.showNotificationWithTimeout(modalName)),
-    userCreated: user => dispatch(actions.userCreated(user)),
-    loginGoogle: () => dispatch(actions.loginGoogle()),
+    getCurrentUser: userUid => dispatch(actions.getCurrentUser(userUid)),
     navActive: (activeTab, params) =>
       dispatch(actions.navActive(activeTab, params)),
     guardarDatosPedido: (datosEnvio, carro, paymentData) =>
