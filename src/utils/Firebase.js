@@ -10,8 +10,6 @@ const database = firebase.database();
 var storage = firebase.storage();
 var storageRef = storage.ref();
 
-const providerGoogle = new firebase.auth.GoogleAuthProvider();
-
 const DBferias = database.ref("ferias/");
 const DBcreaciones = database.ref("creaciones/");
 const DBcontenidos = database.ref("contenidos/");
@@ -517,6 +515,7 @@ const loginFacebook = (params, actionType) => {
 
 const loginGoogle = (params, actionType) => {
   firebase.auth().useDeviceLanguage();
+  var providerGoogle = new firebase.auth.GoogleAuthProvider();
   return dispatch =>
     firebase
       .auth()
