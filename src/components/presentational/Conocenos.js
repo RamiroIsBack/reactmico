@@ -1,55 +1,68 @@
-import React, { Component } from 'react'
-import style from './styles'
+import React, { Component } from "react";
 
 class Conocenos extends Component {
   constructor() {
-    super()
-    this.state ={
-      fotoLoaded:false,
-    }
+    super();
+    this.state = {
+      fotoLoaded: false
+    };
   }
-  handleClick(event){
-    this.props.whenClicked()
+  handleClick(event) {
+    this.props.whenClicked();
   }
   render() {
-    let urlPic = ''
-    let descripcionTexto = ''
-    if(this.props.conocenosContenido.headerFoto){
-      urlPic = this.props.conocenosContenido.headerFoto.urlPicConocenos
+    let urlPic = "";
+    let descripcionTexto = "";
+    if (this.props.conocenosContenido.headerFoto) {
+      urlPic = this.props.conocenosContenido.headerFoto.urlPicConocenos;
     }
-    if(this.props.conocenosContenido.descripcion){
-      descripcionTexto = this.props.conocenosContenido.descripcion.descripcionConocenos
-      if(this.props.lengua ==='ga'){
-        descripcionTexto = (this.props.conocenosContenido.descripcion.descripcionConocenosGalego)? this.props.conocenosContenido.descripcion.descripcionConocenosGalego : this.props.conocenosContenido.descripcion.descripcionConocenos
+    if (this.props.conocenosContenido.descripcion) {
+      descripcionTexto = this.props.conocenosContenido.descripcion
+        .descripcionConocenos;
+      if (this.props.lengua === "ga") {
+        descripcionTexto = this.props.conocenosContenido.descripcion
+          .descripcionConocenosGalego
+          ? this.props.conocenosContenido.descripcion.descripcionConocenosGalego
+          : this.props.conocenosContenido.descripcion.descripcionConocenos;
       }
     }
     return (
-      <div >
-
-        <div className='col-xs-12 col-sm-12 col-md-6 col-lg-6' style={{textAlign: 'center', marginBottom:'15px'}} >
-          {!this.state.fotoLoaded &&
-            <div className='loader'>Cargando...</div>
-          }
-          <img role='presentation' src={urlPic} className ='img-rounded' style={{maxWidth :'100%'}} onLoad = {()=>{this.setState({fotoLoaded:true})}} >
-          </img>
+      <div>
+        <div
+          className="col-xs-12 col-sm-12 col-md-6 col-lg-6"
+          style={{ textAlign: "center", marginBottom: "15px" }}
+        >
+          {!this.state.fotoLoaded && <div className="loader">Cargando...</div>}
+          <img
+            role="presentation"
+            src={urlPic}
+            className="img-rounded"
+            alt="imagenLogo"
+            style={{ maxWidth: "100%" }}
+            onLoad={() => {
+              this.setState({ fotoLoaded: true });
+            }}
+          />
         </div>
 
-        <div className='col-xs-12 col-sm-12 col-md-6 col-lg-6' >
-
-          {descripcionTexto.split('\n').map((item, key) => {
-            return <span  key={key}>{item}<div><br/></div></span>
+        <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          {descripcionTexto.split("\n").map((item, key) => {
+            return (
+              <span key={key}>
+                {item}
+                <div>
+                  <br />
+                </div>
+              </span>
+            );
           })}
-
         </div>
-
       </div>
-    )
+    );
   }
 }
 
-export default Conocenos
-
-
+export default Conocenos;
 
 /*
 Para separar con los /n (linebreacks)

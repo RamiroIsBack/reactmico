@@ -938,7 +938,6 @@ const resendEmail = (params, actionType) => {
 const checkEmailVerified = (flagEmailVerified, actionType) => {
   // VERIFY_EMAIL
   let userRecord = firebase.auth().currentUser;
-  let caca = "";
   var credentials = firebase.auth.EmailAuthProvider.credential(
     userRecord.email,
     currentUserPassword

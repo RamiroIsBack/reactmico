@@ -112,6 +112,7 @@ class ModalFormaDePago extends React.Component {
               <div style={{ minHeight: 122 }}>
                 <img
                   id="foto"
+                  alt="progress"
                   src={progressI}
                   style={{ borderRadius: 10, paddingTop: 3, width: "100%" }}
                 />

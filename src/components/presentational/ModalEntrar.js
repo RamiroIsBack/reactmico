@@ -114,146 +114,151 @@ class ModalEntrar extends React.Component {
                 <h3 className="text-center">Bienvenido</h3>
                 <hr />
               </div>
-              {!this.state.entrarM &&
-                !this.state.entrarG && (
-                  <div className="container-fluid row">
-                    <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <div className=" text-center container-fluid row visible-xs-block hidden-sm hidden-md hidden-lg">
-                        <h6 style={{ fontWeight: "bold" }}>
-                          Entrar con contraseña
-                        </h6>
-                        <a
-                          style={{
-                            cursor: "pointer",
-                            color: "white",
-                            backgroundColor: "transparent",
-                            textDecoration: "none",
-                            padding: 0
-                          }}
-                        >
-                          <img
-                            id="entrarM"
-                            src={loginMIcon}
-                            style={{ paddingTop: 3, height: 96 }}
-                            onClick={this.handleEleccion.bind(this)}
-                          />
-                        </a>
-                      </div>
-                      <div className="text-center container-fluid row hidden-xs">
-                        <h4>Entrar con contraseña</h4>
-                        <a
-                          style={{
-                            cursor: "pointer",
-                            color: "white",
-                            backgroundColor: "transparent",
-                            textDecoration: "none",
-                            padding: 0
-                          }}
-                        >
-                          <img
-                            id="entrarM"
-                            src={loginMIcon}
-                            style={{ paddingTop: 3, height: 96 }}
-                            onClick={this.handleEleccion.bind(this)}
-                          />
-                        </a>
-                      </div>
+              {!this.state.entrarM && !this.state.entrarG && (
+                <div className="container-fluid row">
+                  <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div className=" text-center container-fluid row visible-xs-block hidden-sm hidden-md hidden-lg">
+                      <h6 style={{ fontWeight: "bold" }}>
+                        Entrar con contraseña
+                      </h6>
+                      <a
+                        style={{
+                          cursor: "pointer",
+                          color: "white",
+                          backgroundColor: "transparent",
+                          textDecoration: "none",
+                          padding: 0
+                        }}
+                      >
+                        <img
+                          id="entrarM"
+                          alt="entrarContrasena"
+                          src={loginMIcon}
+                          style={{ paddingTop: 3, height: 96 }}
+                          onClick={this.handleEleccion.bind(this)}
+                        />
+                      </a>
                     </div>
-                    <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                      <div className="text-center container-fluid row visible-xs-block hidden-sm hidden-md hidden-lg">
-                        <h6 style={{ fontWeight: "bold" }}>
-                          Entrar con tu cuenta de Google
-                        </h6>
-                        <a
-                          style={{
-                            cursor: "pointer",
-                            color: "white",
-                            backgroundColor: "transparent",
-                            textDecoration: "none",
-                            padding: 0
-                          }}
-                        >
-                          <img
-                            id="entrarG"
-                            src={loginGIcon}
-                            style={{
-                              borderRadius: "30px",
-                              marginTop: 12,
-                              paddingTop: 7,
-                              height: 55
-                            }}
-                            onClick={this.handleEleccion.bind(this)}
-                          />
-                        </a>
-                      </div>
-                      <div className="text-center container-fluid row hidden-xs">
-                        <h4>Entrar con tu cuenta de Google</h4>
-                        <a
-                          style={{
-                            cursor: "pointer",
-                            color: "white",
-                            backgroundColor: "transparent",
-                            textDecoration: "none",
-                            padding: 0
-                          }}
-                        >
-                          <img
-                            id="entrarG"
-                            src={loginGIcon}
-                            style={{
-                              borderRadius: "30px",
-                              paddingTop: 7,
-                              height: 55
-                            }}
-                            onClick={this.handleEleccion.bind(this)}
-                          />
-                        </a>
-                      </div>
-                    </div>
-                    <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                      <div className="text-center container-fluid row visible-xs-block hidden-sm hidden-md hidden-lg">
-                        <h6 style={{ fontWeight: "bold" }}>
-                          Entrar con tu cuenta de Facebook
-                        </h6>
-                        <a
-                          style={{
-                            cursor: "pointer",
-                            color: "white",
-                            backgroundColor: "transparent",
-                            textDecoration: "none",
-                            padding: 0
-                          }}
-                        >
-                          <img
-                            id="entrarF"
-                            src={loginFIcon}
-                            style={{ marginTop: 12, paddingTop: 7, height: 55 }}
-                            onClick={this.handleEleccion.bind(this)}
-                          />
-                        </a>
-                      </div>
-                      <div className="text-center container-fluid row hidden-xs">
-                        <h4>Entrar con tu cuenta de Facebook</h4>
-                        <a
-                          style={{
-                            cursor: "pointer",
-                            color: "white",
-                            backgroundColor: "transparent",
-                            textDecoration: "none",
-                            padding: 0
-                          }}
-                        >
-                          <img
-                            id="entrarF"
-                            src={loginFIcon}
-                            style={{ paddingTop: 7, height: 55 }}
-                            onClick={this.handleEleccion.bind(this)}
-                          />
-                        </a>
-                      </div>
+                    <div className="text-center container-fluid row hidden-xs">
+                      <h4>Entrar con contraseña</h4>
+                      <a
+                        style={{
+                          cursor: "pointer",
+                          color: "white",
+                          backgroundColor: "transparent",
+                          textDecoration: "none",
+                          padding: 0
+                        }}
+                      >
+                        <img
+                          id="entrarM"
+                          alt="entrarContrasena"
+                          src={loginMIcon}
+                          style={{ paddingTop: 3, height: 96 }}
+                          onClick={this.handleEleccion.bind(this)}
+                        />
+                      </a>
                     </div>
                   </div>
-                )}
+                  <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div className="text-center container-fluid row visible-xs-block hidden-sm hidden-md hidden-lg">
+                      <h6 style={{ fontWeight: "bold" }}>
+                        Entrar con tu cuenta de Google
+                      </h6>
+                      <a
+                        style={{
+                          cursor: "pointer",
+                          color: "white",
+                          backgroundColor: "transparent",
+                          textDecoration: "none",
+                          padding: 0
+                        }}
+                      >
+                        <img
+                          id="entrarG"
+                          src={loginGIcon}
+                          alt="entrarGoogle"
+                          style={{
+                            borderRadius: "30px",
+                            marginTop: 12,
+                            paddingTop: 7,
+                            height: 55
+                          }}
+                          onClick={this.handleEleccion.bind(this)}
+                        />
+                      </a>
+                    </div>
+                    <div className="text-center container-fluid row hidden-xs">
+                      <h4>Entrar con tu cuenta de Google</h4>
+                      <a
+                        style={{
+                          cursor: "pointer",
+                          color: "white",
+                          backgroundColor: "transparent",
+                          textDecoration: "none",
+                          padding: 0
+                        }}
+                      >
+                        <img
+                          id="entrarG"
+                          src={loginGIcon}
+                          alt="entrarGoogle"
+                          style={{
+                            borderRadius: "30px",
+                            paddingTop: 7,
+                            height: 55
+                          }}
+                          onClick={this.handleEleccion.bind(this)}
+                        />
+                      </a>
+                    </div>
+                  </div>
+                  <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div className="text-center container-fluid row visible-xs-block hidden-sm hidden-md hidden-lg">
+                      <h6 style={{ fontWeight: "bold" }}>
+                        Entrar con tu cuenta de Facebook
+                      </h6>
+                      <a
+                        style={{
+                          cursor: "pointer",
+                          color: "white",
+                          backgroundColor: "transparent",
+                          textDecoration: "none",
+                          padding: 0
+                        }}
+                      >
+                        <img
+                          id="entrarF"
+                          src={loginFIcon}
+                          alt="entrarFacebook"
+                          style={{ marginTop: 12, paddingTop: 7, height: 55 }}
+                          onClick={this.handleEleccion.bind(this)}
+                        />
+                      </a>
+                    </div>
+                    <div className="text-center container-fluid row hidden-xs">
+                      <h4>Entrar con tu cuenta de Facebook</h4>
+                      <a
+                        style={{
+                          cursor: "pointer",
+                          color: "white",
+                          backgroundColor: "transparent",
+                          textDecoration: "none",
+                          padding: 0
+                        }}
+                      >
+                        <img
+                          id="entrarF"
+                          alt="entrarFacebook"
+                          src={loginFIcon}
+                          style={{ paddingTop: 7, height: 55 }}
+                          onClick={this.handleEleccion.bind(this)}
+                        />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {this.state.entrarG && (
                 <div className="container-fluid row">
@@ -380,6 +385,7 @@ class ModalEntrar extends React.Component {
                         <img
                           id="entrarG"
                           src={loginGIcon}
+                          alt="entrarGoogle"
                           style={{ paddingLeft: 2, height: 55 }}
                           onClick={this.handleEleccion.bind(this)}
                         />
@@ -398,6 +404,7 @@ class ModalEntrar extends React.Component {
                         <img
                           id="entrarF"
                           src={loginFIcon}
+                          alt="entrarFacebook"
                           style={{ paddingLeft: 2, height: 55 }}
                           onClick={this.handleEleccion.bind(this)}
                         />

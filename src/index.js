@@ -55,6 +55,7 @@ class ReactMico extends Component {
             <div>
               <div className="bell__container">
                 <img
+                  alt="logoCartel"
                   className="bellImg"
                   src="https://firebasestorage.googleapis.com/v0/b/micotextil-3f024.appspot.com/o/mico%20poster%20bigger.png?alt=media&token=28883b94-a403-4a8d-87aa-07fe19a027eb"
                 />
@@ -62,6 +63,7 @@ class ReactMico extends Component {
               <div className="crane__contanier">
                 <img
                   id="foto"
+                  alt="enConstrunccion"
                   src={picConstruccion}
                   style={{ height: 420, width: 300 }}
                 />
