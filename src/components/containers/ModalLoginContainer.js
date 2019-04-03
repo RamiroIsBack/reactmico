@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import actions from "../../actions";
-import history from "../../utils/history";
 
 class ModalLoginContainer extends Component {
   //onMouseOut() Rocks!!
