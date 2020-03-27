@@ -181,9 +181,7 @@ const guardarDatosPedido = (datosEnvio, carro, paymentData, actionType) => {
               })
               .catch(err => {
                 console.log(
-                  ` no se ha podido guardar los datos d compra del pedido: ${
-                    err.message
-                  }`
+                  ` no se ha podido guardar los datos d compra del pedido: ${err.message}`
                 );
                 if (actionType !== null) {
                   dispatch({
@@ -197,9 +195,7 @@ const guardarDatosPedido = (datosEnvio, carro, paymentData, actionType) => {
           })
           .catch(err => {
             console.log(
-              ` no se ha podido guardar los datos d compra del pedido: ${
-                err.message
-              }`
+              ` no se ha podido guardar los datos d compra del pedido: ${err.message}`
             );
             if (actionType !== null) {
               dispatch({
@@ -799,7 +795,7 @@ const currentUserToDB = (user, actionType) => {
               .ref("users/" + user.datosPersonales.uid + "/datosEnvio")
               .update(user.datosEnvio)
               .then(snapshot => {
-                console.log("creado los datos envio");
+                // console.log("creado los datos envio");
 
                 if (actionType !== null) {
                   dispatch({

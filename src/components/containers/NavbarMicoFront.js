@@ -39,7 +39,7 @@ class NavbarMicoFront extends Component {
 
   //ya no colapso la navbar , solo los dialogos q hacen de dropdown
   gestionaColapso(event) {
-    console.log("gestionaColapso: " + JSON.stringify(event.target.id));
+    // console.log("gestionaColapso: " + JSON.stringify(event.target.id));
     //click en registrarse as'i q mostrar el dialogo modal xa registrarse
     if (event.target.id === "xsMenu") {
       this.props.toggleModal("openMenuXs");
@@ -691,7 +691,4 @@ const stateToProps = state => {
   };
 };
 
-export default connect(
-  stateToProps,
-  dispatchToProps
-)(NavbarMicoFront);
+export default connect(stateToProps, dispatchToProps)(NavbarMicoFront);
