@@ -2,16 +2,47 @@
 
 const nodemailer = require("nodemailer");
 const functions = require("firebase-functions");
-
+const { google } = require("googleapis");
+//setting up Oath2
+//https://medium.com/@nickroach_50526/sending-emails-with-node-js-using-smtp-gmail-and-oauth2-316fe9c790a1
+const OAuth2 = google.auth.OAuth2;
+const o2id = functions.config().oath2client.id;
+const o2secret = functions.config().oath2client.secret;
+const o2refreshtoken = functions.config().oath2client.refreshtoken;
 const gmailEmail = functions.config().gmail.email;
-const gmailPassword = functions.config().gmail.password;
+
+const oauth2Client = new OAuth2(
+  o2id, // ClientID
+  o2secret, // Client Secret
+  "https://developers.google.com/oauthplayground" // Redirect URL
+);
+
+oauth2Client.setCredentials({
+  refresh_token: o2refreshtoken,
+});
+const accessToken = oauth2Client.getAccessToken();
+
 const mailTransport = nodemailer.createTransport({
   service: "gmail",
   auth: {
+    type: "OAuth2",
     user: gmailEmail,
-    pass: gmailPassword
-  }
+    clientId: o2id,
+    clientSecret: o2secret,
+    refreshToken: o2refreshtoken,
+    accessToken: accessToken,
+  },
 });
+
+// const gmailEmail = functions.config().gmail.email;
+// const gmailPassword = functions.config().gmail.password;
+// const mailTransport = nodemailer.createTransport({
+//   service: "gmail",
+//   auth: {
+//     user: gmailEmail,
+//     pass: gmailPassword,
+//   },
+// });
 
 // Sends an email confirmation when a user buys a product or when mico sends that product
 exports.sendEmailPreparingPackage = functions.database
@@ -33,7 +64,7 @@ exports.sendEmailPreparingPackage = functions.database
       from: '"Mico diseno textil" <pedidos@micotextil.com>',
       to: pedidoMail,
       bcc: "mico.textil@gmail.com", //cambiar esto para el personal de alba
-      replyTo: "pedidos@micotextil.com"
+      replyTo: "pedidos@micotextil.com",
     };
     console.log(val.datosCompra.localizador);
     console.log(val.datosCompra.urlMensajeria);
@@ -88,8 +119,8 @@ exports.sendEmailPreparingPackage = functions.database
         {
           filename: "mico.jpg",
           path: __dirname + "/assets/mico_disegno_textil.jpg",
-          cid: "logo@micotextil.com" // should be as unique as possible
-        }
+          cid: "logo@micotextil.com", // should be as unique as possible
+        },
       ];
 
       return mailTransport
@@ -100,7 +131,7 @@ exports.sendEmailPreparingPackage = functions.database
             val.datosCompra.payerEmail
           );
         })
-        .catch(error => {
+        .catch((error) => {
           console.error("There was an error while sending the email:", error);
         });
     } else if (val.datosCompra.entregado) {
@@ -151,8 +182,8 @@ exports.sendEmailPreparingPackage = functions.database
         {
           filename: "mico.jpg",
           path: __dirname + "/assets/mico_disegno_textil.jpg",
-          cid: "logo@micotextil.com" // should be as unique as possible
-        }
+          cid: "logo@micotextil.com", // should be as unique as possible
+        },
       ];
 
       return mailTransport
@@ -163,7 +194,7 @@ exports.sendEmailPreparingPackage = functions.database
             val.datosCompra.payerEmail
           );
         })
-        .catch(error => {
+        .catch((error) => {
           console.error("There was an error while sending the email:", error);
         });
     } else {
@@ -220,8 +251,8 @@ exports.sendEmailPreparingPackage = functions.database
         {
           filename: "mico.jpg",
           path: __dirname + "/assets/mico_disegno_textil.jpg",
-          cid: "logo@micotextil.com" // should be as unique as possible
-        }
+          cid: "logo@micotextil.com", // should be as unique as possible
+        },
       ];
 
       return mailTransport
@@ -232,7 +263,7 @@ exports.sendEmailPreparingPackage = functions.database
             val.datosCompra.payerEmail
           );
         })
-        .catch(error => {
+        .catch((error) => {
           console.error("There was an error while sending the email:", error);
         });
     }
